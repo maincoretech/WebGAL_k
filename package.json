@@ -21,5 +21,8 @@
       "packages/*"
     ]
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "yarn": "^1.22.22"
+  }
 }

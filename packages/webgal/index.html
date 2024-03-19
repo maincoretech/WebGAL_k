@@ -9,7 +9,7 @@
   <title>WebGAL</title>
 </head>
 
-<body>
+<body">
   <!--快速显示落地页，让用户感知不到加载的过程-->
   <div id="ebg"></div>
   <div id="Title_enter_page" onclick="enter()" style="
@@ -20,7 +20,7 @@
             top: 0;
             z-index: 14;
             opacity: 1;
-            transition: opacity 1.5s;
+            transition: opacity 0.5s;
 ">
     <!--    落地页背景-->
     <div id="Title_bg_container" style="
@@ -51,7 +51,7 @@
     font-size: 175%;
     transition: opacity 1s;
     z-index: 15;
-    font-family: '思源宋体',Georgia,serif">
+    font-family: 'LibreBarcode128Text'">
       <div class="toCenter" style="
             width: 100%;
             height: 100%;
@@ -64,9 +64,9 @@
             padding: 2em 2em 2em 2em;
             text-shadow: 0 0 30px rgba(0,0,0,0.5);
             transition: text-shadow 1s;
-            font-size: 175%;
+            font-size: 500%;
 ">
-          PRESS THE SCREEN TO START
+          START
         </div>
       </div>
       <div style="position: absolute;
@@ -75,7 +75,8 @@
         justify-content: center;
         width: 100%;
         flex-flow: column;
-        align-items: center ">
+        align-items: center;
+        font-family: 'WebgalUI',Georgia,serif">
         <div style="padding: 0 0 0.25em 0">
           Powered by <a href="https://github.com/MakinoharaShoko/WebGAL"
             onclick="jump(event, 'https://github.com/MakinoharaShoko/WebGAL')">WebGAL</a> Framework

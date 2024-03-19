@@ -10,8 +10,6 @@
 
 # WebGAL
 
-**界面美观、功能强大、易于开发的全新网页端视觉小说引擎**
-
 ## 在线体验
 
 #### WebGAL 示例游戏，一般会演示最新开发的功能
@@ -23,10 +21,6 @@ https://demo.openwebgal.com
 [铃色☆记忆](http://hoshinasuzu.cn/) by 星奈组  [备用链接](http://hoshinasuzu.cc/)
 
 [Elf of Era Idols Project](https://store.steampowered.com/app/2414730/Elf_of_Era_Idols_Project/) (通过 Steam 获取)
-
-## 使用 WebGAL 制作游戏
-
-[WebGAL 开发文档](https://docs.openwebgal.com/)
 
 [下载 WebGAL 图形化编辑器](https://github.com/MakinoharaShoko/WebGAL_Terre/releases)
 
