@@ -19,15 +19,13 @@
             position: absolute;
             top: 0;
             z-index: 14;
-            opacity: 1;
-            transition: opacity 0.5s;
 ">
     <!--    落地页背景-->
     <div id="Title_bg_container" style="
     height: 100%;
     width: 100%;
     position: absolute;
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    background: #1D192B;
     top: 0;
     opacity: 1;
     transition: opacity 1s;
@@ -39,7 +37,7 @@
     position: absolute;
     top: 0;
     opacity: 0;
-    background: linear-gradient(165deg,rgba(255,255,255,0.25) 0%,rgba(255,255,255,1) 50%,rgba(255,255,255,0.25) 100%);
+    background: #1D192B;
     transition: opacity 1s;
 "></div>
     <!--    落地页文字-->
@@ -48,7 +46,7 @@
     top: 0;
     height: 100%;
     opacity: 1;
-    font-size: 175%;
+    font-size: 200%;
     transition: opacity 1s;
     z-index: 15;
     font-family: 'LibreBarcode128Text'">
@@ -56,34 +54,54 @@
             width: 100%;
             height: 100%;
             display: flex;
-            justify-content: center;
+            justify-content:center;
             align-items: center;
+            text-align: center;
 ">
         <div class="StartButton" style="
-            letter-spacing: 0.25em ;
-            padding: 2em 2em 2em 2em;
-            text-shadow: 0 0 30px rgba(0,0,0,0.5);
+            color: #e8def890;
+            padding-top: 0.2em;
+            width: 4.7em;
+            height: 2em;
+            text-shadow: 0 0 100px #1d192b;
             transition: text-shadow 1s;
-            font-size: 500%;
+            font-size: 450%;
+            background: #625B7140;
+            box-shadow: 0 -10px 0 #e8def890;
 ">
-          START
+          CROSS.IN
         </div>
       </div>
       <div style="position: absolute;
         bottom: 1em;
         display: flex;
+        flex-flow: column;
         justify-content: center;
         width: 100%;
-        flex-flow: column;
+        gap: 3px;
         align-items: center;
+        color: #e8def890;
         font-family: 'WebgalUI',Georgia,serif">
-        <div style="padding: 0 0 0.25em 0">
+        <!--<div style="padding: 0 0 0.25em 0">
           Powered by <a href="https://github.com/MakinoharaShoko/WebGAL"
             onclick="jump(event, 'https://github.com/MakinoharaShoko/WebGAL')">WebGAL</a> Framework
         </div>
         <div>
           Made with ❤ by <a href="https://github.com/MakinoharaShoko"
             onclick="jump(event, 'https://github.com/MakinoharaShoko')">Mahiru</a>
+        </div>-->
+        <div>
+          &copy;
+          <script>document.write(new Date().getFullYear());</script>
+          <a 
+            href="https://github.com/maincoretech" target="_blank"
+            onclick="jump(event, 'https://github.com/maincoretech')">
+              maincore_tech.
+          </a>
+        </div>
+        <div>
+          Powered by <a href="https://github.com/MakinoharaShoko/WebGAL" target="_blank"
+            onclick="jump(event, 'https://github.com/MakinoharaShoko/WebGAL')">WebGAL</a> Framework
         </div>
       </div>
     </div>

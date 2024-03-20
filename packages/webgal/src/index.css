@@ -32,38 +32,41 @@
 
 .StartButton {
   animation: StartButton_blink 4s infinite;
+  
 }
 
 @keyframes StartButton_blink {
   0% {
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
+    text-shadow: 0 0 30px #000000;
   }
   50% {
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 30px #ffffff;
   }
   100% {
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
+    text-shadow: 0 0 30px #000000;
   }
 }
 
 a {
-  transition: color 1s;
+  text-decoration: overline 5px;
+  transition: color 0.7s;
+  background: #625B7140;
 }
 
 a:link {
-  color: #434343;
+  color: #e8def890;
 }
 
 a:visited {
-  color: #434343;
+  color: #e8def890;
 }
 
 a:hover {
-  color: #434343;
+  color: #e8def860;
 }
 
 a:active {
-  color: #434343;
+  color: #1d192b;
 }
 
 body {
@@ -78,7 +81,7 @@ body {
   overflow: hidden;
   user-select: none;
 
-  animation-duration: 1s;
+  animation-duration: 0.7s;
   animation-fill-mode: both;
   animation-name: fadeIn;
 }
@@ -184,7 +187,7 @@ code {
 .App {
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 1);
+  background: #000000;
   overflow: hidden;
   perspective: 0;
   -webkit-overflow-scrolling: auto;
