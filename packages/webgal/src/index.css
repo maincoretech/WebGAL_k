@@ -32,7 +32,10 @@
 
 .StartButton {
   animation: StartButton_blink 4s infinite;
-  
+}
+
+.StartButton:hover {
+  background: #625B7120 !important;
 }
 
 @keyframes StartButton_blink {
@@ -49,7 +52,7 @@
 
 a {
   text-decoration: overline 5px;
-  transition: color 0.7s;
+  transition: color 1s;
   background: #625B7140;
 }
 

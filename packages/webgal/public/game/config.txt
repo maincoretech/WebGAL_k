@@ -1,5 +1,5 @@
 Game_name:UNtitled;
 Game_key:0f87dstRg;
-Title_img:WebGAL_New_Enter_Image.png;
+Title_img:WebGAL_New_Enter_Image.jpg;
 Title_bgm:s_Title.mp3;
 Game_Logo:WebGalEnter.png;
