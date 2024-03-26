@@ -23,6 +23,9 @@
   },
   "private": true,
   "dependencies": {
+    "@tauri-apps/api": "^2.0.0-beta.6",
+    "@tauri-apps/cli": "2.0.0-beta.11",
+    "@tauri-apps/plugin-window-state": "2.0.0-beta.2",
     "yarn": "^1.22.22"
   }
 }

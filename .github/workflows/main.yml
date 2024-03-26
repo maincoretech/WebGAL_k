@@ -1,0 +1,91 @@
+name: "publish"
+on:
+  workflow_dispatch:
+  push:
+
+env:
+  CARGO_INCREMENTAL: 0
+  RUST_BACKTRACE: short
+  # RUSTFLAGS: '-D warnings -W unreachable-pub -W rust-2021-compatibility'
+  RUSTFLAGS: "-W unreachable-pub -W rust-2021-compatibility"
+
+jobs:
+  publish-tauri:
+    permissions: write-all
+    strategy:
+      fail-fast: false
+      matrix:
+        settings:
+          - platform: "macos-latest"
+            args: "--target universal-apple-darwin"
+          #- platform: 'macos-latest'
+          #  args: '--target x86_64-apple-darwin'
+          #- platform: 'macos-latest'
+          #  args: '--target aarch64-apple-darwin'
+          #- platform: 'macos-latest'
+          #  args: '--target aarch64-apple-darwin'
+          - platform: "ubuntu-22.04"
+            args: ""
+          - platform: "windows-latest"
+            args: "--target x86_64-pc-windows-msvc"
+          - platform: "windows-latest"
+            args: "--target i686-pc-windows-msvc"
+
+    runs-on: ${{ matrix.settings.platform }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin
+
+      - name: install dependencies (ubuntu only)
+        if: matrix.settings.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y webkit2gtk-4.1 librsvg2-dev patchelf
+      
+ #     - name: Install pnpm
+ #       uses: pnpm/action-setup@v3
+ #       with:
+ #         version: 8
+
+      - name: Install yarn
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: Setup node and cache for package data
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "yarn"
+
+      # Remove this step if you use `npm ci` instead of `npm install` since it deletes the node_modules folder.
+      #- name: node_modules cache
+      #  uses: actions/cache@v3
+      #  with:
+      #    path: '**/node_modules'
+      #    key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json', '**/yarn.lock', '**/pnpm-lock.yaml') }}
+      #    restore-keys: ${{ runner.os }}-node-
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: false
+
+      - uses: tauri-apps/tauri-action@dev
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
+          releaseName: "App v__VERSION__"
+          releaseBody: "See the assets to download this version and install."
+          releaseDraft: true
+          prerelease: true
+          #owner: fabianlars-release
+          #repo: mwt
+          #releaseCommitish: c65dd6db4ccbecdcad72f2fed096355e859fe555
+          #includeDebug: true
+          #args: ${{ matrix.settings.args }} -c '{"package":{"productName":"injected name"},"build":{"distDir":"../dist"}}'
+          #updaterJsonKeepUniversal: true
+          #
