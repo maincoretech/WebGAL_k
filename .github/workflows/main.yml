@@ -44,11 +44,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y webkit2gtk-4.1 librsvg2-dev patchelf
-      
- #     - name: Install pnpm
- #       uses: pnpm/action-setup@v3
- #       with:
- #         version: 8
+
+      #     - name: Install pnpm
+      #       uses: pnpm/action-setup@v3
+      #       with:
+      #         version: 8
 
       - name: Install yarn
         uses: borales/actions-yarn@v4
@@ -72,6 +72,8 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           cache-on-failure: false
+
+      - run: yarn build
 
       - uses: tauri-apps/tauri-action@dev
         env:
