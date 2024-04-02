@@ -10,7 +10,7 @@
 }
 
 .tag:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #ffffff80;
 }
 
 .container {
@@ -21,7 +21,7 @@
   height: 100%;
   display: flex;
   flex-flow: column;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #000000b3;
   z-index: 9;
   padding: 7em 5em 5em 10em;
   opacity: 0;
@@ -34,14 +34,13 @@
 }
 
 .button_text {
-  font-family: "思源宋体", serif;
   font-size: 250%;
   letter-spacing: 0.07em;
   transition: text-shadow 0.33s;
 }
 
 .button_text:hover {
-  text-shadow: 0 0 15px rgba(255, 255, 255, 1);
+  text-shadow: 0 0 15px #ffffff;
 }
 
 @keyframes showContainer {

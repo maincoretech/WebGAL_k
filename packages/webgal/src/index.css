@@ -1,37 +1,25 @@
 @charset "UTF-8";
 
 @font-face {
-  font-family: 'XiaoWei';
-  /*noinspection CssUnknownTarget*/
-  src: url('assets/fonts/ZCOOLXiaoWei-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'LXGW';
-  /*noinspection CssUnknownTarget*/
-  src: url('assets/fonts/LXGWWenKai-Regular.ttf') format('truetype');
-}
-
-@font-face {
   font-family: 'LibreBarcode128Text';
   /*noinspection CssUnknownTarget*/
-  src: url('assets/fonts/LibreBarcode128Text-Regular.ttf') format('truetype');
+  src: url('assets/fonts/LibreBarcode128Text-Regular.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'HinaMinocho';
+  font-family: 'MavenPro';
   /*noinspection CssUnknownTarget*/
-  src: url('assets/fonts/HinaMincho-Regular.ttf') format('truetype');
+  src: url('assets/fonts/MavenPro.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'WebgalUI';
   /*noinspection CssUnknownTarget*/
-  src: url('assets/fonts/MavenPro-VariableFont_wght.ttf') format('truetype');
+  src: url('assets/fonts/HanaMinA.woff2') format('woff2');
 }
 
 .StartButton {
-  animation: StartButton_blink 4s infinite;
+  animation: StartButton_blink 2s infinite;
 }
 
 .StartButton:hover {
