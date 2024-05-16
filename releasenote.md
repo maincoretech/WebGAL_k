@@ -8,25 +8,20 @@
 
 #### 新功能
 
-调整菜单 UI
+引入标题和文本框的 UI 自定义功能
 
-移除文本框其他预设，并接入 UI 自定义模块，为下版本编辑器支持 UI 自定义做准备
-
-添加全屏游戏功能
+添加了一个新的水波纹进入特效
 
 #### 修复
 
-使用鼠标滚轮快进时立绘延迟退出的问题
+WebGAL Parser 的部分问题
 
-效果音循环时阻塞自动播放的问题
+WebSocket 连接问题
 
-iOS 或 Safari 平台下无法正确处理换行和空格的问题
-
-调用 `end` 指令后在某些情况下无法继续游戏的问题
-
-某些情况下音频无法自动播放的问题
+iOS 下字体重叠的问题
 
 <!-- English Translation -->
+
 ## Release Notes
 
 **Only source code is released in this repository**
@@ -35,58 +30,46 @@ iOS 或 Safari 平台下无法正确处理换行和空格的问题
 
 ### In this version
 
-#### New features
+#### New Features
 
-Adjust menu UI
+Introduced UI customization for title and textbox
 
-Remove other presets of text box, and connect to UI customization module, preparing for UI customization supported by next version of editor
+Added a new ripple entrance effect
 
-Add full screen game function
+#### Fixes
 
-#### Bug fixes
+Some issues in WebGAL Parser
 
-Fix the problem that standing pictures exit delay when fast forwarding with mouse wheel
+WebSocket connection issues
 
-Fix the problem that looping sound effects block automatic playback
-
-Fix the problem that line breaks and spaces cannot be handled correctly on iOS or Safari platforms
-
-Fix the problem that the game cannot continue in some cases after calling the `end` instruction
-
-Fix the problem that audio cannot be played automatically in some cases
-
+Font overlapping issue on iOS
 
 <!-- Japanese Translation -->
+
 ## リリースノート
 
 **このリポジトリではソースコードのみを公開しています**
 
-**ユーザーフレンドリーなグラフィックエディタを使用してWebGALゲームの作成、制作、リアルタイムプレビューを体験したい場合は、[WebGALグラフィックエディタをダウンロードしてください](https://github.com/MakinoharaShoko/WebGAL_Terre/releases)**
+**ユーザーフレンドリーなグラフィックエディタを使用して WebGAL ゲームの作成、制作、リアルタイムプレビューを体験したい場合は、[WebGAL グラフィックエディタをダウンロードしてください](https://github.com/MakinoharaShoko/WebGAL_Terre/releases)**
 
 ### このバージョンでは
 
 #### 新機能
 
-メニューUIの調整
+タイトルとテキストボックスの UI カスタマイズ機能を導入
 
-テキストボックスのその他のプリセットを削除し、UIカスタマイズモジュールに接続して、次バージョンのエディタがUIカスタマイズをサポートできるようにします
-
-全画面ゲーム機能を追加
+新しい波紋エフェクトを追加
 
 #### 修正
 
-マウスホイールを使用して早送りすると立ち絵が遅れて終了する問題
+WebGAL パーサーの一部問題
 
-効果音が循環すると自動再生がブロックされる問題
+WebSocket 接続の問題
 
-iOSまたはSafariプラットフォームで改行とスペースが正しく処理されない問題
-
-特定の状況で`end`命令を呼び出した後、ゲームを続行できない問題
-
-特定の状況でオーディオが自動再生されない問題
-
+iOS でのフォントの重なり問題
 
 <!-- French Translation -->
+
 ## Notes de version
 
 **Seul le code source est publié dans ce dépôt**
@@ -97,21 +80,14 @@ iOSまたはSafariプラットフォームで改行とスペースが正しく�
 
 #### Nouvelles fonctionnalités
 
-Ajustement de l'interface utilisateur du menu
+Ajout de la personnalisation de l'interface utilisateur des titres et des zones de texte
 
-Suppression des autres préréglages de zone de texte et connexion au module de personnalisation de l'interface utilisateur, en vue de la prise en charge de la personnalisation de l'interface utilisateur dans la prochaine version de l'éditeur
-
-Ajout de la fonctionnalité de jeu en plein écran
+Ajout d'un nouvel effet d'entrée d'ondulation
 
 #### Corrections
 
-Problème de retard de sortie de l'image lors d'une avance rapide à l'aide de la molette de la souris
+Quelques problèmes avec WebGAL Parser
 
-Problème de blocage de la lecture automatique lors de la mise en boucle des effets sonores
+Problèmes de connexion WebSocket
 
-Problème de traitement incorrect des sauts de ligne et des espaces sur les plateformes iOS ou Safari
-
-Problème d'impossibilité de continuer le jeu dans certains cas après avoir appelé l'instruction `end`
-
-Problème d'impossibilité de lecture automatique de l'audio dans certains cas
-
+Problème de chevauchement des polices sous iOS
