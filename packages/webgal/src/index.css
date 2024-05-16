@@ -19,7 +19,7 @@
 }
 
 .StartButton {
-  animation: StartButton_blink 2s infinite;
+  animation: StartButton_blink 3s infinite;
 }
 
 .StartButton:hover {

@@ -37,7 +37,7 @@
     position: absolute;
     top: 0;
     opacity: 0;
-    background: black;
+    background: #000;
 "></div>
     <!--    落地页文字-->
     <div id="Title_enter_text" style="width: 100%;
@@ -71,7 +71,8 @@
           START
         </div>
       </div>
-      <div style="position: absolute;
+      <div style="
+        position: absolute;
         bottom: 1em;
         display: flex;
         flex-flow: column;
@@ -92,7 +93,7 @@
         <div>
           &copy;
           <script>document.write(new Date().getFullYear());</script>
-          <a 
+          <a
             href="https://github.com/maincoretech" target="_blank"
             onclick="jump(event, 'https://github.com/maincoretech')">
               maincore_tech.
@@ -279,7 +280,6 @@
       setTimeout(() => {
         if (whiteContainer) {
           whiteContainer.style.opacity = "1";
-          
         }
       }, 50); // 在50ms后开始显示渐变
       const title = document.getElementById("Title_enter_page");
@@ -289,13 +289,13 @@
       }, 50); //50ms后开始降低落地页透明度
       if (!isIOS && title) {
         title.style.pointerEvents = "none"; //落地页不再响应点击
-        title.style.background = "linear-gradient( #301A23 0%, #1D192B 100%)"; //改变标题渐变效果
+        //title.style.background = "linear-gradient( #301A23 0%, #1D192B 100%)"; //改变标题渐变效果
       }
       setTimeout(() => {
         if (title) {
           title.style.display = "none";
         }
-      }, 200); // 将落地页设置为不显示
+      }, 50); // 将落地页设置为不显示
       window.enterPromise();
       delete window.enterPromise;
     }
