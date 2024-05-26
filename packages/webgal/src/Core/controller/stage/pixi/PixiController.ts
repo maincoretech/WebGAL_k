@@ -75,7 +75,7 @@ export default class PixiStage {
   // 注册到 Ticker 上的函数
   private stageAnimations: Array<IStageAnimationObject> = [];
   private assetLoader = new PIXI.Loader();
-  private loadQueue: { url: string; callback: () => void }[] = [];
+  private loadQueue: { url: string; callback: () => void; name?: string }[] = [];
   private live2dFigureRecorder: Array<ILive2DRecord> = [];
 
   // 锁定变换对象（对象可能正在执行动画，不能应用变换）
@@ -867,11 +867,11 @@ export default class PixiStage {
     }
   }
 
-  private loadAsset(url: string, callback: () => void) {
+  private loadAsset(url: string, callback: () => void, name?: string) {
     /**
      * Loader 复用疑似有问题，转而采用先前的单独方式
      */
-    this.loadQueue.unshift({ url, callback });
+    this.loadQueue.unshift({ url, callback, name });
     /**
      * 尝试启动加载
      */
@@ -887,10 +887,17 @@ export default class PixiStage {
             front.callback();
             this.callLoader();
           } else {
-            this.assetLoader.add(front.url).load(() => {
-              front.callback();
-              this.callLoader();
-            });
+            if (front.name) {
+              this.assetLoader.add(front.name, front.url).load(() => {
+                front.callback();
+                this.callLoader();
+              });
+            } else {
+              this.assetLoader.add(front.url).load(() => {
+                front.callback();
+                this.callLoader();
+              });
+            }
           }
         } catch (error) {
           logger.fatal('PIXI Loader 故障', error);

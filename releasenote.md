@@ -21,7 +21,6 @@ WebSocket 连接问题
 iOS 下字体重叠的问题
 
 <!-- English Translation -->
-
 ## Release Notes
 
 **Only source code is released in this repository**
@@ -44,13 +43,13 @@ WebSocket connection issues
 
 Font overlapping issue on iOS
 
-<!-- Japanese Translation -->
 
+<!-- Japanese Translation -->
 ## リリースノート
 
 **このリポジトリではソースコードのみを公開しています**
 
-**ユーザーフレンドリーなグラフィックエディタを使用して WebGAL ゲームの作成、制作、リアルタイムプレビューを体験したい場合は、[WebGAL グラフィックエディタをダウンロードしてください](https://github.com/MakinoharaShoko/WebGAL_Terre/releases)**
+**ユーザーフレンドリーなグラフィックエディタを使用してWebGALゲームの作成、制作、リアルタイムプレビューを体験したい場合は、[WebGALグラフィックエディタをダウンロードしてください](https://github.com/MakinoharaShoko/WebGAL_Terre/releases)**
 
 ### このバージョンでは
 
@@ -68,8 +67,8 @@ WebSocket 接続の問題
 
 iOS でのフォントの重なり問題
 
-<!-- French Translation -->
 
+<!-- French Translation -->
 ## Notes de version
 
 **Seul le code source est publié dans ce dépôt**
@@ -91,3 +90,4 @@ Quelques problèmes avec WebGAL Parser
 Problèmes de connexion WebSocket
 
 Problème de chevauchement des polices sous iOS
+

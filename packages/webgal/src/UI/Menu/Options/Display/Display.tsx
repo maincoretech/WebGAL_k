@@ -17,7 +17,7 @@ export function Display() {
 
   return (
     <div className={styles.Options_main_content_half}>
-      {/*<NormalOption key="fullScreen" title={t('fullScreen.title')}>
+      <NormalOption key="fullScreen" title={t('fullScreen.title')}>
         <NormalButton
           textList={t('fullScreen.options.on', 'fullScreen.options.off')}
           functionList={[
@@ -32,7 +32,7 @@ export function Display() {
           ]}
           currentChecked={userDataState.optionData.fullScreen}
         />
-      </NormalOption>*/}
+      </NormalOption>
       <NormalOption key="textSpeed" title={t('textSpeed.title')}>
         <NormalButton
           textList={t('textSpeed.options.slow', 'textSpeed.options.medium', 'textSpeed.options.fast')}
