@@ -8,7 +8,11 @@
     <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
     <title>WebGAL</title>
   </head>
-
+  <script>
+    window.onload = () => {
+      document.getElementById('Title_enter_text').style.visibility = 'initial';
+    };
+  </script>
   <body>
     <!--快速显示落地页，让用户感知不到加载的过程-->
     <div id="ebg"></div>
@@ -24,7 +28,7 @@
           height: 100%;
           width: 100%;
           position: absolute;
-          background: #1d192b;
+          background: #000;
           top: 0;
           opacity: 1;
           transition: opacity 1s;
@@ -48,6 +52,7 @@
           transition: opacity 1s;
           z-index: 15;
           font-family: 'LibreBarcode128Text';
+          visibility: hidden;
         "
       >
         <div
@@ -64,15 +69,16 @@
           <div
             class="StartButton"
             style="
-              color: #e8def890;
+              color: #ffffff80;
               padding-top: 0.2em;
               width: 4.7em;
               height: 2em;
-              text-shadow: 0 0 100px #1d192b;
-              transition: text-shadow, background 1s;
+              text-shadow: 0 0 10px #fff;
+              transition: text-shadow, background 0.7s;
               font-size: 450%;
-              background: #625b7140;
-              border-top: 15px solid #e8def890;
+              background: none;
+              border-radius: 10px;
+              border: 3px solid #808080;
             "
           >
             START
@@ -88,7 +94,7 @@
             width: 100%;
             gap: 3px;
             align-items: center;
-            color: #e8def890;
+            color: #80808090;
             font-family: 'MavenPro', Georgia, serif;
           "
         >
@@ -261,6 +267,7 @@
     <script>
       let enterPromise = new Promise((res) => (window.enterPromise = res));
       let renderPromise = new Promise((res) => (window.renderPromise = res));
+
       /**
        * 将播放bgm的事件发送出去
        */

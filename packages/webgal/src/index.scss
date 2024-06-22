@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import "Core/util/constants";
+@import 'Core/util/constants';
 
 @font-face {
   font-family: 'LibreBarcode128Text';
@@ -21,45 +21,39 @@
 }
 
 .StartButton {
-  animation: StartButton_blink 3s infinite;
+  animation: StartButton_blink 2s infinite;
 }
 
 .StartButton:hover {
-  background: #625b7120 !important;
+  background: #80808040 !important;
 }
 
 @keyframes StartButton_blink {
   0% {
-    text-shadow: 0 0 30px #000000;
+    text-shadow: 0 0 30px #000;
   }
   50% {
-    text-shadow: 0 0 30px #ffffff;
+    text-shadow: 0 0 30px #fff;
   }
   100% {
-    text-shadow: 0 0 30px #000000;
+    text-shadow: 0 0 30px #000;
   }
 }
 
 a {
-  text-decoration: overline 5px;
-  transition: color 1s;
-  background: #625b7140;
-}
-
-a:link {
-  color: #e8def890;
-}
-
-a:visited {
-  color: #e8def890;
+  border-radius: 5px;
+  border: 3px solid #808080;
+  transition: color, background 0.7s;
+  background: none;
+  color: #ffffff80;
 }
 
 a:hover {
-  color: #e8def860;
+  background: #80808040;
 }
 
 a:active {
-  color: #1d192b;
+  color: none;
 }
 
 body {
@@ -72,22 +66,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
   user-select: none;
-
-  animation-duration: 0.7s;
-  animation-fill-mode: both;
-  animation-name: fadeIn;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -10%, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
+  transition: all 1s;
+  /*div {
+    display: none;
+  }*/
 }
 
 code {
@@ -177,7 +159,7 @@ code {
 .App {
   height: 100%;
   width: 100%;
-  background: #000000;
+  //background: #000000;
   overflow: hidden;
   perspective: 0;
   -webkit-overflow-scrolling: auto;
