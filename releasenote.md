@@ -8,19 +8,24 @@
 
 #### 新功能
 
-引入标题和文本框的 UI 自定义功能
+解析器增加前后空值剪切和;的转义
 
-添加了一个新的水波纹进入特效
+在生产环境去除调试输出，提高性能
+
+添加试验性快速预览
+
+支持使用 Spine 做背景
 
 #### 修复
 
-WebGAL Parser 的部分问题
+UI 自定义可以支持小头像不存在的情况
 
-WebSocket 连接问题
+提高唇形同步性能
 
-iOS 下字体重叠的问题
+提高日语翻译质量
 
 <!-- English Translation -->
+
 ## Release Notes
 
 **Only source code is released in this repository**
@@ -31,63 +36,58 @@ iOS 下字体重叠的问题
 
 #### New Features
 
-Introduced UI customization for title and textbox
+Parser adds trimming of leading and trailing whitespace and escaping of ;
 
-Added a new ripple entrance effect
+Remove debug prints in production builds, improving performance
+
+Add experimental fast preview
+
+Support using Spine for backgrounds
 
 #### Fixes
 
-Some issues in WebGAL Parser
+UI customization can handle the case where small portraits are missing
 
-WebSocket connection issues
+Improved performance of lip syncing
 
-Font overlapping issue on iOS
-
+Improved Japanese translation quality
 
 <!-- Japanese Translation -->
-## リリースノート
-
-**このリポジトリではソースコードのみを公開しています**
-
-**ユーザーフレンドリーなグラフィックエディタを使用してWebGALゲームの作成、制作、リアルタイムプレビューを体験したい場合は、[WebGALグラフィックエディタをダウンロードしてください](https://github.com/MakinoharaShoko/WebGAL_Terre/releases)**
-
-### このバージョンでは
 
 #### 新機能
 
-タイトルとテキストボックスの UI カスタマイズ機能を導入
+パーサーに前後空白トリムと;のエスケープを追加
 
-新しい波紋エフェクトを追加
+本番環境でデバッグ出力を削除し、パフォーマンスを向上
+
+試験的な高速プレビューを追加
+
+Spine を背景として使用することをサポート
 
 #### 修正
 
-WebGAL パーサーの一部問題
+UI カスタマイズでアバターが存在しない場合をサポート
 
-WebSocket 接続の問題
+リップシンクのパフォーマンスを向上
 
-iOS でのフォントの重なり問題
-
+日本語翻訳の品質を向上
 
 <!-- French Translation -->
-## Notes de version
-
-**Seul le code source est publié dans ce dépôt**
-
-**Si vous souhaitez expérimenter la création, la fabrication et la prévisualisation en temps réel des jeux WebGAL à l'aide d'un éditeur graphique convivial, veuillez [télécharger l'éditeur graphique WebGAL](https://github.com/MakinoharaShoko/WebGAL_Terre/releases)**
-
-### Dans cette version
 
 #### Nouvelles fonctionnalités
 
-Ajout de la personnalisation de l'interface utilisateur des titres et des zones de texte
+L'analyseur ajoute le rognage des espaces vides avant et après et l'échappement des ;
 
-Ajout d'un nouvel effet d'entrée d'ondulation
+Suppression de la sortie de débogage en environnement de production, amélioration des performances
+
+Ajout d'un aperçu rapide expérimental
+
+Prise en charge de Spine pour les arrière-plans
 
 #### Corrections
 
-Quelques problèmes avec WebGAL Parser
+La personnalisation de l'interface utilisateur peut prendre en charge les cas où il n'y a pas de petite icône
 
-Problèmes de connexion WebSocket
+Amélioration des performances de synchronisation labiale
 
-Problème de chevauchement des polices sous iOS
-
+Amélioration de la qualité de la traduction japonaise
