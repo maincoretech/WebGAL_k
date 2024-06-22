@@ -1,9 +1,17 @@
 {
   "name": "@webgal/base",
   "version": "4.5",
-  "description": "A brand new web Visual Novel engine.",
-  "repository": "https://github.com/MakinoharaShoko/WebGAL.git",
   "author": "Mahiru <Mahiru_@outlook.com>",
+  "repository": "https://github.com/MakinoharaShoko/WebGAL.git",
+  "dependencies": {
+    "@tauri-apps/api": "^2.0.0-beta.6",
+    "@tauri-apps/cli": "2.0.0-beta.11",
+    "@tauri-apps/plugin-window-state": "2.0.0-beta.2",
+    "yarn": "^1.22.22"
+  },
+  "description": "A brand new web Visual Novel engine.",
+  "license": "MPL-2.0",
+  "private": true,
   "scripts": {
     "build": "yarn parser:build && yarn webgal:build",
     "build-ci": "yarn parser:build-ci && yarn webgal:build",
@@ -15,17 +23,9 @@
     "parser:build": "cd packages/parser && yarn build",
     "parser:build-ci": "cd packages/parser && yarn build-ci"
   },
-  "license": "MPL-2.0",
   "workspaces": {
     "packages": [
       "packages/*"
     ]
-  },
-  "private": true,
-  "dependencies": {
-    "@tauri-apps/api": "^2.0.0-beta.6",
-    "@tauri-apps/cli": "2.0.0-beta.11",
-    "@tauri-apps/plugin-window-state": "2.0.0-beta.2",
-    "yarn": "^1.22.22"
   }
 }

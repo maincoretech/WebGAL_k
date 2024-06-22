@@ -5,6 +5,7 @@ import { resolve, relative } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { readdirSync, watch, writeFileSync } from 'fs';
 import { isEqual } from 'lodash';
+
 // https://vitejs.dev/config/
 
 // @ts-ignore

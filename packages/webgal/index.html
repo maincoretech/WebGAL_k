@@ -2,15 +2,15 @@
 <html lang="zh-Hans">
   <head>
     <meta charset="UTF-8" />
+    <meta name="color-scheme" content="dark" />
     <link rel="icon" type="image/x-icon" href="./icons/favicon.ico" />
     <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
     <link rel="manifest" href="./manifest.json" />
     <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
     <title>WebGAL</title>
   </head>
-
-  <body>
-    <!--快速显示落地页，让用户感知不到加载的过程-->
+  <!--等待资源加载完后显示-->
+  <body style="display: none; visibility: hidden; transition: visibility 0.7s ease-in-out">
     <div id="ebg"></div>
     <div
       id="Title_enter_page"
@@ -33,7 +33,7 @@
           height: 100%;
           width: 100%;
           position: absolute;
-          background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+          background: #000;
           top: 0;
           opacity: 1;
           transition: opacity 1s;
@@ -48,12 +48,7 @@
           position: absolute;
           top: 0;
           opacity: 0;
-          background: linear-gradient(
-            165deg,
-            rgba(255, 255, 255, 0.25) 0%,
-            rgba(255, 255, 255, 1) 50%,
-            rgba(255, 255, 255, 0.25) 100%
-          );
+          background: linear-gradient(165deg, #ffffff40 0%, #ffffff 50%, #ffffff40 100%);
           transition: opacity 1s;
         "
       ></div>
@@ -69,7 +64,7 @@
           font-size: 175%;
           transition: opacity 1s;
           z-index: 15;
-          font-family: '思源宋体', Georgia, serif;
+          font-family: 'MavenPro', Georgia, serif;
         "
       >
         <div
@@ -79,14 +74,15 @@
           <div
             class="StartButton"
             style="
+              color: #fff;
               letter-spacing: 0.25em;
               padding: 2em 2em 2em 2em;
-              text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+              text-shadow: 0 0 30px #00000080;
               transition: text-shadow 1s;
               font-size: 175%;
             "
           >
-            PRESS THE SCREEN TO START
+            TAP TO START
           </div>
         </div>
         <div
@@ -100,24 +96,32 @@
             align-items: center;
           "
         >
-          <div style="padding: 0 0 0.25em 0">
+          <div style="padding: 0 0 0.25em 0; color: #fff">
             Powered by
             <a href="https://github.com/OpenWebGAL/WebGAL" onclick="jump(event, 'https://github.com/OpenWebGAL/WebGAL')"
               >WebGAL</a
             >
             Framework
           </div>
-          <div>
+          <!--<div>
             Made with ❤ by
             <a href="https://github.com/OpenWebGAL" onclick="jump(event, 'https://github.com/OpenWebGAL')"
               >OpenWebGAL</a
             >
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
     <div id="panic-overlay"><!-- 紧急回避 --></div>
     <div id="root"></div>
+
+    <script>
+      window.addEventListener('load', (event) => {
+        document.body.style.display = 'inline';
+        document.body.style.visibility = 'visible';
+      });
+    </script>
+
     <script>
       /**
        * 在窗口大小改变时进行强制缩放
