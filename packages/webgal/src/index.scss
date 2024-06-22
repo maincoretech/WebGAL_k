@@ -1,79 +1,77 @@
 @charset "UTF-8";
 
-@import 'Core/util/constants';
+@import "Core/util/constants";
 
 @font-face {
-  font-family: 'LibreBarcode128Text';
+  font-family: "思源宋体";
   /*noinspection CssUnknownTarget*/
-  src: url('assets/fonts/LibreBarcode128Text-Regular.woff2') format('woff2');
+  src: url("assets/fonts/SourceHanSerifCN-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'MavenPro';
+  font-family: "LXGW";
   /*noinspection CssUnknownTarget*/
-  src: url('assets/fonts/MavenPro.woff2') format('woff2');
+  src: url("assets/fonts/LXGWWenKai-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'WebgalUI';
+  font-family: "WebgalUI";
   /*noinspection CssUnknownTarget*/
-  src: url('assets/fonts/HanaMinA.woff2') format('woff2');
+  src: url("assets/fonts/OPPOSans-R.ttf") format("truetype");
 }
 
 .StartButton {
-  animation: StartButton_blink 2s infinite;
-}
-
-.StartButton:hover {
-  background: #80808040 !important;
+  animation: StartButton_blink 4s infinite;
 }
 
 @keyframes StartButton_blink {
   0% {
-    text-shadow: 0 0 30px #000;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
   }
   50% {
-    text-shadow: 0 0 30px #fff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
   }
   100% {
-    text-shadow: 0 0 30px #000;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
   }
 }
 
 a {
-  border-radius: 5px;
-  border: 3px solid #808080;
-  transition: color, background 0.7s;
-  background: none;
-  color: #ffffff80;
+  transition: color 1s;
+}
+
+a:link {
+  color: #434343;
+}
+
+a:visited {
+  color: #434343;
 }
 
 a:hover {
-  background: #80808040;
+  color: #434343;
 }
 
 a:active {
-  color: none;
+  color: #434343;
 }
 
 body {
   background-color: #000;
   font-size: 16px;
   margin: 0;
-  font-family: 'WebgalUI', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: "WebgalUI", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
   user-select: none;
-  transition: all 1s;
-  /*div {
-    display: none;
-  }*/
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
 }
 
 #root {
@@ -92,18 +90,18 @@ code {
 
 /* 滚动槽 */
 ::-webkit-scrollbar-track {
-  box-shadow: 0 0 10px #ffffff33;
-  -webkit-box-shadow: 0 0 10px #ffffff33;
-  background: #ffffff33;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  -webkit-box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
 }
 
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: #ffffff80;
-  box-shadow: 0 0 10px #00000026;
-  -webkit-box-shadow: 0 0 10px #00000026;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
 #ebg {
@@ -142,6 +140,7 @@ code {
 /*    }*/
 /*}*/
 
+
 /*@media screen and (max-width: 1100px) {*/
 /*    !*手机端视图*!*/
 /*    #root {*/
@@ -159,20 +158,20 @@ code {
 .App {
   height: 100%;
   width: 100%;
-  //background: #000000;
+  background: rgba(0, 0, 0, 1);
   overflow: hidden;
   perspective: 0;
   -webkit-overflow-scrolling: auto;
 }
 
-* {
+*{
   /*-webkit-overflow-scrolling: auto;*/
 }
 
-#pixiCanvas {
+#pixiCanvas{
   z-index: 5;
 }
 
-#root {
+#root{
   /*will-change: transform;*/
 }
