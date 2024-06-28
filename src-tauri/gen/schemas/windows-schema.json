@@ -1067,6 +1067,13 @@
           ]
         },
         {
+          "description": "webview:allow-set-webview-zoom -> Enables the set_webview_zoom command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "webview:allow-set-webview-zoom"
+          ]
+        },
+        {
           "description": "webview:allow-webview-close -> Enables the webview_close command without any pre-configured scope.",
           "type": "string",
           "enum": [
@@ -1144,6 +1151,13 @@
           ]
         },
         {
+          "description": "webview:deny-set-webview-zoom -> Denies the set_webview_zoom command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "webview:deny-set-webview-zoom"
+          ]
+        },
+        {
           "description": "webview:deny-webview-close -> Denies the webview_close command without any pre-configured scope.",
           "type": "string",
           "enum": [
@@ -1204,6 +1218,13 @@
           "type": "string",
           "enum": [
             "window:allow-current-monitor"
+          ]
+        },
+        {
+          "description": "window:allow-cursor-position -> Enables the cursor_position command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "window:allow-cursor-position"
           ]
         },
         {
@@ -1323,6 +1344,13 @@
           "type": "string",
           "enum": [
             "window:allow-minimize"
+          ]
+        },
+        {
+          "description": "window:allow-monitor-from-point -> Enables the monitor_from_point command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "window:allow-monitor-from-point"
           ]
         },
         {
@@ -1557,6 +1585,13 @@
           ]
         },
         {
+          "description": "window:allow-start-resize-dragging -> Enables the start_resize_dragging command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "window:allow-start-resize-dragging"
+          ]
+        },
+        {
           "description": "window:allow-theme -> Enables the theme command without any pre-configured scope.",
           "type": "string",
           "enum": [
@@ -1624,6 +1659,13 @@
           "type": "string",
           "enum": [
             "window:deny-current-monitor"
+          ]
+        },
+        {
+          "description": "window:deny-cursor-position -> Denies the cursor_position command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "window:deny-cursor-position"
           ]
         },
         {
@@ -1743,6 +1785,13 @@
           "type": "string",
           "enum": [
             "window:deny-minimize"
+          ]
+        },
+        {
+          "description": "window:deny-monitor-from-point -> Denies the monitor_from_point command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "window:deny-monitor-from-point"
           ]
         },
         {
@@ -1974,6 +2023,13 @@
           "type": "string",
           "enum": [
             "window:deny-start-dragging"
+          ]
+        },
+        {
+          "description": "window:deny-start-resize-dragging -> Denies the start_resize_dragging command without any pre-configured scope.",
+          "type": "string",
+          "enum": [
+            "window:deny-start-resize-dragging"
           ]
         },
         {
