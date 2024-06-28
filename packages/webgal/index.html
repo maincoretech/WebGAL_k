@@ -9,38 +9,14 @@
     <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
     <title>WebGAL</title>
   </head>
-  <!--等待资源加载完后显示-->
-  <body style="display: none; visibility: hidden; transition: visibility 0.7s ease-in-out">
-    <div id="ebg"></div>
-    <div
-      id="Title_enter_page"
-      onclick="enter()"
-      style="
-        width: 2560px;
-        height: 1440px;
-        overflow: hidden;
-        position: absolute;
-        top: 0;
-        z-index: 14;
-        opacity: 1;
-        transition: opacity 1.5s;
-      "
-    >
+
+  <body>
+    <!--<div id="trans-overlay"></div>-->
+    <div id="Title_enter_page">
       <!--    落地页背景-->
-      <div
-        id="Title_bg_container"
-        style="
-          height: 100%;
-          width: 100%;
-          position: absolute;
-          background: #000;
-          top: 0;
-          opacity: 1;
-          transition: opacity 1s;
-        "
-      ></div>
+      <div id="Title_bg_container"></div>
       <!--    点击后的白色渐变-->
-      <div
+      <!--<div
         id="Title_white_container"
         style="
           width: 100%;
@@ -51,56 +27,16 @@
           background: linear-gradient(165deg, #ffffff40 0%, #ffffff 50%, #ffffff40 100%);
           transition: opacity 1s;
         "
-      ></div>
+      ></div>-->
       <!--    落地页文字-->
-      <div
-        id="Title_enter_text"
-        style="
-          width: 100%;
-          position: absolute;
-          top: 0;
-          height: 100%;
-          opacity: 1;
-          font-size: 175%;
-          transition: opacity 1s;
-          z-index: 15;
-          font-family: 'MavenPro', Georgia, serif;
-        "
-      >
-        <div
-          class="toCenter"
-          style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center"
-        >
-          <div
-            class="StartButton"
-            style="
-              color: #fff;
-              letter-spacing: 0.25em;
-              padding: 2em 2em 2em 2em;
-              text-shadow: 0 0 30px #00000080;
-              transition: text-shadow 1s;
-              font-size: 175%;
-            "
-          >
-            TAP TO START
-          </div>
+      <div id="Title_enter_text">
+        <div id="StartButton">
+          <div onclick="enter()">TAP TO START</div>
         </div>
-        <div
-          style="
-            position: absolute;
-            bottom: 1em;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            flex-flow: column;
-            align-items: center;
-          "
-        >
-          <div style="padding: 0 0 0.25em 0; color: #fff">
+        <div id="footer">
+          <div>
             Powered by
-            <a href="https://github.com/OpenWebGAL/WebGAL" onclick="jump(event, 'https://github.com/OpenWebGAL/WebGAL')"
-              >WebGAL</a
-            >
+            <a href="https://github.com/OpenWebGAL/WebGAL" target="_blank">WebGAL</a>
             Framework
           </div>
           <!--<div>
@@ -114,8 +50,10 @@
     </div>
     <div id="panic-overlay"><!-- 紧急回避 --></div>
     <div id="root"></div>
+    <div id="ebg"></div>
 
     <script>
+      //加载回避
       window.addEventListener('load', (event) => {
         document.body.style.display = 'inline';
         document.body.style.visibility = 'visible';
