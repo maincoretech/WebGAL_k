@@ -19,7 +19,7 @@
         "title": "UNtitled",
         "minHeight": 360,
         "minWidth": 640,
-        "fullscreen": true
+        "fullscreen": false
       }
     ],
     "withGlobalTauri": true
