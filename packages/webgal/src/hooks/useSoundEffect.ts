@@ -1,9 +1,9 @@
 import { setStage } from '@/store/stageReducer';
 
-import page_flip_1 from '@/assets/se/page-flip-1.mp3';
-import switch_1 from '@/assets/se/switch-1.mp3';
-import mouse_enter from '@/assets/se/mouse-enter.mp3';
-import dialog_se from '@/assets/se/dialog.mp3';
+import page_flip_1 from '@/assets/se/page-flip-1.opus';
+import switch_1 from '@/assets/se/switch-1.opus';
+import mouse_enter from '@/assets/se/mouse-enter.opus';
+import dialog_se from '@/assets/se/dialog.opus';
 import click_se from '@/assets/se/click.opus';
 import { useDispatch } from 'react-redux';
 import { webgalStore } from '@/store/store';
