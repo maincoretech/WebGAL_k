@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <div id="trans-overlay"><div id="trans-overlay-anime"></div></div>
+    <!--<div id="trans-overlay"><div id="trans-overlay-anime"></div></div>-->
     <div id="Title_enter_page">
       <!--    落地页背景-->
       <div id="Title_bg_container"></div>
@@ -49,22 +49,6 @@
     <div id="panic-overlay"><!-- 紧急回避 --></div>
     <div id="root"></div>
     <div id="ebg"></div>
-
-    <script>
-      //加载过场
-      const transOverlayAnime = document.querySelector('#trans-overlay div');
-      const transOverlay = document.getElementById('trans-overlay');
-      window.addEventListener('load', () => {
-        /*document.body.style.display = 'inline';
-        document.body.style.visibility = 'visible';*/
-        setTimeout(() => {
-          transOverlay.style.opacity = '0';
-          setTimeout(() => {
-            transOverlay.style.display = 'none';
-          }, 1000);
-        }, 2000);
-      });
-    </script>
 
     <script>
       /**
@@ -226,10 +210,28 @@
         // window.location = url;
       }
 
+      const title = document.getElementById('Title_enter_page');
+      const bgContainer = document.getElementById('Title_bg_container');
+      const titleText = document.getElementById('Title_enter_text');
+      //加载前不显示
+      /*const transOverlayAnime = document.querySelector('#trans-overlay div');
+      const transOverlay = document.getElementById('trans-overlay');*/
+      window.addEventListener('load', () => {
+        /*document.body.style.display = 'inline';
+        document.body.style.visibility = 'visible';*/
+        setTimeout(() => {
+          bgContainer.style.zIndex = '13';
+          /*transOverlay.style.opacity = '0';
+          setTimeout(() => {
+            transOverlay.style.display = 'none';
+          }, 1000);*/
+        }, 500);
+      });
+
       /**
        * 点击屏幕，进入引擎主界面
        */
-      function enter() {
+      /*function enter() {
         const bgContainer = document.getElementById('Title_bg_container');
         setTimeout(() => {
           if (bgContainer) {
@@ -242,21 +244,21 @@
             enterText.style.opacity = '0'; // 调整标题文字的透明度
           }
         }, 500);
-        /*const whiteContainer = document.getElementById('Title_white_container');
+        //const whiteContainer = document.getElementById('Title_white_container');
         setTimeout(() => {
           if (whiteContainer) {
             whiteContainer.style.opacity = '1';
           }
         }, 50); // 在50ms后开始显示白色渐变
-        */
+        //
         const title = document.getElementById('Title_enter_page');
         setTimeout(() => {
           if (title) title.style.opacity = '0';
         }, 500); //500ms后开始降低落地页透明度
-        /*if (!isIOS && title) {
+        //if (!isIOS && title) {
           title.style.pointerEvents = 'none'; //落地页不再响应点击
           title.style.background = '#000'; //改变标题渐变效果
-        }*/
+        }//
         if (transOverlay.style.display == 'none') {
           transOverlay.style.display = 'flex';
           transOverlay.style.opacity = '1';
@@ -274,27 +276,33 @@
         }, 2000); // 将落地页设置为不显示
         window.enterPromise();
         delete window.enterPromise;
-      }
-      /*function enter() {
-        console.log('clicked');
-        const title = document.getElementById('Title_enter_page');
-        setTimeout(() => {
-          if (title) {
-            title.style.opacity = '0';
-          }
-        }, 500); //500ms后开始降低落地页透明度
+      }*/
+      function enter() {
+        if (title) {
+          titleText.style.opacity = '0';
+        }
         if (!isIOS && title) {
           title.style.pointerEvents = 'none'; //落地页不再响应点击
-          title.style.background = 'linear-gradient( #a1c4fd 0%, #c2e9fb 100%)'; //改变标题渐变效果
+          //title.style.background = 'linear-gradient( #a1c4fd 0%, #c2e9fb 100%)'; //改变标题渐变效果
         }
         setTimeout(() => {
           if (title) {
+            title.style.opacity = '0';
             title.style.display = 'none';
+          }
+        }, 2000);
+        if (bgContainer) {
+          bgContainer.style.zIndex = '16';
+        }
+        setTimeout(() => {
+          if (bgContainer) {
+            bgContainer.style.opacity = '0';
+            bgContainer.style.display = 'none';
           }
         }, 2000);
         window.enterPromise();
         delete window.enterPromise;
-      }*/
+      }
     </script>
   </body>
 </html>

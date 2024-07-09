@@ -32,7 +32,7 @@
   src: url('assets/fonts/HanaMinA.woff2') format('woff2');
 }
 
-#trans-overlay {
+/*#trans-overlay {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,7 +68,7 @@
     transform: scale(1);
     box-shadow: 0 0 0 36px #80808000;
   }
-}
+}*/
 
 @keyframes StartButton_blink {
   0% {
@@ -134,7 +134,7 @@ code {
   position: absolute;
   background: #000;
   top: 0;
-  opacity: 1;
+  z-index: 16;
   transition: opacity 1s;
 }
 
@@ -146,7 +146,7 @@ code {
   top: 0;
   z-index: 14;
   opacity: 1;
-  transition: opacity 1.4s;
+  transition: opacity 250ms;
 }
 
 #Title_enter_text {
@@ -160,6 +160,8 @@ code {
   opacity: 1;
   z-index: 15;
   font-family: 'MavenPro', Georgia, serif;
+  transition: opacity 500ms;
+
   #enter-buttom {
     animation: StartButton_blink 2s infinite;
     color: #fff;
@@ -220,7 +222,7 @@ code {
 #ebg {
   height: 100vh;
   width: 100vw;
-  filter: blur(50px);
+  filter: blur(50px) grayscale(100%);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
