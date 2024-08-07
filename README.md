@@ -4,11 +4,17 @@
 
 **[Help us with translation | 协助翻译 | 翻訳のお手伝い | 번역을 도와주세요](https://github.com/MakinoharaShoko/WebGAL/tree/dev/packages/webgal/src/translations)**
 
-**[Join Discord Server | 加入 Discord 讨论 | Discordのディスカッションに参加する](https://discord.gg/kPrQkJttJy)**
+**[Join Discord Server | 加入 Discord 讨论 | Discord のディスカッションに参加する](https://discord.gg/kPrQkJttJy)**
 
 <a href="https://www.producthunt.com/posts/webgal?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-webgal" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=443280&theme=light" alt="WebGAL - Galgame&#0032;Editing&#0046;&#0032;Redefined | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
 # WebGAL
+
+**界面美观、功能强大、易于开发的全新网页端视觉小说引擎**
+
+# WebGAL 提供可视化编辑器
+
+**创作视觉小说，何须会编程？欢迎体验 [WebGAL 图形化编辑器](https://github.com/MakinoharaShoko/WebGAL_Terre/)**
 
 ## 在线体验
 
@@ -18,7 +24,7 @@ https://demo.openwebgal.com
 
 #### 完整的游戏
 
-[铃色☆记忆](http://hoshinasuzu.cn/) by 星奈组  [备用链接](http://hoshinasuzu.cc/)
+[铃色 ☆ 记忆](http://hoshinasuzu.cn/) by 星奈组 [备用链接](http://hoshinasuzu.cc/)
 
 [Elf of Era Idols Project](https://store.steampowered.com/app/2414730/Elf_of_Era_Idols_Project/) (通过 Steam 获取)
 
