@@ -73,26 +73,28 @@ export function Display() {
           currentChecked={userDataState.optionData.textSize}
         />
       </NormalOption>
-      <NormalOption key="textFont" title={t('textFont.title')}>
-        <NormalButton
-          textList={t('textFont.options.siYuanSimSun', 'textFont.options.SimHei', 'textFont.options.lxgw')}
-          functionList={[
-            () => {
-              dispatch(setOptionData({ key: 'textboxFont', value: textFont.song }));
-              setStorage();
-            },
-            () => {
-              dispatch(setOptionData({ key: 'textboxFont', value: textFont.hei }));
-              setStorage();
-            },
-            () => {
-              dispatch(setOptionData({ key: 'textboxFont', value: textFont.lxgw }));
-              setStorage();
-            },
-          ]}
-          currentChecked={userDataState.optionData.textboxFont}
-        />
-      </NormalOption>
+      {/*
+        <NormalOption key="textFont" title={t('textFont.title')}>
+          <NormalButton
+            textList={t('textFont.options.siYuanSimSun', 'textFont.options.SimHei', 'textFont.options.lxgw')}
+            functionList={[
+              () => {
+                dispatch(setOptionData({ key: 'textboxFont', value: textFont.song }));
+                setStorage();
+              },
+              () => {
+                dispatch(setOptionData({ key: 'textboxFont', value: textFont.hei }));
+                setStorage();
+              },
+              () => {
+                dispatch(setOptionData({ key: 'textboxFont', value: textFont.lxgw }));
+                setStorage();
+              },
+            ]}
+            currentChecked={userDataState.optionData.textboxFont}
+          />
+        </NormalOption>
+      */}
       <NormalOption key="textboxOpacity" title={t('textboxOpacity.title')}>
         <OptionSlider
           initValue={userDataState.optionData.textboxOpacity}

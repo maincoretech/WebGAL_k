@@ -144,24 +144,24 @@ const zhCn = {
 
   title: {
     start: {
-      title: '开始游戏',
-      subtitle: 'START',
+      title: 'START',
+      subtitle: '',
     },
     continue: {
-      title: '继续游戏',
-      subtitle: 'CONTINUE',
+      title: 'CONTINUE',
+      subtitle: '',
     },
     options: {
-      title: '游戏选项',
-      subtitle: 'OPTIONS',
+      title: 'OPTIONS',
+      subtitle: '',
     },
     load: {
-      title: '读取存档',
-      subtitle: 'LOAD',
+      title: 'LOAD',
+      subtitle: '',
     },
     extra: {
-      title: '鉴赏模式',
-      subtitle: 'EXTRA',
+      title: 'EXTRA',
+      subtitle: '',
     },
   },
 

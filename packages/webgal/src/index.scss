@@ -171,15 +171,20 @@ code {
     text-shadow: 0 0 0 0 #fff;
     transition: text-shadow 1s;
     font-size: 300%;
-    background: linear-gradient(to right, #202020, #990000) no-repeat right bottom;
+    //background: linear-gradient(to right, #202020, #990000) no-repeat right bottom;
+    background: linear-gradient(to right, #202020, #606060) no-repeat right bottom;
     background-size: 0 20px;
-    transition: background-size 0.5s;
+    transition: background-size 0.33s, font-size 0.33s;
     //background: #fff;
     //border-radius: 20px;
   }
   #enter-buttom:hover {
     background-size: 100% 20px;
     background-position: left bottom;
+  }
+  #enter-buttom:active {
+    //background-size: 0 20px;
+    font-size: 270%;
   }
 
   #footer {
@@ -222,7 +227,7 @@ code {
 #ebg {
   height: 100vh;
   width: 100vw;
-  filter: blur(50px) grayscale(100%);
+  filter: blur(30px);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

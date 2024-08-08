@@ -14,7 +14,7 @@
 }
 
 .Options_title {
-  font-family: "思源宋体", serif;
+  font-family: 'WebgalUI', serif;
   letter-spacing: 0.1em;
   font-size: 225%;
   margin: 0.5em 0 0.5em 0;
@@ -29,7 +29,7 @@
   font-size: 165%;
   font-weight: bold;
   color: transparent;
-  background: linear-gradient(to left, #227D51, rgba(81, 110, 65, 1));
+  background: linear-gradient(to left, #227d51, rgba(81, 110, 65, 1));
   -webkit-background-clip: text;
   animation: Elements_in ease-out 0.7s forwards;
 }
@@ -44,10 +44,8 @@
 .Option_title_text_ts {
   position: absolute;
   color: rgba(0, 0, 0, 0);
-  text-shadow: 0.04em 0.04em rgba(81, 110, 65, 0.9),
-    0.05em 0.05em rgba(81, 110, 65, 0.9),
-    0.06em 0.06em rgba(81, 110, 65, 0.9),
-    0.07em 0.07em rgba(81, 110, 65, 0.9);
+  text-shadow: 0.04em 0.04em rgba(81, 110, 65, 0.9), 0.05em 0.05em rgba(81, 110, 65, 0.9),
+    0.06em 0.06em rgba(81, 110, 65, 0.9), 0.07em 0.07em rgba(81, 110, 65, 0.9);
   //0.08em 0.08em rgba(81, 110, 65, 0.9),
   //0.09em 0.09em rgba(81, 110, 65, 0.9),
   //0.10em 0.10em rgba(81, 110, 65, 0.9),
@@ -88,7 +86,6 @@
   -webkit-background-clip: text;
   font-size: 135%;
   text-decoration: underline;
-
 }
 
 @keyframes Elements_in {
@@ -114,11 +111,11 @@
 }
 
 .Options_page_button {
-  font-family: "思源宋体", serif;
+  font-family: 'WebgalUI', serif;
   font-size: 300%;
   font-weight: bold;
   color: transparent;
-  background: linear-gradient(to left, #227D51, rgba(81, 110, 65, 1));
+  background: linear-gradient(to left, #227d51, rgba(81, 110, 65, 1));
   opacity: 0.35;
   -webkit-background-clip: text;
   transition: color 0.33s, background-image 0.33s, opacity 0.33s;
@@ -126,7 +123,7 @@
 }
 
 .Options_page_button_active {
-  background-image: linear-gradient(to left, #227D51, rgba(81, 110, 65, 1));
+  background-image: linear-gradient(to left, #227d51, rgba(81, 110, 65, 1));
   -webkit-background-clip: text;
   opacity: 1;
 }

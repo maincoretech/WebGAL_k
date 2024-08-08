@@ -12,36 +12,45 @@
   min-width: 25%;
   height: 100%;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-end;
   flex-flow: column;
   transition: background 0.75s;
-  padding-left: 120px;
+  padding-left: 70%;
 }
 
 .Title_button {
-  border: #fff solid 10px;
-  font-weight: bold;
-  text-align: center;
+  //border: #fff solid 10px;
+  font: 2rem 'MavenPro';
+  text-align: left;
+  width: 16em;
   flex: 0 1 auto;
   cursor: pointer;
-  padding: 1em 2em 1em 2em;
+  padding: 1em 1.2em 1em 0.6em;
   margin: 20px 0;
   transition: all 0.33s;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(5px);
-  border-radius: 4px;
+  background: #00000080;
+  backdrop-filter: blur(10px);
+  //border-radius: 10px;
+  text-shadow: 0 0 10px #000;
   //transform: skewX(-10deg);
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+  //background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
 }
 
 .Title_button:hover {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 1);
-  padding: 1em 6em 1em 3em;
+  box-shadow: -0.6em 0 0 0 #000000aa;
+  width: 15.4em;
+  padding: 1em 0.6em 1em 0.6em;
+}
+
+.Title_button:active {
+  padding: 0.8em 0.5em 0.8em 0.5em;
+  width: 14.6em;
+  box-shadow: -0.5em 0 0 0 #000000aa;
 }
 
 .Title_button_text {
   font-size: 165%;
-  color: #fbfbfb;
+  color: #fff;
   padding: 0 0.5em 0 0.5em;
   letter-spacing: 0.2em;
 }

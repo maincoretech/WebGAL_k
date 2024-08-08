@@ -140,24 +140,24 @@ const jp = {
 
   title: {
     start: {
-      title: '初めから',
-      subtitle: 'START',
+      title: 'START',
+      subtitle: '',
     },
     continue: {
-      title: '続きから',
-      subtitle: 'CONTINUE',
+      title: 'CONTINUE',
+      subtitle: '',
     },
     options: {
-      title: '設定',
-      subtitle: 'CONFIG',
+      title: 'OPTIONS',
+      subtitle: '',
     },
     load: {
-      title: 'ロード',
-      subtitle: 'LOAD',
+      title: 'LOAD',
+      subtitle: '',
     },
     extra: {
-      title: '鑑賞モード',
-      subtitle: 'EXTRA',
+      title: 'EXTRA',
+      subtitle: '',
     },
   },
 

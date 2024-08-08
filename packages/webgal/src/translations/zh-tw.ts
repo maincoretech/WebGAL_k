@@ -133,24 +133,24 @@ const zhTw = {
 
   title: {
     start: {
-      title: '開始遊戲',
-      subtitle: 'START',
+      title: 'START',
+      subtitle: '',
     },
     continue: {
-      title: '繼續遊戲',
-      subtitle: 'CONTINUE',
+      title: 'CONTINUE',
+      subtitle: '',
     },
     options: {
-      title: '遊戲選項',
-      subtitle: 'OPTIONS',
+      title: 'OPTIONS',
+      subtitle: '',
     },
     load: {
-      title: '讀取存檔',
-      subtitle: 'LOAD',
+      title: 'LOAD',
+      subtitle: '',
     },
     extra: {
-      title: 'CG模式',
-      subtitle: 'EXTRA',
+      title: 'EXTRA',
+      subtitle: '',
     },
   },
 
