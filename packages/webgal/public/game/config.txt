@@ -1,0 +1,8 @@
+Game_name:UNtitled;
+Game_key:0f87dstRg;
+Title_img:tmp-bg.webp;
+Title_bgm:s_Title.mp3;
+Game_Logo:WebGalEnter.png;
+Debug:true;
+GameNum:10;
+GameNum_Double:20;
