@@ -83,7 +83,8 @@
 .About_text {
   font-weight: bold;
   color: transparent;
-  background: linear-gradient(to left, rgba(34, 125, 81, 0.65), rgba(81, 110, 65, 0.65));
+  //background: linear-gradient(to left, rgba(34, 125, 81, 0.65), rgba(81, 110, 65, 0.65));
+  background: #ffffff80;
   -webkit-background-clip: text;
   font-size: 135%;
   text-decoration: underline;
@@ -116,7 +117,8 @@
   font-size: 300%;
   font-weight: bold;
   color: transparent;
-  background: linear-gradient(to left, #227d51, rgba(81, 110, 65, 1));
+  //background: linear-gradient(to left, #227d51, rgba(81, 110, 65, 1));
+  background: #ffffff80;
   opacity: 0.35;
   -webkit-background-clip: text;
   transition: color 0.33s, background-image 0.33s, opacity 0.33s;
@@ -124,7 +126,8 @@
 }
 
 .Options_page_button_active {
-  background-image: linear-gradient(to left, #227d51, rgba(81, 110, 65, 1));
+  //background-image: linear-gradient(to left, #227d51, rgba(81, 110, 65, 1));
+  background: #ffffffcc;
   -webkit-background-clip: text;
   opacity: 1;
 }
