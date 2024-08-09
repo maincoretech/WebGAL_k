@@ -14,6 +14,9 @@ import useApplyStyle from '@/hooks/useApplyStyle';
 import { fullScreenOption } from '@/store/userDataInterface';
 import { keyboard } from '@/hooks/useHotkey';
 import useConfigData from '@/hooks/useConfigData';
+import { showGlogalDialog } from '@/UI/GlobalDialog/GlobalDialog';
+import { Windows } from '@icon-park/react';
+
 /**
  * 标题页
  * @constructor
@@ -80,17 +83,6 @@ const Title: FC = () => {
               onClick={() => {
                 playSeClick();
                 dispatch(setVisibility({ component: 'showMenuPanel', visibility: true }));
-                dispatch(setMenuPanelTag(MenuPanelTag.Option));
-              }}
-              onMouseEnter={playSeEnter}
-            >
-              <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('options.title')}</div>
-            </div>
-            <div
-              className={applyStyle('Title_button', styles.Title_button)}
-              onClick={() => {
-                playSeClick();
-                dispatch(setVisibility({ component: 'showMenuPanel', visibility: true }));
                 dispatch(setMenuPanelTag(MenuPanelTag.Load));
               }}
               onMouseEnter={playSeEnter}
@@ -106,6 +98,37 @@ const Title: FC = () => {
               onMouseEnter={playSeEnter}
             >
               <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('extra.title')}</div>
+            </div>
+            <div
+              className={applyStyle('Title_button', styles.Title_button)}
+              onClick={() => {
+                playSeClick();
+                dispatch(setVisibility({ component: 'showMenuPanel', visibility: true }));
+                dispatch(setMenuPanelTag(MenuPanelTag.Option));
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('options.title')}</div>
+            </div>
+            <div
+              className={applyStyle('Title_button', styles.Title_button)}
+              onClick={() => {
+                playSeClick();
+                showGlogalDialog({
+                  title: t('$gaming.buttons.exitTips'),
+                  leftText: t('$common.yes'),
+                  rightText: t('$common.no'),
+                  leftFunc: () => {
+                    //dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
+                    //window.close();
+                  },
+                  rightFunc: () => {},
+                });
+                //dispatch(setVisibility({ component: 'showExtra', visibility: true }));
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('exit.title')}</div>
             </div>
           </div>
         </div>

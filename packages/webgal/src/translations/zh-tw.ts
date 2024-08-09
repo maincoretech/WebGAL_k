@@ -152,6 +152,10 @@ const zhTw = {
       title: 'EXTRA',
       subtitle: '',
     },
+    exit: {
+      title: 'EXIT',
+      subtitle: '',
+    },
   },
 
   gaming: {
@@ -170,6 +174,7 @@ const zhTw = {
       options: '選項',
       title: '標題',
       titleTips: '確認返回到標題界面嗎',
+      exitTips: '確認關閉軟體嗎',
     },
   },
 

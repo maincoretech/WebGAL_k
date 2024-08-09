@@ -1,10 +1,10 @@
 import { setStage } from '@/store/stageReducer';
 
-import page_flip_1 from '@/assets/se/page-flip-1.opus';
-import switch_1 from '@/assets/se/switch-1.opus';
-import mouse_enter from '@/assets/se/mouse-enter.opus';
-import dialog_se from '@/assets/se/dialog.opus';
-import click_se from '@/assets/se/click.opus';
+import se_pageFlip from '@/assets/se/switch.opus';
+import se_switch from '@/assets/se/switch.opus';
+import se_mouseEnter from '@/assets/se/mouse-enter.opus';
+import se_dialog from '@/assets/se/click.opus';
+import se_click from '@/assets/se/click.opus';
 import { useDispatch } from 'react-redux';
 import { webgalStore } from '@/store/store';
 
@@ -15,20 +15,20 @@ const useSoundEffect = () => {
   const dispatch = useDispatch();
 
   const playSeEnter = () => {
-    dispatch(setStage({ key: 'uiSe', value: mouse_enter }));
+    dispatch(setStage({ key: 'uiSe', value: se_mouseEnter }));
   };
   const playSeClick = () => {
-    dispatch(setStage({ key: 'uiSe', value: click_se }));
+    dispatch(setStage({ key: 'uiSe', value: se_click }));
   };
   const playSeSwitch = () => {
-    dispatch(setStage({ key: 'uiSe', value: switch_1 }));
+    dispatch(setStage({ key: 'uiSe', value: se_switch }));
   };
   const playSePageChange = () => {
-    dispatch(setStage({ key: 'uiSe', value: page_flip_1 }));
+    dispatch(setStage({ key: 'uiSe', value: se_pageFlip }));
   };
 
   const playSeDialogOpen = () => {
-    dispatch(setStage({ key: 'uiSe', value: dialog_se }));
+    dispatch(setStage({ key: 'uiSe', value: se_dialog }));
   };
 
   return {
@@ -45,10 +45,10 @@ const useSoundEffect = () => {
  */
 export const useSEByWebgalStore = () => {
   const playSeEnter = () => {
-    webgalStore.dispatch(setStage({ key: 'uiSe', value: mouse_enter }));
+    webgalStore.dispatch(setStage({ key: 'uiSe', value: se_mouseEnter }));
   };
   const playSeClick = () => {
-    webgalStore.dispatch(setStage({ key: 'uiSe', value: click_se }));
+    webgalStore.dispatch(setStage({ key: 'uiSe', value: se_click }));
   };
   return {
     playSeEnter, // 鼠标进入

@@ -163,6 +163,10 @@ const zhCn = {
       title: 'EXTRA',
       subtitle: '',
     },
+    exit: {
+      title: 'EXIT',
+      subtitle: '',
+    },
   },
 
   gaming: {
@@ -181,6 +185,7 @@ const zhCn = {
       options: '选项',
       title: '标题',
       titleTips: '确认返回到标题界面吗',
+      exitTips: '确认退出游戏吗',
     },
   },
 

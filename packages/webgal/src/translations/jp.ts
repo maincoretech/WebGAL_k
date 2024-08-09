@@ -159,6 +159,10 @@ const jp = {
       title: 'EXTRA',
       subtitle: '',
     },
+    exit: {
+      title: 'EXIT',
+      subtitle: '',
+    },
   },
 
   gaming: {
@@ -177,6 +181,7 @@ const jp = {
       options: 'CONFIG',
       title: 'HOME',
       titleTips: 'タイトル画面に戻りますか？',
+      exitTips: 'ゲームを終了しますか',
     },
   },
 

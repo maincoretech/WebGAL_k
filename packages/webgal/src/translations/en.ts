@@ -1,3 +1,5 @@
+import { title } from 'process';
+
 const en = {
   // 通用
   common: {
@@ -156,6 +158,10 @@ const en = {
       title: 'EXTRA',
       subtitle: '',
     },
+    exit: {
+      title: 'EXIT',
+      subtitle: '',
+    },
   },
 
   gaming: {
@@ -174,6 +180,7 @@ const en = {
       options: 'Options',
       title: 'Title',
       titleTips: 'Confirm return to the title screen',
+      exitTips: 'Confirm quit the game',
     },
   },
 

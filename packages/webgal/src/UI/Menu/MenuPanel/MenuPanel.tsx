@@ -66,10 +66,25 @@ export const MenuPanel = () => {
         tagName={t('loadSaving.title')}
         key="loadButton"
       />
+
+      <MenuPanelButton
+        iconName="option"
+        buttonOnClassName={OptionTagOn}
+        iconColor={OptionIconColor}
+        tagColor={OptionTagColor}
+        clickFunc={() => {
+          playSePageChange();
+          dispatch(setMenuPanelTag(MenuPanelTag.Option));
+        }}
+        tagName={t('options.title')}
+        key="optionButton"
+      />
+
       <MenuPanelButton
         iconName="title"
         iconColor="rgba(123,144,169,1)"
         tagColor="rgba(123,144,169,1)"
+        style={{ marginLeft: 'auto' }}
         clickFunc={() => {
           playSeDialogOpen();
           showGlogalDialog({
@@ -85,19 +100,6 @@ export const MenuPanel = () => {
         }}
         tagName={t('title.title')}
         key="titleIcon"
-      />
-      <MenuPanelButton
-        iconName="option"
-        style={{ marginLeft: 'auto' }}
-        buttonOnClassName={OptionTagOn}
-        iconColor={OptionIconColor}
-        tagColor={OptionTagColor}
-        clickFunc={() => {
-          playSePageChange();
-          dispatch(setMenuPanelTag(MenuPanelTag.Option));
-        }}
-        tagName={t('options.title')}
-        key="optionButton"
       />
 
       <MenuPanelButton

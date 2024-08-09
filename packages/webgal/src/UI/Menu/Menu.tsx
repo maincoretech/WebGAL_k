@@ -34,8 +34,8 @@ const Menu: FC = () => {
     <>
       {GUIState.showMenuPanel && (
         <div className={styles.Menu_main}>
-          <div className={styles.Menu_TagContent}>{currentTag}</div>
           <MenuPanel />
+          <div className={styles.Menu_TagContent}>{currentTag}</div>
         </div>
       )}
     </>
