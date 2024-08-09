@@ -16,6 +16,8 @@ pnpm-lock.yaml
 yarn.lock
 bun.lockb
 
+public
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
