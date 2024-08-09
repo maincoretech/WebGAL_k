@@ -3,9 +3,10 @@
   height: 100%;
   position: absolute;
   z-index: 16;
-  //backdrop-filter: blur(1px);
+  //backdrop-filter: blur(100px);
   animation: Menu_ShowSoftly 0.5s forwards;
-  background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+  background: #000000cc;
+  //background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
 }
 
 .Menu_TagContent {
