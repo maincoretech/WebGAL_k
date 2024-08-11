@@ -2,22 +2,27 @@
   font-size: 150%;
   box-sizing: border-box;
   padding: 0.2em 1em 0.2em 1em;
-  background-color: rgba(50, 50, 50, 0.05);
+  //background-color: rgba(50, 50, 50, 0.05);
   margin: 0 0.4em 0 0;
-  color: rgba(160, 170, 160, 1);
+  color: #ffffff60;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
+  //border-bottom: 2px solid transparent;
+  background: linear-gradient(to right, #ffffff30, #ffffff30) no-repeat right;
+  background-size: 0 100%;
+  transition: background-size 0.2s, color 0.2s;
 }
 
 .NormalButton:hover {
-  border-bottom: 2px solid rgba(81, 110, 65, 0.9);
-  color: rgba(81, 110, 65, 0.9);
+  //border-bottom: 2px solid rgba(81, 110, 65, 0.9);
+  color: #ffffffaa;
   font-weight: bold;
+  background-size: 100% 100%;
+  background-position: left;
 }
 
 .NormalButtonChecked {
-  background-color: rgba(81, 110, 65, 0.15);
-  border-bottom: 2px solid rgba(81, 110, 65, 0.9);
-  color: rgba(81, 110, 65, 0.9);
+  background-color: #ffffff30;
+  //border-bottom: 2px solid rgba(81, 110, 65, 0.9);
+  color: #ffffffaa;
   font-weight: bold;
 }

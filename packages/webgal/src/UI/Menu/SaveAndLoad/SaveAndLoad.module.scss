@@ -11,16 +11,16 @@
   display: flex;
   //background-color: rgba(255, 255, 255, 1);
   //box-shadow: 0 0 1.5em 0.1em rgba(0, 0, 0, 0.05);
-  animation: Elements_in ease-out 1s forwards;
+  animation: Elements_in ease-out 0.2s forwards;
   //border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   justify-content: center;
 }
 
 .Save_Load_title {
-  font-family: "思源宋体", serif;
+  font-family: 'WebgalUI', serif;
   letter-spacing: 0.1em;
   width: auto;
-  font-size: 500%;
+  font-size: 300%;
   min-width: 350px;
   //margin: 0 0 0 0.8em;
   //padding: 0 0.8em 0 0.8em;
@@ -30,47 +30,47 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  left: 20px;
-  top:0;
+  left: -1%;
+  top: 2%;
   z-index: -1;
   opacity: 0.2;
-  transform: translateY(-10px);
+  //transform: translateY(-10px);
 }
 
-.Save_title_text {
+/*.Save_title_text {
   font-weight: bold;
   color: transparent;
-  background: linear-gradient(135deg, #77428D 0%, #B28FCE 100%);
+  background: #ffffffaa;
   text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.5);
   -webkit-background-clip: text;
 }
-
 
 .Load_title_text {
   font-weight: bold;
   color: transparent;
-  background: linear-gradient(135deg, #005CAF 0%, #2EA9DF 100%);
+  background: linear-gradient(135deg, #005caf 0%, #2ea9df 100%);
   text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.5);
   -webkit-background-clip: text;
-}
+}*/
 
 .Save_Load_top_buttonList {
   height: 100%;
   display: flex;
+  padding: 0.5%;
   //padding: 0 0 0 2em;
 }
 
 .Save_Load_top_button {
   cursor: pointer;
   font-size: 200%;
-  width: 2.05em;
+  width: 2em;
   text-align: center;
-  color: rgba(0, 0, 0, 0.5);
+  color: #ffffff30;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  border-bottom: 4px solid rgba(0, 0, 0, 0);
-  transition: background-color 0.7s, border-bottom-width 0.7s;
+  //border-bottom: 4px solid rgba(0, 0, 0, 0);
+  transition: background-color 0.2s, border-bottom-width 0.2s;
 }
 
 .Save_Load_top_button_text {
@@ -86,28 +86,30 @@
 
 .Save_Load_top_button_on {
   font-weight: bold;
-  border-bottom: 4px solid #77428D;
-  color: #77428D;
-  background-color: rgba(119, 66, 141, 0.05);
+  border-bottom: 8px solid #ffffffaa;
+  color: #ffffffaa;
+  background-color: #ffffff30;
 }
 
 .Save_Load_top_button:hover {
-  color: #77428D;
+  color: #ffffff30;
   font-weight: bold;
-  border-bottom: 4px solid #77428D;
+  border-bottom: 8px solid #ffffff30;
+  background-color: #ffffff10;
 }
 
 .Load_top_button_on {
   font-weight: bold;
-  border-bottom: 5px solid #005CAF;
-  color: #005CAF;
-  background-color: rgba(0, 92, 175, 0.1);
+  border-bottom: 8px solid #ffffffaa;
+  color: #ffffffaa;
+  background-color: #ffffff30;
 }
 
 .Load_top_button:hover {
-  color: #005CAF;
+  color: #ffffff30;
   font-weight: bold;
-  border-bottom: 5px solid #005CAF;
+  border-bottom: 8px solid #ffffff30;
+  background-color: #ffffff10;
 }
 
 .Save_Load_content {
@@ -127,9 +129,9 @@
   width: 17.5%;
   height: 45%;
   //box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  animation: Elements_in 1s ease-out forwards, Elements_in_transform 1s ease-out;
+  animation: Elements_in 0.2s forwards, Elements_in_transform 0.2s;
   opacity: 0;
-  border-radius: 4px;
+  //border-radius: 4px;
   transition: transform 0.25s, box-shadow 0.25s;
   cursor: pointer;
 }
@@ -139,31 +141,31 @@
   transform: scale(1.05, 1.05) translate(-0.2em, -0.2em);
 }
 
-
 .Save_Load_content_element_top {
-  font-family: "思源宋体", serif;
+  font-family: 'Webgal_UI', serif;
   width: 100%;
   height: 12%;
   display: flex;
 }
 
 .Save_Load_content_element_top_index {
-  color: rgba(255, 255, 255, 1);
+  color: #ffffffcc;
   text-align: center;
+  font-family: WebgalUI, serif;
   font-size: 155%;
   height: 100%;
   width: 20%;
-  background-color: #B28FCE;
+  background-color: #00000060;
 }
 
 .Load_content_elememt_top_index {
-  background-color: #51A8DD;
+  background-color: #00000060;
 }
 
 .Save_Load_content_element_top_date {
   padding: 0.425em 0 0 0.5em;
-  background-color: #77428D;
-  color: rgba(255, 255, 255, 1);
+  background-color: #00000030;
+  color: #ffffffaa;
   font-size: 115%;
   height: 100%;
   width: 80%;
@@ -172,14 +174,15 @@
 }
 
 .Load_content_element_top_date {
-  background-color: #005CAF;
+  background-color: #00000039;
 }
 
 .Save_Load_content_text {
-  font-family: "WebgalUI", sans-serif;
+  font-family: 'WebgalUI', sans-serif;
   letter-spacing: 0.05em;
-  color: #373C38;
-  background: linear-gradient(-45deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 1) 100%);
+  color: #ffffffaa;
+  background: #00000060;
+  //background: linear-gradient(-45deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 1) 100%);
   //background: rgba(255,255,255,1);
   font-size: 120%;
   height: 40%;
@@ -200,20 +203,23 @@
   //margin: 0.35em 0 0 0;
   //background: rgba(0, 0, 0, 0.04);
   font-weight: bold;
-  color: #77428D;
+  color: #ffffffcc;
   padding: 0.35em 0.8em 0.25em 0.8em;
+  //border-left: 10px solid #ffffff10;
   width: 100%;
+  margin-top: 2%;
   //border-radius: 4px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .Load_content_speaker {
-  color: #005caf;
+  //border-left: 10px solid #ffffff10;
+  margin-top: 2%;
+  color: #ffffffcc;
 }
 
-
 .Load_content_text {
-  background-color: rgba(0, 92, 175, 0.75);
+  background-color: #ffffffaa;
 }
 
 .Save_Load_content_miniRen {

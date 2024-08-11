@@ -21,14 +21,14 @@
   //width: 20%;
   min-width: 12.5%;
   cursor: pointer;
-  color: rgba(123,144,169, 1);
+  color: #ffffff;
   background: rgba(0, 0, 0, 0);
   overflow: hidden;
   //border-right: 1.5px solid rgba(0, 0, 0, 0.15);
   transition: text-shadow 0.7s, background-color 0.7s;
 }
 
-.MenuPanel_button:last-child{
+.MenuPanel_button:last-child {
   margin-right: 0;
 }
 
@@ -46,6 +46,6 @@
   margin: 0 0.15em 0 0;
 }
 
-.MenuPanel_button_hl{
+.MenuPanel_button_hl {
   background-color: rgba(245, 246, 247, 0.35) !important;
 }

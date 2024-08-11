@@ -1,29 +1,31 @@
-.backButton{
+.backButton {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 50px;
   height: 50px;
-  background: rgba(0,0,0,0.1);
+  background: #ffffff30;
   border-radius: 4px;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
-.backButton:hover{
-  background: rgba(0,0,0,0.2);
+.backButton:hover {
+  background: #ffffff50;
 }
 
-.about{
+.about {
   padding: 10px 0 0 0;
 }
 
-.icon{
+.icon {
   display: inline-flex;
 }
 
-.title{
+.title {
   color: transparent;
-  background: linear-gradient(to left, #227D51, rgba(81, 110, 65, 1));
+  //background: linear-gradient(to left, #227D51, rgba(81, 110, 65, 1));
+  background: #ffffffaa;
   -webkit-background-clip: text;
   font-size: 200%;
   //border-bottom: 2px solid rgba(81, 110, 65, 0.9);
@@ -32,15 +34,20 @@
   margin-top: 20px;
 }
 
-.text{
-  color: rgba(81, 110, 65, 1);
+.text {
+  color: #ffffff80;
   padding: 0 0 0 10px;
   font-size: 135%;
-  a{
-    color: rgba(81, 110, 65, 1);
+  transition: text-decoration 0.2s;
+  a {
+    color: #ffffff80;
   }
 }
 
-.contributor{
+.text:hover {
+  text-decoration: underline 5px;
+}
+
+.contributor {
   padding: 0 10px 0 0;
 }

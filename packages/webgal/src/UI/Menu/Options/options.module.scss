@@ -32,7 +32,7 @@
   //background: linear-gradient(to left, #227d51, rgba(81, 110, 65, 1));
   background: #ffffffcc;
   -webkit-background-clip: text;
-  animation: Elements_in ease-out 0.7s forwards;
+  animation: Elements_in ease-out 0.2s forwards;
 }
 
 .Option_title_text_shadow {
@@ -45,8 +45,8 @@
 .Option_title_text_ts {
   position: absolute;
   color: rgba(0, 0, 0, 0);
-  text-shadow: 0.04em 0.04em rgba(81, 110, 65, 0.9), 0.05em 0.05em rgba(81, 110, 65, 0.9),
-    0.06em 0.06em rgba(81, 110, 65, 0.9), 0.07em 0.07em rgba(81, 110, 65, 0.9);
+  text-shadow: #ffffffcc;
+  //text-shadow: 0.04em 0.04em rgba(81, 110, 65, 0.9), 0.05em 0.05em rgba(81, 110, 65, 0.9), 0.06em 0.06em rgba(81, 110, 65, 0.9), 0.07em 0.07em rgba(81, 110, 65, 0.9);
   //0.08em 0.08em rgba(81, 110, 65, 0.9),
   //0.09em 0.09em rgba(81, 110, 65, 0.9),
   //0.10em 0.10em rgba(81, 110, 65, 0.9),
@@ -76,7 +76,7 @@
   margin: 0.2em 1em 0.2em 1em;
   padding: 0.2em 0.2em 0.2em 0.2em;
   width: 100%;
-  animation: Elements_in ease-out 0.7s forwards;
+  animation: Elements_in ease-out 0.2s forwards;
   cursor: pointer;
 }
 
@@ -109,7 +109,7 @@
 }
 
 .Options_button_list {
-  animation: Elements_in ease-out 0.7s forwards;
+  animation: Elements_in ease-out 0.2s forwards;
 }
 
 .Options_page_button {
@@ -121,13 +121,14 @@
   background: #ffffff80;
   opacity: 0.35;
   -webkit-background-clip: text;
-  transition: color 0.33s, background-image 0.33s, opacity 0.33s;
+  transition: color 0.2s, background-image 0.2s, opacity 0.2s;
   cursor: pointer;
 }
 
 .Options_page_button_active {
   //background-image: linear-gradient(to left, #227d51, rgba(81, 110, 65, 1));
   background: #ffffffcc;
+  //margin-left: 10px;
   -webkit-background-clip: text;
   opacity: 1;
 }

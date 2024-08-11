@@ -113,7 +113,7 @@ export const Save: FC = () => {
     <div className={styles.Save_Load_main}>
       <div className={styles.Save_Load_top}>
         <div className={styles.Save_Load_title}>
-          <div className={styles.Save_title_text}>{t('saving.title')}</div>
+          {/*<div className={styles.Save_title_text}>{t('saving.title')}</div>*/}
         </div>
         <div className={styles.Save_Load_top_buttonList}>{page}</div>
       </div>

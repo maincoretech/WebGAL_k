@@ -8,7 +8,7 @@ export default function About(props: { onClose: () => void }) {
   return (
     <div className={s.about}>
       <div className={s.backButton} onClick={props.onClose}>
-        <Left className={s.icon} theme="outline" size="35" strokeWidth={3} fill="#333" />
+        <Left className={s.icon} theme="outline" size="35" strokeWidth={3} fill="#ffffff80" />
       </div>
       <div className={s.title}>{t('subTitle')}</div>
       <div className={s.title}>{t('version')}</div>
