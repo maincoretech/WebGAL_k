@@ -179,7 +179,7 @@
 
 .Save_Load_content_text {
   font-family: 'WebgalUI', sans-serif;
-  letter-spacing: 0.05em;
+  //letter-spacing: 0.05em;
   color: #ffffffaa;
   background: #00000060;
   //background: linear-gradient(-45deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 1) 100%);
@@ -192,10 +192,11 @@
   flex-flow: column;
   justify-content: flex-start;
   align-items: flex-start;
+  line-height: 1em;
 }
 
 .Save_Load_content_text_padding {
-  padding: 0 0.75em 0.2em 0.75em;
+  padding: 0.45em 0.75em 0 0.75em;
 }
 
 .Save_Load_content_speaker {
