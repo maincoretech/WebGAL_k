@@ -13,6 +13,7 @@ import DevPanel from '@/UI/DevPanel/DevPanel';
 import Translation from '@/UI/Translation/Translation';
 import { PanicOverlay } from '@/UI/PanicOverlay/PanicOverlay';
 import { useFullScreen } from './hooks/useFullScreen';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function App() {
   useEffect(() => {

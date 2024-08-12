@@ -6,6 +6,7 @@
   "dependencies": {
     "@tauri-apps/api": "^2.0.0-beta.13",
     "@tauri-apps/cli": "^2.0.0-beta.20",
+    "bootstrap-icons": "^1.11.3",
     "yarn": "^1.22.22"
   },
   "description": "A brand new web Visual Novel engine.",

@@ -1,4 +1,4 @@
-import {
+/*import {
   AlignTextLeftOne,
   DoubleRight,
   FolderOpen,
@@ -13,7 +13,7 @@ import {
   DoubleUp,
   Lock,
   Unlock,
-} from '@icon-park/react';
+} from '@icon-park/react';*/
 import styles from './bottomControlPanel.module.scss';
 import { switchAuto } from '@/Core/controller/gamePlay/autoPlay';
 import { switchFast } from '@/Core/controller/gamePlay/fastSkip';
@@ -90,13 +90,14 @@ export const BottomControlPanel = () => {
               }}
               onMouseEnter={playSeEnter}
             >
-              <PreviewCloseOne
+              {/*<PreviewCloseOne
                 className={styles.button}
                 theme="outline"
                 size={size}
                 fill="#f5f5f7"
                 strokeWidth={strokeWidth}
-              />
+              />*/}
+              <i className="bi bi-eye-slash"></i>
               <span className={styles.button_text}>{t('buttons.hide')}</span>
             </span>
           )}
@@ -110,13 +111,14 @@ export const BottomControlPanel = () => {
               }}
               onMouseEnter={playSeEnter}
             >
-              <PreviewOpen
+              {/*<PreviewOpen
                 className={styles.button}
                 theme="outline"
                 size={size}
                 fill="#f5f5f7"
                 strokeWidth={strokeWidth}
-              />
+              />*/}
+              <i className="bi bi-eye"></i>
               <span className={styles.button_text}>{t('buttons.show')}</span>
             </span>
           )}
@@ -130,13 +132,14 @@ export const BottomControlPanel = () => {
             }}
             onMouseEnter={playSeEnter}
           >
-            <AlignTextLeftOne
+            {/*<AlignTextLeftOne
               className={styles.button}
               theme="outline"
               size={size}
               fill="#f5f5f7"
               strokeWidth={strokeWidth}
-            />
+            />*/}
+            <i className="bi bi-file-text"></i>
             <span className={styles.button_text}>{t('buttons.backlog')}</span>
           </span>
           <span
@@ -153,13 +156,14 @@ export const BottomControlPanel = () => {
             }}
             onMouseEnter={playSeEnter}
           >
-            <ReplayMusic
+            {/*<ReplayMusic
               className={styles.button}
               theme="outline"
               size={size}
               fill="#f5f5f7"
               strokeWidth={strokeWidth}
-            />
+            />*/}
+            <i className="bi bi-bootstrap-reboot"></i>
             <span className={styles.button_text}>{t('buttons.replay')}</span>
           </span>
           <span
@@ -172,7 +176,8 @@ export const BottomControlPanel = () => {
             }}
             onMouseEnter={playSeEnter}
           >
-            <PlayOne className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />
+            {/*<PlayOne className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />*/}
+            <i className="bi bi-play"></i>
             <span className={styles.button_text}>{t('buttons.auto')}</span>
           </span>
           <span
@@ -185,13 +190,14 @@ export const BottomControlPanel = () => {
             }}
             onMouseEnter={playSeEnter}
           >
-            <DoubleRight
+            {/*<DoubleRight
               className={styles.button}
               theme="outline"
               size={size}
               fill="#f5f5f7"
               strokeWidth={strokeWidth}
-            />
+            />*/}
+            <i className="bi bi-fast-forward"></i>
             <span className={styles.button_text}>{t('buttons.forward')}</span>
           </span>
           <span
@@ -203,13 +209,14 @@ export const BottomControlPanel = () => {
             }}
             onMouseEnter={playSeEnter}
           >
-            <DoubleDown
+            {/*<DoubleDown
               className={styles.button}
               theme="outline"
               size={size}
               fill="#f5f5f7"
               strokeWidth={strokeWidth}
-            />
+            />*/}
+            <i className="bi bi-chevron-double-down"></i>
             <span className={styles.button_text}>{t('buttons.quicklySave')}</span>
             <div className={styles.fastSlPreview + ' ' + styles.fastSPreview}>{fastSlPreview}</div>
           </span>
@@ -222,7 +229,8 @@ export const BottomControlPanel = () => {
             }}
             onMouseEnter={playSeEnter}
           >
-            <DoubleUp className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />
+            {/*<DoubleUp className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />*/}
+            <i className="bi bi-chevron-double-up"></i>
             <span className={styles.button_text}>{t('buttons.quicklyLoad')}</span>
             <div className={styles.fastSlPreview + ' ' + styles.fastLPreview}>{fastSlPreview}</div>
           </span>
@@ -236,7 +244,8 @@ export const BottomControlPanel = () => {
             }}
             onMouseEnter={playSeEnter}
           >
-            <Save className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />
+            {/*<Save className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />*/}
+            <i className="bi bi-floppy2"></i>
             <span className={styles.button_text}>{t('buttons.save')}</span>
           </span>
           <span
@@ -249,13 +258,14 @@ export const BottomControlPanel = () => {
             }}
             onMouseEnter={playSeEnter}
           >
-            <FolderOpen
+            {/*<FolderOpen
               className={styles.button}
               theme="outline"
               size={size}
               fill="#f5f5f7"
               strokeWidth={strokeWidth}
-            />
+            />*/}
+            <i className="bi bi-folder2-open"></i>
             <span className={styles.button_text}>{t('buttons.load')}</span>
           </span>
           <span
@@ -268,13 +278,14 @@ export const BottomControlPanel = () => {
             }}
             onMouseEnter={playSeEnter}
           >
-            <SettingTwo
+            {/*<SettingTwo
               className={styles.button}
               theme="outline"
               size={size}
               fill="#f5f5f7"
               strokeWidth={strokeWidth}
-            />
+            />*/}
+            <i className="bi bi-sliders2"></i>
             <span className={styles.button_text}>{t('buttons.options')}</span>
           </span>
           <span
@@ -294,7 +305,8 @@ export const BottomControlPanel = () => {
             }}
             onMouseEnter={playSeEnter}
           >
-            <Home className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />
+            {/*<Home className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />*/}
+            <i className="bi bi-house"></i>
             <span className={styles.button_text}>{t('buttons.title')}</span>
           </span>
           <span
@@ -306,11 +318,7 @@ export const BottomControlPanel = () => {
             }}
             onMouseEnter={playSeEnter}
           >
-            {GUIStore.showControls ? (
-              <Lock className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />
-            ) : (
-              <Unlock className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />
-            )}
+            {GUIStore.showControls ? <i className="bi bi-lock"></i> : <i className="bi bi-unlock"></i>}
           </span>
         </div>
       )}

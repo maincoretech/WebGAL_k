@@ -83,8 +83,8 @@ export const MenuPanel = () => {
 
       <MenuPanelButton
         iconName="title"
-        iconColor="rgba(123,144,169,1)"
-        tagColor="rgba(123,144,169,1)"
+        iconColor="#ffffff60"
+        tagColor="#ffffff60"
         style={{ marginLeft: 'auto' }}
         clickFunc={() => {
           playSeDialogOpen();
@@ -108,8 +108,8 @@ export const MenuPanel = () => {
 
       <MenuPanelButton
         iconName="exit"
-        iconColor="rgba(123,144,169,1)"
-        tagColor="rgba(123,144,169,1)"
+        iconColor="#ffffff60"
+        tagColor="#ffffff60"
         clickFunc={() => {
           playSeClick();
           setTimeout(() => {

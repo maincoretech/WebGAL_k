@@ -146,7 +146,7 @@ code {
   top: 0;
   z-index: 14;
   opacity: 1;
-  transition: opacity 250ms;
+  transition: opacity 200ms;
 }
 
 #Title_enter_text {
@@ -163,7 +163,7 @@ code {
   transition: opacity 500ms;
 
   #enter-buttom {
-    animation: StartButton_blink 2s infinite;
+    animation: StartButton_blink 1s infinite;
     color: #fff;
     letter-spacing: 0.25em;
     z-index: 16;
@@ -278,7 +278,7 @@ code {
 .App {
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 1);
+  background: #000000;
   overflow: hidden;
   perspective: 0;
   -webkit-overflow-scrolling: auto;
