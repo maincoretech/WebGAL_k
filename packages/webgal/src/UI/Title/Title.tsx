@@ -119,12 +119,12 @@ const Title: FC = () => {
                   leftText: t('$common.yes'),
                   rightText: t('$common.no'),
                   leftFunc: () => {
-                    //dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
-                    //window.close();
+                    // dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
+                    // window.close();
                   },
                   rightFunc: () => {},
                 });
-                //dispatch(setVisibility({ component: 'showExtra', visibility: true }));
+                // dispatch(setVisibility({ component: 'showExtra', visibility: true }));
               }}
               onMouseEnter={playSeEnter}
             >
