@@ -163,7 +163,7 @@ const zhTw = {
     buttons: {
       hide: '隱藏',
       show: '顯示',
-      backlog: '回想',
+      backlog: '回放',
       replay: '重播',
       auto: '自動',
       forward: '加速',
