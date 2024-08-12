@@ -70,7 +70,7 @@
   display: flex;
   align-items: center;
   //border-bottom: 4px solid rgba(0, 0, 0, 0);
-  transition: background-color 0.2s, border-bottom-width 0.2s;
+  transition: all 0.2s;
 }
 
 .Save_Load_top_button_text {
@@ -88,13 +88,13 @@
   font-weight: bold;
   border-bottom: 8px solid #ffffffaa;
   color: #ffffffaa;
-  background-color: #ffffff30;
+  background-color: #ffffff10;
 }
 
 .Save_Load_top_button:hover {
-  color: #ffffff30;
+  color: #ffffff10;
   font-weight: bold;
-  border-bottom: 8px solid #ffffff30;
+  border-bottom: 8px solid #ffffff10;
   background-color: #ffffff10;
 }
 
@@ -106,9 +106,9 @@
 }
 
 .Load_top_button:hover {
-  color: #ffffff30;
+  color: #ffffff10;
   font-weight: bold;
-  border-bottom: 8px solid #ffffff30;
+  border-bottom: 8px solid #ffffff10;
   background-color: #ffffff10;
 }
 

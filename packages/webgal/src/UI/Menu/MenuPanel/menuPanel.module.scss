@@ -7,18 +7,23 @@
   //background-color: rgba(255, 255, 255, 1);
   //box-shadow: 0 0 45px 15px rgba(0, 0, 0, 0.05);
   padding: 0 55px;
-  
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.MenuPanel_main_exit {
+  opacity: 0;
 }
 
 .MenuPanel_button {
-  padding: 0.25em 15px 0 15px;
+  padding: 0.15em 15px 0.15em 15px;
   margin-right: 15px;
   display: flex;
   justify-content: center;
   font-size: 200%;
   text-align: center;
   //font-weight: bold;
-  border-radius: 6px;
+  //border-radius: 6px;
   //width: 20%;
   min-width: 12.5%;
   cursor: pointer;
@@ -26,7 +31,7 @@
   background: rgba(0, 0, 0, 0);
   overflow: hidden;
   //border-right: 1.5px solid rgba(0, 0, 0, 0.15);
-  transition: text-shadow 0.7s, background-color 0.7s;
+  transition: text-shadow 0.2s, background-color 0.2s;
 }
 
 .MenuPanel_button:last-child {
@@ -34,7 +39,7 @@
 }
 
 .MenuPanel_button:hover {
-  background-color: rgba(245, 246, 247, 0.15);
+  background-color: #ffffff10;
 }
 
 .MenuPanel_button:last-child {
@@ -48,5 +53,5 @@
 }
 
 .MenuPanel_button_hl {
-  background-color: rgba(245, 246, 247, 0.35) !important;
+  background-color: #ffffff30 !important;
 }

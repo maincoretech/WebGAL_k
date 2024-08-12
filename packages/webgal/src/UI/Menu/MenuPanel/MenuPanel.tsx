@@ -9,6 +9,7 @@ import { backToTitle } from '@/Core/controller/gamePlay/backToTitle';
 import useTrans from '@/hooks/useTrans';
 import useSoundEffect from '@/hooks/useSoundEffect';
 import { showGlogalDialog } from '@/UI/GlobalDialog/GlobalDialog';
+import { useState } from 'react';
 
 /**
  * Menu页的底栏
@@ -27,20 +28,20 @@ export const MenuPanel = () => {
   const OptionTagOn = GUIState.currentMenuTag === MenuPanelTag.Option ? ` ${styles.MenuPanel_button_hl}` : ``;
 
   // 设置Menu按钮的颜色
-  const SaveTagColor = GUIState.currentMenuTag === MenuPanelTag.Save ? `rgba(74, 34, 93, 0.9)` : `rgba(123,144,169,1)`;
-  const LoadTagColor = GUIState.currentMenuTag === MenuPanelTag.Load ? `rgba(11, 52, 110, 0.9)` : `rgba(123,144,169,1)`;
-  const OptionTagColor =
-    GUIState.currentMenuTag === MenuPanelTag.Option ? `rgba(81, 110, 65, 0.9)` : `rgba(123,144,169,1)`;
+  const SaveTagColor = GUIState.currentMenuTag === MenuPanelTag.Save ? `#ffffffaa` : `#ffffff60`;
+  const LoadTagColor = GUIState.currentMenuTag === MenuPanelTag.Load ? `#ffffffaa` : `#ffffff60`;
+  const OptionTagColor = GUIState.currentMenuTag === MenuPanelTag.Option ? `#ffffffaa` : `#ffffff60`;
 
   // 设置Menu图标的颜色
-  const SaveIconColor = GUIState.currentMenuTag === MenuPanelTag.Save ? `rgba(74, 34, 93, 0.9)` : `rgba(123,144,169,1)`;
-  const LoadIconColor =
-    GUIState.currentMenuTag === MenuPanelTag.Load ? `rgba(11, 52, 110, 0.9)` : `rgba(123,144,169,1)`;
-  const OptionIconColor =
-    GUIState.currentMenuTag === MenuPanelTag.Option ? `rgba(81, 110, 65, 0.9)` : `rgba(123,144,169,1)`;
+  const SaveIconColor = GUIState.currentMenuTag === MenuPanelTag.Save ? `#ffffffaa` : `#ffffff60`;
+  const LoadIconColor = GUIState.currentMenuTag === MenuPanelTag.Load ? `#ffffffaa` : `#ffffff60`;
+  const OptionIconColor = GUIState.currentMenuTag === MenuPanelTag.Option ? `#ffffffaa` : `#ffffff60`;
+
+  // 设置透明度
+  const [isOpacity, setIsOpacity] = useState(false);
 
   return (
-    <div className={styles.MenuPanel_main}>
+    <div className={styles.MenuPanel_main} style={{ opacity: isOpacity ? 0 : 1 }}>
       <MenuPanelButton
         iconName="save"
         buttonOnClassName={SaveTagOn}
@@ -93,7 +94,10 @@ export const MenuPanel = () => {
             rightText: t('$common.no'),
             leftFunc: () => {
               backToTitle();
-              dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
+              setTimeout(() => {
+                dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
+              }, 200);
+              setIsOpacity((current) => !current);
             },
             rightFunc: () => {},
           });
@@ -108,7 +112,10 @@ export const MenuPanel = () => {
         tagColor="rgba(123,144,169,1)"
         clickFunc={() => {
           playSeClick();
-          dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
+          setTimeout(() => {
+            dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
+          }, 200);
+          setIsOpacity((current) => !current);
         }}
         tagName={t('exit.title')}
         key="exitIcon"

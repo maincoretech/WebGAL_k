@@ -174,7 +174,7 @@ const zhCn = {
     buttons: {
       hide: '隐藏',
       show: '显示',
-      backlog: '回想',
+      backlog: '回放',
       replay: '重播',
       auto: '自动',
       forward: '快进',
