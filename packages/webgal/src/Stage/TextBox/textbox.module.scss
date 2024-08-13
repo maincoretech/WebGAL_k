@@ -10,7 +10,7 @@
   //text-shadow: 0 0 3px rgba(81,168,221,1);
 }
 
-$height: 330px;
+$height: 350px;
 
 .TextBox_Container {
   position: absolute;
@@ -137,11 +137,11 @@ $height: 330px;
   font-size: 85%;
   //border-bottom: 3px solid rgb(176, 176, 176);
   //min-width: 25%;
-  padding: 0 1em 0 1em;
+  padding: 0 1.2em 0 1.2em;
   //margin: 0 0 0 0;
   position: absolute;
-  left: 150px;
-  top: -86px;
+  left: 0;
+  top: -90px;
   height: 80px;
   line-height: 68px;
   //display: flex;
@@ -155,11 +155,9 @@ $height: 330px;
 }
 
 .TextBox_ShowName_Background {
-  backdrop-filter: blur(10px);
+  //backdrop-filter: blur(30px);
   z-index: 2;
   background: #000000aa;
-  border: 10px #000000ff;
-  border-style: none solid none solid;
   //box-shadow: 0 0 5px 5px #303030;
 }
 

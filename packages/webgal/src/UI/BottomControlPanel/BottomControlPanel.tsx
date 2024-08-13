@@ -69,7 +69,7 @@ export const BottomControlPanel = () => {
         </div>
         <div className={styles.textContainer}>
           <div>{data.nowStageState.showName}</div>
-          <div style={{ fontSize: '75%', color: 'rgb(55,60,56)' }}>{data.nowStageState.showText}</div>
+          <div style={{ fontSize: '75%', color: '#ffffffaa' }}>{data.nowStageState.showText}</div>
         </div>
       </div>
     );
@@ -79,248 +79,195 @@ export const BottomControlPanel = () => {
     // <div className={styles.ToCenter}>
     <>
       {GUIStore.showTextBox && stageState.enableFilm === '' && (
-        <div className={styles.main} style={{ visibility: GUIStore.controlsVisibility ? 'visible' : 'hidden' }}>
-          {GUIStore.showTextBox && (
+        <>
+          <div className={styles.main_top} style={{ visibility: GUIStore.controlsVisibility ? 'visible' : 'hidden' }}>
             <span
               className={styles.singleButton}
               style={{ fontSize }}
               onClick={() => {
+                setComponentVisibility('showBacklog', true);
                 setComponentVisibility('showTextBox', false);
                 playSeClick();
               }}
               onMouseEnter={playSeEnter}
             >
-              {/*<PreviewCloseOne
-                className={styles.button}
-                theme="outline"
-                size={size}
-                fill="#f5f5f7"
-                strokeWidth={strokeWidth}
-              />*/}
-              <i className="bi bi-eye-slash"></i>
-              <span className={styles.button_text}>{t('buttons.hide')}</span>
+              <i className="bi bi-file-text"></i>
+              {/* <span className={styles.button_text}>{t('buttons.backlog')}</span> */}
             </span>
-          )}
-          {!GUIStore.showTextBox && (
             <span
               className={styles.singleButton}
               style={{ fontSize }}
               onClick={() => {
-                setComponentVisibility('showTextBox', true);
+                let VocalControl: any = document.getElementById('currentVocal');
+                if (VocalControl !== null) {
+                  VocalControl.currentTime = 0;
+                  VocalControl.pause();
+                  VocalControl?.play();
+                }
                 playSeClick();
               }}
               onMouseEnter={playSeEnter}
             >
-              {/*<PreviewOpen
-                className={styles.button}
-                theme="outline"
-                size={size}
-                fill="#f5f5f7"
-                strokeWidth={strokeWidth}
-              />*/}
-              <i className="bi bi-eye"></i>
-              <span className={styles.button_text}>{t('buttons.show')}</span>
+              <i className="bi bi-arrow-clockwise"></i>
+              {/* <span className={styles.button_text}>{t('buttons.replay')}</span> */}
             </span>
-          )}
-          <span
-            className={styles.singleButton}
-            style={{ fontSize }}
-            onClick={() => {
-              setComponentVisibility('showBacklog', true);
-              setComponentVisibility('showTextBox', false);
-              playSeClick();
-            }}
-            onMouseEnter={playSeEnter}
+            <span
+              id="Button_ControlPanel_auto"
+              className={styles.singleButton}
+              style={{ fontSize }}
+              onClick={() => {
+                switchAuto();
+                playSeClick();
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <i className="bi bi-play"></i>
+              {/* <span className={styles.button_text}>{t('buttons.auto')}</span> */}
+            </span>
+            <span
+              id="Button_ControlPanel_fast"
+              className={styles.singleButton}
+              style={{ fontSize }}
+              onClick={() => {
+                switchFast();
+                playSeClick();
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <i className="bi bi-fast-forward"></i>
+              {/* <span className={styles.button_text}>{t('buttons.forward')}</span> */}
+            </span>
+            {GUIStore.showTextBox && (
+              <span
+                className={styles.singleButton}
+                style={{ fontSize }}
+                onClick={() => {
+                  setComponentVisibility('showTextBox', false);
+                  playSeClick();
+                }}
+                onMouseEnter={playSeEnter}
+              >
+                <i className="bi bi-eye-slash"></i>
+                {/* <span className={styles.button_text}>{t('buttons.hide')}</span> */}
+              </span>
+            )}
+            {!GUIStore.showTextBox && (
+              <span
+                className={styles.singleButton}
+                style={{ fontSize }}
+                onClick={() => {
+                  setComponentVisibility('showTextBox', true);
+                  playSeClick();
+                }}
+                onMouseEnter={playSeEnter}
+              >
+                <i className="bi bi-eye"></i>
+                {/* <span className={styles.button_text}>{t('buttons.show')}</span> */}
+              </span>
+            )}
+            <span
+              className={styles.singleButton}
+              style={{ fontSize }}
+              onClick={() => {
+                switchControls();
+                playSeClick();
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              {GUIStore.showControls ? <i className="bi bi-lock"></i> : <i className="bi bi-unlock"></i>}
+            </span>
+          </div>
+          <div
+            className={styles.main_bottom}
+            style={{ visibility: GUIStore.controlsVisibility ? 'visible' : 'hidden' }}
           >
-            {/*<AlignTextLeftOne
-              className={styles.button}
-              theme="outline"
-              size={size}
-              fill="#f5f5f7"
-              strokeWidth={strokeWidth}
-            />*/}
-            <i className="bi bi-file-text"></i>
-            <span className={styles.button_text}>{t('buttons.backlog')}</span>
-          </span>
-          <span
-            className={styles.singleButton}
-            style={{ fontSize }}
-            onClick={() => {
-              let VocalControl: any = document.getElementById('currentVocal');
-              if (VocalControl !== null) {
-                VocalControl.currentTime = 0;
-                VocalControl.pause();
-                VocalControl?.play();
-              }
-              playSeClick();
-            }}
-            onMouseEnter={playSeEnter}
-          >
-            {/*<ReplayMusic
-              className={styles.button}
-              theme="outline"
-              size={size}
-              fill="#f5f5f7"
-              strokeWidth={strokeWidth}
-            />*/}
-            <i className="bi bi-bootstrap-reboot"></i>
-            <span className={styles.button_text}>{t('buttons.replay')}</span>
-          </span>
-          <span
-            id="Button_ControlPanel_auto"
-            className={styles.singleButton}
-            style={{ fontSize }}
-            onClick={() => {
-              switchAuto();
-              playSeClick();
-            }}
-            onMouseEnter={playSeEnter}
-          >
-            {/*<PlayOne className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />*/}
-            <i className="bi bi-play"></i>
-            <span className={styles.button_text}>{t('buttons.auto')}</span>
-          </span>
-          <span
-            id="Button_ControlPanel_fast"
-            className={styles.singleButton}
-            style={{ fontSize }}
-            onClick={() => {
-              switchFast();
-              playSeClick();
-            }}
-            onMouseEnter={playSeEnter}
-          >
-            {/*<DoubleRight
-              className={styles.button}
-              theme="outline"
-              size={size}
-              fill="#f5f5f7"
-              strokeWidth={strokeWidth}
-            />*/}
-            <i className="bi bi-fast-forward"></i>
-            <span className={styles.button_text}>{t('buttons.forward')}</span>
-          </span>
-          <span
-            className={styles.singleButton + ' ' + styles.fastsave}
-            style={{ fontSize }}
-            onClick={() => {
-              saveGame(0);
-              playSeClick();
-            }}
-            onMouseEnter={playSeEnter}
-          >
-            {/*<DoubleDown
-              className={styles.button}
-              theme="outline"
-              size={size}
-              fill="#f5f5f7"
-              strokeWidth={strokeWidth}
-            />*/}
-            <i className="bi bi-chevron-double-down"></i>
-            <span className={styles.button_text}>{t('buttons.quicklySave')}</span>
-            <div className={styles.fastSlPreview + ' ' + styles.fastSPreview}>{fastSlPreview}</div>
-          </span>
-          <span
-            className={styles.singleButton + ' ' + styles.fastload}
-            style={{ fontSize }}
-            onClick={() => {
-              loadGame(0);
-              playSeClick();
-            }}
-            onMouseEnter={playSeEnter}
-          >
-            {/*<DoubleUp className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />*/}
-            <i className="bi bi-chevron-double-up"></i>
-            <span className={styles.button_text}>{t('buttons.quicklyLoad')}</span>
-            <div className={styles.fastSlPreview + ' ' + styles.fastLPreview}>{fastSlPreview}</div>
-          </span>
-          <span
-            className={styles.singleButton}
-            style={{ fontSize }}
-            onClick={() => {
-              setMenuPanel(MenuPanelTag.Save);
-              setComponentVisibility('showMenuPanel', true);
-              playSeClick();
-            }}
-            onMouseEnter={playSeEnter}
-          >
-            {/*<Save className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />*/}
-            <i className="bi bi-floppy2"></i>
-            <span className={styles.button_text}>{t('buttons.save')}</span>
-          </span>
-          <span
-            className={styles.singleButton}
-            style={{ fontSize }}
-            onClick={() => {
-              setMenuPanel(MenuPanelTag.Load);
-              setComponentVisibility('showMenuPanel', true);
-              playSeClick();
-            }}
-            onMouseEnter={playSeEnter}
-          >
-            {/*<FolderOpen
-              className={styles.button}
-              theme="outline"
-              size={size}
-              fill="#f5f5f7"
-              strokeWidth={strokeWidth}
-            />*/}
-            <i className="bi bi-folder2-open"></i>
-            <span className={styles.button_text}>{t('buttons.load')}</span>
-          </span>
-          <span
-            className={styles.singleButton}
-            style={{ fontSize }}
-            onClick={() => {
-              setMenuPanel(MenuPanelTag.Option);
-              setComponentVisibility('showMenuPanel', true);
-              playSeClick();
-            }}
-            onMouseEnter={playSeEnter}
-          >
-            {/*<SettingTwo
-              className={styles.button}
-              theme="outline"
-              size={size}
-              fill="#f5f5f7"
-              strokeWidth={strokeWidth}
-            />*/}
-            <i className="bi bi-sliders2"></i>
-            <span className={styles.button_text}>{t('buttons.options')}</span>
-          </span>
-          <span
-            className={styles.singleButton}
-            style={{ fontSize }}
-            onClick={() => {
-              playSeDialogOpen();
-              showGlogalDialog({
-                title: t('buttons.titleTips'),
-                leftText: t('$common.yes'),
-                rightText: t('$common.no'),
-                leftFunc: () => {
-                  backToTitle();
-                },
-                rightFunc: () => {},
-              });
-            }}
-            onMouseEnter={playSeEnter}
-          >
-            {/*<Home className={styles.button} theme="outline" size={size} fill="#f5f5f7" strokeWidth={strokeWidth} />*/}
-            <i className="bi bi-house"></i>
-            <span className={styles.button_text}>{t('buttons.title')}</span>
-          </span>
-          <span
-            className={styles.singleButton}
-            style={{ fontSize }}
-            onClick={() => {
-              switchControls();
-              playSeClick();
-            }}
-            onMouseEnter={playSeEnter}
-          >
-            {GUIStore.showControls ? <i className="bi bi-lock"></i> : <i className="bi bi-unlock"></i>}
-          </span>
-        </div>
+            <span
+              className={styles.singleButton + ' ' + styles.fastsave}
+              style={{ fontSize }}
+              onClick={() => {
+                saveGame(0);
+                playSeClick();
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <i className="bi bi-chevron-double-down"></i>
+              <span className={styles.button_text}>{t('buttons.quicklySave')}</span>
+              <div className={styles.fastSlPreview + ' ' + styles.fastSPreview}>{fastSlPreview}</div>
+            </span>
+            <span
+              className={styles.singleButton + ' ' + styles.fastload}
+              style={{ fontSize }}
+              onClick={() => {
+                loadGame(0);
+                playSeClick();
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <i className="bi bi-chevron-double-up"></i>
+              <span className={styles.button_text}>{t('buttons.quicklyLoad')}</span>
+              <div className={styles.fastSlPreview + ' ' + styles.fastLPreview}>{fastSlPreview}</div>
+            </span>
+            <span
+              className={styles.singleButton}
+              style={{ fontSize }}
+              onClick={() => {
+                setMenuPanel(MenuPanelTag.Save);
+                setComponentVisibility('showMenuPanel', true);
+                playSeClick();
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <i className="bi bi-floppy2"></i>
+              <span className={styles.button_text}>{t('buttons.save')}</span>
+            </span>
+            <span
+              className={styles.singleButton}
+              style={{ fontSize }}
+              onClick={() => {
+                setMenuPanel(MenuPanelTag.Load);
+                setComponentVisibility('showMenuPanel', true);
+                playSeClick();
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <i className="bi bi-folder2-open"></i>
+              <span className={styles.button_text}>{t('buttons.load')}</span>
+            </span>
+            <span
+              className={styles.singleButton}
+              style={{ fontSize }}
+              onClick={() => {
+                setMenuPanel(MenuPanelTag.Option);
+                setComponentVisibility('showMenuPanel', true);
+                playSeClick();
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <i className="bi bi-sliders2"></i>
+              <span className={styles.button_text}>{t('buttons.options')}</span>
+            </span>
+            <span
+              className={styles.singleButton}
+              style={{ fontSize }}
+              onClick={() => {
+                playSeDialogOpen();
+                showGlogalDialog({
+                  title: t('buttons.titleTips'),
+                  leftText: t('$common.yes'),
+                  rightText: t('$common.no'),
+                  leftFunc: () => {
+                    backToTitle();
+                  },
+                  rightFunc: () => {},
+                });
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <i className="bi bi-house"></i>
+              <span className={styles.button_text}>{t('buttons.title')}</span>
+            </span>
+          </div>
+        </>
       )}
     </>
     // </div>

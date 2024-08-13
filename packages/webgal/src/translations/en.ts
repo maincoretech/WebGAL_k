@@ -181,6 +181,8 @@ const en = {
       title: 'Title',
       titleTips: 'Confirm return to the title screen',
       exitTips: 'Confirm quit the game',
+      qsTips: '',
+      qlTips: '',
     },
   },
 

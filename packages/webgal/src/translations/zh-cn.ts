@@ -186,6 +186,8 @@ const zhCn = {
       title: '标题',
       titleTips: '确认返回到标题界面吗',
       exitTips: '确认退出游戏吗',
+      qsTips: '',
+      qlTips: '',
     },
   },
 

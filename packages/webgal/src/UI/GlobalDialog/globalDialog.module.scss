@@ -8,6 +8,7 @@
   opacity: 0.5;
   animation: showGlobalDialog 0.2s forwards;
   display: flex;
+  backdrop-filter: blur(10px);
   justify-content: center;
   align-items: center;
   //font-family: "WebgalUI", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;

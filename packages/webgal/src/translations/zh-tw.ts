@@ -175,6 +175,8 @@ const zhTw = {
       title: '標題',
       titleTips: '確認返回到標題界面嗎',
       exitTips: '確認關閉軟體嗎',
+      qsTips: '',
+      qlTips: '',
     },
   },
 

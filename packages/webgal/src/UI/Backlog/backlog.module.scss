@@ -1,5 +1,5 @@
 .Backlog_main {
-  font-family: "思源宋体", serif;
+  font-family: 'WebgalUI', serif;
   position: absolute;
   top: 0;
   width: 100%;
@@ -7,12 +7,12 @@
   z-index: 10;
   background: rgba(0, 0, 0, 0.7);
   padding: 2em 0 2em 0;
-  animation: backlog_soft_in 0.7s ease-out forwards;
+  animation: backlog_soft_in 0.2s ease-out forwards;
   box-sizing: border-box;
 }
 
 .Backlog_main_out {
-  font-family: "思源宋体", serif;
+  font-family: 'WebgalUI', serif;
   position: absolute;
   top: 0;
   width: 100%;
@@ -20,7 +20,7 @@
   z-index: 10;
   background: rgba(0, 0, 0, 0.7);
   padding: 2em 0 2em 0;
-  animation: backlog_soft_out 0.7s ease-out forwards;
+  animation: backlog_soft_out 0.2s ease-out forwards;
   box-sizing: border-box;
 }
 
@@ -34,23 +34,25 @@
   overflow: hidden !important;
 }
 
-
 .backlog_top {
   padding: 0 0 0 1em;
   display: flex;
-  height: 10%;
+  height: 8%;
 }
 
 .backlog_top_icon {
-  padding: 0.6em 0.6em 0 0.6em;
-  border-radius: 1000px;
-  transform: translate(0, -13px);
+  font-size: 60px;
+  //padding: 0.6em 0.6em 0 0.6em;
+  padding: 0.1em 0.4em 0 0.4em;
+
+  //border-radius: 1000px;
+  //transform: translate(0, -13px);
   cursor: pointer;
 }
 
 .backlog_top_icon:hover {
-  background: rgba(255, 255, 255, 0.25);
-  animation: backlog_icon_softin 0.25s ease-out forwards;
+  background: #ffffff30;
+  animation: backlog_icon_softin 0.2s ease-out forwards;
 }
 
 @keyframes backlog_icon_softin {
@@ -62,14 +64,13 @@
   }
 }
 
-
 .backlog_title {
   height: 100%;
   line-height: 100%;
   font-size: 360%;
   font-weight: bold;
   color: transparent;
-  background: linear-gradient(150deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 35%, rgba(165, 212, 228, 1) 100%);
+  background: #fff;
   -webkit-background-clip: text;
 }
 
@@ -84,7 +85,6 @@
   width: 100%;
   box-sizing: border-box;
 }
-
 
 .backlog_item {
   display: flex;
@@ -119,14 +119,14 @@
   font-weight: bold;
   color: transparent;
   //background: linear-gradient(150deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 55%, rgb(210, 243, 255) 100%);
-  background: linear-gradient(150deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 35%, rgba(165, 212, 228, 1) 100%);
+  background: #fff;
   -webkit-background-clip: text;
   //width: 20%;
   margin: 0 0 0 auto;
   overflow-wrap: break-word;
   box-sizing: border-box;
   //background: rgba(255, 255, 255, 0.175);
-  border-radius: 7px;
+  //border-radius: 7px;
   padding: 0.2em 0.5em 0.2em 0.5em;
   font-size: 115%;
   width: 50%;
@@ -158,24 +158,23 @@
   padding: 0.01em 0.75em 0 0.75em;
   margin: 0 0 0 0.5em;
   background: rgba(255, 255, 255, 0.075);
-  border-radius: 7px;
+  //border-radius: 7px;
   display: flex;
+  transition: background 0.2s;
   //border: 1px solid rgba(255, 255, 255, 0.15);
   //box-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
 }
 
 .backlog_item_button_element:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: #ffffff30;
   //border: 1px solid rgba(255, 255, 255, 0);
   //box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
-
 
 .backlog_item_content_text {
   //width: 80%;
   box-sizing: border-box;
 }
-
 
 @keyframes backlog_soft_in {
   0% {

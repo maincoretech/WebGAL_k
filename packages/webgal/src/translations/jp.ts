@@ -182,6 +182,8 @@ const jp = {
       title: 'HOME',
       titleTips: 'タイトル画面に戻りますか？',
       exitTips: 'ゲームを終了しますか',
+      qsTips: '',
+      qlTips: '',
     },
   },
 

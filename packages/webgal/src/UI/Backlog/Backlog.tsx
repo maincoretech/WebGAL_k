@@ -65,7 +65,8 @@ export const Backlog = () => {
                 onMouseEnter={playSeEnter}
                 className={styles.backlog_item_button_element}
               >
-                <Return theme="outline" size={iconSize} fill="#ffffff" strokeWidth={3} />
+                {/*<Return theme="outline" size={iconSize} fill="#ffffff" strokeWidth={3} />*/}
+                <i className="bi bi-arrow-right"></i>
               </div>
               {backlogItem.currentStageState.vocal ? (
                 <div
@@ -74,6 +75,12 @@ export const Backlog = () => {
                     // 获取到播放 backlog 语音的元素
                     const backlog_audio_element: any = document.getElementById('backlog_audio_play_element_' + i);
                     if (backlog_audio_element) {
+                      const backlog_audio_elements = document.querySelectorAll(
+                        'audio[id*="backlog_audio_play_element"], audio[id="currentVocal"]',
+                      );
+                      backlog_audio_elements.forEach((audio) => {
+                        audio.pause();
+                      });
                       backlog_audio_element.currentTime = 0;
                       const userDataStore = webgalStore.getState().userData;
                       const mainVol = userDataStore.optionData.volumeMain;
@@ -84,7 +91,8 @@ export const Backlog = () => {
                   onMouseEnter={playSeEnter}
                   className={styles.backlog_item_button_element}
                 >
-                  <VolumeNotice theme="outline" size={iconSize} fill="#ffffff" strokeWidth={3} />
+                  {/*<VolumeNotice theme="outline" size={iconSize} fill="#ffffff" strokeWidth={3} />*/}
+                  <i className="bi bi-soundwave"></i>
                 </div>
               ) : null}
             </div>
@@ -130,7 +138,7 @@ export const Backlog = () => {
         timeRef.current = undefined;
         // 700是和动画一样的延时 保险起见多个80ms
         // 不加也没啥 问题不大
-      }, 700 + 80);
+      }, 200 + 80);
     }
   }, [GUIStore.showBacklog]);
   return (
@@ -144,24 +152,20 @@ export const Backlog = () => {
           `}
         >
           <div className={styles.backlog_top}>
-            <CloseSmall
-              className={styles.backlog_top_icon}
+            <i
+              className={`bi bi-x-lg ${styles.backlog_top_icon}`}
               onClick={() => {
                 playSeClick();
                 dispatch(setVisibility({ component: 'showBacklog', visibility: false }));
                 dispatch(setVisibility({ component: 'showTextBox', visibility: true }));
               }}
               onMouseEnter={playSeEnter}
-              theme="outline"
-              size="4em"
-              fill="#ffffff"
-              strokeWidth={3}
-            />
+            ></i>
             <div
               className={styles.backlog_title}
-              onClick={() => {
+              /*onClick={() => {
                 logger.info('Rua! Testing');
-              }}
+              }}*/
             >
               {t('buttons.backlog')}
             </div>
