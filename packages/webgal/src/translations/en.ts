@@ -88,14 +88,14 @@ const en = {
                 large: 'Large',
               },
             },
-            textFont: {
+            /* textFont: {
               title: 'Text Font',
               options: {
                 siYuanSimSun: 'Source Han Serif',
                 SimHei: 'Sans',
                 lxgw: 'LXGW WenKai',
               },
-            },
+            }, */
             textboxOpacity: {
               title: 'Textbox Opacity',
             },
@@ -173,12 +173,12 @@ const en = {
       replay: 'Replay',
       auto: 'Auto',
       forward: 'Forward',
-      quicklySave: 'Q. Save',
-      quicklyLoad: 'Q. Load',
-      save: 'Save',
-      load: 'Load',
-      options: 'Options',
-      title: 'Title',
+      quicklySave: 'Q·SAVE',
+      quicklyLoad: 'Q·LOAD',
+      save: 'SAVE',
+      load: 'LOAD',
+      options: 'SYSTEM',
+      title: 'TITLE',
       titleTips: 'Confirm return to the title screen',
       exitTips: 'Confirm quit the game',
       qsTips: '',

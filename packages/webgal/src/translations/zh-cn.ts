@@ -86,14 +86,14 @@ const zhCn = {
                 large: '大',
               },
             },
-            textFont: {
+            /* textFont: {
               title: '文本字体',
               options: {
                 siYuanSimSun: '思源宋体',
                 SimHei: '黑体',
                 lxgw: '霞鹜文楷',
               },
-            },
+            }, */
             textboxOpacity: {
               title: '文本框不透明度',
             },
@@ -118,7 +118,7 @@ const zhCn = {
         },
         // language: {
         //   title: '语言',
-        //   options: {
+        //   options: {.
         //   },
         // },
       },
@@ -178,12 +178,12 @@ const zhCn = {
       replay: '重播',
       auto: '自动',
       forward: '快进',
-      quicklySave: '快速存档',
-      quicklyLoad: '快速读档',
-      save: '存档',
-      load: '读档',
-      options: '选项',
-      title: '标题',
+      quicklySave: 'Q·SAVE',
+      quicklyLoad: 'Q·LOAD',
+      save: 'SAVE',
+      load: 'LOAD',
+      options: 'SYSTEM',
+      title: 'TITLE',
       titleTips: '确认返回到标题界面吗',
       exitTips: '确认退出游戏吗',
       qsTips: '',
@@ -192,7 +192,7 @@ const zhCn = {
   },
 
   extra: {
-    title: '鉴赏模式',
+    title: 'EXTRA',
   },
 };
 

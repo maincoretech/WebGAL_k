@@ -86,14 +86,14 @@ const jp = {
                 large: '大',
               },
             },
-            textFont: {
+            /* textFont: {
               title: 'フォント',
               options: {
                 siYuanSimSun: '源ノ明朝(中国語)',
                 SimHei: 'OPPO Sans',
                 lxgw: 'LXGW WenKai',
               },
-            },
+            }, */
             textboxOpacity: {
               title: 'テキストボックスの不透明度',
             },
@@ -174,12 +174,12 @@ const jp = {
       replay: 'REPLAY',
       auto: 'AUTO',
       forward: 'SKIP',
-      quicklySave: 'Q.SAVE',
-      quicklyLoad: 'Q.LOAD',
+      quicklySave: 'Q·SAVE',
+      quicklyLoad: 'Q·LOAD',
       save: 'SAVE',
       load: 'LOAD',
-      options: 'CONFIG',
-      title: 'HOME',
+      options: 'SYSTEM',
+      title: 'TITLE',
       titleTips: 'タイトル画面に戻りますか？',
       exitTips: 'ゲームを終了しますか',
       qsTips: '',
@@ -188,7 +188,7 @@ const jp = {
   },
 
   extra: {
-    title: '鑑賞モード',
+    title: 'EXTRA',
   },
 };
 

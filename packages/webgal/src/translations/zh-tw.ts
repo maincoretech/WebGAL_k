@@ -79,13 +79,13 @@ const zhTw = {
                 large: '大',
               },
             },
-            textFont: {
+            /* textFont: {
               title: '文字字體',
               options: {
                 siYuanSimSun: '霞鹜文楷',
                 SimHei: '黑體',
               },
-            },
+            }, */
             textboxOpacity: {
               title: '文本框不透明度',
             },
@@ -167,12 +167,12 @@ const zhTw = {
       replay: '重播',
       auto: '自動',
       forward: '加速',
-      quicklySave: '快速存檔',
-      quicklyLoad: '快速讀檔',
-      save: '存檔',
-      load: '讀檔',
-      options: '選項',
-      title: '標題',
+      quicklySave: 'Q·SAVE',
+      quicklyLoad: 'Q·LOAD',
+      save: 'SAVE',
+      load: 'LOAD',
+      options: 'SYSTEM',
+      title: 'TITLE',
       titleTips: '確認返回到標題界面嗎',
       exitTips: '確認關閉軟體嗎',
       qsTips: '',
@@ -181,7 +181,7 @@ const zhTw = {
   },
 
   extra: {
-    title: 'CG模式',
+    title: 'EXTRA',
   },
 };
 
