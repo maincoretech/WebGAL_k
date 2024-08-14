@@ -118,7 +118,7 @@ const zhCn = {
         },
         // language: {
         //   title: '语言',
-        //   options: {
+        //   options: {.
         //   },
         // },
       },
