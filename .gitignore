@@ -33,3 +33,5 @@ packages/parser/build
 packages/webgal/src/Core/util/pixiPerformManager/initRegister.ts
 yarn.lock
 yarn.lock
+
+._*

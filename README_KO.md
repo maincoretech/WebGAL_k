@@ -26,7 +26,7 @@ https://demo.openwebgal.com
 
 완성된 게임:
 
-[铃色☆记忆](http://hoshinasuzu.cn/) by Hoshinasuzu  [백업 링크](http://hoshinasuzu.cc/)
+[铃色 ☆ 记忆](http://hoshinasuzu.cn/) by Hoshinasuzu [백업 링크](http://hoshinasuzu.cc/)
 
 ### WebGAL로 게임 만들기
 

@@ -110,8 +110,7 @@
   }
 }
 
-@keyframes showSoftly /* Safari 与 Chrome */
-{
+@keyframes showSoftly /* Safari 与 Chrome */ {
   0% {
     opacity: 0;
   }
@@ -147,7 +146,6 @@
     /*box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.65);*/
   }
   100% {
-
   }
 }
 
@@ -172,7 +170,6 @@
   }
 
   100% {
-
   }
 }
 
@@ -193,7 +190,6 @@
     background-color: rgba(0, 0, 0, 0.35);
   }
 }
-
 
 /*背景的演出效果*/
 @keyframes bg_focusLeft {

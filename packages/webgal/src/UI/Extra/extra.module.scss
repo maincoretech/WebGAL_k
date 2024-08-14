@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   z-index: 14;
-  background-image: linear-gradient(135deg, #93a5cf 0%, #e4efe9 100%);;
+  background-image: linear-gradient(135deg, #93a5cf 0%, #e4efe9 100%);
   padding: 2em 2em 2em 2em;
   box-sizing: border-box;
 }
@@ -37,15 +37,14 @@
   }
 }
 
-
 .extra_title {
-  font-family: "思源宋体", serif;
+  font-family: '思源宋体', serif;
   height: 100%;
   line-height: 100%;
   font-size: 325%;
   font-weight: bold;
   color: transparent;
-  background: linear-gradient(150deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 75%, #51A8DD 100%);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 75%, #51a8dd 100%);
   -webkit-background-clip: text;
 }
 
@@ -113,14 +112,14 @@
 
 .bgmName {
   color: rgba(255, 255, 255, 0.8);
-  font-family: "思源宋体", serif;
+  font-family: '思源宋体', serif;
   font-size: 155%;
   margin: 5px 5px 0 15px;
   overflow: hidden;
 }
 
 .bgmElement {
-  font-family: "思源宋体", serif;
+  font-family: '思源宋体', serif;
   padding: 0.5em 1em 0.5em 1em;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.1);
@@ -231,14 +230,13 @@
 
 .cgNav_active {
   background-color: rgba(0, 92, 175, 0.1) !important;
-  color: #005CAF;
+  color: #005caf;
   font-weight: bold;
 }
 
 .cgNav:hover {
   background-color: rgba(0, 92, 175, 0.05);
 }
-
 
 .showFullContainer {
   z-index: 13;

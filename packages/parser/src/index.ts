@@ -8,7 +8,7 @@ import { configParser, WebgalConfig } from './configParser/configParser';
 import { fileType } from './interface/assets';
 import { IAsset } from './interface/sceneInterface';
 import { sceneParser } from './sceneParser';
-import {IWebGALStyleObj, scss2cssinjsParser} from "./styleParser";
+import { IWebGALStyleObj, scss2cssinjsParser } from './styleParser';
 
 export default class SceneParser {
   private readonly SCRIPT_CONFIG_MAP: ConfigMap;
@@ -69,10 +69,9 @@ export default class SceneParser {
     );
   }
 
-  parseScssToWebgalStyleObj(scssString: string): IWebGALStyleObj{
+  parseScssToWebgalStyleObj(scssString: string): IWebGALStyleObj {
     return scss2cssinjsParser(scssString);
   }
-
 }
 
 export { ADD_NEXT_ARG_LIST, SCRIPT_CONFIG };
