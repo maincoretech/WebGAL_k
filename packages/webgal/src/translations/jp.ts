@@ -1,5 +1,5 @@
 const jp = {
-  // 通用
+  // 通用.
   common: {
     yes: 'はい',
     no: 'いいえ',
