@@ -1,107 +1,37 @@
 {
+  "productName": "webgal-k",
+  "version": "0.1.0",
+  "identifier": "com.tauri.dev",
+  "build": {
+    "frontendDist": "../packages/webgal/dist",
+    "devUrl": "http://localhost:3000",
+    "beforeDevCommand": "yarn run dev",
+    "beforeBuildCommand": "yarn run build"
+  },
   "app": {
-    "macOSPrivateApi": true,
-    "security": {
-      "assetProtocol": {
-        "enable": false,
-        "scope": []
-      },
-      "dangerousDisableAssetCspModification": false,
-      "freezePrototype": false,
-      "pattern": {
-        "use": "brownfield"
-      }
-    },
     "windows": [
       {
-        "height": 1440,
-        "width": 2560,
-        "title": "UNtitled",
-        "minHeight": 360,
-        "minWidth": 640,
+        "title": "webgal-k",
+        "width": 800,
+        "height": 600,
+        "resizable": true,
         "fullscreen": false
       }
     ],
-    "withGlobalTauri": true
+    "security": {
+      "csp": null
+    }
   },
-  "build": {
-    "frontendDist": "../packages/webgal/dist"
-  },
-  "identifier": "com.maincoretech.untitled",
-  "productName": "UNtitled",
-  "version": "0.0.1",
   "bundle": {
     "active": true,
-    "category": "AdventureGame",
-    "copyright": "copyright 2024 maincore_tech.",
-    "longDescription": "A way to touch untitled world",
-    "android": {
-      "minSdkVersion": 24
-    },
-    "iOS": {
-      "developmentTeam": "maincore_tech."
-    },
+    "targets": "all",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ],
-    "linux": {
-      "appimage": {
-        "bundleMediaFramework": true,
-        "files": {}
-      },
-      "deb": {
-        "files": {}
-      },
-      "rpm": {
-        "epoch": 0,
-        "files": {},
-        "release": "1"
-      }
-    },
-    "macOS": {
-      "dmg": {
-        "appPosition": {
-          "x": 180,
-          "y": 170
-        },
-        "applicationFolderPosition": {
-          "x": 480,
-          "y": 170
-        },
-        "windowSize": {
-          "height": 400,
-          "width": 660
-        },
-        "background": "icons/installer/background.png"
-      },
-      "files": {},
-      "minimumSystemVersion": "10.13"
-    },
-    "windows": {
-      "allowDowngrades": true,
-      "certificateThumbprint": null,
-      "digestAlgorithm": null,
-      "timestampUrl": null,
-      "nsis": {
-        "displayLanguageSelector": true,
-        "languages": ["SimpChinese", "English"],
-        "compression": "lzma",
-        "installerIcon": "icons/installer/icon.ico",
-        "headerImage": "icons/installer/header.bmp",
-        "sidebarImage": "icons/installer/sidebar.bmp"
-      },
-      "tsp": false,
-      "webviewFixedRuntimePath": null,
-      "webviewInstallMode": {
-        "silent": true,
-        "type": "downloadBootstrapper"
-      },
-      "wix": null
-    },
-    "targets": "all"
-  }
+    ]
+  },
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json"
 }
