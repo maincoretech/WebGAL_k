@@ -65,8 +65,8 @@ export const Backlog = () => {
                 onMouseEnter={playSeEnter}
                 className={styles.backlog_item_button_element}
               >
-                {/*<Return theme="outline" size={iconSize} fill="#ffffff" strokeWidth={3} />*/}
-                <i className="bi bi-arrow-right"></i>
+                {/* <Return theme="outline" size={iconSize} fill="#ffffff" strokeWidth={3} /> */}
+                <i className="bi bi-arrow-right" />
               </div>
               {backlogItem.currentStageState.vocal ? (
                 <div
@@ -91,8 +91,8 @@ export const Backlog = () => {
                   onMouseEnter={playSeEnter}
                   className={styles.backlog_item_button_element}
                 >
-                  {/*<VolumeNotice theme="outline" size={iconSize} fill="#ffffff" strokeWidth={3} />*/}
-                  <i className="bi bi-soundwave"></i>
+                  {/* <VolumeNotice theme="outline" size={iconSize} fill="#ffffff" strokeWidth={3} /> */}
+                  <i className="bi bi-soundwave" />
                 </div>
               ) : null}
             </div>
@@ -160,12 +160,12 @@ export const Backlog = () => {
                 dispatch(setVisibility({ component: 'showTextBox', visibility: true }));
               }}
               onMouseEnter={playSeEnter}
-            ></i>
+            />
             <div
               className={styles.backlog_title}
-              /*onClick={() => {
+              /* onClick={() => {
                 logger.info('Rua! Testing');
-              }}*/
+              }} */
             >
               {t('buttons.backlog')}
             </div>
