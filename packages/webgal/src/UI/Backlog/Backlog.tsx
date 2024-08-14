@@ -75,6 +75,12 @@ export const Backlog = () => {
                     // 获取到播放 backlog 语音的元素
                     const backlog_audio_element: any = document.getElementById('backlog_audio_play_element_' + i);
                     if (backlog_audio_element) {
+                      const backlog_audio_elements = document.querySelectorAll<HTMLAudioElement>(
+                        'audio[id*="backlog_audio_play_element"], audio[id="currentVocal"]',
+                      );
+                      backlog_audio_elements.forEach((audio) => {
+                        audio.pause();
+                      });
                       backlog_audio_element.currentTime = 0;
                       const userDataStore = webgalStore.getState().userData;
                       const mainVol = userDataStore.optionData.volumeMain;

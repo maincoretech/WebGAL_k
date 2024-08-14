@@ -71,7 +71,7 @@ export function Sound() {
           }}
         />
       </NormalOption>
-      <NormalOption key="option9" title={t('voiceOption.title')}>
+      {/* <NormalOption key="option9" title={t('voiceOption.title')}>
         <NormalButton
           textList={t('voiceStop.title', 'voiceContinue.title')}
           functionList={[
@@ -86,7 +86,7 @@ export function Sound() {
           ]}
           currentChecked={userDataState.optionData.voiceInterruption}
         />
-      </NormalOption>
+      </NormalOption> */}
     </div>
   );
 }
