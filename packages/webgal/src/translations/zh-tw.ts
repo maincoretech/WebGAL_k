@@ -79,13 +79,13 @@ const zhTw = {
                 large: '大',
               },
             },
-            textFont: {
+            /* textFont: {
               title: '文字字體',
               options: {
                 siYuanSimSun: '霞鹜文楷',
                 SimHei: '黑體',
               },
-            },
+            }, */
             textboxOpacity: {
               title: '文本框不透明度',
             },
@@ -181,7 +181,7 @@ const zhTw = {
   },
 
   extra: {
-    title: 'CG模式',
+    title: 'EXTRA',
   },
 };
 

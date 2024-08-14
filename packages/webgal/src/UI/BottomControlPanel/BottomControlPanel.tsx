@@ -1,4 +1,4 @@
-/*import {
+/* import {
   AlignTextLeftOne,
   DoubleRight,
   FolderOpen,
@@ -13,7 +13,7 @@
   DoubleUp,
   Lock,
   Unlock,
-} from '@icon-park/react';*/
+} from '@icon-park/react'; */
 import styles from './bottomControlPanel.module.scss';
 import { switchAuto } from '@/Core/controller/gamePlay/autoPlay';
 import { switchFast } from '@/Core/controller/gamePlay/fastSkip';
@@ -91,7 +91,7 @@ export const BottomControlPanel = () => {
               }}
               onMouseEnter={playSeEnter}
             >
-              <i className="bi bi-file-text"></i>
+              <i className="bi bi-file-text" />
               {/* <span className={styles.button_text}>{t('buttons.backlog')}</span> */}
             </span>
             <span
@@ -108,7 +108,7 @@ export const BottomControlPanel = () => {
               }}
               onMouseEnter={playSeEnter}
             >
-              <i className="bi bi-arrow-clockwise"></i>
+              <i className="bi bi-arrow-clockwise" />
               {/* <span className={styles.button_text}>{t('buttons.replay')}</span> */}
             </span>
             <span
@@ -121,7 +121,7 @@ export const BottomControlPanel = () => {
               }}
               onMouseEnter={playSeEnter}
             >
-              <i className="bi bi-play"></i>
+              <i className="bi bi-play" />
               {/* <span className={styles.button_text}>{t('buttons.auto')}</span> */}
             </span>
             <span
@@ -134,7 +134,7 @@ export const BottomControlPanel = () => {
               }}
               onMouseEnter={playSeEnter}
             >
-              <i className="bi bi-fast-forward"></i>
+              <i className="bi bi-fast-forward" />
               {/* <span className={styles.button_text}>{t('buttons.forward')}</span> */}
             </span>
             {GUIStore.showTextBox && (
@@ -147,7 +147,7 @@ export const BottomControlPanel = () => {
                 }}
                 onMouseEnter={playSeEnter}
               >
-                <i className="bi bi-eye-slash"></i>
+                <i className="bi bi-eye-slash" />
                 {/* <span className={styles.button_text}>{t('buttons.hide')}</span> */}
               </span>
             )}
@@ -161,7 +161,7 @@ export const BottomControlPanel = () => {
                 }}
                 onMouseEnter={playSeEnter}
               >
-                <i className="bi bi-eye"></i>
+                <i className="bi bi-eye" />
                 {/* <span className={styles.button_text}>{t('buttons.show')}</span> */}
               </span>
             )}
@@ -174,7 +174,7 @@ export const BottomControlPanel = () => {
               }}
               onMouseEnter={playSeEnter}
             >
-              {GUIStore.showControls ? <i className="bi bi-lock"></i> : <i className="bi bi-unlock"></i>}
+              {GUIStore.showControls ? <i className="bi bi-lock" /> : <i className="bi bi-unlock" />}
             </span>
           </div>
           <div
@@ -185,12 +185,20 @@ export const BottomControlPanel = () => {
               className={styles.singleButton + ' ' + styles.fastsave}
               style={{ fontSize }}
               onClick={() => {
-                saveGame(0);
+                showGlogalDialog({
+                  title: t('buttons.qsTips'),
+                  leftText: t('$common.yes'),
+                  rightText: t('$common.no'),
+                  leftFunc: () => {
+                    saveGame(0);
+                  },
+                  rightFunc: () => {},
+                });
                 playSeClick();
               }}
               onMouseEnter={playSeEnter}
             >
-              <i className="bi bi-chevron-double-down"></i>
+              <i className="bi bi-chevron-double-down" />
               <span className={styles.button_text}>{t('buttons.quicklySave')}</span>
               <div className={styles.fastSlPreview + ' ' + styles.fastSPreview}>{fastSlPreview}</div>
             </span>
@@ -198,12 +206,20 @@ export const BottomControlPanel = () => {
               className={styles.singleButton + ' ' + styles.fastload}
               style={{ fontSize }}
               onClick={() => {
-                loadGame(0);
+                showGlogalDialog({
+                  title: t('buttons.qlTips'),
+                  leftText: t('$common.yes'),
+                  rightText: t('$common.no'),
+                  leftFunc: () => {
+                    loadGame(0);
+                  },
+                  rightFunc: () => {},
+                });
                 playSeClick();
               }}
               onMouseEnter={playSeEnter}
             >
-              <i className="bi bi-chevron-double-up"></i>
+              <i className="bi bi-chevron-double-up" />
               <span className={styles.button_text}>{t('buttons.quicklyLoad')}</span>
               <div className={styles.fastSlPreview + ' ' + styles.fastLPreview}>{fastSlPreview}</div>
             </span>
@@ -217,7 +233,7 @@ export const BottomControlPanel = () => {
               }}
               onMouseEnter={playSeEnter}
             >
-              <i className="bi bi-floppy2"></i>
+              <i className="bi bi-floppy2" />
               <span className={styles.button_text}>{t('buttons.save')}</span>
             </span>
             <span
@@ -230,7 +246,7 @@ export const BottomControlPanel = () => {
               }}
               onMouseEnter={playSeEnter}
             >
-              <i className="bi bi-folder2-open"></i>
+              <i className="bi bi-folder2-open" />
               <span className={styles.button_text}>{t('buttons.load')}</span>
             </span>
             <span
@@ -243,7 +259,7 @@ export const BottomControlPanel = () => {
               }}
               onMouseEnter={playSeEnter}
             >
-              <i className="bi bi-sliders2"></i>
+              <i className="bi bi-sliders2" />
               <span className={styles.button_text}>{t('buttons.options')}</span>
             </span>
             <span
@@ -263,7 +279,7 @@ export const BottomControlPanel = () => {
               }}
               onMouseEnter={playSeEnter}
             >
-              <i className="bi bi-house"></i>
+              <i className="bi bi-house" />
               <span className={styles.button_text}>{t('buttons.title')}</span>
             </span>
           </div>

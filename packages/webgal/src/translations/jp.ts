@@ -86,14 +86,14 @@ const jp = {
                 large: '大',
               },
             },
-            textFont: {
+            /* textFont: {
               title: 'フォント',
               options: {
                 siYuanSimSun: '源ノ明朝(中国語)',
                 SimHei: 'OPPO Sans',
                 lxgw: 'LXGW WenKai',
               },
-            },
+            }, */
             textboxOpacity: {
               title: 'テキストボックスの不透明度',
             },
@@ -188,7 +188,7 @@ const jp = {
   },
 
   extra: {
-    title: '鑑賞モード',
+    title: 'EXTRA',
   },
 };
 

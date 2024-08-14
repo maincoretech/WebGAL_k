@@ -88,14 +88,14 @@ const en = {
                 large: 'Large',
               },
             },
-            textFont: {
+            /* textFont: {
               title: 'Text Font',
               options: {
                 siYuanSimSun: 'Source Han Serif',
                 SimHei: 'Sans',
                 lxgw: 'LXGW WenKai',
               },
-            },
+            }, */
             textboxOpacity: {
               title: 'Textbox Opacity',
             },
