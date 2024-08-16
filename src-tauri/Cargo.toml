@@ -1,8 +1,8 @@
 [package]
 name = "app"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "the k"
+authors = ["maincore_tech."]
 license = ""
 repository = ""
 edition = "2021"
@@ -24,3 +24,13 @@ tauri = { version = "2.0.0-rc.2", features = [] }
 tauri-plugin-process = "2.0.0-rc.0"
 tauri-plugin-persisted-scope = "2.0.0-rc"
 tauri-plugin-window-state = "2.0.0-rc"
+
+[profile.dev]
+incremental = true
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "z"
+panic = "abort"
+strip = true
