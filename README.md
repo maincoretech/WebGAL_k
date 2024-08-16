@@ -16,4 +16,4 @@ bun build    // build project, the webgal output is ./packages/webgal/dist
 
 see also [WebGAL's documents](https://docs.openwebgal.com/)
 
-instead of electron we use tauri2 to pack program, you can easily config environment with [tauri2's documents](https://v2.tauri.app/start/) for develop
+instead of electron we use tauri2 to pack program, you can easily config environment with [tauri2's documents](https://v2.tauri.app/start/prerequisites/) for develop
