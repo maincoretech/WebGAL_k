@@ -5,6 +5,8 @@
   "repository": "https://github.com/MakinoharaShoko/WebGAL.git",
   "dependencies": {
     "@tauri-apps/api": "^2.0.0-rc.0",
+    "@tauri-apps/plugin-window-state": "^2.0.0-rc.0",
+    "@tauri-apps/plugin-process": "^2.0.0-rc.0",
     "@tauri-apps/cli": "^2.0.0-rc.3",
     "bootstrap-icons": "^1.11.3",
     "yarn": "^1.22.22"

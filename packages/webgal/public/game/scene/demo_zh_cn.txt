@@ -1,7 +1,9 @@
 bgm:s_Title.mp3 -volume=80 -enter=3000;
 unlockBgm:s_Title.mp3 -name=雲を追いかけて;
-intro:你好|欢迎来到 {egine} 的世界;
+;// intro:你好|欢迎来到 {egine} 的世界;
 changeBg:tmp-bg.webp -next;
+label:userInput;
+getUserInput:name -title=如何称呼你 -buttonText=确认;
 setTransition: -target=bg-main -exit=shockwaveOut;
 :你好|欢迎来到 {egine} 的世界;
 changeBg:tmp-bg.webp -next;

@@ -15,7 +15,8 @@ import { fullScreenOption } from '@/store/userDataInterface';
 import { keyboard } from '@/hooks/useHotkey';
 import useConfigData from '@/hooks/useConfigData';
 import { showGlogalDialog } from '@/UI/GlobalDialog/GlobalDialog';
-import { Windows } from '@icon-park/react';
+// import { Windows } from '@icon-park/react';
+import { exit } from '@tauri-apps/plugin-process';
 
 /**
  * 标题页
@@ -120,7 +121,7 @@ const Title: FC = () => {
                   rightText: t('$common.no'),
                   leftFunc: () => {
                     // dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
-                    // window.close();
+                    exit(0);
                   },
                   rightFunc: () => {},
                 });

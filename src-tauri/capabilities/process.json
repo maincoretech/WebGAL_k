@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "process-capability",
+  "description": "Capability for the process",
+  "windows": ["main"],
+  "permissions": ["process:allow-exit"]
+}

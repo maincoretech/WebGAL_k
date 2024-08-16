@@ -9,6 +9,7 @@ import { setStorage } from '@/Core/controller/storage/storageController';
 import { TextPreview } from '@/UI/Menu/Options/TextPreview/TextPreview';
 import useTrans from '@/hooks/useTrans';
 import { OptionSlider } from '../OptionSlider';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 
 export function Display() {
   const userDataState = useSelector((state: RootState) => state.userData);
@@ -24,10 +25,12 @@ export function Display() {
             () => {
               dispatch(setOptionData({ key: 'fullScreen', value: fullScreenOption.on }));
               setStorage();
+              getCurrentWindow().setFullscreen(true);
             },
             () => {
               dispatch(setOptionData({ key: 'fullScreen', value: fullScreenOption.off }));
               setStorage();
+              getCurrentWindow().setFullscreen(false);
             },
           ]}
           currentChecked={userDataState.optionData.fullScreen}

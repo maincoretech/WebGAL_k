@@ -19,7 +19,7 @@ export function Extra() {
       {showExtra && (
         <div className={styles.extra}>
           <div className={styles.extra_top}>
-            <CloseSmall
+            {/* <CloseSmall
               className={styles.extra_top_icon}
               onClick={() => {
                 dispatch(setVisibility({ component: 'showExtra', visibility: false }));
@@ -30,6 +30,14 @@ export function Extra() {
               size="4em"
               fill="#fff"
               strokeWidth={3}
+            /> */}
+            <i
+              className={`bi bi-x-lg ${styles.extra_top_icon}`}
+              onClick={() => {
+                dispatch(setVisibility({ component: 'showExtra', visibility: false }));
+                playSeClick();
+              }}
+              onMouseEnter={playSeClick}
             />
             <div className={styles.extra_title}>{t('title')}</div>
           </div>

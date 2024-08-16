@@ -1,7 +1,7 @@
 {
   "productName": "webgal-k",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "moe.maincore.k",
   "build": {
     "frontendDist": "../packages/webgal/dist",
     "devUrl": "http://localhost:3000",
@@ -12,8 +12,8 @@
     "windows": [
       {
         "title": "webgal-k",
-        "width": 800,
-        "height": 600,
+        "width": 1080,
+        "height": 1920,
         "resizable": true,
         "fullscreen": false
       }
