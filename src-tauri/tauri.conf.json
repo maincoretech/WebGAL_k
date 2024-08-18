@@ -12,8 +12,8 @@
     "windows": [
       {
         "title": "webgal-k",
-        "width": 1080,
-        "height": 1920,
+        "width": 1440,
+        "height": 810,
         "resizable": true,
         "fullscreen": false
       }
@@ -21,12 +21,12 @@
     "security": {
       "csp": null
     },
-    "enableGTKAppId": false,
-    "macOSPrivateApi": false
+    "enableGTKAppId": true,
+    "macOSPrivateApi": true
   },
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": ["appimage", "app", "dmg", "nsis"],
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -73,6 +73,7 @@
       "digestAlgorithm": null,
       "timestampUrl": null,
       "nsis": {
+        "installMode": "both",
         "displayLanguageSelector": true,
         "compression": "lzma",
         "languages": ["SimpChinese", "TradChinese", "English", "Japanese"],
@@ -85,8 +86,7 @@
       "webviewInstallMode": {
         "silent": true,
         "type": "downloadBootstrapper"
-      },
-      "wix": null
+      }
     }
   },
   "$schema": "../node_modules/@tauri-apps/cli/schema.json"
