@@ -12,8 +12,8 @@
     "windows": [
       {
         "title": "webgal-k",
-        "width": 1440,
-        "height": 810,
+        "width": 800,
+        "height": 450,
         "resizable": true,
         "fullscreen": false
       }
