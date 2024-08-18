@@ -73,7 +73,9 @@
       "digestAlgorithm": null,
       "timestampUrl": null,
       "nsis": {
+        "displayLanguageSelector": true,
         "compression": "lzma",
+        "languages": ["SimpChinese", "TradChinese", "English", "Japanese"],
         "installerIcon": "icons/installer/icon.ico",
         "headerImage": "icons/installer/header.bmp",
         "sidebarImage": "icons/installer/sidebar.bmp"
