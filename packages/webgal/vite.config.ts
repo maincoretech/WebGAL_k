@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import loadVersion from 'vite-plugin-package-version';
@@ -5,6 +7,10 @@ import { resolve, relative } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { readdirSync, watch, writeFileSync } from 'fs';
 import { isEqual } from 'lodash';
+
+// postcss
+import postcssPresetEnv from 'postcss-preset-env';
+import cssnano from 'cssnano';
 
 // https://vitejs.dev/config/
 
@@ -47,6 +53,11 @@ console.log(env);
 })();
 
 export default defineConfig({
+  css: {
+    postcss: {
+      plugins: [postcssPresetEnv(), cssnano()],
+    },
+  },
   plugins: [
     react(),
     loadVersion(),

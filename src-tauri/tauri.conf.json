@@ -20,7 +20,9 @@
     ],
     "security": {
       "csp": null
-    }
+    },
+    "enableGTKAppId": false,
+    "macOSPrivateApi": false
   },
   "bundle": {
     "active": true,
@@ -31,7 +33,59 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+    "category": "RolePlayingGame",
+    "copyright": "maincore-tech.",
+    "linux": {
+      "appimage": {
+        "bundleMediaFramework": true
+      }
+    },
+    "android": {
+      "minSdkVersion": 24
+    },
+    "iOS": {
+      "developmentTeam": "maincore_tech."
+    },
+    "macOS": {
+      "dmg": {
+        "appPosition": {
+          "x": 180,
+          "y": 170
+        },
+        "applicationFolderPosition": {
+          "x": 480,
+          "y": 170
+        },
+        "windowSize": {
+          "height": 400,
+          "width": 660
+        },
+        "background": "icons/installer/background.png"
+      },
+      "files": {},
+      "hardenedRuntime": true,
+      "minimumSystemVersion": "10.15"
+    },
+    "windows": {
+      "allowDowngrades": true,
+      "certificateThumbprint": null,
+      "digestAlgorithm": null,
+      "timestampUrl": null,
+      "nsis": {
+        "compression": "lzma",
+        "installerIcon": "icons/installer/icon.ico",
+        "headerImage": "icons/installer/header.bmp",
+        "sidebarImage": "icons/installer/sidebar.bmp"
+      },
+      "tsp": false,
+      "webviewFixedRuntimePath": null,
+      "webviewInstallMode": {
+        "silent": true,
+        "type": "downloadBootstrapper"
+      },
+      "wix": null
+    }
   },
   "$schema": "../node_modules/@tauri-apps/cli/schema.json"
 }
