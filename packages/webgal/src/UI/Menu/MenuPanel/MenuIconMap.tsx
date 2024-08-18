@@ -10,24 +10,24 @@ export const MenuIconMap = (props: IMenuPanel) => {
   let returnIcon;
   switch (props.iconName) {
     case 'save':
-      returnIcon = //<Save theme="outline" size="1.2em" fill={props.iconColor} strokeWidth={2} />;
-        <i className="bi bi-floppy2"></i>;
+      returnIcon = // <Save theme="outline" size="1.2em" fill={props.iconColor} strokeWidth={2} />;
+        <i className="bi bi-floppy2" />;
       break;
     case 'load':
-      returnIcon = //<FolderOpen theme="outline" size="1.2em" fill={props.iconColor} strokeWidth={2} />;
-        <i className="bi bi-folder2-open"></i>;
+      returnIcon = // <FolderOpen theme="outline" size="1.2em" fill={props.iconColor} strokeWidth={2} />;
+        <i className="bi bi-folder2-open" />;
       break;
     case 'option':
-      returnIcon = //<SettingTwo theme="outline" size="1.2em" fill={props.iconColor} strokeWidth={2} />;
-        <i className="bi bi-sliders2"></i>;
+      returnIcon = // <SettingTwo theme="outline" size="1.2em" fill={props.iconColor} strokeWidth={2} />;
+        <i className="bi bi-sliders2" />;
       break;
     case 'title':
-      returnIcon = //<Home theme="outline" size="1.2em" fill={props.iconColor} strokeWidth={2} />;
-        <i className="bi bi-house"></i>;
+      returnIcon = // <Home theme="outline" size="1.2em" fill={props.iconColor} strokeWidth={2} />;
+        <i className="bi bi-house" />;
       break;
     case 'exit':
-      returnIcon = //<Logout theme="outline" size="1.2em" fill={props.iconColor} strokeWidth={2} />;
-        <i className="bi bi-box-arrow-right"></i>;
+      returnIcon = // <Logout theme="outline" size="1.2em" fill={props.iconColor} strokeWidth={2} />;
+        <i className="bi bi-box-arrow-right" />;
       break;
     default:
       returnIcon = <div />;

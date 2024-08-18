@@ -1,9 +1,9 @@
 {
-  "name": "WebGAL-K",
-  "short_name": "WebGAL",
+  "name": "webagl-k",
+  "short_name": "webgal",
   "start_url": ".",
   "display": "fullscreen",
-  "description": "WebGAL K",
+  "description": "webgal-k",
   "dir": "auto",
   "orientation": "landscape",
   "icons": [

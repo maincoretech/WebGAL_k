@@ -18,4 +18,5 @@ export const __INFO = {
     { username: 'callofblood', link: 'https://github.com/callofblood' },
     { username: 'lyle', link: 'https://github.com/lylelove' },
   ],
+  mod: `K mod`,
 };

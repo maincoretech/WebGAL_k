@@ -77,7 +77,8 @@ export function ExtraBgm() {
           onMouseEnter={playSeEnter}
           className={styles.bgmControlButton}
         >
-          <GoStart theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" />
+          <i className="bi bi-rewind" />
+          {/* <GoStart theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
         <div
           onClick={() => {
@@ -88,7 +89,8 @@ export function ExtraBgm() {
           onMouseEnter={playSeEnter}
           className={styles.bgmControlButton}
         >
-          <PlayOne theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" />
+          <i className="bi bi-play" />
+          {/* <PlayOne theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
         <div
           onClick={() => {
@@ -102,7 +104,8 @@ export function ExtraBgm() {
           onMouseEnter={playSeEnter}
           className={styles.bgmControlButton}
         >
-          <GoEnd theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" />
+          <i className="bi bi-fast-forward" />
+          {/* <GoEnd theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
         <div
           onClick={() => {
@@ -113,7 +116,8 @@ export function ExtraBgm() {
           onMouseEnter={playSeEnter}
           className={styles.bgmControlButton}
         >
-          <SquareSmall theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" />
+          <i className="bi bi-stop" />
+          {/* <SquareSmall theme="filled" fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
         <div className={styles.bgmName}>{foundCurrentBgmName}</div>
         <div
@@ -125,7 +129,8 @@ export function ExtraBgm() {
           className={styles.bgmControlButton}
           style={{ marginLeft: 'auto' }}
         >
-          <MusicList theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" />
+          <i className="bi bi-music-note-list" />
+          {/* <MusicList theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
       </div>
       {isShowBgmList.value && <div className={styles.bgmListContainer}> {showBgmList}</div>}

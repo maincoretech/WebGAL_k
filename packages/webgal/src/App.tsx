@@ -11,7 +11,7 @@ import { BottomControlPanelFilm } from '@/UI/BottomControlPanel/BottomControlPan
 import GlobalDialog from '@/UI/GlobalDialog/GlobalDialog';
 import DevPanel from '@/UI/DevPanel/DevPanel';
 import Translation from '@/UI/Translation/Translation';
-import { PanicOverlay } from '@/UI/PanicOverlay/PanicOverlay';
+// import { PanicOverlay } from '@/UI/PanicOverlay/PanicOverlay';
 import { useFullScreen } from './hooks/useFullScreen';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
@@ -35,7 +35,7 @@ function App() {
       <Extra />
       <Menu />
       <GlobalDialog />
-      <PanicOverlay />
+      {/* <PanicOverlay /> */}
       <DevPanel />
     </div>
   );

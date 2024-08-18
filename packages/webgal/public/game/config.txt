@@ -1,4 +1,4 @@
-Game_name:UNtitled;
+Game_name:webgal-k;
 Game_key:0f87dstRg;
 Title_img:tmp-bg.webp;
 Title_bgm:s_Title.mp3;

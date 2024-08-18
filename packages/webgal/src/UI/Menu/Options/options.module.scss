@@ -87,7 +87,12 @@
   background: #ffffff80;
   -webkit-background-clip: text;
   font-size: 135%;
-  text-decoration: underline;
+  // text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.About_text:hover {
+  color: #ffffffaa;
 }
 
 @keyframes Elements_in {
