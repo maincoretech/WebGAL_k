@@ -2,8 +2,8 @@ bgm:s_Title.mp3 -volume=80 -enter=3000;
 unlockBgm:s_Title.mp3 -name=ようこそ;
 intro:■初めに| このデモゲームで使用している画像素材は、AI生成画像です;
 intro:■クレジット| 「VOICEVOX:小夜/SAYO」;
-changeBg:bg.png -next;
-unlockCg:bg.png -name=良い夜; // CGのロックを解いて、名前をつけます。
+changeBg:tmp-bg.webp -next;
+unlockCg:tmp-bg.webp -name=良い夜; // CGのロックを解いて、名前をつけます。
 changeFigure:stand.png -left -enter=enter-from-left -next;
 miniAvatar:miniavatar.png;
 WebGAL:こんにちは。 -001_小夜SAYO（ノーマル）_こんにちは。.wav;

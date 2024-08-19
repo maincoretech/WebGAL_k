@@ -58,12 +58,7 @@ export default defineConfig({
       plugins: [postcssPresetEnv(), cssnano()],
     },
   },
-  plugins: [
-    react(),
-    loadVersion(),
-    // @ts-ignore
-    visualizer(),
-  ],
+  plugins: [react(), loadVersion(), visualizer()],
   resolve: {
     alias: {
       '@': resolve('src'),

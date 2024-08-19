@@ -1,21 +1,12 @@
-changeBg:tmp-bg.webp -next;
-choose:{egine} 发展历程:choose1|{egine} 冷知识:choose2;
-choose:{egine} 发展历程:choose1|{egine} 冷知识:choose2;
-choose:{egine} 发展历程:choose1|{egine} 冷知识:choose2;
-
-
-
-
 bgm:s_Title.mp3 -volume=80 -enter=3000;
 unlockBgm:s_Title.mp3 -name=雲を追いかけて;
-;// intro:你好|欢迎来到 {egine} 的世界;
-label:userInput;
-getUserInput:name -title=如何称呼你 -buttonText=确认;
+intro:你好|欢迎来到 {egine} 的世界;
+changeBg:tmp-bg.webp -next;
 setTransition: -target=bg-main -exit=shockwaveOut;
 :你好|欢迎来到 {egine} 的世界;
 changeBg:tmp-bg.webp -next;
 setTransition: -target=bg-main -enter=shockwaveIn -next;
-unlockCg:bg.png -name=良い夜; // 解锁CG并赋予名称
+unlockCg:tmp-bg.webp -name=良い夜; // 解锁CG并赋予名称
 changeFigure:stand.png -left -enter=enter-from-left -next;
 miniAvatar:miniavatar.png;
 {heroine}:欢迎使用 {egine}！这是一款全新的网页端视觉小说引擎。 -v1.wav;
