@@ -23,8 +23,6 @@ jobs:
           - platform: "macos-latest"
             args: "--target universal-apple-darwin"
           - platform: "ubuntu-24.04"
-            args: "--target aarch64-unknown-linux-gnu"
-          - platform: "ubuntu-24.04"
             args: "--target i686-unknown-linux-gnu"
           - platform: "ubuntu-24.04"
             args: "--target x86_64-unknown-linux-gnu"
@@ -42,7 +40,6 @@ jobs:
         with:
           targets:
             ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
-            ${{ matrix.platform == 'ubuntu-24.04' && 'aarch64-unknown-linux-gnu' || '' }}
 
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-24.04'
