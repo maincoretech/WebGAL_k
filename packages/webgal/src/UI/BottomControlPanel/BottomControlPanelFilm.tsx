@@ -30,7 +30,6 @@ export const BottomControlPanelFilm = () => {
             }}
           >
             <i class="bi bi-list" />
-            {/* <HamburgerButton theme="outline" size="32" fill="#fff" /> */}
           </div>
           {showPanel.value && (
             <div className={styles.container}>
