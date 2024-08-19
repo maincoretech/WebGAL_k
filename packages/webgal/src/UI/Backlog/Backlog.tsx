@@ -1,5 +1,5 @@
 import styles from './backlog.module.scss';
-import { CloseSmall, Return, VolumeNotice } from '@icon-park/react';
+// import { CloseSmall, Return, VolumeNotice } from '@icon-park/react';
 import { jumpFromBacklog } from '@/Core/controller/storage/jumpFromBacklog';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, webgalStore } from '@/store/store';
