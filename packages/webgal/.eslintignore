@@ -4,7 +4,9 @@
 *.otf
 *.svg
 *.ttf
+*.woff2
 *.ico
 *.mp3
 *.wav
 *.txt
+*.opus
