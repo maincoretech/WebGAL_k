@@ -7,7 +7,7 @@ import { setMenuPanelTag, setVisibility } from '@/store/GUIReducer';
 import { componentsVisibility, MenuPanelTag } from '@/store/guiInterface';
 import { backToTitle } from '@/Core/controller/gamePlay/backToTitle';
 import { useValue } from '@/hooks/useValue';
-import { HamburgerButton } from '@icon-park/react';
+// import { HamburgerButton } from '@icon-park/react';
 
 export const BottomControlPanelFilm = () => {
   const showPanel = useValue(false);
@@ -29,7 +29,7 @@ export const BottomControlPanelFilm = () => {
               showPanel.set(!showPanel.value);
             }}
           >
-            <HamburgerButton theme="outline" size="32" fill="#fff" />
+            <i className="bi bi-list" />
           </div>
           {showPanel.value && (
             <div className={styles.container}>
