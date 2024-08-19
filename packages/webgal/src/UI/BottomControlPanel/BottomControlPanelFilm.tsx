@@ -29,7 +29,7 @@ export const BottomControlPanelFilm = () => {
               showPanel.set(!showPanel.value);
             }}
           >
-            <i class="bi bi-list" />
+            <i className="bi bi-list" />
           </div>
           {showPanel.value && (
             <div className={styles.container}>
