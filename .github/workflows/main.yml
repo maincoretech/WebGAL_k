@@ -75,7 +75,7 @@ jobs:
           bun run build
 
       - name: Tauri Build and Release
-        uses: tauri-apps/tauri-action@dev
+        uses: Muska-Ami/tauri-action@dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
