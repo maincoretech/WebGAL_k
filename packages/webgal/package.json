@@ -6,7 +6,7 @@
     "dev": "vite --host --port 3000",
     "build": "cross-env NODE_ENV=production tsc && vite build --base=./",
     "preview": "vite preview",
-    "format": "prettier -w src",
+    "format": "prettier -w src index.html",
     "lint": "eslint src/** --fix"
   },
   "dependencies": {
