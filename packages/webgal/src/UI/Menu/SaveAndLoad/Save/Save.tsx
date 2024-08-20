@@ -57,7 +57,7 @@ export const Save: FC = () => {
     const saves = JSON.stringify(gameData);
     if (saves !== null) {
       writeTextFile('saves.json', saves, {
-        baseDir: BaseDirectory.AppData,
+        baseDir: BaseDirectory.AppLocalData,
       });
       /* const blob = new Blob([saves], { type: 'application/json' });
       const blobUrl = URL.createObjectURL(blob);
