@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - bun-dev 
+      - bun-dev
 
 env:
   CARGO_INCREMENTAL: 0
@@ -45,6 +45,11 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
+      - name: Vite Build
+        run: |
+          bun i
+          bun run build
+
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -66,20 +71,13 @@ jobs:
 
       - name: Cache Rust
         uses: Swatinem/rust-cache@v2
-        with:
-          cache-on-failure: false
-
-      - name: Vite Build
-        run: |
-          bun i
-          bun run build
 
       - name: Tauri Build and Release
         uses: Muska-Ami/tauri-action@dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: bun-app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
+          tagName: app-v__VERSION__-bun # the action automatically replaces \_\_VERSION\_\_ with the app version
           releaseName: "[Bun]App v__VERSION__"
           releaseBody: "Test version with Bun. See the assets to download this version and install."
           releaseDraft: true

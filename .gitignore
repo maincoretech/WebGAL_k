@@ -12,10 +12,6 @@ dist
 dist-ssr
 *.local
 
-pnpm-lock.yaml
-yarn.lock
-bun.lockb
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -31,7 +27,5 @@ stats.html
 packages/webgal/public/game.old
 packages/parser/build
 packages/webgal/src/Core/util/pixiPerformManager/initRegister.ts
-yarn.lock
-yarn.lock
 
 ._*
