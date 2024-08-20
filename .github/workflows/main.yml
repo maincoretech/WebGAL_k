@@ -35,11 +35,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-      - name: setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
 
       - name: Install Dependencies (Ubuntu Only)
         if: matrix.platform == 'ubuntu-24.04'
@@ -52,7 +47,7 @@ jobs:
 
       - name: Vite Build
         run: |
-          bun install --global
+          bun i
           bun run build
 
       - name: Setup Rust
