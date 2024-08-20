@@ -20,7 +20,7 @@ export const syncWithOrigine = (sceneName: string, sentenceId: number, experment
   dispatch(setVisibility({ component: 'showTitle', visibility: false }));
   dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
   dispatch(setVisibility({ component: 'isShowLogo', visibility: false }));
-  const title = document.getElementById('Title_enter_page');
+  const title = document.getElementById('title-enter-page');
   if (title) {
     title.style.display = 'none';
   }

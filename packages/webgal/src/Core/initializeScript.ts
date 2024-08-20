@@ -39,8 +39,8 @@ export const initializeScript = (): void => {
     );
   }
 
-  // 获得 userAnimation
-  loadStyle('./game/userStyleSheet.css');
+  // // 获得 userAnimation
+  // loadStyle('./game/userStyleSheet.css');
   // 获得 user Animation
   getUserAnimation();
   // 获取游戏信息

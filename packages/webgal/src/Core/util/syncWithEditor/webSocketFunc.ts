@@ -64,7 +64,7 @@ export const webSocketFunc = () => {
       runScript(sentence);
     }
     if (message.command === DebugCommand.REFETCH_TEMPLATE_FILES) {
-      const title = document.getElementById('Title_enter_page');
+      const title = document.getElementById('title-enter-page');
       if (title) {
         title.style.display = 'none';
       }

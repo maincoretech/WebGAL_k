@@ -12,9 +12,9 @@
 
   <body>
     <!--<div id="trans-overlay"><div id="trans-overlay-anime"></div></div>-->
-    <div id="Title_enter_page">
+    <div id="title-enter-page">
       <!--    落地页背景-->
-      <div id="Title_bg_container"></div>
+      <div id="title-background-container"></div>
       <!--    点击后的白色渐变-->
       <!--<div
         id="Title_white_container"
@@ -29,7 +29,7 @@
         "
       ></div>-->
       <!--    落地页文字-->
-      <div id="Title_enter_text">
+      <div id="title-enter-text">
         <div id="enter-buttom" onclick="enter()">TAP TO START</div>
         <div id="footer">
           <div>
@@ -73,7 +73,7 @@
         let transform = '';
         let ebgTransform = '';
         const root = document.getElementById('root'); // 获取根元素
-        const title = document.getElementById('Title_enter_page');
+        const title = document.getElementById('title-enter-page');
         const ebg = document.getElementById('ebg');
         const elements = [root, title];
         if (w > h) {
@@ -210,9 +210,9 @@
         // window.location = url;
       }
 
-      const title = document.getElementById('Title_enter_page');
-      const bgContainer = document.getElementById('Title_bg_container');
-      const titleText = document.getElementById('Title_enter_text');
+      const title = document.getElementById('title-enter-page');
+      const bgContainer = document.getElementById('title-background-container');
+      const titleText = document.getElementById('title-enter-text');
       //加载前不显示
       /*const transOverlayAnime = document.querySelector('#trans-overlay div');
       const transOverlay = document.getElementById('trans-overlay');*/
@@ -232,13 +232,13 @@
        * 点击屏幕，进入引擎主界面
        */
       /*function enter() {
-        const bgContainer = document.getElementById('Title_bg_container');
+        const bgContainer = document.getElementById('title-background-container');
         setTimeout(() => {
           if (bgContainer) {
             bgContainer.style.opacity = '0'; // 调整标题背景的透明度
           }
         }, 500);
-        const enterText = document.getElementById('Title_enter_text');
+        const enterText = document.getElementById('title-enter-text');
         setTimeout(() => {
           if (enterText) {
             enterText.style.opacity = '0'; // 调整标题文字的透明度
@@ -251,7 +251,7 @@
           }
         }, 50); // 在50ms后开始显示白色渐变
         //
-        const title = document.getElementById('Title_enter_page');
+        const title = document.getElementById('title-enter-page');
         setTimeout(() => {
           if (title) title.style.opacity = '0';
         }, 500); //500ms后开始降低落地页透明度

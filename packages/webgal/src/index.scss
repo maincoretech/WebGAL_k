@@ -128,7 +128,7 @@ code {
   font-size: 160%;
 }
 
-#Title_bg_container {
+#title-background-container {
   height: 100%;
   width: 100%;
   position: absolute;
@@ -138,7 +138,7 @@ code {
   transition: opacity 1s;
 }
 
-#Title_enter_page {
+#title-enter-page {
   width: 2560px;
   height: 1440px;
   overflow: hidden;
@@ -149,7 +149,7 @@ code {
   transition: opacity 200ms;
 }
 
-#Title_enter_text {
+#title-enter-text {
   width: 100%;
   height: 100%;
   display: flex;
