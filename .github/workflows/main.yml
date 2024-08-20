@@ -70,7 +70,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Tauri Build and Release
-        uses: Muska-Ami/tauri-action@dev
+        uses: tauri-apps/tauri-action@dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
