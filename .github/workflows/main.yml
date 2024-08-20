@@ -52,7 +52,7 @@ jobs:
 
       - name: Vite Build
         run: |
-          bun i
+          bun install --global
           bun run build
 
       - name: Setup Rust
