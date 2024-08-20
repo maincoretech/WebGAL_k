@@ -42,7 +42,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y webkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
-      - name: Install Rust
+      - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
           targets:
@@ -70,9 +70,11 @@ jobs:
           cache-on-failure: false
 
       - name: Vite Build
-        run: bun run build
+        run: |
+          bun i
+          bun run build
 
-      - name: Tauri Build
+      - name: Tauri Build and Release
         uses: tauri-apps/tauri-action@dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
