@@ -1,6 +1,6 @@
 # 安装依赖并构建
-yarn
-yarn build
+bun i
+bun build
 
 # 进入 WebGAL 构建目录
 cd packages || exit

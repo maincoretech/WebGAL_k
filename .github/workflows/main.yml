@@ -2,6 +2,8 @@ name: "publish"
 on:
   workflow_dispatch:
   push:
+    branches:
+      - bun-dev
 
 env:
   CARGO_INCREMENTAL: 0
@@ -31,45 +33,53 @@ jobs:
 
     runs-on: ${{ matrix.platform }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: install Rust stable
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          targets:
-            ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
-
-      - name: install dependencies (ubuntu only)
+      - name: Install Dependencies (Ubuntu Only)
         if: matrix.platform == 'ubuntu-24.04'
         run: |
           sudo apt-get update
           sudo apt-get install -y webkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
-      - name: Install yarn
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
 
-      - name: Setup node and cache for package data
-        uses: actions/setup-node@v4
-        with:
-          node-version: "lts/*"
-          cache: "yarn"
+      - name: Vite Build
+        run: |
+          bun i
+          bun run build
 
-      - name: Rust cache
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets:
+            ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      # Just not need NodeJS and Yarn anymore!
+      # SEE U AGAIN~
+      # - name: Install yarn
+      #   uses: borales/actions-yarn@v4
+      #   with:
+      #     cmd: install
+
+      # - name: Setup node and cache for package data
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "lts/*"
+      #     cache: "yarn"
+
+      - name: Cache Rust
         uses: Swatinem/rust-cache@v2
-        with:
-          cache-on-failure: false
 
-      - run: yarn build
-
-      - uses: tauri-apps/tauri-action@dev
+      - name: Tauri Build and Release
+        uses: Muska-Ami/tauri-action@dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
-          releaseName: "App v__VERSION__"
-          releaseBody: "See the assets to download this version and install."
+          tagName: app-v__VERSION__-bun # the action automatically replaces \_\_VERSION\_\_ with the app version
+          releaseName: "[Bun]App v__VERSION__"
+          releaseBody: "Test version with Bun. See the assets to download this version and install."
           releaseDraft: true
           prerelease: true
           args: ${{ matrix.args }}

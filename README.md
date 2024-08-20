@@ -2,7 +2,9 @@ Custom modified WebGAL for our game use
 
 ## Recommanded environment setup
 
-[VSCode](https://code.visualstudio.com/) (with [plugin](https://marketplace.visualstudio.com/items?itemName=c6h5-no2.webgal-script-basics)) + [Chrome](https://www.google.com/chrome/)/[Edge](https://www.microsoft.com/edge) + [Bun](https://bun.sh/) + [Node.js](https://nodejs.org/) ~~(很遗憾我们仍未优化掉 nodejs)~~
+[VSCode](https://code.visualstudio.com/) (with [plugin](https://marketplace.visualstudio.com/items?itemName=c6h5-no2.webgal-script-basics)) + [Chrome](https://www.google.com/chrome/)/[Edge](https://www.microsoft.com/edge) + [Bun](https://bun.sh/)
+
+> NodeJS was removed since 2024-08-20
 
 ## Commands
 

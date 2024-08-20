@@ -24,7 +24,7 @@ console.log(env);
   let lastFiles: string[] = [];
 
   function setInitFile() {
-    console.log('正在自动编写pixi特效依赖注入');
+    console.log('Automatic writing pixi.js dependencies mixins...');
     writeFileSync(
       resolve(pixiPerformManagerDirPath, 'initRegister.ts'),
       lastFiles
@@ -35,6 +35,7 @@ console.log(env);
         .join('\n') + '\n',
       { encoding: 'utf-8' },
     );
+    console.log('Done.');
   }
 
   function getPixiPerformScriptFiles() {
