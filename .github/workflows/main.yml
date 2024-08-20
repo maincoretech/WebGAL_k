@@ -2,6 +2,8 @@ name: "publish"
 on:
   workflow_dispatch:
   push:
+    branches:
+      - bun-dev 
 
 env:
   CARGO_INCREMENTAL: 0
@@ -31,39 +33,47 @@ jobs:
 
     runs-on: ${{ matrix.platform }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: install Rust stable
-        uses: dtolnay/rust-toolchain@stable
-        with:
-          targets:
-            ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
-
-      - name: install dependencies (ubuntu only)
+      - name: Install Dependencies (Ubuntu Only)
         if: matrix.platform == 'ubuntu-24.04'
         run: |
           sudo apt-get update
           sudo apt-get install -y webkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
-      - name: Install yarn
-        uses: borales/actions-yarn@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
         with:
-          cmd: install
+          targets:
+            ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
-      - name: Setup node and cache for package data
-        uses: actions/setup-node@v4
-        with:
-          node-version: "lts/*"
-          cache: "yarn"
+      # Just not need NodeJS and Yarn anymore!
+      # SEE U AGAIN~
+      # - name: Install yarn
+      #   uses: borales/actions-yarn@v4
+      #   with:
+      #     cmd: install
 
-      - name: Rust cache
+      # - name: Setup node and cache for package data
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: "lts/*"
+      #     cache: "yarn"
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Cache Rust
         uses: Swatinem/rust-cache@v2
         with:
           cache-on-failure: false
 
-      - run: yarn build
+      - name: Vite Build
+        run: bun build
 
-      - uses: tauri-apps/tauri-action@dev
+      - name: Tauri Build
+        uses: tauri-apps/tauri-action@dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

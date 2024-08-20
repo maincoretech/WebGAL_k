@@ -1,6 +1,6 @@
 # 安装依赖并构建
-yarn
-yarn build
+bun i
+bun build
 
 # 进入 Terre 目录
 cd ../WebGAL_Terre/packages/terre2/assets/templates/WebGAL_Template || exit
