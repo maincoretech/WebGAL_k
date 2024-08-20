@@ -19,6 +19,7 @@
     "build": "bun run parser:build && bun run webgal:build",
     "build-ci": "bun run parser:build-ci && bun run webgal:build",
     "dev": "bun run parser:build && bun run webgal:dev",
+    "tauri:dev": "bun tauri dev",
     "webgal:dev": "cd packages/webgal && bun run dev",
     "webgal:build": "cd packages/webgal && bun run build",
     "parser:test": "cd packages/parser && bun run test",
