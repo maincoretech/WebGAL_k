@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - bun-dev 
+      - bun-dev
 
 env:
   CARGO_INCREMENTAL: 0
@@ -35,6 +35,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
 
       - name: Install Dependencies (Ubuntu Only)
         if: matrix.platform == 'ubuntu-24.04'
