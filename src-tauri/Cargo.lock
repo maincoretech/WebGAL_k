@@ -70,6 +70,7 @@ dependencies = [
  "serde_json",
  "tauri",
  "tauri-build",
+ "tauri-plugin-fs",
  "tauri-plugin-persisted-scope",
  "tauri-plugin-process",
  "tauri-plugin-window-state",

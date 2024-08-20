@@ -40,7 +40,6 @@ export function System() {
 
     const saves = JSON.stringify(gameData);
     if (saves !== null) {
-      // @ts-ignore
       const blob = new Blob([saves], { type: 'application/json' });
       const blobUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');

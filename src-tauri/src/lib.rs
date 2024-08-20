@@ -4,6 +4,7 @@ pub fn run() {
     .plugin(tauri_plugin_window_state::Builder::default().build())
     .plugin(tauri_plugin_persisted_scope::init())
     .plugin(tauri_plugin_process::init())
+    .plugin(tauri_plugin_fs::init())
     .run(tauri::generate_context!())
     .expect("error while running webgal-k");
 }

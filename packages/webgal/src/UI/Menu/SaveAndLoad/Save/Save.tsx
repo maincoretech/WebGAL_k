@@ -10,9 +10,18 @@ import useTrans from '@/hooks/useTrans';
 import { useTranslation } from 'react-i18next';
 import useSoundEffect from '@/hooks/useSoundEffect';
 import { getSavesFromStorage } from '@/Core/controller/storage/savesController';
+import { IUserData } from '@/store/userDataInterface';
+import savesReducer, { ISavesData } from '@/store/savesReducer';
+import { writeTextFile, BaseDirectory } from '@tauri-apps/plugin-fs';
+
+interface IExportGameData {
+  userData: IUserData;
+  saves: ISavesData;
+}
 
 export const Save: FC = () => {
   const { playSePageChange, playSeEnter, playSeDialogOpen } = useSoundEffect();
+  const userSavesState = useSelector((state: RootState) => state.saveData);
   const userDataState = useSelector((state: RootState) => state.userData);
   const savesDataState = useSelector((state: RootState) => state.saveData);
   const dispatch = useDispatch();
@@ -37,6 +46,27 @@ export const Save: FC = () => {
       </div>
     );
     page.push(element);
+  }
+
+  function exportSaves() {
+    const gameData: IExportGameData = {
+      userData: userDataState,
+      saves: userSavesState,
+    };
+
+    const saves = JSON.stringify(gameData);
+    if (saves !== null) {
+      writeTextFile('saves.json', saves, {
+        baseDir: BaseDirectory.AppData,
+      });
+      /* const blob = new Blob([saves], { type: 'application/json' });
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = blobUrl;
+      a.download = 'saves.json';
+      a.click();
+      a.remove(); */
+    }
   }
 
   const tCommon = useTrans('common.');
@@ -88,12 +118,14 @@ export const Save: FC = () => {
               leftFunc: () => {
                 saveGame(i);
                 setStorage();
+                exportSaves();
               },
               rightFunc: () => {},
             });
           } else {
             playSePageChange();
             saveGame(i);
+            exportSaves();
           }
         }}
         onMouseEnter={playSeEnter}

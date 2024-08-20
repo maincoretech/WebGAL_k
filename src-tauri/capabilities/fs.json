@@ -1,0 +1,13 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "fs-capability",
+  "description": "Capability for the fs",
+  "windows": ["main"],
+  "permissions": [
+    "fs:default",
+    {
+      "identifier": "fs:allow-exists",
+      "allow": [{ "path": "$APPDATA/*" }]
+    }
+  ]
+}
