@@ -70,7 +70,7 @@ jobs:
           cache-on-failure: false
 
       - name: Vite Build
-        run: bun build
+        run: bun run build
 
       - name: Tauri Build
         uses: tauri-apps/tauri-action@dev
