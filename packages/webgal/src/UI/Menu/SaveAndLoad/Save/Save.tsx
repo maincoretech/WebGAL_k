@@ -10,7 +10,7 @@ import useTrans from '@/hooks/useTrans';
 import { useTranslation } from 'react-i18next';
 import useSoundEffect from '@/hooks/useSoundEffect';
 import { getSavesFromStorage } from '@/Core/controller/storage/savesController';
-import { exportSaves } from '@/Core/controller/storage/storageController';
+import { syncSaves } from '@/Core/controller/storage/storageController';
 
 export const Save: FC = () => {
   const { playSePageChange, playSeEnter, playSeDialogOpen } = useSoundEffect();
@@ -89,14 +89,14 @@ export const Save: FC = () => {
               leftFunc: () => {
                 saveGame(i);
                 setStorage();
-                exportSaves();
+                syncSaves();
               },
               rightFunc: () => {},
             });
           } else {
             playSePageChange();
             saveGame(i);
-            exportSaves();
+            syncSaves();
           }
         }}
         onMouseEnter={playSeEnter}

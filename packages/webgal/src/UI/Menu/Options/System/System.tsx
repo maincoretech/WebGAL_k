@@ -3,7 +3,7 @@ import { NormalOption } from '@/UI/Menu/Options/NormalOption';
 import { NormalButton } from '@/UI/Menu/Options/NormalButton';
 import { resetAllData, resetOptionSet, setOptionData } from '@/store/userDataReducer';
 import { IUserData, playSpeed } from '@/store/userDataInterface';
-import { getStorage, setStorage, dumpToStorageFast } from '@/Core/controller/storage/storageController';
+import { backupSaves, getStorage, setStorage, dumpToStorageFast } from '@/Core/controller/storage/storageController';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, webgalStore } from '@/store/store';
 import { showGlogalDialog } from '@/UI/GlobalDialog/GlobalDialog';
@@ -146,6 +146,7 @@ export function System() {
                     leftText: t('$common.yes'),
                     rightText: t('$common.no'),
                     leftFunc: () => {
+                      backupSaves();
                       dispatch(saveActions.resetSaves());
                       dumpSavesToStorage(0, 200);
                       dumpFastSaveToStorage();
@@ -160,6 +161,7 @@ export function System() {
                     leftText: t('$common.yes'),
                     rightText: t('$common.no'),
                     leftFunc: () => {
+                      backupSaves();
                       dispatch(resetOptionSet());
                       dumpToStorageFast();
                     },
@@ -173,6 +175,7 @@ export function System() {
                     leftText: t('$common.yes'),
                     rightText: t('$common.no'),
                     leftFunc: () => {
+                      backupSaves();
                       dispatch(resetAllData());
                       dumpToStorageFast();
                       dispatch(saveActions.resetSaves());

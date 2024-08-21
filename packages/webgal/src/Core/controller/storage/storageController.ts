@@ -5,18 +5,45 @@ import { webgalStore } from '@/store/store';
 import { initState, resetUserData } from '@/store/userDataReducer';
 import { WebGAL } from '@/Core/WebGAL';
 import savesReducer, { ISavesData } from '@/store/savesReducer';
-import { exists, remove, create, writeTextFile, BaseDirectory } from '@tauri-apps/plugin-fs';
+import { mkdir, exists, remove, copyFile, writeTextFile, BaseDirectory } from '@tauri-apps/plugin-fs';
 
 interface IExportGameData {
   userData: IUserData;
   saves: ISavesData;
 }
 
+const savesDir = { baseDir: BaseDirectory.AppData };
+
+/**
+ * 备份外部存储
+ */
+export async function backupSaves() {
+  let savesExists = await exists('saves.json', savesDir);
+  let backupDirExists = await exists('backups', savesDir);
+  let now = new Date();
+  const savesDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(
+    now.getDate(),
+  ).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(
+    now.getSeconds(),
+  ).padStart(2, '0')}`;
+  if (!backupDirExists) {
+    mkdir('backups', {
+      baseDir: BaseDirectory.AppData,
+    });
+  }
+  if (savesExists) {
+    await copyFile('saves.json', `backups/saves_${savesDate}.json`, {
+      fromPathBaseDir: BaseDirectory.AppData,
+      toPathBaseDir: BaseDirectory.AppData,
+    });
+    logger.info(`外部存储已备份`);
+  }
+}
+
 /**
  * 写入外部存储
  */
-
-export async function exportSaves() {
+export async function syncSaves() {
   const userDataState = webgalStore.getState().userData;
   const userSavesState = webgalStore.getState().saveData;
   let gameData: IExportGameData = {
@@ -25,9 +52,8 @@ export async function exportSaves() {
   };
   const saves = JSON.stringify(gameData);
   if (saves !== null) {
-    let savesDir = { baseDir: BaseDirectory.AppData };
-    const existSaves = await exists('saves.json', savesDir);
-    if (existSaves) {
+    let savesExists = await exists('saves.json', savesDir);
+    if (savesExists) {
       await remove('saves.json', savesDir);
       await writeTextFile('saves.json', saves, savesDir);
       logger.info(`外部存储已同步`);
@@ -42,7 +68,7 @@ export const setStorage = debounce(() => {
   const userDataState = webgalStore.getState().userData;
   localforage.setItem(WebGAL.gameKey, userDataState).then(() => {
     logger.info('写入本地存储');
-    exportSaves();
+    syncSaves();
   });
 }, 100);
 
