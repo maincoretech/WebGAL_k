@@ -1,8 +1,5 @@
-import { logger } from '../../util/logger';
 import { ISaveData } from '@/store/userDataInterface';
-import { dumpToStorageFast } from './storageController';
 import { webgalStore } from '@/store/store';
-import { setUserData } from '@/store/userDataReducer';
 import cloneDeep from 'lodash/cloneDeep';
 
 import { WebGAL } from '@/Core/WebGAL';
@@ -39,7 +36,7 @@ export function generateCurrentStageData(index: number, isSavePreviewImage = tru
     canvas2.width = 480;
     canvas2.height = 270;
     context!.drawImage(canvas, 0, 0, 480, 270);
-    urlToSave = canvas2.toDataURL('image/webp', 0.5);
+    urlToSave = canvas2.toDataURL('image/webp', 0.3);
     canvas2.remove();
   }
   const saveData: ISaveData = {

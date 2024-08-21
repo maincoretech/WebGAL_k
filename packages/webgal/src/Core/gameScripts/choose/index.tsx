@@ -82,7 +82,7 @@ export const choose = (sentence: ISentence): IPerform => {
 
 function Choose(props: { chooseOptions: ChooseOption[] }) {
   const fontFamily = webgalStore.getState().userData.optionData.textboxFont;
-  const font = fontFamily === textFont.song ? '"思源宋体", serif' : '"WebgalUI", serif';
+  const font = fontFamily === textFont.song ? '"WebgalUI", serif' : '"WebgalUI", serif';
   const { playSeEnter, playSeClick } = useSEByWebgalStore();
   const applyStyle = useApplyStyle('Stage/Choose/choose.scss');
   // 运行时计算JSX.Element[]

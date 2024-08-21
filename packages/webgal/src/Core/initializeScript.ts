@@ -26,6 +26,7 @@ export const initializeScript = (): void => {
   logger.info(__INFO.version);
   logger.info('Github: https://github.com/OpenWebGAL/WebGAL ');
   logger.info('Made with ❤ by OpenWebGAL');
+  logger.info('The K mode');
   // 激活强制缩放
   // 在调整窗口大小时重新计算宽高，设计稿按照 1600*900。
   if (isIOS) {

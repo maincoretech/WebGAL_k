@@ -10,7 +10,8 @@
     "@tauri-apps/plugin-process": "^2.0.0-rc.0",
     "@tauri-apps/plugin-window-state": "^2.0.0-rc.0",
     "bootstrap-icons": "^1.11.3",
-    "bun": "^1.1.24"
+    "bun": "^1.1.24",
+    "install": "^0.13.0"
   },
   "description": "A brand new web Visual Novel engine.",
   "license": "MPL-2.0",

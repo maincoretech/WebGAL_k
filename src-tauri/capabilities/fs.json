@@ -4,10 +4,17 @@
   "description": "Capability for the fs",
   "windows": ["main"],
   "permissions": [
-    "fs:default",
-    {
-      "identifier": "fs:allow-exists",
-      "allow": [{ "path": "$APPLOCALDATA/*" }]
-    }
+    "fs:allow-data-read-recursive",
+    "fs:allow-data-meta",
+    "fs:allow-data-meta-recursive",
+    "fs:allow-data-read",
+    "fs:allow-data-write",
+    "fs:allow-data-write-recursive",
+    "fs:allow-log-meta",
+    "fs:allow-log-meta-recursive",
+    "fs:allow-log-read",
+    "fs:allow-log-read-recursive",
+    "fs:allow-log-write",
+    "fs:allow-log-write-recursive"
   ]
 }

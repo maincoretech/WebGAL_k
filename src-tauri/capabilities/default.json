@@ -3,5 +3,11 @@
   "identifier": "default",
   "description": "enables the default permissions",
   "windows": ["main"],
-  "permissions": ["core:app:default"]
+  "permissions": [
+    "core:app:default",
+    "core:path:default",
+    "core:event:default",
+    "core:webview:default",
+    "core:resources:default"
+  ]
 }
