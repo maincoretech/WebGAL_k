@@ -29,7 +29,11 @@
     "@types/lodash": "^4.17.7",
     "@types/node": "^18.19.45",
     "@vitest/coverage-c8": "^0.28.5",
+<<<<<<< HEAD
     "rollup": "^3.29.4",
+=======
+    "rollup": "^3.29.5",
+>>>>>>> 58fc90a69af45043ef5e9c9c6f3b8834de2540e6
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.34.1",
