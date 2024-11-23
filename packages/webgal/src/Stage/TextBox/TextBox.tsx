@@ -60,14 +60,15 @@ export const TextBox = () => {
     size = getTextSize(stageState.showTextSize) + '%';
     textSizeState = stageState.showTextSize;
   }
-  const lineLimit = match(userDataState.optionData.textSize)
+  const lineLimit = match(textSizeState)
     .with(textSize.small, () => 3)
     .with(textSize.medium, () => 2)
     .with(textSize.large, () => 2)
     .default(() => 2);
   // 拆字
   const textArray = compileSentence(stageState.showText, lineLimit);
-  const showName = stageState.showName;
+  const isHasName = stageState.showName !== '';
+  const showName = compileSentence(stageState.showName, lineLimit);
   const currentConcatDialogPrev = stageState.currentConcatDialogPrev;
   const currentDialogKey = stageState.currentDialogKey;
   const miniAvatar = stageState.miniAvatar;
@@ -79,6 +80,7 @@ export const TextBox = () => {
       isText={isText}
       textDelay={textDelay}
       showName={showName}
+      isHasName={isHasName}
       currentConcatDialogPrev={currentConcatDialogPrev}
       fontSize={size}
       currentDialogKey={currentDialogKey}
@@ -99,7 +101,13 @@ function isCJK(character: string) {
   return !!character.match(/[\u4e00-\u9fa5]|[\u0800-\u4e00]|[\uac00-\ud7ff]/);
 }
 
-export function compileSentence(sentence: string, lineLimit: number, ignoreLineLimit?: boolean): EnhancedNode[][] {
+// eslint-disable-next-line max-params
+export function compileSentence(
+  sentence: string,
+  lineLimit: number,
+  ignoreLineLimit?: boolean,
+  replace_space_with_nbsp = true,
+): EnhancedNode[][] {
   // 先拆行
   const lines = sentence.split(/(?<!\\)\|/).map((val: string) => useEscape(val));
   // 对每一行进行注音处理
@@ -109,7 +117,7 @@ export function compileSentence(sentence: string, lineLimit: number, ignoreLineL
     line.forEach((node, index) => {
       match(node.type)
         .with(SegmentType.String, () => {
-          const chars = splitChars(node.value as string);
+          const chars = splitChars(node.value as string, replace_space_with_nbsp);
           // eslint-disable-next-line max-nested-callbacks
           ln.push(...chars.map((c) => ({ reactNode: c })));
         })
@@ -133,9 +141,10 @@ export function compileSentence(sentence: string, lineLimit: number, ignoreLineL
 
 /**
  * @param sentence
+ * @param replace_space_with_nbsp
  */
-export function splitChars(sentence: string) {
-  if (!sentence) return [];
+export function splitChars(sentence: string, replace_space_with_nbsp = true) {
+  if (!sentence) return [''];
   const words: string[] = [];
   let word = '';
   let cjkFlag = isCJK(sentence[0]);
@@ -155,13 +164,15 @@ export function splitChars(sentence: string) {
     //   cjkFlag = false;
     //   continue;
     // }
-    if (character === ' ') {
+    if (character === ' ' || character === '\u00a0') {
       // Space
       if (word) {
         words.push(word);
         word = '';
       }
-      words.push('\u00a0');
+      if (replace_space_with_nbsp) {
+        words.push('\u00a0');
+      } else words.push(character);
       cjkFlag = false;
     } else if (isCJK(character) && !isPunctuation(character)) {
       if (!cjkFlag && word) {
@@ -248,6 +259,9 @@ function parseString(input: string): Segment[] {
     }
   }
 
+  // 我也不知道为什么，不加这个就会导致在 Enhanced Value 处于行首时故障
+  // 你可以认为这个代码不明所以，但是不要删除
+  result.unshift({ type: SegmentType.String, value: '' });
   return result;
 }
 
@@ -264,7 +278,7 @@ function parseEnhancedString(enhanced: string): KeyValuePair[] {
   while ((match = regex.exec(enhanced)) !== null) {
     result.push({
       key: match[1],
-      value: match[2].trim(),
+      value: match[2].replace(/~/g, ':').trim(),
     });
   }
 

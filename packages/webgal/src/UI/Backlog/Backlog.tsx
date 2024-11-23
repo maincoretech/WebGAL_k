@@ -7,7 +7,7 @@ import { setVisibility } from '@/store/GUIReducer';
 import { logger } from '@/Core/util/logger';
 import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import useTrans from '@/hooks/useTrans';
-import { compileSentence, EnhancedNode, splitChars } from '@/Stage/TextBox/TextBox';
+import { compileSentence, EnhancedNode } from '@/Stage/TextBox/TextBox';
 import useSoundEffect from '@/hooks/useSoundEffect';
 import { WebGAL } from '@/Core/WebGAL';
 
@@ -27,7 +27,7 @@ export const Backlog = () => {
     // logger.info('backlogList render');
     for (let i = 0; i < WebGAL.backlogManager.getBacklog().length; i++) {
       const backlogItem = WebGAL.backlogManager.getBacklog()[i];
-      const showTextArray = compileSentence(backlogItem.currentStageState.showText, 3, true);
+      const showTextArray = compileSentence(backlogItem.currentStageState.showText, 3, true, false);
       const showTextArray2 = showTextArray.map((line) => {
         return line.map((c) => {
           return c.reactNode;
@@ -35,6 +35,26 @@ export const Backlog = () => {
       });
       const showTextArrayReduced = mergeStringsAndKeepObjects(showTextArray2);
       const showTextElementList = showTextArrayReduced.map((line, index) => {
+        return (
+          <div key={`backlog-line-${index}`}>
+            {line.map((e, index) => {
+              if (e === '<br />') {
+                return <br key={`br${index}`} />;
+              } else {
+                return e;
+              }
+            })}
+          </div>
+        );
+      });
+      const showNameArray = compileSentence(backlogItem.currentStageState.showName, 3, true);
+      const showNameArray2 = showNameArray.map((line) => {
+        return line.map((c) => {
+          return c.reactNode;
+        });
+      });
+      const showNameArrayReduced = mergeStringsAndKeepObjects(showNameArray2);
+      const nameElementList = showNameArrayReduced.map((line, index) => {
         return (
           <div key={`backlog-line-${index}`}>
             {line.map((e, index) => {
@@ -96,7 +116,7 @@ export const Backlog = () => {
                 </div>
               ) : null}
             </div>
-            <div className={styles.backlog_item_content_name}>{backlogItem.currentStageState.showName}</div>
+            <div className={styles.backlog_item_content_name}>{nameElementList}</div>
           </div>
           <div className={styles.backlog_item_content}>
             <span className={styles.backlog_item_content_text}>{showTextElementList}</span>
