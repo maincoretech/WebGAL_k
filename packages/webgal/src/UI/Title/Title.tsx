@@ -60,16 +60,6 @@ const Title: FC = () => {
           <div className={applyStyle('Title_buttonList', styles.Title_buttonList)}>
             <div
               className={applyStyle('Title_button', styles.Title_button)}
-              onClick={() => {
-                startGame();
-                playSeClick();
-              }}
-              onMouseEnter={playSeEnter}
-            >
-              <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('start.title')}</div>
-            </div>
-            <div
-              className={applyStyle('Title_button', styles.Title_button)}
               onClick={async () => {
                 playSeClick();
                 dispatch(setVisibility({ component: 'showTitle', visibility: false }));
@@ -78,6 +68,16 @@ const Title: FC = () => {
               onMouseEnter={playSeEnter}
             >
               <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('continue.title')}</div>
+            </div>
+            <div
+              className={applyStyle('Title_button', styles.Title_button)}
+              onClick={() => {
+                startGame();
+                playSeClick();
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('start.title')}</div>
             </div>
             <div
               className={applyStyle('Title_button', styles.Title_button)}
