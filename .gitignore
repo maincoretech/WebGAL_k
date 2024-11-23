@@ -29,3 +29,6 @@ packages/parser/build
 packages/webgal/src/Core/util/pixiPerformManager/initRegister.ts
 
 ._*
+
+# We use bun!
+yarn.lock
