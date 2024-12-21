@@ -37,7 +37,7 @@ export const scriptParser = (
 
   // 去分号
   let newSentenceRaw = sentenceRaw.split(/(?<!\\);/)[0];
-  newSentenceRaw = newSentenceRaw.replaceAll('\\;', ';');
+  newSentenceRaw = newSentenceRaw.replaceAll('\\;',';');
   if (newSentenceRaw === '') {
     // 注释提前返回
     return {

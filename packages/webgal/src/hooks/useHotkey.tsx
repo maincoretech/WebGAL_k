@@ -43,7 +43,7 @@ export function useHotkey(opt?: HotKeyType) {
   useMouseRightClickHotKey();
   useMouseWheel();
   useSkip();
-  // usePanic();
+  usePanic();
   useFastSaveBeforeUnloadPage();
   useSpaceAndEnter();
   useToggleFullScreen();
@@ -158,7 +158,7 @@ export function useMouseWheel() {
 /**
  * Panic Button, use Esc and Backquote
  */
-/* export function usePanic() {
+export function usePanic() {
   const panicButtonList = ['Escape', 'Backquote'];
   const isPanicButton = (ev: KeyboardEvent) =>
     !ev.isComposing && !ev.defaultPrevented && panicButtonList.includes(ev.code);
@@ -183,7 +183,7 @@ export function useMouseWheel() {
   useUnMounted(() => {
     document.removeEventListener('keyup', handlePressPanicButton);
   });
-} */
+}
 
 /**
  * ctrl控制快进

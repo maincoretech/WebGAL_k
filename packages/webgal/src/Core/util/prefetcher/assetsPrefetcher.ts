@@ -15,8 +15,6 @@ export const assetsPrefetcher = (assetList: Array<IAsset>) => {
   // }
 
   for (const asset of assetList) {
-    // 是否要插入这个标签
-    let isInsert = true;
     // 判断是否已经存在
     const hasPrefetch = WebGAL.sceneManager.settledAssets.includes(asset.url);
     if (hasPrefetch) {
