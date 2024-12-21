@@ -23,7 +23,7 @@
   align-items: center;
   flex-flow: column;
   background: #000000aa;
-  padding: 1em 5em 1.5em 5em;
+  padding: 1em 5em 1em 5em;
 }
 
 .glabalDialog_container {
@@ -46,9 +46,10 @@
 .button {
   font-size: 200%;
   padding: 0.15em 1em 0.15em 1em;
-  margin: 0.2em 1em 0.2em 1em;
+  margin: 0.2em 1em 0 1em;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, font-weight 0.2s, transform 0.2s;
+  border-bottom: 7px solid #00000000;
+  transition: border-bottom 0.2s, background-color 0.2s, color 0.2s, font-weight 0.2s, transform 0.2s;
   //text-shadow: 0 0 15px rgba(255, 255, 255, 1);
   //border-radius: 5px;
   //background: rgba(0, 0, 0, 0.05);
@@ -57,9 +58,9 @@
 .button:hover {
   //font-weight: bold;
   color: #ffffffcc;
-  transform: scale(1.1, 1.1);
   text-shadow: 0 0 15px #00000000;
   background: #ffffff10;
+  border-bottom: 7px solid #ffffffcc;
 }
 
 @keyframes showGlobalDialog {

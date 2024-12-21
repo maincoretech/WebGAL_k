@@ -7,22 +7,24 @@
   justify-content: center;
   align-items: center;
   z-index: 13;
-  background: rgba(0, 0, 0, 0.05);
+  background: #0000000d;
 }
 
 .Choose_item {
+  font-family: 'WebgalUI', serif;
   cursor: pointer;
   min-width: 50%;
   padding: 0.25em 1em 0.25em 1em;
   font-size: 265%;
-  color: #005caf;
+  color: #ffffffaa;
   text-align: center;
-  border-radius: 4px;
-  border: 3px solid rgba(0, 0, 0, 0);
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
-  background: rgba(255, 255, 255, 0.65);
+  // border-radius: 4px;
+  border: 3px solid #00000000;
+  box-shadow: 0 0 25px #00000040;
+  background: #00000030;
   margin: 0.25em 0 0.25em 0;
-  transition: background-color 0.5s, border 0.5s, font-weight 0.5s, box-shadow 0.5s;
+  backdrop-filter: blur(30px);
+  transition: background 0.2s, border 0.2s, font-weight 0.2s, box-shadow 0.2s;
 }
 
 //.title {
@@ -47,30 +49,17 @@
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  background: linear-gradient(to right,
-    rgba(0, 92, 175, 0) 0%,
-    rgba(0, 92, 175, 0.5) 33%,
-    rgba(0, 92, 175, 0.85) 50%,
-    rgba(0, 92, 175, 0.5) 66%,
-    rgba(0, 92, 175, 0) 100%
-  );
-  padding: 1em 5em 1.5em 5em;
+  box-shadow: 0 0 25px #00000040;
+  background: #00000030;
+  backdrop-filter: blur(30px);
+  padding: 1em 5em 1em 5em;
 }
 
 .glabalDialog_container {
-  //height: 20%;
-  color:white;
+  // height: 20%;
+  color: white;
   width: 100%;
-  border-top: 4px solid;
-  border-bottom: 4px solid;
-  border-image: linear-gradient(to right,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.85) 33%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(255, 255, 255, 0.85) 66%,
-    rgba(255, 255, 255, 0.05) 100%
-  ) 1;
-  //padding: 1px 1px 1px 1px;
+  border-top: 15px solid #00000030;
 }
 
 .title {
@@ -81,26 +70,23 @@
 
 .Choose_item:hover {
   //font-weight: bold;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
-  border: 3px solid #005caf;
+  background: #00000080;
+  box-shadow: 0 0 25px #00000080;
 }
 
 .button {
   font-size: 200%;
   padding: 0.15em 1em 0.15em 1em;
-  margin: 0.2em 1em 0.2em 1em;
+  margin: 0.2em 1em 0 1em;
   cursor: pointer;
-  transition: background-color 0.33s, color 0.33s, font-weight 0.33s, transform 0.33s;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 1);
-  border-radius: 5px;
+  border-bottom: 7px solid #00000000;
+  transition: border-bottom 0.2s, background-color 0.2s, color 0.2s, font-weight 0.2s, transform 0.2s;
   //background: rgba(0, 0, 0, 0.05);
 }
 
 .button:hover {
-  font-weight: bold;
-  color: #005caf;
-  transform: scale(1.1, 1.1);
-  text-shadow: 0 0 15px rgba(0, 0, 0, 0);
-  background: rgba(255, 255, 255, 0.85);
+  color: #ffffffcc;
+  text-shadow: 0 0 15px #00000000;
+  background: #ffffff10;
+  border-bottom: 7px solid #ffffffcc;
 }
