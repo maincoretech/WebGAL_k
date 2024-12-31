@@ -36,26 +36,6 @@ export function Display() {
           currentChecked={userDataState.optionData.fullScreen}
         />
       </NormalOption>
-      <NormalOption key="textSpeed" title={t('textSpeed.title')}>
-        <NormalButton
-          textList={t('textSpeed.options.slow', 'textSpeed.options.medium', 'textSpeed.options.fast')}
-          functionList={[
-            () => {
-              dispatch(setOptionData({ key: 'textSpeed', value: playSpeed.slow }));
-              setStorage();
-            },
-            () => {
-              dispatch(setOptionData({ key: 'textSpeed', value: playSpeed.normal }));
-              setStorage();
-            },
-            () => {
-              dispatch(setOptionData({ key: 'textSpeed', value: playSpeed.fast }));
-              setStorage();
-            },
-          ]}
-          currentChecked={userDataState.optionData.textSpeed}
-        />
-      </NormalOption>
       <NormalOption key="textSize" title={t('textSize.title')}>
         <NormalButton
           textList={t('textSize.options.small', 'textSize.options.medium', 'textSize.options.large')}

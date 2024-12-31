@@ -7,7 +7,7 @@ const zhTw = {
 
   menu: {
     options: {
-      title: '選項',
+      title: '設定',
       pages: {
         system: {
           title: '系統',
@@ -24,29 +24,29 @@ const zhTw = {
               title: '語言',
             },
             resetData: {
-              title: '清除或還原數據',
+              title: '清除或還原紀錄',
               options: {
                 clearGameSave: '清除所有存檔',
-                resetSettings: '還原默認設定',
-                clearAll: '清除所有數據',
+                resetSettings: '還原預設設定',
+                clearAll: '清除所有紀錄',
               },
               dialogs: {
                 clearGameSave: '確定要清除存檔嗎',
-                resetSettings: '確定要還原默認設定嗎',
-                clearAll: '確定要清除所有數據嗎',
+                resetSettings: '確定要還原預設設定嗎',
+                clearAll: '確定要清除所有紀錄嗎',
               },
             },
             gameSave: {
-              title: '導入或導出存檔與選項',
+              title: '匯入或匯出存檔與設定',
               options: {
-                export: '導出存檔與選項',
-                import: '導入存檔與選項',
+                export: '匯出存檔與設定',
+                import: '匯入存檔與設定',
               },
               dialogs: {
                 import: {
-                  title: '確定要導入存檔與選項嗎',
-                  tip: '導入存檔',
-                  error: '存檔解析失敗',
+                  title: '確定要匯入存檔與設定嗎',
+                  tip: '匯入存檔',
+                  error: '存檔匯入失敗',
                 },
               },
             },
@@ -64,6 +64,13 @@ const zhTw = {
         display: {
           title: '顯示',
           options: {
+            fullScreen: {
+              title: '全螢幕模式',
+              options: {
+                on: '開啟',
+                off: '關閉',
+              },
+            },
             textSpeed: {
               title: '文字顯示速度',
               options: {
@@ -83,16 +90,17 @@ const zhTw = {
             /* textFont: {
               title: '文字字體',
               options: {
-                siYuanSimSun: '霞鹜文楷',
+                siYuanSimSun: '思源宋體',
                 SimHei: '黑體',
+                lxgw: '霞鶩文楷',
               },
             }, */
             textboxOpacity: {
-              title: '文本框不透明度',
+              title: '文字方塊不透明度',
             },
             textPreview: {
               title: '文字顯示預覽',
-              text: '現在預覽的是文字框字體大小和播放速度的情況，您可以根據您的觀感調整上面的選項。',
+              text: '現在預覽的是文字方塊字體大小和播放速度的情況，您可以根據您的觀感調整上面的設定。',
             },
           },
         },
@@ -103,7 +111,10 @@ const zhTw = {
             vocalVolume: { title: '語音音量' },
             bgmVolume: { title: '背景音樂音量' },
             seVolume: { title: '音效音量' },
-            uiSeVolume: { title: '用戶界面音效音量' },
+            uiSeVolume: { title: '介面音效音量' },
+            /* voiceOption: { title: '是否中斷語音' },
+            voiceStop: { title: '停止語音' },
+            voiceContinue: { title: '繼續語音' }, */
           },
         },
         // language: {
@@ -121,7 +132,7 @@ const zhTw = {
       title: '讀檔',
     },
     title: {
-      title: '標題',
+      title: '主選單',
       options: {
         load: '',
         extra: 'CG模式',
