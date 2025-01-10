@@ -1,5 +1,5 @@
 Game_name:webgal-k;
 Game_key:137929181;
 Title_img:tmp-bg.webp;
-Title_bgm:s_Title.mp3;
+Title_bgm:葉ノ舞.opus;
 Game_Logo:WebGalEnter.png;
