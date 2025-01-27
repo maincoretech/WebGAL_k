@@ -1,6 +1,6 @@
 {
   "productName": "webgal-k",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "identifier": "moe.maincore.k",
   "build": {
     "frontendDist": "../packages/webgal/dist",
@@ -82,7 +82,6 @@
         "sidebarImage": "icons/installer/sidebar.bmp"
       },
       "tsp": false,
-      "webviewFixedRuntimePath": null,
       "webviewInstallMode": {
         "silent": true,
         "type": "downloadBootstrapper"

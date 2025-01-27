@@ -1,10 +1,10 @@
 import { setStage } from '@/store/stageReducer';
 
-import se_pageFlip from '@/assets/se/switch.opus';
-import se_switch from '@/assets/se/switch.opus';
-import se_mouseEnter from '@/assets/se/mouse-enter.opus';
-import se_dialog from '@/assets/se/click.opus';
-import se_click from '@/assets/se/click.opus';
+import se_pageFlip from '@/assets/se/switch.webm';
+import se_switch from '@/assets/se/switch.webm';
+import se_mouseEnter from '@/assets/se/mouse-enter.webm';
+import se_dialog from '@/assets/se/click.webm';
+import se_click from '@/assets/se/click.webm';
 import { useDispatch } from 'react-redux';
 import { webgalStore } from '@/store/store';
 
