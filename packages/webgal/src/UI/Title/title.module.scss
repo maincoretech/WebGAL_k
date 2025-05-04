@@ -62,3 +62,8 @@
   z-index: 13;
   background: #fff;
 }
+
+.Title_button_disabled {
+  cursor: not-allowed !important;
+  opacity: 0.5;
+}
