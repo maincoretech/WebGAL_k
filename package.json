@@ -4,13 +4,12 @@
   "author": "Mahiru <Mahiru_@outlook.com>",
   "repository": "https://github.com/MakinoharaShoko/WebGAL.git",
   "dependencies": {
-    "@tauri-apps/api": "^2.2.0",
-    "@tauri-apps/cli": "^2.2.5",
-    "@tauri-apps/plugin-fs": "^2.2.0",
-    "@tauri-apps/plugin-process": "^2.2.0",
-    "@tauri-apps/plugin-window-state": "^2.2.1",
-    "bootstrap-icons": "^1.11.3",
-    "caniuse-lite": "^1.0.30001716"
+    "@tauri-apps/api": "^2.5.0",
+    "@tauri-apps/cli": "^2.5.0",
+    "@tauri-apps/plugin-fs": "^2.2.1",
+    "@tauri-apps/plugin-process": "^2.2.1",
+    "@tauri-apps/plugin-window-state": "^2.2.2",
+    "bootstrap-icons": "^1.12.1"
   },
   "description": "A brand new web Visual Novel engine.",
   "license": "MPL-2.0",
@@ -31,5 +30,8 @@
     "packages": [
       "packages/*"
     ]
+  },
+  "engines": {
+    "node": "18"
   }
 }
