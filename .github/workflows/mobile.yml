@@ -36,10 +36,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
       - name: Vite Build
         run: |
-          pnpm install --frozen-lockfile=false
-          pnpm run build
+          bun i
+          bun run build
+          pnpm install -r
+          pnpm install -r --lockfile-only
 
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
