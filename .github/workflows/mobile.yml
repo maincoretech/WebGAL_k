@@ -73,7 +73,7 @@ jobs:
         env:
           NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
         run: |
-          npm tauri android init
+          pnpm tauri android init
 
       - name: setup Android signing
         run: |
