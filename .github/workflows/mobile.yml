@@ -24,10 +24,11 @@ jobs:
         with:
           node-version: lts/*
           cache: npm
+          cache-dependency-path: "package.json"
 
       - name: install example dependencies
         run: |
-          npm install
+          npm install --no-package-lock
 
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-24.04'
