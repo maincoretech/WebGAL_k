@@ -91,7 +91,8 @@
   position: relative;
 }
 
-.singleButton:hover {
+.singleButton:hover,
+.singleButton_active {
   background-color: #ffffff10;
 }
 

@@ -7,6 +7,8 @@ import { resolve, relative } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { readdirSync, watch, writeFileSync } from 'fs';
 import { isEqual } from 'lodash';
+import Info from 'unplugin-info/vite';
+
 
 // postcss
 import postcssPresetEnv from 'postcss-preset-env';
@@ -59,7 +61,12 @@ export default defineConfig({
       plugins: [postcssPresetEnv(), cssnano()],
     },
   },
-  plugins: [react(), loadVersion(), visualizer()],
+  plugins: [
+    react(),
+    loadVersion(),
+    Info(),
+    // @ts-ignore
+    // visualizer()],
   resolve: {
     alias: {
       '@': resolve('src'),

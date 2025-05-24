@@ -183,6 +183,7 @@ const zhCn = {
       quicklyLoad: 'Q·LOAD',
       save: 'SAVE',
       load: 'LOAD',
+      // fullscreen: '全屏',
       options: 'SYSTEM',
       title: 'TITLE',
       titleTips: '确认返回到标题界面吗',

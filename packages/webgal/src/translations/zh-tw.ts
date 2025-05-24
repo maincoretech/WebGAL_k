@@ -183,6 +183,7 @@ const zhTw = {
       quicklyLoad: 'Q·LOAD',
       save: 'SAVE',
       load: 'LOAD',
+      // fullscreen: '全螢幕',
       options: 'SYSTEM',
       title: 'TITLE',
       titleTips: '確認返回到標題界面嗎',
