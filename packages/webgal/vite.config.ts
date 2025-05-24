@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import loadVersion from 'vite-plugin-package-version';
@@ -9,14 +8,12 @@ import { readdirSync, watch, writeFileSync } from 'fs';
 import { isEqual } from 'lodash';
 import Info from 'unplugin-info/vite';
 
+// https://vitejs.dev/config/
 
 // postcss
 import postcssPresetEnv from 'postcss-preset-env';
 import cssnano from 'cssnano';
 
-// https://vitejs.dev/config/
-
-// @ts-ignore
 const env = process.env.NODE_ENV;
 console.log(env);
 (() => {
@@ -26,7 +23,7 @@ console.log(env);
   let lastFiles: string[] = [];
 
   function setInitFile() {
-    console.log('Automatic writing pixi.js dependencies mixins...');
+    console.log('正在自动编写pixi特效依赖注入');
     writeFileSync(
       resolve(pixiPerformManagerDirPath, 'initRegister.ts'),
       lastFiles
@@ -37,7 +34,6 @@ console.log(env);
         .join('\n') + '\n',
       { encoding: 'utf-8' },
     );
-    console.log('Done.');
   }
 
   function getPixiPerformScriptFiles() {
@@ -65,8 +61,8 @@ export default defineConfig({
     react(),
     loadVersion(),
     Info(),
-    // @ts-ignore
-    // visualizer()],
+    // visualizer(),
+  ],
   resolve: {
     alias: {
       '@': resolve('src'),
