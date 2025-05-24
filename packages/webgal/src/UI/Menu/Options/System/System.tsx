@@ -19,7 +19,6 @@ import useSoundEffect from '@/hooks/useSoundEffect';
 import savesReducer, { ISavesData, saveActions } from '@/store/savesReducer';
 import { dumpFastSaveToStorage, dumpSavesToStorage } from '@/Core/controller/storage/savesController';
 import { OptionSlider } from '@/UI/Menu/Options/OptionSlider';
-import { Info } from '@icon-park/react';
 
 interface IExportGameData {
   userData: IUserData;
@@ -190,7 +189,7 @@ export function System() {
             />
           </NormalOption>
           <div className={styles.About_title_text} onClick={toggleAbout}>
-            <Info theme="outline" size="32" fill="#227D515F" />
+            <span className={styles.About_text}>{t('about.title')}</span>
           </div>
         </>
       )}
