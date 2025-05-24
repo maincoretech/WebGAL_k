@@ -23,12 +23,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: npm
+          cache: pnpm
           cache-dependency-path: "package.json"
 
-      - name: install example dependencies
-        run: |
-          npm install --no-package-lock
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-24.04'
@@ -38,7 +38,8 @@ jobs:
 
       - name: Vite Build
         run: |
-          npm run build
+          pnpm install --frozen-lockfile=false
+          pnpm run build
 
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
