@@ -1,10 +1,8 @@
-name: "release"
+name: "publish_mobile"
 
 on:
   workflow_dispatch:
   push:
-    tags:
-      - "v*"
 
 jobs:
   publish-tauri:
@@ -62,7 +60,6 @@ jobs:
         env:
           NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
         run: |
-          cd ./.github/fixtures/example-with-tauri-v2
           bun tauri android init
 
       - name: setup Android signing
