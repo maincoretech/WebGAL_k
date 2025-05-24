@@ -19,16 +19,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: setup node
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
           cache: pnpm
           cache-dependency-path: "package.json"
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-24.04'
