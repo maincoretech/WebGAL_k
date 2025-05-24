@@ -35,12 +35,12 @@ export default function Translation() {
           case 'ja':
             setLang(language.jp);
             break;
-          case 'fr':
-            setLang(language.fr);
-            break;
-          case 'de':
-            setLang(language.de);
-            break;
+          // case 'fr':
+          //   setLang(language.fr);
+          //   break;
+          // case 'de':
+          //   setLang(language.de);
+          //   break;
           default:
             setLang(language.zhCn);
             break;
