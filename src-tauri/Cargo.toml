@@ -23,7 +23,6 @@ serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "2.5.1", features = ["macos-private-api"] }
 tauri-plugin-process = "2.2.1"
 tauri-plugin-persisted-scope = "2.2.1"
-tauri-plugin-window-state = "2.2.2"
 tauri-plugin-fs = "2.2.1"
 
 [profile.dev]
@@ -35,3 +34,6 @@ lto = true
 opt-level = "z"
 panic = "abort"
 strip = true
+
+[target.'cfg(any(target_os = "macos", windows, target_os = "linux"))'.dependencies]
+tauri-plugin-window-state = "2.2.2"
