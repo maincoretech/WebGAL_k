@@ -1,4 +1,4 @@
-name: "publish_mobile"
+name: "mobile"
 
 on:
   workflow_dispatch:
