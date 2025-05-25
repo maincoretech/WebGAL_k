@@ -19,17 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - name: setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: pnpm
-          cache-dependency-path: "package.json"
-
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-24.04'
         run: |
@@ -43,8 +32,6 @@ jobs:
         run: |
           bun i
           bun run build
-          pnpm install -r
-          pnpm install -r --lockfile-only
 
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
@@ -73,7 +60,7 @@ jobs:
         env:
           NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
         run: |
-          pnpm tauri android init
+          bun tauri android init
 
       - name: setup Android signing
         run: |
@@ -83,7 +70,7 @@ jobs:
           base64 -d <<< "${{ secrets.ANDROID_KEY_BASE64 }}" > $RUNNER_TEMP/keystore.jks
           echo "storeFile=$RUNNER_TEMP/keystore.jks" >> keystore.properties
 
-      - uses: tauri-apps/tauri-action@mobile
+      - uses: shiftz300/tauri-action@mobile
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
