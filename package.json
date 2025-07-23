@@ -2,7 +2,7 @@
   "name": "@webgal/base",
   "version": "4.5",
   "author": "Mahiru <Mahiru_@outlook.com>",
-  "repository": "https://github.com/MakinoharaShoko/WebGAL.git",
+  "repository": "https://github.com/OpenWebGAL/WebGAL.git",
   "dependencies": {
     "@tauri-apps/api": "^2.5.0",
     "@tauri-apps/cli": "^2.5.0",

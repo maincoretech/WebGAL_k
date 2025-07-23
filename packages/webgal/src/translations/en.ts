@@ -162,6 +162,7 @@ const en = {
     exit: {
       title: 'EXIT',
       subtitle: '',
+      tips: 'Are you sure you want to exit?',
     },
   },
 

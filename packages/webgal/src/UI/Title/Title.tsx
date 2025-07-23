@@ -14,7 +14,7 @@ import useApplyStyle from '@/hooks/useApplyStyle';
 import { fullScreenOption } from '@/store/userDataInterface';
 import { keyboard } from '@/hooks/useHotkey';
 import useConfigData from '@/hooks/useConfigData';
-import { showGlogalDialog } from '@/UI/GlobalDialog/GlobalDialog';
+import { showGlogalDialog } from '../GlobalDialog/GlobalDialog';
 // import { Windows } from '@icon-park/react';
 import { exit } from '@tauri-apps/plugin-process';
 
@@ -30,6 +30,7 @@ const Title: FC = () => {
   const background = GUIState.titleBg;
   const showBackground = background === '' ? 'rgba(0,0,0,1)' : `url("${background}")`;
   const t = useTrans('title.');
+  const tCommon = useTrans('common.');
   const { playSeEnter, playSeClick } = useSoundEffect();
 
   const appreciationItems = useSelector((state: RootState) => state.userData.appreciationData);
