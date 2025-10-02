@@ -15,7 +15,7 @@
     },
     "packages/parser": {
       "name": "webgal-parser",
-      "version": "4.5.12",
+      "version": "4.5.13",
       "dependencies": {
         "chevrotain": "^10.5.0",
         "cloudlogjs": "^1.0.11",
@@ -54,7 +54,7 @@
     },
     "packages/webgal": {
       "name": "webgal-engine",
-      "version": "4.5.13",
+      "version": "4.5.15-1",
       "dependencies": {
         "@emotion/css": "^11.11.2",
         "@reduxjs/toolkit": "^1.8.1",
@@ -68,7 +68,7 @@
         "mitt": "^3.0.0",
         "modern-css-reset": "^1.4.0",
         "pixi-filters": "^4.2.0",
-        "pixi-live2d-display-webgal": "^0.5.8",
+        "pixi-live2d-display-webgal": "^0.5.12",
         "pixi.js": "^6.3.0",
         "popmotion": "^11.0.5",
         "postcss": "^8.5.3",
@@ -102,6 +102,7 @@
         "typescript": "^5.8.3",
         "unplugin-info": "^1.2.2",
         "vite": "^4.5.5",
+        "vite-plugin-compression": "^0.5.1",
       },
     },
   },
@@ -1458,7 +1459,7 @@
 
     "pixi-filters": ["pixi-filters@4.2.0", "", { "dependencies": { "@pixi/filter-adjustment": "4.2.0", "@pixi/filter-advanced-bloom": "4.2.0", "@pixi/filter-ascii": "4.2.0", "@pixi/filter-bevel": "4.2.0", "@pixi/filter-bloom": "4.2.0", "@pixi/filter-bulge-pinch": "4.2.0", "@pixi/filter-color-map": "4.2.0", "@pixi/filter-color-overlay": "4.2.0", "@pixi/filter-color-replace": "4.2.0", "@pixi/filter-convolution": "4.2.0", "@pixi/filter-cross-hatch": "4.2.0", "@pixi/filter-crt": "4.2.0", "@pixi/filter-dot": "4.2.0", "@pixi/filter-drop-shadow": "4.2.0", "@pixi/filter-emboss": "4.2.0", "@pixi/filter-glitch": "4.2.0", "@pixi/filter-glow": "4.2.0", "@pixi/filter-godray": "4.2.0", "@pixi/filter-kawase-blur": "4.2.0", "@pixi/filter-motion-blur": "4.2.0", "@pixi/filter-multi-color-replace": "4.2.0", "@pixi/filter-old-film": "4.2.0", "@pixi/filter-outline": "4.2.0", "@pixi/filter-pixelate": "4.2.0", "@pixi/filter-radial-blur": "4.2.0", "@pixi/filter-reflection": "4.2.0", "@pixi/filter-rgb-split": "4.2.0", "@pixi/filter-shockwave": "4.2.0", "@pixi/filter-simple-lightmap": "4.2.0", "@pixi/filter-tilt-shift": "4.2.0", "@pixi/filter-twist": "4.2.0", "@pixi/filter-zoom-blur": "4.2.0" } }, "sha512-1ImDMPblvy/nafKbl+kACXqWcQY8jixq6ZID1jwcQW5wAEhuKmTtsLv4KU1Ui2qxj8Gor6/WUe3UaqfSR0OYpw=="],
 
-    "pixi-live2d-display-webgal": ["pixi-live2d-display-webgal@0.5.8", "", { "dependencies": { "gh-pages": "^4.0.0" }, "peerDependencies": { "@pixi/core": "^6", "@pixi/display": "^6", "@pixi/loaders": "^6", "@pixi/math": "^6", "@pixi/sprite": "^6", "@pixi/utils": "^6" } }, "sha512-yekmPckXykqziyFcmmgYlZU4ad42rRGGmUFvrm96YJrdRIi+V9uv/xKOrRBMxD/tr3Sckqp6hOr9Wi3UX6NNLw=="],
+    "pixi-live2d-display-webgal": ["pixi-live2d-display-webgal@0.5.12", "", { "dependencies": { "gh-pages": "^4.0.0" }, "peerDependencies": { "@pixi/core": "^6", "@pixi/display": "^6", "@pixi/loaders": "^6", "@pixi/math": "^6", "@pixi/sprite": "^6", "@pixi/utils": "^6" } }, "sha512-93UDIM8ducia8zIgVtidqxlDamxlwEK4+ddUnl/8XcEKBinbr2Qlu0bBN9i1f4c5rzX5OPgEKc0DhjlDa7fJVg=="],
 
     "pixi.js": ["pixi.js@6.5.10", "", { "dependencies": { "@pixi/accessibility": "6.5.10", "@pixi/app": "6.5.10", "@pixi/compressed-textures": "6.5.10", "@pixi/constants": "6.5.10", "@pixi/core": "6.5.10", "@pixi/display": "6.5.10", "@pixi/extensions": "6.5.10", "@pixi/extract": "6.5.10", "@pixi/filter-alpha": "6.5.10", "@pixi/filter-blur": "6.5.10", "@pixi/filter-color-matrix": "6.5.10", "@pixi/filter-displacement": "6.5.10", "@pixi/filter-fxaa": "6.5.10", "@pixi/filter-noise": "6.5.10", "@pixi/graphics": "6.5.10", "@pixi/interaction": "6.5.10", "@pixi/loaders": "6.5.10", "@pixi/math": "6.5.10", "@pixi/mesh": "6.5.10", "@pixi/mesh-extras": "6.5.10", "@pixi/mixin-cache-as-bitmap": "6.5.10", "@pixi/mixin-get-child-by-name": "6.5.10", "@pixi/mixin-get-global-position": "6.5.10", "@pixi/particle-container": "6.5.10", "@pixi/polyfill": "6.5.10", "@pixi/prepare": "6.5.10", "@pixi/runner": "6.5.10", "@pixi/settings": "6.5.10", "@pixi/sprite": "6.5.10", "@pixi/sprite-animated": "6.5.10", "@pixi/sprite-tiling": "6.5.10", "@pixi/spritesheet": "6.5.10", "@pixi/text": "6.5.10", "@pixi/text-bitmap": "6.5.10", "@pixi/ticker": "6.5.10", "@pixi/utils": "6.5.10" } }, "sha512-Z2mjeoISml2iuVwT1e/BQwERYM2yKoiR08ZdGrg8y5JjeuVptfTrve4DbPMRN/kEDodesgQZGV/pFv0fE9Q2SA=="],
 
@@ -1888,6 +1889,8 @@
 
     "vite-node": ["vite-node@0.28.5", "", { "dependencies": { "cac": "^6.7.14", "debug": "^4.3.4", "mlly": "^1.1.0", "pathe": "^1.1.0", "picocolors": "^1.0.0", "source-map": "^0.6.1", "source-map-support": "^0.5.21", "vite": "^3.0.0 || ^4.0.0" }, "bin": { "vite-node": "vite-node.mjs" } }, "sha512-LmXb9saMGlrMZbXTvOveJKwMTBTNUH66c8rJnQ0ZPNX+myPEol64+szRzXtV5ORb0Hb/91yq+/D3oERoyAt6LA=="],
 
+    "vite-plugin-compression": ["vite-plugin-compression@0.5.1", "", { "dependencies": { "chalk": "^4.1.2", "debug": "^4.3.3", "fs-extra": "^10.0.0" }, "peerDependencies": { "vite": ">=2.0.0" } }, "sha512-5QJKBDc+gNYVqL/skgFAP81Yuzo9R+EAf19d+EtsMF/i8kFUpNi3J/H01QD3Oo8zBQn+NzoCIFkpPLynoOzaJg=="],
+
     "vite-plugin-package-version": ["vite-plugin-package-version@1.1.0", "", { "peerDependencies": { "vite": ">=2.0.0-beta.69" } }, "sha512-TPoFZXNanzcaKCIrC3e2L/TVRkkRLB6l4RPN/S7KbG7rWfyLcCEGsnXvxn6qR7fyZwXalnnSN/I9d6pSFjHpEA=="],
 
     "vitest": ["vitest@0.28.5", "", { "dependencies": { "@types/chai": "^4.3.4", "@types/chai-subset": "^1.3.3", "@types/node": "*", "@vitest/expect": "0.28.5", "@vitest/runner": "0.28.5", "@vitest/spy": "0.28.5", "@vitest/utils": "0.28.5", "acorn": "^8.8.1", "acorn-walk": "^8.2.0", "cac": "^6.7.14", "chai": "^4.3.7", "debug": "^4.3.4", "local-pkg": "^0.4.2", "pathe": "^1.1.0", "picocolors": "^1.0.0", "source-map": "^0.6.1", "std-env": "^3.3.1", "strip-literal": "^1.0.0", "tinybench": "^2.3.1", "tinypool": "^0.3.1", "tinyspy": "^1.0.2", "vite": "^3.0.0 || ^4.0.0", "vite-node": "0.28.5", "why-is-node-running": "^2.2.2" }, "peerDependencies": { "@edge-runtime/vm": "*", "@vitest/browser": "*", "@vitest/ui": "*", "happy-dom": "*", "jsdom": "*" }, "optionalPeers": ["@edge-runtime/vm", "@vitest/browser", "@vitest/ui", "happy-dom", "jsdom"], "bin": { "vitest": "vitest.mjs" } }, "sha512-pyCQ+wcAOX7mKMcBNkzDwEHRGqQvHUl0XnoHR+3Pb1hytAHISgSxv9h0gUiSiYtISXUU3rMrKiKzFYDrI6ZIHA=="],
@@ -2162,6 +2165,10 @@
 
     "vite-node/source-map": ["source-map@0.6.1", "", {}, "sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g=="],
 
+    "vite-plugin-compression/debug": ["debug@4.4.0", "", { "dependencies": { "ms": "^2.1.3" } }, "sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA=="],
+
+    "vite-plugin-compression/fs-extra": ["fs-extra@10.1.0", "", { "dependencies": { "graceful-fs": "^4.2.0", "jsonfile": "^6.0.1", "universalify": "^2.0.0" } }, "sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ=="],
+
     "vitest/@types/node": ["@types/node@18.19.87", "", { "dependencies": { "undici-types": "~5.26.4" } }, "sha512-OIAAu6ypnVZHmsHCeJ+7CCSub38QNBS9uceMQeg7K5Ur0Jr+wG9wEOEvvMbhp09pxD5czIUy/jND7s7Tb6Nw7A=="],
 
     "vitest/debug": ["debug@4.4.0", "", { "dependencies": { "ms": "^2.1.3" } }, "sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA=="],
@@ -2269,6 +2276,8 @@
     "string-width/strip-ansi/ansi-regex": ["ansi-regex@6.1.0", "", {}, "sha512-7HSX4QQb4CspciLpVFwyRe79O3xsIZDDLER21kERQ71oaPodF8jL725AgJMFAYbooIqolJoRLuM81SpeUkpkvA=="],
 
     "vite-node/debug/ms": ["ms@2.1.3", "", {}, "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA=="],
+
+    "vite-plugin-compression/debug/ms": ["ms@2.1.3", "", {}, "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA=="],
 
     "vitest/debug/ms": ["ms@2.1.3", "", {}, "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA=="],
 

@@ -4,8 +4,8 @@ intro:*Getting started| The image materials used in this demo game are AI-genera
 intro:*Credit| Created By ondoku3.com;
 changeBg:tmp-bg.webp -next;
 unlockCg:tmp-bg.webp -name=良い夜;
-changeFigure:stand.png -left -enter=enter-from-left -next;
-miniAvatar:miniavatar.png;
+changeFigure:stand.webp -left -enter=enter-from-left -next;
+miniAvatar:miniavatar.webp;
 WebGAL:Hello -e001_Hello.mp3;
 Welcome to WebGAL! -e002_Welcome_to_WebGAL.mp3;
 WebGAL is a completely new web visual engine never seen before. -e003_WebGAL_is_a_completely_new_web.mp3;

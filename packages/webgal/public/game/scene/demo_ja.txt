@@ -4,8 +4,8 @@ intro:■初めに| このデモゲームで使用している画像素材は、
 intro:■クレジット| 「VOICEVOX:小夜/SAYO」;
 changeBg:tmp-bg.webp -next;
 unlockCg:tmp-bg.webp -name=良い夜; // CGのロックを解いて、名前をつけます。
-changeFigure:stand.png -left -enter=enter-from-left -next;
-miniAvatar:miniavatar.png;
+changeFigure:stand.webp -left -enter=enter-from-left -next;
+miniAvatar:miniavatar.webp;
 WebGAL:こんにちは。 -001_小夜SAYO（ノーマル）_こんにちは。.wav;
 WebGALへようこそ！ -002_小夜SAYO（ノーマル）_ウェブギャルへよう….wav;
 WebGALは、かつてないまったく新しいビジュアルノベルエンジンです。 -003_小夜SAYO（ノーマル）_ウェブギャルは、か….wav;
