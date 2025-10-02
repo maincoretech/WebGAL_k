@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 @import 'Core/util/constants';
+@import 'Core/util/constants';
 
 /*@font-face {
   font-family: "思源宋体";
@@ -74,9 +75,11 @@
   0% {
     text-shadow: 0 0 0px #000;
   }
+
   50% {
     text-shadow: 0 0 36px #fff;
   }
+
   100% {
     text-shadow: 0 0 0px #000;
   }
@@ -123,8 +126,6 @@ code {
   width: $screenWidth;
   height: $screenHeight;
   overflow: hidden;
-  /*position: absolute;*/
-  /*top: 0;*/
   font-size: 160%;
 }
 
@@ -178,10 +179,12 @@ code {
     //background: #fff;
     //border-radius: 20px;
   }
+
   #enter-buttom:hover {
     background-size: 100% 20px;
     background-position: left bottom;
   }
+
   #enter-buttom:active {
     //background-size: 0 20px;
     font-size: 270%;
@@ -196,6 +199,7 @@ code {
     flex-flow: column;
     align-items: center;
     font-size: 200%;
+
     div {
       padding: 0 0 0.25em 0;
       color: #fff;
@@ -224,57 +228,6 @@ code {
   -webkit-box-shadow: 0 0 10px #00000026;
 }
 
-#ebg {
-  height: 100vh;
-  width: 100vw;
-  filter: blur(30px) brightness(0.5) grayscale(0.5);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-}
-
-/* ::-webkit-scrollbar-thumb:window-inactive {
-    background:rgba(255,0,0,0.4);
-} */
-
-/*@media screen and (orientation: portrait) {*/
-/*    !*竖屏 css*!*/
-/*    #root {*/
-/*        !*transform-origin: calc(100vw / 2) calc(100vw / 2);*!*/
-/*        transform: rotate(90deg);*/
-/*        width: 1600px;*/
-/*        height: 900px;*/
-/*        overflow: hidden;*/
-/*    }*/
-/*}*/
-
-/*@media screen and (orientation: landscape) {*/
-/*    !*横屏 css*!*/
-/*    #root {*/
-/*        width: 1600px;*/
-/*        height: 900px;*/
-/*        overflow: hidden;*/
-/*    }*/
-/*}*/
-
-/*@media screen and (max-width: 1100px) {*/
-/*    !*手机端视图*!*/
-/*    #root {*/
-/*        font-size: 50%;*/
-/*    }*/
-/*}*/
-
-/*@media screen and (max-height: 650px) {*/
-/*    !*手机端视图*!*/
-/*    #root {*/
-/*        font-size: 50%;*/
-/*    }*/
-/*}*/
-
 .App {
   height: 100%;
   width: 100%;
@@ -284,14 +237,6 @@ code {
   -webkit-overflow-scrolling: auto;
 }
 
-* {
-  /*-webkit-overflow-scrolling: auto;*/
-}
-
 #pixiCanvas {
   z-index: 5;
-}
-
-#root {
-  /*will-change: transform;*/
 }

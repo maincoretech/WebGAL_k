@@ -1,28 +1,21 @@
-import { FC, useEffect } from 'react';
-import styles from './title.module.scss';
-import { playBgm } from '@/Core/controller/stage/playBgm';
-import { continueGame, startGame } from '@/Core/controller/gamePlay/startContinueGame';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, webgalStore } from '@/store/store';
+import { RootState } from '@/store/store';
+import { fullScreenOption } from '@/store/userDataInterface';
 import { setMenuPanelTag, setVisibility } from '@/store/GUIReducer';
 import { MenuPanelTag } from '@/store/guiInterface';
 import useTrans from '@/hooks/useTrans';
-// import { resize } from '@/Core/util/resize';
-import { hasFastSaveRecord, loadFastSaveGame } from '@/Core/controller/storage/fastSaveLoad';
 import useSoundEffect from '@/hooks/useSoundEffect';
 import useApplyStyle from '@/hooks/useApplyStyle';
-import { fullScreenOption } from '@/store/userDataInterface';
 import { keyboard } from '@/hooks/useHotkey';
 import useConfigData from '@/hooks/useConfigData';
+import { playBgm } from '@/Core/controller/stage/playBgm';
+import { continueGame, startGame } from '@/Core/controller/gamePlay/startContinueGame';
 import { showGlogalDialog } from '../GlobalDialog/GlobalDialog';
-// import { Windows } from '@icon-park/react';
+import styles from './title.module.scss';
 import { exit } from '@tauri-apps/plugin-process';
 
-/**
- * 标题页
- * @constructor
- */
-const Title: FC = () => {
+/** 标题页 */
+export default function Title() {
   const userDataState = useSelector((state: RootState) => state.userData);
   const GUIState = useSelector((state: RootState) => state.GUI);
   const dispatch = useDispatch();
@@ -42,7 +35,7 @@ const Title: FC = () => {
     <>
       {GUIState.showTitle && <div className={applyStyle('Title_backup_background', styles.Title_backup_background)} />}
       <div
-        id="enter_game_target"
+        className="title__enter-game-target"
         onClick={() => {
           playBgm(GUIState.titleBgm);
           dispatch(setVisibility({ component: 'isEnterGame', visibility: true }));
@@ -130,12 +123,10 @@ const Title: FC = () => {
                   leftText: t('$common.yes'),
                   rightText: t('$common.no'),
                   leftFunc: () => {
-                    // dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
                     exit(0);
                   },
                   rightFunc: () => {},
                 });
-                // dispatch(setVisibility({ component: 'showExtra', visibility: true }));
               }}
               onMouseEnter={playSeEnter}
             >
@@ -146,6 +137,4 @@ const Title: FC = () => {
       )}
     </>
   );
-};
-
-export default Title;
+}
