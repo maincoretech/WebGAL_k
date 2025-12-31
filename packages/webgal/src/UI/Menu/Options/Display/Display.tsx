@@ -4,14 +4,13 @@ import { RootState } from '@/store/store';
 import { NormalOption } from '@/UI/Menu/Options/NormalOption';
 import { NormalButton } from '@/UI/Menu/Options/NormalButton';
 import { setOptionData } from '@/store/userDataReducer';
-import { fullScreenOption, playSpeed, textFont, textSize } from '@/store/userDataInterface';
+import { fullScreenOption, textSize } from '@/store/userDataInterface';
 import { setStorage } from '@/Core/controller/storage/storageController';
 import { TextPreview } from '@/UI/Menu/Options/TextPreview/TextPreview';
 import useTrans from '@/hooks/useTrans';
-import { RootState } from '@/store/store';
-import { textSize } from '@/store/userDataInterface';
-import { setOptionData } from '@/store/userDataReducer';
-import { useDispatch, useSelector } from 'react-redux';
+// import { textSize } from '@/store/userDataInterface';
+// import { setOptionData } from '@/store/userDataReducer';
+// import { useDispatch, useSelector } from 'react-redux';
 import { OptionSlider } from '../OptionSlider';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
@@ -19,7 +18,7 @@ export function Display() {
   const userDataState = useSelector((state: RootState) => state.userData);
   const dispatch = useDispatch();
   const t = useTrans('menu.options.pages.display.options.');
-  const { isSupported: isFullscreenSupported, enter: enterFullscreen, exit: exitFullscreen } = useFullScreen();
+  /* const { isSupported: isFullscreenSupported, enter: enterFullscreen, exit: exitFullscreen } = useFullScreen();
   const fontOptions = useSelector((state: RootState) => state.GUI.fontOptions);
   const fontOptionTexts = fontOptions.map((option) => {
     if (option.labelKey) return t(option.labelKey);
@@ -28,7 +27,7 @@ export function Display() {
   });
   const currentFontIndex = fontOptions.length
     ? Math.min(userDataState.optionData.textboxFont, fontOptions.length - 1)
-    : 0;
+    : 0; */
 
   return (
     <div className={styles.Options_main_content_half}>
@@ -70,16 +69,18 @@ export function Display() {
           currentChecked={userDataState.optionData.textSize}
         />
       </NormalOption>
-      {/*<NormalOption key="textFont" title={t('textFont.title')}>
-        <NormalButton
-          textList={fontOptionTexts}
-          functionList={fontOptions.map((_, index) => () => {
-            dispatch(setOptionData({ key: 'textboxFont', value: index }));
-            setStorage();
-          })}
-          currentChecked={currentFontIndex}
-        />
-      </NormalOption>*/}
+      {/*
+        <NormalOption key="textFont" title={t('textFont.title')}>
+          <NormalButton
+            textList={fontOptionTexts}
+            functionList={fontOptions.map((_, index) => () => {
+              dispatch(setOptionData({ key: 'textboxFont', value: index }));
+              setStorage();
+            })}
+            currentChecked={currentFontIndex}
+          />
+        </NormalOption>
+      */}
       <NormalOption key="textSpeed" title={t('textSpeed.title')}>
         <OptionSlider
           initValue={userDataState.optionData.textSpeed}
