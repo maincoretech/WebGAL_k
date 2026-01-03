@@ -17,6 +17,11 @@ console.log(env);
 
 export default defineConfig({
   css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: ['legacy-js-api'],
+      },
+    },
     postcss: {
       plugins: [postcssPresetEnv(), cssnano()],
     },

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import 'Core/util/constants';
+@use 'Core/util/constants' as *;
 
 /*@font-face {
   font-family: "思源宋体";
