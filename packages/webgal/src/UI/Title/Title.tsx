@@ -26,11 +26,12 @@ export default function Title() {
   const tCommon = useTrans('common.');
   const { playSeEnter, playSeClick } = useSoundEffect();
 
+  const applyStyle = useApplyStyle('title');
+  useConfigData(); // 监听基础ConfigData变化
+
   const appreciationItems = useSelector((state: RootState) => state.userData.appreciationData);
   const hasAppreciationItems = appreciationItems.bgm.length > 0 || appreciationItems.cg.length > 0;
 
-  const applyStyle = useApplyStyle('UI/Title/title.scss');
-  useConfigData(); // 监听基础ConfigData变化
   return (
     <>
       {GUIState.showTitle && <div className={applyStyle('Title_backup_background', styles.Title_backup_background)} />}
