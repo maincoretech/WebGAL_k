@@ -148,27 +148,27 @@ const jp = {
 
   title: {
     start: {
-      title: 'START',
+      title: '最初から',
       subtitle: '',
     },
     continue: {
-      title: 'CONTINUE',
+      title: '続きから',
       subtitle: '',
     },
     options: {
-      title: 'OPTIONS',
+      title: 'システム設定',
       subtitle: '',
     },
     load: {
-      title: 'LOAD',
+      title: 'ロード',
       subtitle: '',
     },
     extra: {
-      title: 'EXTRA',
+      title: 'ギャラリー',
       subtitle: '',
     },
     exit: {
-      title: 'EXIT',
+      title: 'ゲーム終了',
       subtitle: '',
     },
   },
@@ -196,7 +196,7 @@ const jp = {
   },
 
   extra: {
-    title: 'EXTRA',
+    title: 'ギャラリー',
   },
 };
 

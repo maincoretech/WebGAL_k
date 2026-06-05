@@ -70,6 +70,8 @@ export function ExtraBgm() {
   return (
     <div className={styles.bgmContainer} style={{ maxHeight: bgmPlayerHeight }}>
       <div className={styles.bgmPlayerMain}>
+        {/* Previous, Play, Next, Stop buttons */}
+        {/* 上一曲 */}
         <div
           onClick={() => {
             playSeClick();
@@ -85,6 +87,7 @@ export function ExtraBgm() {
           <i className="bi bi-rewind" />
           {/* <GoStart theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
+        {/* 播放 */}
         <div
           onClick={() => {
             playSeClick();
@@ -97,6 +100,7 @@ export function ExtraBgm() {
           <i className="bi bi-play" />
           {/* <PlayOne theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
+        {/* 下一曲 */}
         <div
           onClick={() => {
             playSeClick();
@@ -112,6 +116,7 @@ export function ExtraBgm() {
           <i className="bi bi-fast-forward" />
           {/* <GoEnd theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
+        {/* 停止 */}
         <div
           onClick={() => {
             playSeClick();
@@ -124,6 +129,7 @@ export function ExtraBgm() {
           <i className="bi bi-stop" />
           {/* <SquareSmall theme="filled" fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
+        {/* BGM 名称 */}
         <div className={styles.bgmName}>{foundCurrentBgmName}</div>
         <div
           onClick={() => {

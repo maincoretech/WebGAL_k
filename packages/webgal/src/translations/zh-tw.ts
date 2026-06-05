@@ -152,27 +152,27 @@ const zhTw = {
 
   title: {
     start: {
-      title: 'START',
+      title: '新篇章',
       subtitle: '',
     },
     continue: {
-      title: 'CONTINUE',
+      title: '繼續進度',
       subtitle: '',
     },
     options: {
-      title: 'OPTIONS',
+      title: '系統選項',
       subtitle: '',
     },
     load: {
-      title: 'LOAD',
+      title: '載入存檔',
       subtitle: '',
     },
     extra: {
-      title: 'EXTRA',
+      title: '鑑賞模式',
       subtitle: '',
     },
     exit: {
-      title: 'EXIT',
+      title: '退出遊戲',
       subtitle: '',
     },
   },
@@ -201,7 +201,7 @@ const zhTw = {
   },
 
   extra: {
-    title: 'EXTRA',
+    title: '鑑賞模式',
   },
 };
 

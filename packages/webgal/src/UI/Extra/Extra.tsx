@@ -40,7 +40,9 @@ export function Extra() {
               }}
               onMouseEnter={playSeEnter}
             />
-            <div className={styles.extra_title}>{t('title')}</div>
+            <div className={styles.extra_title}>
+              {t('title')}
+            </div>
           </div>
           <div className={styles.mainContainer}>
             <ExtraCg />
