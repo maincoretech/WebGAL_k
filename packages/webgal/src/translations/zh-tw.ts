@@ -157,6 +157,7 @@ const zhTw = {
     },
     continue: {
       title: '繼續進度',
+      noSaving: '暫無存檔',
       subtitle: '',
     },
     options: {

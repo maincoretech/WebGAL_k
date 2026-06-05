@@ -157,6 +157,7 @@ const zhCn = {
     },
     continue: {
       title: '继续进度',
+      noSaving: '暂无存档',
       subtitle: '',
     },
     options: {

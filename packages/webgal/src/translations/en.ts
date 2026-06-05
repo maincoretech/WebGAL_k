@@ -1,5 +1,3 @@
-import { title } from 'process';
-
 const en = {
   // 通用
   common: {
@@ -152,6 +150,7 @@ const en = {
     },
     continue: {
       title: 'CONTINUE',
+      noSaving: 'No saving',
       subtitle: '',
     },
     options: {

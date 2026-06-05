@@ -153,6 +153,7 @@ const jp = {
     },
     continue: {
       title: '続きから',
+      noSaving: 'セーブデータなし',
       subtitle: '',
     },
     options: {

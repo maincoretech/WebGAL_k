@@ -8,9 +8,10 @@ import { nextSentence } from '@/Core/controller/gamePlay/nextSentence';
 import { setEbg } from '@/Core/gameScripts/changeBg/setEbg';
 import { restorePerform } from '@/Core/controller/storage/jumpFromBacklog';
 
-import { hasFastSaveRecord, loadFastSaveGame } from '@/Core/controller/storage/fastSaveLoad';
+import { getFastSaveRecord, hasFastSaveRecord, loadFastSaveGame } from '@/Core/controller/storage/fastSaveLoad';
 import { WebGAL } from '@/Core/WebGAL';
 import { stageStateManager } from '@/Core/Modules/stage/stageStateManager';
+import { generateCurrentStageData } from '../storage/saveGame';
 
 /**
  * 从头开始游戏
@@ -28,6 +29,20 @@ export const startGame = () => {
   });
   webgalStore.dispatch(setVisibility({ component: 'showTitle', visibility: false }));
 };
+
+export async function getContinueGameSaveData() {
+  if ((await hasFastSaveRecord()) && WebGAL.sceneManager.sceneData.currentSentenceId === 0) {
+    return await getFastSaveRecord();
+  }
+  if (
+    WebGAL.sceneManager.sceneData.currentSentenceId === 0 &&
+    WebGAL.sceneManager.sceneData.currentScene.sceneName === 'start.txt'
+  ) {
+    return null;
+  } else {
+    return generateCurrentStageData(-1, true);
+  }
+}
 
 export async function continueGame() {
   /**
