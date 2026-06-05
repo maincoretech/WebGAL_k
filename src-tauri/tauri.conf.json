@@ -1,7 +1,7 @@
 {
-  "productName": "webgal-k",
-  "version": "0.1.2",
-  "identifier": "moe.maincore.k",
+  "productName": "webgal-k-sli",
+  "version": "0.1.0",
+  "identifier": "cn.k43lab.webgalksli",
   "build": {
     "frontendDist": "../packages/webgal/dist",
     "devUrl": "http://localhost:3000",
@@ -11,7 +11,7 @@
   "app": {
     "windows": [
       {
-        "title": "webgal-k",
+        "title": "webgal-k_sli",
         "width": 800,
         "height": 450,
         "resizable": true,

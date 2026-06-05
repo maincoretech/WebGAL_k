@@ -51,7 +51,7 @@ const zhTw = {
               },
             },
             about: {
-              title: '關於 webgal-k',
+              title: '關於 WebGAL',
               subTitle: 'WebGAL 引擎的分支',
               version: '版本號',
               sourceK: '程式碼倉庫',
@@ -59,6 +59,13 @@ const zhTw = {
               // contributors: '貢獻者',
               website: '網站',
             },
+            skipAll: {
+              title: '快進模式',
+              options: {
+                read: '已讀',
+                all: '全部',
+              }
+            }
           },
         },
         display: {
@@ -90,9 +97,9 @@ const zhTw = {
             /* textFont: {
               title: '文字字體',
               options: {
+                resourceHanRounded: '資源圓體',
                 siYuanSimSun: '思源宋體',
                 SimHei: '黑體',
-                lxgw: '霞鶩文楷',
               },
             }, */
             textboxOpacity: {

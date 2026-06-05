@@ -51,14 +51,21 @@ const zhCn = {
               },
             },
             about: {
-              title: '关于 webgal-k',
-              subTitle: '一个 WebGAL 引擎的分支',
+              title: '关于 WebGAL',
+              subTitle: 'WebGAL 引擎的分支',
               version: '版本号',
               sourceK: '代码仓库',
               source: '源项目仓库',
               // contributors: '贡献者',
               website: '网站',
             },
+            skipAll: {
+              title: '快进模式',
+              options: {
+                read: '已读',
+                all: '全部',
+              }
+            }
           },
         },
         display: {
@@ -90,9 +97,9 @@ const zhCn = {
             /* textFont: {
               title: '文本字体',
               options: {
+                resourceHanRounded: '资源圆体',
                 siYuanSimSun: '思源宋体',
                 SimHei: '黑体',
-                lxgw: '霞鹜文楷',
               },
             }, */
             textboxOpacity: {

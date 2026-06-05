@@ -1,9 +1,9 @@
 {
-  "name": "webagl-k",
+  "name": "webagl-k-sli",
   "short_name": "webgal",
   "start_url": ".",
   "display": "fullscreen",
-  "description": "webgal-k",
+  "description": "webgal-k_sli",
   "dir": "auto",
   "orientation": "landscape",
   "icons": [

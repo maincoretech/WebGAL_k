@@ -10,5 +10,5 @@ pub fn run() {
     .plugin(tauri_plugin_persisted_scope::init())
     .plugin(tauri_plugin_process::init())
     .run(tauri::generate_context!())
-    .expect("error while running webgal-k");
+    .expect("error while running webgal-k_sli");
 }

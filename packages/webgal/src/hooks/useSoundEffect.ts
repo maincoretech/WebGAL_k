@@ -1,34 +1,30 @@
-import { setStage } from '@/store/stageReducer';
-
 import se_pageFlip from '@/assets/se/switch.webm';
 import se_switch from '@/assets/se/switch.webm';
 import se_mouseEnter from '@/assets/se/mouse-enter.webm';
 import se_dialog from '@/assets/se/click.webm';
 import se_click from '@/assets/se/click.webm';
-import { useDispatch } from 'react-redux';
-import { webgalStore } from '@/store/store';
+
+import { stageStateManager } from '@/Core/Modules/stage/stageStateManager';
 
 /**
  * 调用音效
  */
 const useSoundEffect = () => {
-  const dispatch = useDispatch();
-
   const playSeEnter = () => {
-    dispatch(setStage({ key: 'uiSe', value: se_mouseEnter }));
+    stageStateManager.setStageAndCommit('uiSe', se_mouseEnter);
   };
   const playSeClick = () => {
-    dispatch(setStage({ key: 'uiSe', value: se_click }));
+    stageStateManager.setStageAndCommit('uiSe', se_click);
   };
   const playSeSwitch = () => {
-    dispatch(setStage({ key: 'uiSe', value: se_switch }));
+    stageStateManager.setStageAndCommit('uiSe', se_switch);
   };
   const playSePageChange = () => {
-    dispatch(setStage({ key: 'uiSe', value: se_pageFlip }));
+    stageStateManager.setStageAndCommit('uiSe', se_pageFlip);
   };
 
   const playSeDialogOpen = () => {
-    dispatch(setStage({ key: 'uiSe', value: se_dialog }));
+    stageStateManager.setStageAndCommit('uiSe', se_dialog);
   };
 
   return {
@@ -45,10 +41,10 @@ const useSoundEffect = () => {
  */
 export const useSEByWebgalStore = () => {
   const playSeEnter = () => {
-    webgalStore.dispatch(setStage({ key: 'uiSe', value: se_mouseEnter }));
+    stageStateManager.setStageAndCommit('uiSe', se_mouseEnter);
   };
   const playSeClick = () => {
-    webgalStore.dispatch(setStage({ key: 'uiSe', value: se_click }));
+    stageStateManager.setStageAndCommit('uiSe', se_click);
   };
   return {
     playSeEnter, // 鼠标进入
