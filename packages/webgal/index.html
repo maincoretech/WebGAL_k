@@ -69,12 +69,12 @@
         position: absolute;
         top: 0;
         opacity: 0;
-        background: linear-gradient(
+        /* background: linear-gradient(
           165deg,
           rgba(255, 255, 255, 0.25) 0%,
-          rgba(255, 255, 255, 1) 50%,
+          rgb(255, 255, 255) 50%,
           rgba(255, 255, 255, 0.25) 100%
-        );
+        ); */
         transition: opacity 1s;
       }
 
@@ -148,11 +148,11 @@
       <div class="title-enter__white-background"></div>
       <div class="title-enter__container">
         <div class="title-enter-container__center-text">
-          <div>PRESS THE SCREEN TO START</div>
+          <div>PRESS TO START</div>
         </div>
-        <div class="title-enter-container__link-to-github">
+        <!-- <div class="title-enter-container__link-to-github">
           <div>Powered by <a> WebGAL </a> Framework</div>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- 紧急回避页挂载点 -->
@@ -445,7 +445,7 @@
           }, 500); // 500ms后开始降低落地页透明度
           if (!isIOS && titleEnter) {
             titleEnter.style.pointerEvents = 'none'; // 落地页不再响应点击
-            titleEnter.style.background = 'linear-gradient( #a1c4fd 0%, #c2e9fb 100%)'; // 改变标题渐变效果
+            // titleEnter.style.background = 'linear-gradient( #a1c4fd 0%, #c2e9fb 100%)'; // 改变标题渐变效果
           }
           setTimeout(() => {
             if (titleEnter) {
@@ -458,12 +458,12 @@
         if (titleEnter) {
           titleEnter.onclick = enter;
         }
-        const linkToGithub = document.querySelector('.title-enter-container__link-to-github');
-        const aTag = linkToGithub?.querySelector('a');
-        if (aTag) {
-          aTag.href = 'https://github.com/OpenWebGAL/WebGAL';
-          aTag.onclick = (event) => event.stopPropagation();
-        }
+        // const linkToGithub = document.querySelector('.title-enter-container__link-to-github');
+        // const aTag = linkToGithub?.querySelector('a');
+        // if (aTag) {
+        //   aTag.href = 'https://github.com/OpenWebGAL/WebGAL';
+        //   aTag.onclick = (event) => event.stopPropagation();
+        // }
       })();
     </script>
     <!-- 加载IIFE插件 -->

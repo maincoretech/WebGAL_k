@@ -65,6 +65,16 @@ export default function Title() {
           <div className={applyStyle('Title_buttonList', styles.Title_buttonList)}>
             <div
               className={applyStyle('Title_button', styles.Title_button)}
+              onClick={() => {
+                startGame();
+                playSeClick();
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('start.title')}</div>
+            </div>
+            <div
+              className={applyStyle('Title_button', styles.Title_button)}
               onClick={async () => {
                 playSeClick();
                 dispatch(setVisibility({ component: 'showTitle', visibility: false }));
@@ -73,16 +83,6 @@ export default function Title() {
               onMouseEnter={playSeEnter}
             >
               {renderButtonText(t('continue.title'))}
-            </div>
-            <div
-              className={applyStyle('Title_button', styles.Title_button)}
-              onClick={() => {
-                startGame();
-                playSeClick();
-              }}
-              onMouseEnter={playSeEnter}
-            >
-              <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('start.title')}</div>
             </div>
             <div
               className={applyStyle('Title_button', styles.Title_button)}

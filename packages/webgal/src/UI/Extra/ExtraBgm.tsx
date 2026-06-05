@@ -12,7 +12,7 @@ export function ExtraBgm() {
   // 检查当前正在播放的bgm是否在bgm列表内
   const currentBgmSrc = useSelector((state: RootState) => state.GUI.titleBgm);
   const extraState = useSelector((state: RootState) => state.userData.appreciationData);
-  const initName = 'Title_BGM';
+  const initName = 'No BGM';
   // 是否展示 bgm 列表
   const isShowBgmList = useValue(false);
   let foundCurrentBgmName = initName;
