@@ -50,7 +50,7 @@ export default function Title() {
       try {
         const data = await getContinueGameSaveData();
         setContinueData(data);
-        logger.debug('Continue data:', continueData);
+        logger.debug('继续游戏的存档数据:', continueData);
       } catch (error) {
         logger.error("获取游戏数据失败:", error);
       }
