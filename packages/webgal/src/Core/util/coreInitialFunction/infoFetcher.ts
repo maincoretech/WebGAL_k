@@ -72,8 +72,7 @@ export const infoFetcher = (url: string) => {
     });
 
     dispatch(setUserData({ key: 'gameConfigInit', value: gameConfigInit }));
-    // @ts-expect-error renderPromiseResolve is a global variable
-    window.renderPromiseResolve();
+    window.renderPromiseResolve?.();
     setStorage();
   });
 };

@@ -42,118 +42,12 @@
         opacity: 0;
       }
 
-      .html-body__title-enter {
-        width: 2560px;
-        height: 1440px;
-        overflow: hidden;
-        position: absolute;
-        top: 0;
-        z-index: 14;
-        opacity: 1;
-        transition: opacity 1.5s;
-      }
-
-      .title-enter__initial-background {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-        top: 0;
-        opacity: 1;
-        transition: opacity 1s;
-      }
-
-      .title-enter__white-background {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        opacity: 0;
-        /* background: linear-gradient(
-          165deg,
-          rgba(255, 255, 255, 0.25) 0%,
-          rgb(255, 255, 255) 50%,
-          rgba(255, 255, 255, 0.25) 100%
-        ); */
-        transition: opacity 1s;
-      }
-
-      .title-enter__container {
-        width: 100%;
-        position: absolute;
-        top: 0;
-        height: 100%;
-        opacity: 1;
-        font-size: 175%;
-        transition: opacity 1s;
-        z-index: 15;
-        font-family: '思源宋体', Georgia, serif;
-      }
-
-      .title-enter-container__center-text {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .title-enter-container__center-text > div {
-        letter-spacing: 0.25em;
-        padding: 2em 2em 2em 2em;
-        text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-        transition: text-shadow 1s;
-        font-size: 175%;
-        animation: title-enter-container__center-text--blink 4s infinite;
-      }
-
-      @keyframes title-enter-container__center-text--blink {
-        0% {
-          text-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
-        }
-        50% {
-          text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-        }
-        100% {
-          text-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
-        }
-      }
-
-      .title-enter-container__link-to-github {
-        position: absolute;
-        bottom: 1em;
-        color: #999;
-        font-size: 75%;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        flex-flow: column;
-        align-items: center;
-      }
-
-      .title-enter-container__link-to-github > div {
-        padding: 0 0 0.25em 0;
-      }
-
     </style>
   </head>
   <body>
     <!-- 背景模糊 -->
     <div id="ebg" class="html-body__effect-background">
       <div id="ebgOverlay" class="html-body__effect-background-overlay"></div>
-    </div>
-    <!-- 落地页 -->
-    <div class="html-body__title-enter">
-      <div class="title-enter__initial-background"></div>
-      <div class="title-enter__white-background"></div>
-      <div class="title-enter__container">
-        <div class="title-enter-container__center-text">
-          <div>PRESS TO START</div>
-        </div>
-        <!-- <div class="title-enter-container__link-to-github">
-          <div>Powered by <a> WebGAL </a> Framework</div>
-        </div> -->
-      </div>
     </div>
     <!-- 紧急回避页挂载点 -->
     <div id="html-body__panic-overlay"></div>
@@ -194,7 +88,6 @@
               hideEffectBackground: false,
             };
         const root = document.querySelector('#root');
-        const titleEnter = document.querySelector('.html-body__title-enter');
         const effectBackground = document.querySelector('.html-body__effect-background');
         let viewportMeta = document.querySelector('meta[name="viewport"]');
 
@@ -223,7 +116,7 @@
           let mw2os = targetHeight / 2 - layoutHeight / 2; // 竖屏时 x轴移动距离
           let transform = '';
           let effectBackgroundTransform = '';
-          const elements = [root, titleEnter];
+          const elements = [root];
           if (w > h) {
             if (effectBackground) {
               effectBackground.style.height = `100vh`;
@@ -384,17 +277,16 @@
           });
       })();
     </script>
-    <!-- 首屏加载 -->
+    <!-- 首屏加载：Promise 协调（enterPromise 由 Enter.tsx 组件 resolve，renderPromise 由 infoFetcher resolve） -->
     <script>
       (() => {
-        const isIOS = window.__WEBGAL_DEVICE_INFO__?.isIOS ?? false;
-        const enterConfig = isIOS
-          ? { skipAnimation: true, hideDelay: 0 }
-          : { skipAnimation: false, hideDelay: 2000 };
         let enterPromiseResolve;
         const enterPromise = new Promise((res) => {
           enterPromiseResolve = res;
         });
+        // 暴露给 Enter.tsx 组件调用
+        window.__enterPromiseResolve = enterPromiseResolve;
+
         const renderPromise = new Promise((res) => {
           window.renderPromiseResolve = () => {
             res();
@@ -413,57 +305,6 @@
             target.dispatchEvent(event);
           }
         });
-        /** 点击屏幕，进入引擎主界面 */
-        const enter = () => {
-          const titleEnter = document.querySelector('.html-body__title-enter');
-          if (enterConfig.skipAnimation) {
-            if (titleEnter) {
-              titleEnter.style.pointerEvents = 'none';
-              titleEnter.style.transition = 'none';
-              titleEnter.style.opacity = '0';
-              titleEnter.style.display = 'none';
-            }
-            enterPromiseResolve();
-            return;
-          }
-          const initialBackground = document.querySelector('.title-enter__initial-background');
-          if (initialBackground) {
-            initialBackground.style.opacity = '0';
-          }
-          const container = document.querySelector('.title-enter__container');
-          if (container) {
-            container.style.opacity = '0';
-          }
-          const whiteBackground = document.querySelector('.title-enter__white-background');
-          setTimeout(() => {
-            if (whiteBackground) {
-              whiteBackground.style.opacity = '1';
-            }
-          }, 50); // 在50ms后开始显示白色渐变
-          setTimeout(() => {
-            if (titleEnter) titleEnter.style.opacity = '0';
-          }, 500); // 500ms后开始降低落地页透明度
-          if (!isIOS && titleEnter) {
-            titleEnter.style.pointerEvents = 'none'; // 落地页不再响应点击
-            // titleEnter.style.background = 'linear-gradient( #a1c4fd 0%, #c2e9fb 100%)'; // 改变标题渐变效果
-          }
-          setTimeout(() => {
-            if (titleEnter) {
-              titleEnter.style.display = 'none';
-            }
-          }, enterConfig.hideDelay); // 将落地页设置为不显示
-          enterPromiseResolve();
-        };
-        const titleEnter = document.querySelector('.html-body__title-enter');
-        if (titleEnter) {
-          titleEnter.onclick = enter;
-        }
-        // const linkToGithub = document.querySelector('.title-enter-container__link-to-github');
-        // const aTag = linkToGithub?.querySelector('a');
-        // if (aTag) {
-        //   aTag.href = 'https://github.com/OpenWebGAL/WebGAL';
-        //   aTag.onclick = (event) => event.stopPropagation();
-        // }
       })();
     </script>
     <!-- 加载IIFE插件 -->
