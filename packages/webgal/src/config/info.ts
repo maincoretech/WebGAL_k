@@ -5,5 +5,5 @@ export const __INFO = {
   contributors: [
     // 现在改为跳转到 GitHub 了
   ],
-  mod: `K mod`,
+  mod: `K mod (Modified)`,
 };

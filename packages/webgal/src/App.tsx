@@ -7,6 +7,7 @@ import { BottomControlPanelFilm } from '@/UI/BottomControlPanel/BottomControlPan
 import { Backlog } from '@/UI/Backlog/Backlog';
 import Title from '@/UI/Title/Title';
 import Logo from '@/UI/Logo/Logo';
+import Enter from '@/UI/Enter/Enter';
 import { Extra } from '@/UI/Extra/Extra';
 import Menu from '@/UI/Menu/Menu';
 import GlobalDialog from '@/UI/GlobalDialog/GlobalDialog';
@@ -20,6 +21,7 @@ export default function App() {
   }, []);
   return (
     <div className="App">
+      <Enter />
       <Translation />
       <Stage />
       <BottomControlPanel />

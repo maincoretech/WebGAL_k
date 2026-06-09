@@ -22,7 +22,8 @@ export function initKey() {
  * 用于紧急回避时的数据存储 & 快速保存
  */
 export async function fastSaveGame() {
-  const saveData: ISaveData = generateCurrentStageData(-1, false);
+  // TODO: 需要同步 Tauri 的退出前事件，进行快速存档
+  const saveData: ISaveData = generateCurrentStageData(-1, true);
   const newSaveData = cloneDeep(saveData);
   webgalStore.dispatch(saveActions.setFastSave(newSaveData));
   await dumpFastSaveToStorage();
@@ -38,17 +39,26 @@ export async function hasFastSaveRecord() {
 }
 
 /**
+ * 获取紧急回避时的数据
+ */
+export async function getFastSaveRecord() {
+  await getFastSaveFromStorage();
+  return webgalStore.getState().saveData.quickSaveData;
+}
+
+/**
  * 加载紧急回避时的数据
  */
 export async function loadFastSaveGame() {
   // 获得存档文件
   // const loadFile: ISaveData | null = await localforage.getItem(fastSaveGameKey);
-  await getFastSaveFromStorage();
-  const loadFile: ISaveData | null = webgalStore.getState().saveData.quickSaveData;
-  if (!loadFile) {
+  // await getFastSaveFromStorage();
+  // const loadFile: ISaveData | null = webgalStore.getState().saveData.quickSaveData;
+  const data = await getFastSaveRecord();
+  if (!data) {
     return;
   }
-  loadGameFromStageData(loadFile);
+  loadGameFromStageData(data);
 }
 
 /**

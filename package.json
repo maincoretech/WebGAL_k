@@ -1,8 +1,9 @@
 {
   "name": "@webgal/base",
-  "version": "4.5",
-  "author": "Mahiru <Mahiru_@outlook.com>",
+  "version": "4.6.0",
+  "description": "A brand new web Visual Novel engine.",
   "repository": "https://github.com/OpenWebGAL/WebGAL.git",
+  "author": "Mahiru <Mahiru_@outlook.com>",
   "dependencies": {
     "@tauri-apps/api": "^2.5.0",
     "@tauri-apps/cli": "^2.5.0",
@@ -12,7 +13,6 @@
     "@types/parse-path": "^7.1.0",
     "bootstrap-icons": "^1.12.1"
   },
-  "description": "A brand new web Visual Novel engine.",
   "license": "MPL-2.0",
   "private": true,
   "scripts": {

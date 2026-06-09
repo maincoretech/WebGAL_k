@@ -2,181 +2,311 @@
 <html lang="zh-Hans">
   <head>
     <meta charset="UTF-8" />
-    <meta name="color-scheme" content="dark" />
-    <link rel="icon" type="image/x-icon" href="./icons/favicon.png" />
-    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
-    <link rel="manifest" href="./manifest.json" />
-    <!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
+    <link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
     <title>WebGAL</title>
-  </head>
-
-  <body>
-    <!--<div id="trans-overlay"><div id="trans-overlay-anime"></div></div>-->
-    <div id="Title_enter_page">
-      <!--    落地页背景-->
-      <div id="Title_bg_container"></div>
-      <!--    点击后的白色渐变-->
-      <!--<div
-        id="Title_white_container"
-        style="
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 0;
-          opacity: 0;
-          background: linear-gradient(165deg, #ffffff40 0%, #ffffff 50%, #ffffff40 100%);
-          transition: opacity 1s;
-        "
-      ></div>-->
-      <!--    落地页文字-->
-      <div id="Title_enter_text">
-        <div id="enter-buttom" onclick="enter()">TAP TO START</div>
-        <div id="footer">
-          <div>
-            Powered by
-            <a href="https://github.com/OpenWebGAL/WebGAL" target="_blank">WebGAL</a>
-            Framework
-          </div>
-          <!--<div>
-            Made with ❤ by
-            <a href="https://github.com/OpenWebGAL" onclick="jump(event, 'https://github.com/OpenWebGAL')"
-              >OpenWebGAL</a
-            >
-          </div>-->
-        </div>
-      </div>
-    </div>
-    <div id="panic-overlay"><!-- 紧急回避 --></div>
-    <div id="root"></div>
-    <div id="ebg"></div>
-
-    <script>
-      /**
-       * 在窗口大小改变时进行强制缩放
-       */
-      const ua = navigator.userAgent;
-      const isIOSDevice = !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-      function resize() {
-        const targetHeight = 1440;
-        const targetWidth = 2560;
-
-        const h = window.innerHeight; // 窗口高度
-        const w = window.innerWidth; // 窗口宽度
-        const zoomH = h / targetHeight; // 以窗口高度为基准的变换比
-        const zoomW = w / targetWidth; // 以窗口宽度为基准的变换比
-        const zoomH2 = w / targetHeight; // 竖屏时以窗口高度为基础的变换比
-        const zoomW2 = h / targetWidth; // 竖屏时以窗口宽度为基础的变换比
-        let mh = (targetHeight - h) / 2; // y轴移动距离
-        let mw = (targetWidth - w) / 2; // x轴移动距离
-        let mh2os = targetWidth / 2 - w / 2; // 竖屏时 y轴移动距离
-        let mw2os = targetHeight / 2 - h / 2; // 竖屏时 x轴移动距离
-        let transform = '';
-        let ebgTransform = '';
-        const root = document.getElementById('root'); // 获取根元素
-        const title = document.getElementById('Title_enter_page');
-        const ebg = document.getElementById('ebg');
-        const elements = [root, title];
-        if (w > h) {
-          const ebg = document.getElementById('ebg');
-          if (ebg) {
-            ebg.style.height = `100vh`;
-            ebg.style.width = `100vw`;
-            ebgTransform = '';
-          }
-          mw = -mw;
-          mh = -mh;
-          if (w * (9 / 16) >= h) {
-            transform = `translate(${mw}px, ${mh}px) scale(${zoomH},${zoomH})`;
-          }
-          if (w * (9 / 16) < h) {
-            transform = `translate(${mw}px, ${mh}px) scale(${zoomW},${zoomW})`;
-          }
-        } else {
-          /**
-           * 旋转
-           */
-          if (ebg) {
-            ebg.style.height = `${targetHeight}px`;
-            ebg.style.width = `${targetWidth}px`;
-          }
-          mw2os = -mw2os;
-          if (h * (9 / 16) >= w) {
-            ebgTransform = `rotate(90deg) translate(${mw2os}px, ${mh2os}px) scale(${zoomH2 * 1.75},${zoomH2 * 1.75})`;
-            transform = `rotate(90deg) translate(${mw2os}px, ${mh2os}px) scale(${zoomH2},${zoomH2})`;
-          }
-          if (h * (9 / 16) < w) {
-            ebgTransform = `rotate(90deg) translate(${mw2os}px, ${mh2os}px) scale(${zoomW2 * 1.75},${zoomW2 * 1.75})`;
-            transform = `rotate(90deg) translate(${mw2os}px, ${mh2os}px) scale(${zoomW2},${zoomW2})`;
-          }
-          /**
-           * iOS 不强制旋转
-           */
-          if (isIOSDevice) {
-            const zoomWi = w / targetWidth;
-            transform = `translate(${-mw}px, ${-mh}px) scale(${zoomWi},${zoomWi})`;
-          }
-        }
-        if (ebg) {
-          ebg.style.transform = ebgTransform;
-        }
-        for (const element of elements) {
-          if (element) {
-            element.style.transform = transform;
-          }
-        }
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: black;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
       }
 
-      if (!isIOSDevice) {
-        // 创建一个新的 meta 标签
-        const meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no';
-        // 将该标签添加到 head 中
-        document.getElementsByTagName('head')[0].appendChild(meta);
-        resize();
-        window.onload = resize;
-        window.onresize = resize;
-        // 监听键盘 F11 事件，全屏时触发页面调整
-        document.onkeydown = function (event) {
-          const e = event;
+      .html-body__effect-background {
+        height: 100vh;
+        width: 100vw;
+        filter: blur(50px);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: black;
+      }
+
+      .html-body__effect-background-overlay {
+        height: 100%;
+        width: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: black;
+        opacity: 0;
+      }
+
+    </style>
+  </head>
+  <body>
+    <!-- 背景模糊 -->
+    <div id="ebg" class="html-body__effect-background">
+      <div id="ebgOverlay" class="html-body__effect-background-overlay"></div>
+    </div>
+    <!-- 紧急回避页挂载点 -->
+    <div id="html-body__panic-overlay"></div>
+    <!-- 应用挂载点 -->
+    <div id="root"></div>
+    <script>
+      (() => {
+        const userAgent = navigator.userAgent || '';
+        const platform = navigator.userAgentData?.platform || navigator.platform || '';
+        const maxTouchPoints = navigator.maxTouchPoints || 0;
+        const isIOSPhone = /iPhone|iPod/i.test(userAgent);
+        const isIPad = /iPad/i.test(userAgent) || (/Mac/i.test(platform) && maxTouchPoints > 1);
+
+        window.__WEBGAL_DEVICE_INFO__ = {
+          isIOS: isIOSPhone || isIPad,
+          isIOSPhone,
+          isIPad,
+        };
+      })();
+    </script>
+    <!-- 在窗口大小改变时进行强制缩放 -->
+    <script>
+      (() => {
+        const deviceInfo = window.__WEBGAL_DEVICE_INFO__ ?? { isIOS: false };
+        const isIOS = deviceInfo.isIOS;
+        const layoutConfig = isIOS
+          ? {
+              bottomInset: 15,
+              resizeDelay: 500,
+              viewport:
+                'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover',
+              hideEffectBackground: true,
+            }
+          : {
+              bottomInset: 0,
+              resizeDelay: 0,
+              viewport: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no',
+              hideEffectBackground: false,
+            };
+        const root = document.querySelector('#root');
+        const effectBackground = document.querySelector('.html-body__effect-background');
+        let viewportMeta = document.querySelector('meta[name="viewport"]');
+
+        const ensureViewportMeta = () => {
+          if (!viewportMeta) {
+            viewportMeta = document.createElement('meta');
+            viewportMeta.name = 'viewport';
+            document.head.appendChild(viewportMeta);
+          }
+          return viewportMeta;
+        };
+
+        const resize = () => {
+          const targetHeight = 1440; // 目标高度
+          const targetWidth = 2560; // 目标宽度
+          const h = window.innerHeight; // 窗口高度
+          const w = window.innerWidth; // 窗口宽度
+          const layoutHeight = Math.max(h - layoutConfig.bottomInset, 1);
+          const zoomH = layoutHeight / targetHeight; // 以窗口高度为基准的变换比
+          const zoomW = w / targetWidth; // 以窗口宽度为基准的变换比
+          const zoomH2 = w / targetHeight; // 竖屏时以窗口高度为基础的变换比
+          const zoomW2 = layoutHeight / targetWidth; // 竖屏时以窗口宽度为基础的变换比
+          let mh = (targetHeight - layoutHeight) / 2; // y轴移动距离
+          let mw = (targetWidth - w) / 2; // x轴移动距离
+          let mh2os = targetWidth / 2 - w / 2; // 竖屏时 y轴移动距离
+          let mw2os = targetHeight / 2 - layoutHeight / 2; // 竖屏时 x轴移动距离
+          let transform = '';
+          let effectBackgroundTransform = '';
+          const elements = [root];
+          if (w > h) {
+            if (effectBackground) {
+              effectBackground.style.height = `100vh`;
+              effectBackground.style.width = `100vw`;
+              effectBackgroundTransform = '';
+            }
+            mw = -mw;
+            mh = -mh;
+            if (w * (9 / 16) >= h) {
+              transform = `translate(${mw}px, ${mh}px) ` + `scale(${zoomH}, ${zoomH}) `;
+            }
+            if (w * (9 / 16) < h) {
+              transform = `translate(${mw}px, ${mh}px) ` + `scale(${zoomW}, ${zoomW}) `;
+            }
+          } else {
+            // 旋转
+            if (effectBackground) {
+              effectBackground.style.height = `${targetHeight}px `;
+              effectBackground.style.width = `${targetWidth}px `;
+            }
+            mw2os = -mw2os;
+            if (h * (9 / 16) >= w) {
+              effectBackgroundTransform =
+                `rotate(90deg) ` + `translate(${mw2os}px, ${mh2os}px) ` + `scale(${zoomH2 * 1.75}, ${zoomH2 * 1.75}) `;
+              transform = `rotate(90deg) ` + `translate(${mw2os}px, ${mh2os}px) ` + `scale(${zoomH2},${zoomH2}) `;
+            }
+            if (h * (9 / 16) < w) {
+              effectBackgroundTransform =
+                `rotate(90deg) ` + ` translate(${mw2os}px, ${mh2os}px) ` + `scale(${zoomW2 * 1.75}, ${zoomW2 * 1.75}) `;
+              transform = `rotate(90deg) ` + `translate(${mw2os}px, ${mh2os}px) ` + `scale(${zoomW2},${zoomW2}) `;
+            }
+            // iOS 不强制旋转
+            if (isIOS) {
+              const zoomWi = w / targetWidth;
+              if (effectBackground) {
+                effectBackground.style.height = `100vh`;
+                effectBackground.style.width = `100vw`;
+                effectBackgroundTransform = '';
+              }
+              transform = `translate(${-mw}px, ${-mh}px) ` + `scale(${zoomWi},${zoomWi}) `;
+            }
+          }
+          if (effectBackground) {
+            effectBackground.style.transform = effectBackgroundTransform;
+          }
+          for (const element of elements) {
+            if (element) {
+              element.style.transform = transform;
+            }
+          }
+        };
+        let iosResizeTimer = null;
+        const scheduleResize = () => {
+          if (layoutConfig.resizeDelay > 0) {
+            if (iosResizeTimer) {
+              window.clearTimeout(iosResizeTimer);
+            }
+            iosResizeTimer = window.setTimeout(() => {
+              resize();
+              iosResizeTimer = null;
+            }, layoutConfig.resizeDelay);
+            return;
+          }
+          resize();
+        };
+        if (isIOS) {
+          const styleTag = document.createElement('style');
+          styleTag.textContent = `* { font-synthesis: none !important; }`;
+          if (layoutConfig.hideEffectBackground) {
+            styleTag.textContent += `
+              #ebg,
+              #ebgOverlay {
+                display: none !important;
+              }
+            `;
+          }
+          document.head.appendChild(styleTag);
+        }
+        ensureViewportMeta().content = layoutConfig.viewport;
+        scheduleResize();
+        window.onload = scheduleResize;
+        window.onresize = scheduleResize;
+        // 监听键盘 F11 键按下事件，全屏时触发页面调整
+        document.onkeydown = (e) => {
           if (e && e.key === 'F11') {
             setTimeout(() => {
-              resize();
+              scheduleResize();
             }, 100);
           }
         };
-      } else {
-        // ios
-        const meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, initial-scale=0.22, minimum-scale=0.01, maximum-scale=1';
-        document.getElementsByTagName('head')[0].appendChild(meta);
-        const style = document.createElement('style');
-        style.type = 'text/css';
-        style.textContent = '* { font-synthesis: none !important; }';
-        document.head.appendChild(style);
-      }
+      })();
     </script>
+    <!-- 注册 Service Worker -->
     <script>
-      /**
-       * 注册 Service Worker
-       */
-      const u = navigator.userAgent;
-      const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); // 判断是否是 iOS终端
-      if ('serviceWorker' in navigator && !isIOS) {
+      (() => {
+        const isIOS = window.__WEBGAL_DEVICE_INFO__?.isIOS ?? false;
+        const localHostnames = ['localhost', '127.0.0.1', '::1'];
+        const isLocalPreview = localHostnames.includes(window.location.hostname) || window.location.protocol === 'file:';
+        const isElectron = Boolean(window.electronFuncs) || /Electron/i.test(navigator.userAgent || '');
+        const shouldBypassServiceWorker = isIOS || isLocalPreview || isElectron;
+        const webgalServiceWorkerUrl = new URL('./webgal-serviceworker.js', window.location.href).href;
+        const bypassReloadKey = 'webgal-sw-bypass-reloaded';
+        const isWebGALRegistration = (registration) => {
+          const workers = [registration.active, registration.installing, registration.waiting];
+          return workers.some((worker) => worker?.scriptURL === webgalServiceWorkerUrl);
+        };
+        const markBypassReload = () => {
+          try {
+            if (sessionStorage.getItem(bypassReloadKey) === 'true') {
+              return false;
+            }
+            sessionStorage.setItem(bypassReloadKey, 'true');
+            return true;
+          } catch {
+            return false;
+          }
+        };
+        const clearBypassReloadMark = () => {
+          try {
+            sessionStorage.removeItem(bypassReloadKey);
+          } catch {}
+        };
+        const clearWebGALServiceWorker = async () => {
+          try {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            const webgalRegistrations = registrations.filter(isWebGALRegistration);
+            const hasWebGALController = navigator.serviceWorker.controller?.scriptURL === webgalServiceWorkerUrl;
+            await Promise.all(webgalRegistrations.map((registration) => registration.unregister()));
+            if ('caches' in window) {
+              const cacheKeys = await caches.keys();
+              await Promise.all(cacheKeys.filter((key) => key.startsWith('webgal-')).map((key) => caches.delete(key)));
+            }
+            if ((webgalRegistrations.length > 0 || hasWebGALController) && navigator.serviceWorker.controller && markBypassReload()) {
+              window.location.reload();
+            }
+          } catch (error) {
+            console.warn('Failed to clear WebGAL Service Worker cache', error);
+          }
+        };
+        if (!('serviceWorker' in navigator)) {
+          return;
+        }
+        if (shouldBypassServiceWorker) {
+          clearWebGALServiceWorker();
+          return;
+        }
+        if (!window.isSecureContext) {
+          return;
+        }
+        clearBypassReloadMark();
         navigator.serviceWorker
           .register('./webgal-serviceworker.js')
-          .then(function (reg) {
-            // registration worked
+          .then((reg) => {
             console.log('Registration succeeded. Scope is ' + reg.scope);
           })
-          .catch(function (error) {
-            // registration failed
+          .catch((error) => {
             console.log('Registration failed with ' + error);
           });
-      }
+      })();
     </script>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- 首屏加载：Promise 协调（enterPromise 由 Enter.tsx 组件 resolve，renderPromise 由 infoFetcher resolve） -->
+    <script>
+      (() => {
+        let enterPromiseResolve;
+        const enterPromise = new Promise((res) => {
+          enterPromiseResolve = res;
+        });
+        // 暴露给 Enter.tsx 组件调用
+        window.__enterPromiseResolve = enterPromiseResolve;
+
+        const renderPromise = new Promise((res) => {
+          window.renderPromiseResolve = () => {
+            res();
+            delete window.renderPromiseResolve;
+          };
+        });
+        // 将播放bgm的事件发送出去
+        Promise.all([enterPromise, renderPromise]).then(() => {
+          const event = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+          });
+          const target = document.querySelector('.title__enter-game-target');
+          if (target) {
+            target.dispatchEvent(event);
+          }
+        });
+      })();
+    </script>
     <!-- 加载IIFE插件 -->
     <script>
       (() => {
@@ -214,129 +344,7 @@
         window.live2dPromise = Promise.all([live2d2Promise, live2d4Promise]);
       })();
     </script>
-    <script>
-      let enterPromise = new Promise((res) => (window.enterPromise = res));
-      let renderPromise = new Promise((res) => (window.renderPromise = res));
-      /**
-       * 将播放bgm的事件发送出去
-       */
-      Promise.all([enterPromise, renderPromise]).then(() => {
-        const event = new MouseEvent('click', {
-          view: window,
-          bubbles: true,
-          cancelable: true,
-        });
-        const target = document.getElementById('enter_game_target');
-        if (target) {
-          target.dispatchEvent(event);
-        }
-        if (event) {
-          const logo = document.getElementById('logo_target');
-          if (logo) {
-            logo.style.display = 'contents';
-          }
-        }
-      });
-
-      function jump(event, url) {
-        // 获取点击事件，阻止点击事件冒泡触发 `enter` 事件
-        event.stopPropagation();
-        // window.location = url;
-      }
-
-      const title = document.getElementById('Title_enter_page');
-      const bgContainer = document.getElementById('Title_bg_container');
-      const titleText = document.getElementById('Title_enter_text');
-      //加载前不显示
-      /*const transOverlayAnime = document.querySelector('#trans-overlay div');
-      const transOverlay = document.getElementById('trans-overlay');*/
-      window.addEventListener('load', () => {
-        /*document.body.style.display = 'inline';
-        document.body.style.visibility = 'visible';*/
-        setTimeout(() => {
-          bgContainer.style.zIndex = '13';
-          /*transOverlay.style.opacity = '0';
-          setTimeout(() => {
-            transOverlay.style.display = 'none';
-          }, 1000);*/
-        }, 500);
-      });
-
-      /**
-       * 点击屏幕，进入引擎主界面
-       */
-      /*function enter() {
-        const bgContainer = document.getElementById('Title_bg_container');
-        setTimeout(() => {
-          if (bgContainer) {
-            bgContainer.style.opacity = '0'; // 调整标题背景的透明度
-          }
-        }, 500);
-        const enterText = document.getElementById('Title_enter_text');
-        setTimeout(() => {
-          if (enterText) {
-            enterText.style.opacity = '0'; // 调整标题文字的透明度
-          }
-        }, 500);
-        //const whiteContainer = document.getElementById('Title_white_container');
-        setTimeout(() => {
-          if (whiteContainer) {
-            whiteContainer.style.opacity = '1';
-          }
-        }, 50); // 在50ms后开始显示白色渐变
-        //
-        const title = document.getElementById('Title_enter_page');
-        setTimeout(() => {
-          if (title) title.style.opacity = '0';
-        }, 500); //500ms后开始降低落地页透明度
-        //if (!isIOS && title) {
-          title.style.pointerEvents = 'none'; //落地页不再响应点击
-          title.style.background = '#000'; //改变标题渐变效果
-        }//
-        if (transOverlay.style.display == 'none') {
-          transOverlay.style.display = 'flex';
-          transOverlay.style.opacity = '1';
-          setTimeout(() => {
-            transOverlay.style.opacity = '0';
-            setTimeout(() => {
-              transOverlay.style.display = 'none';
-            }, 1000);
-          }, 2000);
-        }
-        setTimeout(() => {
-          if (title) {
-            title.style.display = 'none';
-          }
-        }, 2000); // 将落地页设置为不显示
-        window.enterPromise();
-        delete window.enterPromise;
-      }*/
-      function enter() {
-        if (title) {
-          titleText.style.opacity = '0';
-        }
-        if (!isIOS && title) {
-          title.style.pointerEvents = 'none'; //落地页不再响应点击
-          //title.style.background = 'linear-gradient( #a1c4fd 0%, #c2e9fb 100%)'; //改变标题渐变效果
-        }
-        setTimeout(() => {
-          if (title) {
-            title.style.opacity = '0';
-            title.style.display = 'none';
-          }
-        }, 2000);
-        if (bgContainer) {
-          bgContainer.style.zIndex = '16';
-        }
-        setTimeout(() => {
-          if (bgContainer) {
-            bgContainer.style.opacity = '0';
-            bgContainer.style.display = 'none';
-          }
-        }, 2000);
-        window.enterPromise();
-        delete window.enterPromise;
-      }
-    </script>
+    <!-- main文件 -->
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

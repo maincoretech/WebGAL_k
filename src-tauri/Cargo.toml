@@ -2,7 +2,7 @@
 name = "app"
 version = "0.1.2"
 description = "webgal-k"
-authors = ["maincore_tech."]
+authors = ["maincore_tech.", "k43Lab"]
 license = ""
 repository = ""
 edition = "2024"

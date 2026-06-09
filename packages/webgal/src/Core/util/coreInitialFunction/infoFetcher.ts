@@ -8,7 +8,7 @@ import { initKey } from '@/Core/controller/storage/fastSaveLoad';
 import { getFastSaveFromStorage, getSavesFromStorage } from '@/Core/controller/storage/savesController';
 import { logger } from '@/Core/util/logger';
 import axios from 'axios';
-import { IGameVar } from '@/store/stageInterface';
+import { IGameVar } from '@/Core/Modules/stage/stageInterface';
 
 /**
  * 获取游戏信息
@@ -72,8 +72,7 @@ export const infoFetcher = (url: string) => {
     });
 
     dispatch(setUserData({ key: 'gameConfigInit', value: gameConfigInit }));
-    // @ts-expect-error renderPromiseResolve is a global variable
-    window.renderPromiseResolve();
+    window.renderPromiseResolve?.();
     setStorage();
   });
 };

@@ -28,9 +28,8 @@ import useTrans from '@/hooks/useTrans';
 import { useTranslation } from 'react-i18next';
 import useSoundEffect from '@/hooks/useSoundEffect';
 import { showGlogalDialog, switchControls } from '@/UI/GlobalDialog/GlobalDialog';
-import { useEffect } from 'react';
-import { getSavesFromStorage } from '@/Core/controller/storage/savesController';
 import { easyCompile } from '@/UI/Menu/SaveAndLoad/Save/Save';
+import { useStageState } from '@/hooks/useStageState';
 
 export const BottomControlPanel = () => {
   const t = useTrans('gaming.');
@@ -46,7 +45,7 @@ export const BottomControlPanel = () => {
     size = 40;
   }
   const GUIStore = useSelector((state: RootState) => state.GUI);
-  const stageState = useSelector((state: RootState) => state.stage);
+  const stageState = useStageState();
   const dispatch = useDispatch();
   const setComponentVisibility = (component: keyof componentsVisibility, visibility: boolean) => {
     dispatch(setVisibility({ component, visibility }));

@@ -51,7 +51,7 @@ const jp = {
               },
             },
             about: {
-              title: 'webgal-k について',
+              title: 'WebGAL について',
               subTitle: 'WebGAL エンジンの一つのフォーク',
               version: 'バージョン',
               sourceK: 'ソースコードリポジトリ',
@@ -59,6 +59,13 @@ const jp = {
               // contributors: '貢献者',
               website: 'ウェブサイト',
             },
+            skipAll: {
+              title: 'スキップモード',
+              options: {
+                read: '既読',
+                all: 'すべて',
+              }
+            }
           },
         },
         display: {
@@ -90,9 +97,9 @@ const jp = {
             /* textFont: {
               title: 'フォント',
               options: {
+                resourceHanRounded: 'Resource Han Rounded',
                 siYuanSimSun: '源ノ明朝(中国語)',
                 SimHei: 'OPPO Sans',
-                lxgw: 'LXGW WenKai',
               },
             }, */
             textboxOpacity: {
@@ -141,27 +148,28 @@ const jp = {
 
   title: {
     start: {
-      title: 'START',
+      title: '最初から',
       subtitle: '',
     },
     continue: {
-      title: 'CONTINUE',
+      title: '続きから',
+      noSaving: 'セーブデータなし',
       subtitle: '',
     },
     options: {
-      title: 'OPTIONS',
+      title: 'システム設定',
       subtitle: '',
     },
     load: {
-      title: 'LOAD',
+      title: 'ロード',
       subtitle: '',
     },
     extra: {
-      title: 'EXTRA',
+      title: 'ギャラリー',
       subtitle: '',
     },
     exit: {
-      title: 'EXIT',
+      title: 'ゲーム終了',
       subtitle: '',
     },
   },
@@ -189,7 +197,7 @@ const jp = {
   },
 
   extra: {
-    title: 'EXTRA',
+    title: 'ギャラリー',
   },
 };
 

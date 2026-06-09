@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
-import { fullScreenOption } from '@/store/userDataInterface';
+import { fullScreenOption, ISaveData } from '@/store/userDataInterface';
 import { setMenuPanelTag, setVisibility } from '@/store/GUIReducer';
 import { MenuPanelTag } from '@/store/guiInterface';
 import useTrans from '@/hooks/useTrans';
@@ -9,10 +9,13 @@ import useApplyStyle from '@/hooks/useApplyStyle';
 import { keyboard } from '@/hooks/useHotkey';
 import useConfigData from '@/hooks/useConfigData';
 import { playBgm } from '@/Core/controller/stage/playBgm';
-import { continueGame, startGame } from '@/Core/controller/gamePlay/startContinueGame';
+import { getContinueGameSaveData, continueGame, startGame } from '@/Core/controller/gamePlay/startContinueGame';
 import { showGlogalDialog } from '../GlobalDialog/GlobalDialog';
 import styles from './title.module.scss';
 import { exit } from '@tauri-apps/plugin-process';
+import { easyCompile } from '@/UI/Menu/SaveAndLoad/Save/Save';
+import { useEffect, useState } from 'react';
+import { logger } from '@/Core/util/logger';
 
 /** 标题页 */
 export default function Title() {
@@ -31,6 +34,50 @@ export default function Title() {
 
   const appreciationItems = useSelector((state: RootState) => state.userData.appreciationData);
   const hasAppreciationItems = appreciationItems.bgm.length > 0 || appreciationItems.cg.length > 0;
+  const renderButtonText = (text: string) => (
+    <div className={applyStyle('Title_button_text', styles.Title_button_text)}>
+      {text}
+      <span className={applyStyle('Title_button_text_outer', styles.Title_button_text_outer)}>{text}</span>
+      <span className={applyStyle('Title_button_text_inner', styles.Title_button_text_inner)}>{text}</span>
+    </div>
+  );
+
+  // 获取临时的数据
+  const [continueData, setContinueData] = useState<ISaveData | null>(null);
+
+  useEffect(() => {
+    const fetchContinueData = async () => {
+      try {
+        const data = await getContinueGameSaveData();
+        setContinueData(data);
+        logger.debug('继续游戏的存档数据:', continueData);
+      } catch (error) {
+        logger.error("获取游戏数据失败:", error);
+      }
+    };
+
+    fetchContinueData();
+  }, [GUIState.showTitle]);
+
+  let continuePreview = (
+    <div style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ fontSize: '125%' }}>{t('continue.noSaving')}</div>
+    </div>
+  );
+
+  if (continueData) {
+    continuePreview = (
+      <div className={styles.continuePreviewMain}>
+        <div className={styles.imgContainer}>
+          <img style={{ height: '100%' }} alt="continue-preview image" src={continueData.previewImage} />
+        </div>
+        <div className={styles.textContainer}>
+          <div>{easyCompile(continueData.nowStageState.showName)}</div>
+          <div style={{ fontSize: '75%', color: '#ffffffaa' }}>{easyCompile(continueData.nowStageState.showText)}</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -56,17 +103,7 @@ export default function Title() {
           }}
         >
           <div className={applyStyle('Title_buttonList', styles.Title_buttonList)}>
-            <div
-              className={applyStyle('Title_button', styles.Title_button)}
-              onClick={async () => {
-                playSeClick();
-                dispatch(setVisibility({ component: 'showTitle', visibility: false }));
-                continueGame();
-              }}
-              onMouseEnter={playSeEnter}
-            >
-              <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('continue.title')}</div>
-            </div>
+            {/* 开始游戏 */}
             <div
               className={applyStyle('Title_button', styles.Title_button)}
               onClick={() => {
@@ -77,6 +114,23 @@ export default function Title() {
             >
               <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('start.title')}</div>
             </div>
+            {/* 继续进度 */}
+            <div
+              className={
+                `${applyStyle('Title_button', styles.Title_button)} ${!continueData ? applyStyle('Title_button_disabled', styles.Title_button_disabled) : ''
+                }`}
+              onClick={async () => {
+                if (!continueData) return;
+                playSeClick();
+                dispatch(setVisibility({ component: 'showTitle', visibility: false }));
+                continueGame();
+              }}
+              onMouseEnter={playSeEnter}
+            >
+              {renderButtonText(t('continue.title'))}
+              <div className={styles.continuePreview}>{continuePreview}</div>
+            </div>
+            {/* 载入存档 */}
             <div
               className={applyStyle('Title_button', styles.Title_button)}
               onClick={() => {
@@ -86,13 +140,13 @@ export default function Title() {
               }}
               onMouseEnter={playSeEnter}
             >
-              <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('load.title')}</div>
+              {renderButtonText(t('load.title'))}
             </div>
+            {/* 系统选项 */}
             {GUIState.enableAppreciationMode && (
               <div
-                className={`${applyStyle('Title_button', styles.Title_button)} ${
-                  !hasAppreciationItems ? styles.Title_button_disabled : ''
-                }`}
+                className={`${applyStyle('Title_button', styles.Title_button)} ${!hasAppreciationItems ? applyStyle('Title_button_disabled', styles.Title_button_disabled) : ''
+                  }`}
                 onClick={() => {
                   if (hasAppreciationItems) {
                     playSeClick();
@@ -101,7 +155,7 @@ export default function Title() {
                 }}
                 onMouseEnter={playSeEnter}
               >
-                <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('extra.title')}</div>
+                {renderButtonText(t('extra.title'))}
               </div>
             )}
             <div
@@ -115,6 +169,7 @@ export default function Title() {
             >
               <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('options.title')}</div>
             </div>
+            {/* 退出游戏 */}
             <div
               className={applyStyle('Title_button', styles.Title_button)}
               onClick={() => {
@@ -126,12 +181,12 @@ export default function Title() {
                   leftFunc: () => {
                     exit(0);
                   },
-                  rightFunc: () => {},
+                  rightFunc: () => { },
                 });
               }}
               onMouseEnter={playSeEnter}
             >
-              <div className={applyStyle('Title_button_text', styles.Title_button_text)}>{t('exit.title')}</div>
+              {renderButtonText(t('exit.title'))}
             </div>
           </div>
         </div>

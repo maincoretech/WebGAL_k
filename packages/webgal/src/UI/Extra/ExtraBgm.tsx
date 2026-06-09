@@ -3,7 +3,6 @@ import { RootState } from '@/store/store';
 import React from 'react';
 import styles from '@/UI/Extra/extra.module.scss';
 import { useValue } from '@/hooks/useValue';
-import { setStage } from '@/store/stageReducer';
 // import { GoEnd, GoStart, MusicList, PlayOne, SquareSmall } from '@icon-park/react';
 import useSoundEffect from '@/hooks/useSoundEffect';
 import { setGuiAsset } from '@/store/GUIReducer';
@@ -13,7 +12,7 @@ export function ExtraBgm() {
   // 检查当前正在播放的bgm是否在bgm列表内
   const currentBgmSrc = useSelector((state: RootState) => state.GUI.titleBgm);
   const extraState = useSelector((state: RootState) => state.userData.appreciationData);
-  const initName = 'Title_BGM';
+  const initName = 'No BGM';
   // 是否展示 bgm 列表
   const isShowBgmList = useValue(false);
   let foundCurrentBgmName = initName;
@@ -71,6 +70,8 @@ export function ExtraBgm() {
   return (
     <div className={styles.bgmContainer} style={{ maxHeight: bgmPlayerHeight }}>
       <div className={styles.bgmPlayerMain}>
+        {/* Previous, Play, Next, Stop buttons */}
+        {/* 上一曲 */}
         <div
           onClick={() => {
             playSeClick();
@@ -86,6 +87,7 @@ export function ExtraBgm() {
           <i className="bi bi-rewind" />
           {/* <GoStart theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
+        {/* 播放 */}
         <div
           onClick={() => {
             playSeClick();
@@ -98,6 +100,7 @@ export function ExtraBgm() {
           <i className="bi bi-play" />
           {/* <PlayOne theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
+        {/* 下一曲 */}
         <div
           onClick={() => {
             playSeClick();
@@ -113,6 +116,7 @@ export function ExtraBgm() {
           <i className="bi bi-fast-forward" />
           {/* <GoEnd theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
+        {/* 停止 */}
         <div
           onClick={() => {
             playSeClick();
@@ -125,6 +129,7 @@ export function ExtraBgm() {
           <i className="bi bi-stop" />
           {/* <SquareSmall theme="filled" fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
         </div>
+        {/* BGM 名称 */}
         <div className={styles.bgmName}>{foundCurrentBgmName}</div>
         <div
           onClick={() => {

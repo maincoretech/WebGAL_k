@@ -51,7 +51,7 @@ const zhTw = {
               },
             },
             about: {
-              title: '關於 webgal-k',
+              title: '關於 WebGAL',
               subTitle: 'WebGAL 引擎的分支',
               version: '版本號',
               sourceK: '程式碼倉庫',
@@ -59,6 +59,13 @@ const zhTw = {
               // contributors: '貢獻者',
               website: '網站',
             },
+            skipAll: {
+              title: '快進模式',
+              options: {
+                read: '已讀',
+                all: '全部',
+              }
+            }
           },
         },
         display: {
@@ -90,9 +97,9 @@ const zhTw = {
             /* textFont: {
               title: '文字字體',
               options: {
+                resourceHanRounded: '資源圓體',
                 siYuanSimSun: '思源宋體',
                 SimHei: '黑體',
-                lxgw: '霞鶩文楷',
               },
             }, */
             textboxOpacity: {
@@ -145,27 +152,28 @@ const zhTw = {
 
   title: {
     start: {
-      title: 'START',
+      title: '新篇章',
       subtitle: '',
     },
     continue: {
-      title: 'CONTINUE',
+      title: '繼續進度',
+      noSaving: '暫無存檔',
       subtitle: '',
     },
     options: {
-      title: 'OPTIONS',
+      title: '系統選項',
       subtitle: '',
     },
     load: {
-      title: 'LOAD',
+      title: '載入存檔',
       subtitle: '',
     },
     extra: {
-      title: 'EXTRA',
+      title: '鑑賞模式',
       subtitle: '',
     },
     exit: {
-      title: 'EXIT',
+      title: '退出遊戲',
       subtitle: '',
     },
   },
@@ -194,7 +202,7 @@ const zhTw = {
   },
 
   extra: {
-    title: 'EXTRA',
+    title: '鑑賞模式',
   },
 };
 

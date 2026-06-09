@@ -9,26 +9,19 @@
 }
 
 @font-face {
+  font-family: '资源圆体';
+  src: url('assets/fonts/ResourceHanRoundedCN-Regular.ttf') format('truetype');
+}
+
+@font-face {
   font-family: "LXGW";
   //noinspection CssUnknownTarget
   src: url("assets/fonts/LXGWWenKai-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "WebgalUI";
-  //noinspection CssUnknownTarget
-  src: url("assets/fonts/OPPOSans-R.ttf") format("truetype");
-}*/
-
-@font-face {
-  font-family: 'MavenPro';
-  /*noinspection CssUnknownTarget*/
-  src: url('assets/fonts/MavenPro.woff2') format('woff2');
-}
-
-@font-face {
   font-family: 'WebgalUI';
-  /*noinspection CssUnknownTarget*/
+  /*noinspection CssUnknownTarget
   src: url('assets/fonts/HanaMinA.woff2') format('woff2');
 }
 

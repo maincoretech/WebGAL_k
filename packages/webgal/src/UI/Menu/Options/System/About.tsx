@@ -17,14 +17,19 @@ export default function About(props: { onClose: () => void }) {
       <div className={s.text}>{__INFO.mod}</div>
       <div className={s.title}>{t('sourceK')}</div>
       <div className={s.text}>
-        <a target="_blank" href="https://github.com/maincoretech/WebGAL_k">
-          The WebGAL_k repository
+        <a target="_blank" href="https://github.com/k43Lab/WebGAL_k_sli">
+          WebGAL_k_sli
         </a>
       </div>
       <div className={s.title}>{t('source')}</div>
       <div className={s.text}>
+        <a target="_blank" href="https://github.com/maincoretech/WebGAL_k">
+          WebGAL_k
+        </a>
+      </div>
+      <div className={s.text}>
         <a target="_blank" href="https://github.com/OpenWebGAL/WebGAL">
-          The WebGAL repository
+          WebGAL
         </a>
       </div>
       {/* <div className={s.title}>{t('contributors')}</div>
@@ -36,7 +41,7 @@ export default function About(props: { onClose: () => void }) {
       <div className={s.title}>{t('website')}</div>
       <div className={s.text}>
         <a target="_blank" href="https://openwebgal.com/">
-          openwebgal site
+          WebGAL Official Website
         </a>
       </div>
     </div>
