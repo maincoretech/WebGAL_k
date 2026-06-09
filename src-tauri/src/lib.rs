@@ -4,7 +4,7 @@ pub fn run() {
     .plugin(tauri_plugin_fs::init())
     .setup(|app| {
       #[cfg(desktop)]
-      app.handle().plugin(tauri_plugin_window_state::Builder::default().build());
+      let _ = app.handle().plugin(tauri_plugin_window_state::Builder::default().build());
       Ok(())
     })
     .plugin(tauri_plugin_persisted_scope::init())
