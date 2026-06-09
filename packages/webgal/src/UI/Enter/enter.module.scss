@@ -6,47 +6,28 @@
   top: 0;
   z-index: 14;
   opacity: 1;
-  transition: opacity 1.5s;
+  transition: opacity 0.8s ease-out;
   cursor: pointer;
+  background: #000;
 }
 
 .containerExiting {
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+  transition-delay: 0.6s;
 
-  .initialBackground {
-    opacity: 0;
+  .triangle, .tapText {
+    opacity: 0 !important;
+    animation: none;
+    transition: opacity 0.2s ease-out;
   }
 
-  .content {
-    opacity: 0;
-  }
-
-  .whiteBackground {
+  .lightBarLeft, .lightBarRight {
     opacity: 1;
-    transition-delay: 50ms;
+    width: 60%;
+    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.8);
   }
-
-  opacity: 0;
-  transition-delay: 500ms;
-}
-
-.initialBackground {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-  top: 0;
-  opacity: 1;
-  transition: opacity 1s;
-}
-
-.whiteBackground {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  opacity: 0;
-  transition: opacity 1s;
 }
 
 .content {
@@ -54,44 +35,85 @@
   position: absolute;
   top: 0;
   height: 100%;
-  opacity: 1;
-  font-size: 175%;
-  transition: opacity 1s;
   z-index: 15;
-  font-family: '思源宋体', Georgia, serif;
 }
 
-.centerText {
+.startIndicator {
+  position: absolute;
+  bottom: 20%;
+  left: 0;
   width: 100%;
-  height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  > div {
-    letter-spacing: 0.25em;
-    padding: 2em;
-    text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-    transition: text-shadow 1s;
-    font-size: 175%;
-    animation: blink 4s infinite;
-  }
+  justify-content: center;
 }
 
-@keyframes blink {
-  0% {
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 24px solid transparent;
+  border-right: 24px solid transparent;
+  border-bottom: 42px solid rgba(255, 255, 255, 0.85);
+  animation: breathe 4s infinite ease-in-out;
+  transition: opacity 0.3s ease-out;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.9);
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
   }
   50% {
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-  }
-  100% {
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
+    opacity: 0.9;
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.7));
   }
 }
 
-.iOSContainer {
-  pointer-events: none;
-  transition: none;
+.lightBarLeft, .lightBarRight {
+  position: absolute;
+  bottom: 20px;
+  height: 3px;
+  width: 0;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.5);
+  transition: width 0.65s cubic-bezier(0.05, 0.7, 0.1, 1), opacity 0.3s ease-out;
   opacity: 0;
+  z-index: 1;
+}
+
+.lightBarLeft {
+  right: 50%;
+  margin-right: 42px;
+}
+
+.lightBarRight {
+  left: 50%;
+  margin-left: 42px;
+}
+
+.tapText {
+  position: absolute;
+  bottom: calc(20% - 75px);
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.7);
+  animation: breatheText 4s infinite ease-in-out;
+  font-family: 'WebgalUI', sans-serif;
+  z-index: 2;
+}
+
+@keyframes breatheText {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }

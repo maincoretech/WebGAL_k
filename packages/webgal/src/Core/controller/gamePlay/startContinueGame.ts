@@ -34,14 +34,11 @@ export async function getContinueGameSaveData() {
   if ((await hasFastSaveRecord()) && WebGAL.sceneManager.sceneData.currentSentenceId === 0) {
     return await getFastSaveRecord();
   }
-  if (
-    WebGAL.sceneManager.sceneData.currentSentenceId === 0 &&
-    WebGAL.sceneManager.sceneData.currentScene.sceneName === 'start.txt'
-  ) {
-    return null;
-  } else {
+  // 只有真正存在快速存档时才返回数据，避免引擎状态变化导致误判
+  if (await hasFastSaveRecord()) {
     return generateCurrentStageData(-1, true);
   }
+  return null;
 }
 
 export async function continueGame() {

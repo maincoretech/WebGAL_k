@@ -128,25 +128,28 @@
 .Option_select_item {
   box-sizing: border-box;
   border: 0;
-  border-bottom: 2px solid transparent;
-  background: rgba(50, 50, 50, 0.05);
-  color: rgba(160, 170, 160, 1);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
   font: inherit;
   cursor: pointer;
+  transition: color 0.25s, background 0.25s, text-shadow 0.25s;
 }
 
 .Option_select_button {
   min-width: 10em;
   padding: 0.2em 1em;
   text-align: left;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
 }
 
 .Option_select_button:hover,
 .Option_select_button:focus-visible,
 .Option_select_button_active {
-  border-bottom-color: rgba(81, 110, 65, 0.9);
-  color: rgba(81, 110, 65, 0.9);
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
   font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 .Option_select_menu {
@@ -157,13 +160,14 @@
   display: grid;
   min-width: 100%;
   padding: 0.25em;
-  background: rgb(235, 243, 250);
-  box-shadow: 0 0.2em 0.8em rgba(34, 75, 55, 0.2);
+  background: rgba(10, 10, 10, 0.45);
+  box-shadow: 0 0.2em 0.8em rgba(0, 0, 0, 0.5);
+  border-radius: 0 0 4px 4px;
 }
 
 .Option_select_item {
   padding: 0.35em 0.75em;
-  background: rgb(235, 243, 250);
+  background: transparent;
   text-align: left;
   white-space: nowrap;
 }
@@ -171,9 +175,8 @@
 .Option_select_item:hover,
 .Option_select_item:focus-visible,
 .Option_select_item_active {
-  background: rgba(81, 110, 65, 0.15);
-  border-bottom-color: rgba(81, 110, 65, 0.9);
-  color: rgba(81, 110, 65, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
   font-weight: bold;
 }
 

@@ -43,7 +43,7 @@
 }
 
 .extra_title {
-  font-family: '思源宋体', serif;
+  font-family: 'WebgalUI', serif;
   height: 100%;
   line-height: 100%;
   font-size: 325%;
@@ -59,26 +59,25 @@
   padding: 0 2em 0 2em;
   display: flex;
   height: 92%;
-  flex-flow: column;
+  flex-flow: row;
+  gap: 2em;
+}
+
+.cgContainer {
+  flex: 1;
+  overflow: auto;
+  box-sizing: border-box;
 }
 
 .bgmContainer {
-  left: 50px;
-  right: 50px;
-  bottom: 30px;
-  position: absolute;
+  flex: 1;
   overflow: auto;
-  // width: 100%;
-  // height: 70%;
   box-sizing: border-box;
   display: flex;
   flex-flow: column-reverse;
   align-content: center;
-  background-image: linear-gradient(315deg, rgba(199, 199, 199, 0.349) 0%, rgba(156, 156, 156, 0.356) 100%);
-
+  background: rgba(255, 255, 255, 0.04);
   padding: 1em 2em 1em 2em;
-  //border-radius: 4px;
-  transition: max-height 0.2s;
   z-index: 2;
 }
 
@@ -131,14 +130,14 @@
 
 .bgmName {
   color: rgba(255, 255, 255, 0.8);
-  font-family: "资源圆体", serif;
+  font-family: 'WebgalUI', serif;
   font-size: 155%;
   margin: 5px 5px 0 15px;
   overflow: hidden;
 }
 
 .bgmElement {
-  font-family: "资源圆体", serif;
+  font-family: 'WebgalUI', serif;
   padding: 0.5em 1em 0.5em 1em;
   overflow: hidden;
   // background-color: #00000020;
@@ -150,7 +149,7 @@
   opacity: 1;
   //animation: bgmElement_In 0.5s forwards ease-out;
   cursor: pointer;
-  width: 28%;
+  width: 44%;
   flex-shrink: 0;
 }
 

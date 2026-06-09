@@ -1,25 +1,26 @@
 .Backlog_main {
-  font-family: 'WebgalUI', serif;
+  font-family: 'WebgalUI-Text', 'WebgalUI', serif;
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   z-index: 10;
   background: #000000aa;
-  //backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   padding: 2em 0 2em 0;
   animation: backlog_soft_in 0.2s ease-out forwards;
   box-sizing: border-box;
 }
 
 .Backlog_main_out {
-  font-family: 'WebgalUI', serif;
+  font-family: 'WebgalUI-Text', 'WebgalUI', serif;
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   z-index: 10;
   background: #000000b3;
+  backdrop-filter: blur(12px);
   padding: 2em 0 2em 0;
   animation: backlog_soft_out 0.2s ease-out forwards;
   box-sizing: border-box;
@@ -77,7 +78,7 @@
 }
 
 .backlog_content {
-  font-family: "资源圆体", serif;
+  font-family: 'WebgalUI-Text', 'WebgalUI', serif;
   position: absolute;
   height: 80%;
   padding: 1em 10em 1em 10em;

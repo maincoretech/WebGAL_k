@@ -13,7 +13,6 @@ import { getContinueGameSaveData, continueGame, startGame } from '@/Core/control
 import { showGlogalDialog } from '../GlobalDialog/GlobalDialog';
 import styles from './title.module.scss';
 import { exit } from '@tauri-apps/plugin-process';
-import { easyCompile } from '@/UI/Menu/SaveAndLoad/Save/Save';
 import { useEffect, useState } from 'react';
 import { logger } from '@/Core/util/logger';
 
@@ -62,26 +61,6 @@ export default function Title() {
     fetchContinueData();
   }, [GUIState.showTitle]);
 
-  let continuePreview = (
-    <div style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <div style={{ fontSize: '125%' }}>{t('continue.noSaving')}</div>
-    </div>
-  );
-
-  if (continueData) {
-    continuePreview = (
-      <div className={styles.continuePreviewMain}>
-        <div className={styles.imgContainer}>
-          <img style={{ height: '100%' }} alt="continue-preview image" src={continueData.previewImage} />
-        </div>
-        <div className={styles.textContainer}>
-          <div>{easyCompile(continueData.nowStageState.showName)}</div>
-          <div style={{ fontSize: '75%', color: '#ffffffaa' }}>{easyCompile(continueData.nowStageState.showText)}</div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <>
       {GUIState.showTitle && <div className={applyStyle('Title_backup_background', styles.Title_backup_background)} />}
@@ -119,11 +98,16 @@ export default function Title() {
             </div>
             {/* 继续进度 */}
             <div
-              className={
-                `${applyStyle('Title_button', styles.Title_button)} ${!continueData ? applyStyle('Title_button_disabled', styles.Title_button_disabled) : ''
-                }`}
+              className={applyStyle('Title_button', styles.Title_button)}
               onClick={async () => {
-                if (!continueData) return;
+                if (!continueData) {
+                  showGlogalDialog({
+                    title: t('$title.continue.noSaving'),
+                    leftText: t('$common.yes'),
+                    leftFunc: () => {},
+                  });
+                  return;
+                }
                 playSeClick();
                 dispatch(setVisibility({ component: 'showTitle', visibility: false }));
                 continueGame();
@@ -131,7 +115,6 @@ export default function Title() {
               onMouseEnter={playSeEnter}
             >
               {renderButtonText(t('continue.title'))}
-              <div className={styles.continuePreview}>{continuePreview}</div>
             </div>
             {/* 载入存档 */}
             <div

@@ -13,12 +13,9 @@ export function ExtraBgm() {
   const currentBgmSrc = useSelector((state: RootState) => state.GUI.titleBgm);
   const extraState = useSelector((state: RootState) => state.userData.appreciationData);
   const initName = 'No BGM';
-  // 是否展示 bgm 列表
-  const isShowBgmList = useValue(false);
   let foundCurrentBgmName = initName;
   let foundCurrentBgmIndex = -1;
   const iconSize = 39;
-  const bgmPlayerHeight = isShowBgmList.value ? '80%' : '10%';
   const bgmListLen = extraState.bgm.length;
   extraState.bgm.forEach((e, i) => {
     if (e.url === currentBgmSrc) {
@@ -68,7 +65,7 @@ export function ExtraBgm() {
   }
 
   return (
-    <div className={styles.bgmContainer} style={{ maxHeight: bgmPlayerHeight }}>
+    <div className={styles.bgmContainer}>
       <div className={styles.bgmPlayerMain}>
         {/* Previous, Play, Next, Stop buttons */}
         {/* 上一曲 */}
@@ -131,20 +128,8 @@ export function ExtraBgm() {
         </div>
         {/* BGM 名称 */}
         <div className={styles.bgmName}>{foundCurrentBgmName}</div>
-        <div
-          onClick={() => {
-            playSeClick();
-            isShowBgmList.set(!isShowBgmList.value);
-          }}
-          onMouseEnter={playSeEnter}
-          className={styles.bgmControlButton}
-          style={{ marginLeft: 'auto' }}
-        >
-          <i className="bi bi-music-note-list" />
-          {/* <MusicList theme="filled" size={iconSize} fill="#fff" strokeWidth={3} strokeLinejoin="miter" /> */}
-        </div>
       </div>
-      {isShowBgmList.value && <div className={styles.bgmListContainer}> {showBgmList}</div>}
+      {showBgmList.length > 0 && <div className={styles.bgmListContainer}>{showBgmList}</div>}
     </div>
   );
 }

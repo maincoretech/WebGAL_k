@@ -7,7 +7,7 @@ const jp = {
 
   menu: {
     options: {
-      title: 'CONFIG',
+      title: 'コンフィグ',
       pages: {
         system: {
           title: 'システム',
@@ -132,44 +132,44 @@ const jp = {
       },
     },
     saving: {
-      title: 'SAVE',
+      title: 'セーブ',
       isOverwrite: 'セーブデータを上書きしますか？',
     },
     loadSaving: {
-      title: 'LOAD',
+      title: 'ロード',
     },
     title: {
-      title: 'HOME',
+      title: 'ホーム',
     },
     exit: {
-      title: 'BACK',
+      title: 'もどる',
     },
   },
 
   title: {
     start: {
-      title: '最初から',
+      title: 'START',
       subtitle: '',
     },
     continue: {
-      title: '続きから',
+      title: 'CONTINUE',
       noSaving: 'セーブデータなし',
       subtitle: '',
     },
     options: {
-      title: 'システム設定',
+      title: 'OPTIONS',
       subtitle: '',
     },
     load: {
-      title: 'ロード',
+      title: 'LOAD',
       subtitle: '',
     },
     extra: {
-      title: 'ギャラリー',
+      title: 'EXTRA',
       subtitle: '',
     },
     exit: {
-      title: 'ゲーム終了',
+      title: 'EXIT',
       subtitle: '',
     },
   },
@@ -197,7 +197,7 @@ const jp = {
   },
 
   extra: {
-    title: 'ギャラリー',
+    title: 'EXTRA',
   },
 };
 

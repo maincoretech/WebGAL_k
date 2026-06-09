@@ -78,13 +78,13 @@
 .fadeIn {
   opacity: 0;
   animation: intro_showSoftly 1.5s ease-out forwards;
-  font-family: '思源宋体', serif;
+  font-family: 'WebgalUI-Text', 'WebgalUI', serif;
 }
 
 .slideIn {
   opacity: 0;
   animation: slideIn 1.5s forwards;
-  font-family: '思源宋体', serif;
+  font-family: 'WebgalUI-Text', 'WebgalUI', serif;
 }
 
 .typingEffect {
@@ -93,19 +93,19 @@
   white-space: pre-line;
   width: 0;
   animation: typing 1.5s forwards, blinkCursor 1s infinite 1.5s;
-  font-family: '思源宋体', serif;
+  font-family: 'WebgalUI-Text', 'WebgalUI', serif;
 }
 
 .pixelateEffect {
   opacity: 0;
   animation: pixelateAnimation 3s forwards;
-  font-family: '思源宋体', serif;
+  font-family: 'WebgalUI-Text', 'WebgalUI', serif;
 }
 
 .revealAnimation {
   opacity: 0;
   animation: revealAnimation 3s forwards;
-  font-family: '思源宋体', serif;
+  font-family: 'WebgalUI-Text', 'WebgalUI', serif;
 }
 
 @keyframes intro_showSoftly {

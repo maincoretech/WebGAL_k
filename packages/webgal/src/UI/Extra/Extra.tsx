@@ -45,8 +45,10 @@ export function Extra() {
             </div>
           </div>
           <div className={styles.mainContainer}>
-            <ExtraCg />
             <ExtraBgm />
+            <div className={styles.cgContainer}>
+              <ExtraCg />
+            </div>
           </div>
         </div>
       )}

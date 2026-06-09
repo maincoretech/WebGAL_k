@@ -152,28 +152,28 @@ const zhCn = {
 
   title: {
     start: {
-      title: '新篇章',
+      title: 'START',
       subtitle: '',
     },
     continue: {
-      title: '继续进度',
+      title: 'CONTINUE',
       noSaving: '暂无存档',
       subtitle: '',
     },
     options: {
-      title: '系统选项',
+      title: 'OPTIONS',
       subtitle: '',
     },
     load: {
-      title: '加载存档',
+      title: 'LOAD',
       subtitle: '',
     },
     extra: {
-      title: '鉴赏模式',
+      title: 'EXTRA',
       subtitle: '',
     },
     exit: {
-      title: '退出游戏',
+      title: 'EXIT',
       subtitle: '',
     },
   },
@@ -202,7 +202,7 @@ const zhCn = {
   },
 
   extra: {
-    title: '鉴赏模式',
+    title: 'EXTRA',
   },
 };
 

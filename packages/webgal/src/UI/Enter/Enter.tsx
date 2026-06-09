@@ -5,7 +5,7 @@ import { setVisibility } from '@/store/GUIReducer';
 import { isIOS } from '@/Core/initializeScript';
 import styles from './enter.module.scss';
 
-const ANIMATION_DURATION = 2000;
+const ANIMATION_DURATION = 1600;
 
 /**
  * 落地页组件 — "PRESS TO START" 界面
@@ -44,8 +44,10 @@ export default function Enter() {
     if (isExiting || isIOS) return;
     setIsExiting(true);
 
-    // 立即 resolve enterPromise（与原始行为一致）
-    window.__enterPromiseResolve?.();
+    // 延迟 resolve enterPromise，防止主线程瞬间卡死导致 CSS 动画跳帧
+    setTimeout(() => {
+      window.__enterPromiseResolve?.();
+    }, 600); // 等待光条滑动动画完成
 
     // 动画结束后隐藏组件
     timerRef.current = setTimeout(() => {
@@ -60,12 +62,13 @@ export default function Enter() {
       className={`${styles.container} ${isExiting ? styles.containerExiting : ''}`}
       onClick={handleClick}
     >
-      <div className={styles.initialBackground} />
-      <div className={styles.whiteBackground} />
       <div className={styles.content}>
-        <div className={styles.centerText}>
-          <div>PRESS TO START</div>
+        <div className={styles.startIndicator}>
+          <div className={styles.lightBarLeft} />
+          <div className={styles.triangle} />
+          <div className={styles.lightBarRight} />
         </div>
+        <div className={styles.tapText}>TAP TO START</div>
       </div>
     </div>
   );

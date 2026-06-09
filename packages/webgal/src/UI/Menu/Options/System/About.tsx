@@ -8,7 +8,7 @@ export default function About(props: { onClose: () => void }) {
   return (
     <div className={s.about}>
       <div className={s.backButton} onClick={props.onClose}>
-        <i className="bi bi-arrow-left" />
+        <i className="bi bi-caret-left-fill" />
         {/* <Left className={s.icon} theme="outline" size="35" strokeWidth={3} fill="#ffffff80" /> */}
       </div>
       <div className={s.title}>{t('subTitle')}</div>
@@ -17,16 +17,11 @@ export default function About(props: { onClose: () => void }) {
       <div className={s.text}>{__INFO.mod}</div>
       <div className={s.title}>{t('sourceK')}</div>
       <div className={s.text}>
-        <a target="_blank" href="https://github.com/k43Lab/WebGAL_k_sli">
-          WebGAL_k_sli
-        </a>
-      </div>
-      <div className={s.title}>{t('source')}</div>
-      <div className={s.text}>
         <a target="_blank" href="https://github.com/maincoretech/WebGAL_k">
           WebGAL_k
         </a>
       </div>
+      <div className={s.title}>{t('source')}</div>
       <div className={s.text}>
         <a target="_blank" href="https://github.com/OpenWebGAL/WebGAL">
           WebGAL
