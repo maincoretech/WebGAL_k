@@ -20,6 +20,7 @@ import { logger } from '@/Core/util/logger';
 /** 标题页 */
 export default function Title() {
   const userDataState = useSelector((state: RootState) => state.userData);
+  const userSaveData = useSelector((state: RootState) => state.saveData);
   const GUIState = useSelector((state: RootState) => state.GUI);
   const dispatch = useDispatch();
   const fullScreen = userDataState.optionData.fullScreen;
@@ -28,6 +29,8 @@ export default function Title() {
   const t = useTrans('title.');
   const tCommon = useTrans('common.');
   const { playSeEnter, playSeClick } = useSoundEffect();
+  const fastSaveData = userSaveData.quickSaveData;
+  const enableContinue = userDataState.globalGameVar.Enable_Continue !== false;
 
   const applyStyle = useApplyStyle('title');
   useConfigData(); // 监听基础ConfigData变化

@@ -247,10 +247,9 @@ $height: 350px;
 
 .readTextOuter {
   background-image: none;
-  // background-clip: border-box;
-  // -webkit-background-clip: border-box;
-  color: #e2d487;
-  -webkit-text-fill-color: #e2d487;
+  background-clip: border-box;
+  -webkit-background-clip: border-box;
+  color: #C0C0C0;
 }
 
 .readTextInner {
