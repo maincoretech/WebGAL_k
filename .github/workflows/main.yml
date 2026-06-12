@@ -36,10 +36,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: maincoretech/hexz_k
-          path: _hexz_k
-
-      - name: Move hexz_k to Cargo-expected location
-        run: mv _hexz_k ../../hexz_k
+          path: hexz_k
 
       - name: Install Dependencies (Ubuntu Only)
         if: matrix.platform == 'ubuntu-24.04'
