@@ -24,6 +24,7 @@ tauri = { version = "2.11.2", features = ["macos-private-api"] }
 tauri-plugin-process = "2.3.1"
 tauri-plugin-persisted-scope = "2.3.7"
 tauri-plugin-fs = "2.5.1"
+hexz_k = { path = "../../hexz_k" }
 
 [profile.dev]
 incremental = true

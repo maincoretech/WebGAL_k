@@ -39,3 +39,19 @@ ReactDOM.render(
   </StrictMode>,
   document.querySelector('#root'),
 );
+
+// Service Worker: relays game/* requests to Tauri hexz IPC
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/webgal-serviceworker.js', { scope: '/' });
+  navigator.serviceWorker.addEventListener('message', (e) => {
+    if (e.data?.type !== 'HEXZ_READ_FILE') return;
+    const port = e.ports[0];
+    // @ts-ignore —— Tauri injected at runtime
+    window.__TAURI_INTERNALS__
+      .invoke('read_hxz_file', { path: e.data.path })
+      // @ts-ignore
+      .then((bytes: number[]) => port.postMessage({ ok: true, bytes }))
+      // @ts-ignore
+      .catch((err: unknown) => port.postMessage({ ok: false, error: String(err) }));
+  });
+}
