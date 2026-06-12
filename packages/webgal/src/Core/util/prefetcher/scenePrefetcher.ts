@@ -8,7 +8,7 @@ import { logger } from '@/Core/util/logger';
 
 import { WebGAL } from '@/Core/WebGAL';
 
-const SCENE_PREFETCH_INTERVAL_MS = 320;
+const SCENE_PREFETCH_INTERVAL_MS = 80;
 const scenePrefetchQueue: Array<string> = [];
 const queuedSceneUrlSet = new Set<string>();
 let isScenePrefetchQueueRunning = false;

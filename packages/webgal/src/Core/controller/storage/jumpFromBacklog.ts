@@ -75,7 +75,7 @@ export const jumpFromBacklog = (index: number, refetchScene = true) => {
   stageStateManager.replaceCalculationStageState(newStageState);
 
   // 恢复演出
-  setTimeout(restorePerform, 0);
+  queueMicrotask(restorePerform);
 
   // 关闭backlog界面
   dispatch(setVisibility({ component: 'showBacklog', visibility: false }));

@@ -102,12 +102,10 @@ $height: 350px;
   position: absolute;
   left: 0;
   top: 0;
-  text-shadow: 0 0 10px #000;
-  //-webkit-text-stroke: 0.1em rgba(255, 255, 255, 1);
+  text-shadow: 0 0 12px #000, 0 0 4px rgba(0, 0, 0, 0.8);
   z-index: 1;
-  //text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.75);
-  display: inline-block; /* 内层元素同样行内块布局 */
-  vertical-align: middle; /* 确保与外层的对齐一致 */
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .zhanwei {
@@ -247,9 +245,7 @@ $height: 350px;
 
 .readTextOuter {
   background-image: none;
-  // background-clip: border-box;
-  // -webkit-background-clip: border-box;
-  color: #C0C0C0;
+  color: #E0E0E0;
 }
 
 .readTextInner {

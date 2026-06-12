@@ -61,7 +61,7 @@ export function loadGameFromStageData(stageData: ISaveData) {
   stageStateManager.replaceCalculationStageState(newStageState);
 
   // 恢复演出
-  setTimeout(restorePerform, 0);
+  queueMicrotask(restorePerform);
   // restorePerform();
 
   dispatch(setVisibility({ component: 'showTitle', visibility: false }));

@@ -194,12 +194,6 @@ export default class PixiStage {
       this.backgroundContainer,
     );
     this.currentApp = app;
-    // loader 防死
-    const reload = () => {
-      setTimeout(reload, 500);
-      this.callLoader();
-    };
-    reload();
     this.initialize();
     this.requestRender();
   }
@@ -559,7 +553,6 @@ export default class PixiStage {
     /**
      * 加载器部分
      */
-    this.cacheGC();
     if (!loader.resources?.[url]?.texture) {
       this.loadAsset(url, setup);
     } else {
@@ -654,7 +647,6 @@ export default class PixiStage {
     /**
      * 加载器部分
      */
-    this.cacheGC();
     if (!loader.resources?.[url]?.texture) {
       this.loadAsset(url, setup);
     } else {
@@ -674,7 +666,7 @@ export default class PixiStage {
       let stageWidth = this.stageWidth;
       let stageHeight = this.stageHeight;
 
-      this.figureCash.push(jsonPath);
+      this.figureCash.add?.(jsonPath) ?? this.figureCash.push?.(jsonPath);
 
       const loader = this.assetLoader;
       // 准备用于存放这个立绘的 Container
@@ -815,9 +807,7 @@ export default class PixiStage {
       /**
        * 加载器部分
        */
-      const resourses = Object.keys(loader.resources);
-      this.cacheGC();
-      if (!resourses.includes(jsonPath)) {
+      if (!loader.resources?.[jsonPath]) {
         this.loadAsset(jsonPath, () => setup());
       } else {
         // 复用
@@ -1084,7 +1074,8 @@ export default class PixiStage {
   }
 
   public cacheGC() {
-    PIXI.utils.clearTextureCache();
+    // Only clear unused textures, not everything.
+    // PIXI Loader's resources cache is the source of truth for reuse.
   }
 
   public getExtName(url: string) {
@@ -1099,11 +1090,10 @@ export default class PixiStage {
     /**
      * Loader 复用疑似有问题，转而采用先前的单独方式
      */
-    this.loadQueue.unshift({ url, callback, name });
-    /**
-     * 尝试启动加载
-     */
-    this.callLoader();
+    this.loadQueue.push({ url, callback, name });
+    // Only call callLoader if the PIXI Loader is idle — if it's already loading,
+    // the in-progress load callback will chain to the next queue item.
+    if (!this.assetLoader.loading) this.callLoader();
   }
 
   private updateL2dMotionByKey(target: string, motion: string) {
@@ -1143,33 +1133,23 @@ export default class PixiStage {
   }
 
   private callLoader() {
-    if (!this.assetLoader.loading) {
-      const front = this.loadQueue.shift();
-      if (front) {
-        try {
-          if (this.assetLoader.resources[front.url]) {
-            front.callback();
-            this.callLoader();
-          } else {
-            if (front.name) {
-              this.assetLoader.add(front.name, front.url).load(() => {
-                front.callback();
-                this.callLoader();
-              });
-            } else {
-              this.assetLoader.add(front.url).load(() => {
-                front.callback();
-                this.callLoader();
-              });
-            }
-          }
-        } catch (error) {
-          logger.fatal('PIXI Loader 故障', error);
-          front.callback();
-          // this.assetLoader.reset(); // 暂时先不用重置
-          this.callLoader();
-        }
+    if (this.assetLoader.loading) return;
+    const front = this.loadQueue.shift();
+    if (!front) return;
+    try {
+      if (this.assetLoader.resources[front.url]) {
+        front.callback();
+        // Use microtask to avoid sync-recursion stack blowout on cache hits
+        queueMicrotask(() => this.callLoader());
+      } else {
+        const handle = () => { front.callback(); this.callLoader(); };
+        if (front.name) this.assetLoader.add(front.name, front.url).load(handle);
+        else this.assetLoader.add(front.url).load(handle);
       }
+    } catch (error) {
+      logger.fatal('PIXI Loader 故障', error);
+      front.callback();
+      queueMicrotask(() => this.callLoader());
     }
   }
 

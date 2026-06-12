@@ -12,7 +12,7 @@ interface IAssetsPrefetcherOptions {
 }
 
 const INITIAL_PARSE_LINE_LOOKAHEAD = 24;
-const ASSET_PREFETCH_INTERVAL_MS = 220;
+const ASSET_PREFETCH_INTERVAL_MS = 60;
 const assetPrefetchQueue: Array<IAsset> = [];
 const queuedAssetUrlSet = new Set<string>();
 let isAssetPrefetchQueueRunning = false;
