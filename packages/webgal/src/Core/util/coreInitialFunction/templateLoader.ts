@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { hexzText, hexzJson } from '@/Core/util/hexzFetch';
 import { logger } from '@/Core/util/logger';
 import { WebGAL } from '@/Core/WebGAL';
 import { TemplateFontDescriptor, WebgalTemplate } from '@/types/template';
@@ -9,12 +9,12 @@ import { setOptionData } from '@/store/userDataReducer';
 import { scss2cssinjsParser } from '@/Core/controller/customUI/scss2cssinjsParser';
 import { injectGlobal } from '@emotion/css';
 
-const TEMPLATE_PATH = './game/template/template.json';
+const TEMPLATE_PATH = 'template/template.json';
 const TEMPLATE_FONT_STYLE_SELECTOR = 'style[data-webgal-template-fonts]';
 
 export async function loadTemplate(): Promise<WebgalTemplate | null> {
   try {
-    const { data } = await axios.get<WebgalTemplate>(TEMPLATE_PATH);
+    const data = await hexzJson<WebgalTemplate>(TEMPLATE_PATH);
     WebGAL.template = data;
     const fonts = data.fonts ?? [];
     injectTemplateFonts(fonts);
@@ -78,7 +78,7 @@ function resolveTemplateAssetPath(path: string): string {
     return path;
   }
   const normalized = path.replace(/^[./]+/, '');
-  return `./game/template/${normalized}`;
+  return `hexz://localhost/template/${normalized}`;
 }
 
 async function loadStyleFiles() {
@@ -92,9 +92,7 @@ async function loadStyleFiles() {
   await Promise.all(
     TEMPLATES.map(async (templatePath) => {
       try {
-        logger.info(`加载模板样式文件: ${templatePath.path}`);
-        const resp = await axios.get(`game/template/${templatePath.path}`);
-        const scssStr = resp.data;
+        const scssStr = await hexzText(`template/${templatePath.path}`);
         const styleObject = scss2cssinjsParser(scssStr);
         WebGAL.styleObjects.set(templatePath.ui, styleObject);
         injectGlobal(styleObject.others);

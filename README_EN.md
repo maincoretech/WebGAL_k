@@ -1,81 +1,122 @@
-![WebGAL Slogan](https://github.com/OpenWebGAL/WebGAL/assets/30483415/ede38a39-d054-4fee-a3e9-fc5e764f358d)
+# WebGAL_k
 
-**[中文版本](/README.md)**
+**[中文版](./README.md)**
 
-**[Help us with translation | 协助翻译 | 翻訳のお手伝い ](https://github.com/OpenWebGAL/WebGAL/tree/dev/packages/webgal/src/translations)**
+> WebGAL + hexz = Encrypted · Random-access · Delta-updatable desktop visual novel engine
 
-**[Join Discord Server](https://discord.gg/kPrQkJttJy)**
+Built on [WebGAL](https://github.com/OpenWebGAL/WebGAL) / [Tauri v2](https://v2.tauri.app) / [hexz](https://github.com/maincoretech/hexz_k). Packs game assets into a single encrypted `.hxz` archive, fully compatible with Steamworks delta patching.
 
-<a href="https://www.producthunt.com/posts/webgal?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-webgal" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=443280&theme=light" alt="WebGAL - Galgame&#0032;Editing&#0046;&#0032;Redefined | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+---
 
-# WebGAL
+## Architecture
 
-**A visually appealing, feature-rich, and easy-to-develop new web-based visual novel engine**
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'fontSize': '13px'}}}%%
+flowchart LR
+    subgraph Disk["💾 Distribution"]
+        HXZ["📦 game.hxz<br/>AES-256-GCM encrypted<br/>random-access index"]
+        APP["🖥️ webgal-k.app"]
+        HXZ -. "independent of .app<br/>delta-patching friendly" .- APP
+    end
 
-# WebGAL Provides Visual Editor
+    subgraph Rust["🦀 src-tauri/src/lib.rs"]
+        Protocol["hexz:// protocol"]
+        IPC["read_hexz_file IPC"]
+        Store["Arc&lt;ResourcePack&gt;<br/>lock-free concurrent reads"]
+    end
 
-**Who needs to code to create visual novels? Welcome to experience [WebGAL Visual Editor](https://github.com/OpenWebGAL/WebGAL_Terre/)**
+    subgraph JS["📦 hexzFetch.ts"]
+        Text["hexzText() / hexzJson()"]
+        Asset["assetSetter() → hexz://localhost/xxx"]
+    end
 
-Demo video: https://www.bilibili.com/video/BV1jS4y1i7Wz/
+    HXZ --> Protocol
+    HXZ --> IPC
+    Protocol -- "img/audio/video/font" --> Browser["🌐 WebView"]
+    IPC -- "json/txt/scss" --> Text
+    Text --> Browser
+    Asset --> Protocol
+    Asset --> Text
+```
 
-## Online Experience
+**Dual-channel design** — `hexz://` protocol for no-cors media, Tauri IPC for text resources (WKWebView blocks cross-origin XHR).
 
-A short example:
+| Resource Type | Channel | Reason |
+|---------------|---------|--------|
+| images / audio / video / fonts | `hexz://` protocol | native browser support, zero overhead |
+| json / txt / scss | Tauri IPC | WKWebView CORS restriction |
 
-https://demo.openwebgal.com
+---
 
-A complete game:
+## Differences from Upstream WebGAL
 
-[WebGAL games showcase](https://www.openwebgal.com/games/)
+### Asset Loading
 
-### Creating Games with WebGAL
+| Upstream WebGAL | WebGAL_k |
+|-----------------|----------|
+| Assets scattered in `public/game/` | Packed into single `game.hxz` encrypted archive |
+| Loaded via relative path `./game/xxx` | Loaded via `hexz://localhost/xxx` protocol |
+| All requests use browser fetch/XHR | Dual channels: no-cors via protocol, text via IPC |
+| Service Worker for caching/relay | No SW (WKWebView incompatible) |
 
-[WebGAL Development Documentation](https://docs.openwebgal.com/en)
+### Security
 
-[Download WebGAL Graphical Editor](https://github.com/OpenWebGAL/WebGAL_Terre/releases)
+| Upstream WebGAL | WebGAL_k |
+|-----------------|----------|
+| Assets stored in plaintext on disk | AES-256-GCM encryption |
+| No native password support | `HEXZ_PASSWORD` env var for decryption |
 
-## WebGAL Advantages and Features
+### Distribution & Updates
 
-Write once, run everywhere, no web development background needed, learn all syntax in 3 minutes, start creating your own visual novel as soon as inspiration strikes!
+| Upstream WebGAL | WebGAL_k |
+|-----------------|----------|
+| Web deployment, assets load with page | Desktop app via Tauri |
+| Full redeploy on update | `.hxz` independent of executable, Steamworks delta patch ready |
+| Client fetches full resource per request | O(1) random access, single-file reads on demand |
 
-### Visually Appealing Interface
+### Concurrency
 
-Beautiful and elegant graphical user interface and interaction effects, all for a better user experience.
+| Upstream WebGAL | WebGAL_k |
+|-----------------|----------|
+| Browser-native concurrency | `Arc<ResourcePack>` lock-free, protocol + IPC parallel channels |
 
-### Feature-Rich
+### UI Tweaks
 
-Supports almost all features of mainstream visual novel engines, plus you can use Pixi.js to add custom effects to your game.
+- Textbox: removed `backdrop-filter: blur()`, darker background
+- Title screen: removed full-screen transparent overlay, fixed double-click SFX
 
-### Easy to Develop
+---
 
-Whether using WebGAL scripts or the visual editor for development, everything is simple and natural.
+## Build
 
-### Participate in WebGAL Development
+```bash
+# 1. Pack game assets into .hxz archive (unencrypted)
+# You can also use the GUI tool for this step
+cargo run --manifest-path hexz_k/Cargo.toml -- pack game/ game.hxz
 
-**Developers who want to participate in engine development, please read [the participation guide for this project](https://docs.openwebgal.com/en/developers/)**
+# 2. Build desktop app
+bun tauri build
 
-### Sponsorship
+# 3. Deploy: place game.hxz alongside the executable
+cp game.hxz src-tauri/target/release/bundle/macos/webgal-k.app/Contents/MacOS/
+```
 
-WebGAL is an open-source software, so you can use this software for free under the scope of the MPL-2.0 open-source license, and it is available for commercial use.
+`find_hexz()` searches exe directory, parent directory, and macOS `.app` bundle root.
 
-Even so, your sponsorship can provide motivation for the developers to move forward and make this project even better.
+---
 
-[Sponsor this project](https://docs.openwebgal.com/en/sponsor/)
+## hexz Features in Use
 
-## Related Projects
+| Feature | Implementation |
+|---------|---------------|
+| **Encryption** | AES-256-GCM, `HEXZ_PASSWORD` env var |
+| **Random access** | O(1) index lookup, per-file reads |
+| **Concurrent reads** | `Arc<ResourcePack>`, protocol + IPC in parallel |
+| **Delta updates** | `.hxz` independent of executable, Steamworks-ready |
 
-- [webgal-craft](https://github.com/A-kirami/webgal-craft): A community WIP visual editor for WebGAL.
-- [Webgal_transformEditor](https://github.com/KonshinHaoshin/Webgal_transformEditor): A visual editor for `setTransform` and `changeFigure` scene scripting.
-- [webgal-language-tools](https://github.com/xiaoxustudio/webgal-language-tools): Volar.js-based language tools for WebGAL, with LSP, VS Code extension, and Monaco support.
-- [webgal-tool-l2dw](https://github.com/LostWaym/webgal-tool-l2dw): A Live2D utility for WebGAL to adjust models and motions and export related commands.
-- [webgal-mygo](https://github.com/boomwwww/webgal-mygo): A MyGO-specific maintenance fork of the WebGAL engine.
+---
 
-# Sponsors
+## License
 
-<a href="https://openwebgal.com/">
-<img alt="Sponsor" src="https://raw.githubusercontent.com/OpenWebGAL/static/main/sponsors.png">
-</a>
+MIT · Built on [WebGAL](https://github.com/OpenWebGAL/WebGAL)
 
-## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/OpenWebGAL/WebGAL.svg)](https://starchart.cc/OpenWebGAL/WebGAL)

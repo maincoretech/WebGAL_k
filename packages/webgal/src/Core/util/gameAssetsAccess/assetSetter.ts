@@ -23,29 +23,29 @@ export enum fileType {
  */
 export const assetSetter = (fileName: string, assetType: fileType): string => {
   // 是绝对链接，直接返回
-  if (fileName.match('http://') || fileName.match('https://')) {
+  if (fileName.startsWith('http://') || fileName.startsWith('https://')) {
     return fileName;
   } else {
     // 根据类型拼接资源的相对路径
     let returnFilePath: string;
     switch (assetType) {
       case fileType.background:
-        returnFilePath = `./game/background/${fileName}`;
+        returnFilePath = `hexz://localhost/background/${fileName}`;
         break;
       case fileType.scene:
-        returnFilePath = `./game/scene/${fileName}`;
+        returnFilePath = `hexz://localhost/scene/${fileName}`;
         break;
       case fileType.vocal:
-        returnFilePath = `./game/vocal/${fileName}`;
+        returnFilePath = `hexz://localhost/vocal/${fileName}`;
         break;
       case fileType.figure:
-        returnFilePath = `./game/figure/${fileName}`;
+        returnFilePath = `hexz://localhost/figure/${fileName}`;
         break;
       case fileType.bgm:
-        returnFilePath = `./game/bgm/${fileName}`;
+        returnFilePath = `hexz://localhost/bgm/${fileName}`;
         break;
       case fileType.video:
-        returnFilePath = `./game/video/${fileName}`;
+        returnFilePath = `hexz://localhost/video/${fileName}`;
         break;
       default:
         returnFilePath = ``;

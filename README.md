@@ -1,104 +1,122 @@
-![WebGAL Slogan](https://github.com/OpenWebGAL/WebGAL/assets/30483415/ede38a39-d054-4fee-a3e9-fc5e764f358d)
+# WebGAL_k
 
-### **[English Version](/README_EN.md)** | **[日本語版](/README_JP.md)** | **[한국어](/README_KO.md)** | **[Français](/README_FR.md)**
+**[English](./README_EN.md)**
 
-**[Help us with translation | 协助翻译 | 翻訳のお手伝い | 번역을 도와주세요](https://github.com/OpenWebGAL/WebGAL/tree/dev/packages/webgal/src/translations)**
+> WebGAL + hexz = 加密 · 随机访问 · 差量更新的桌面端视觉小说引擎
 
-**[Join Discord Server | 加入 Discord 讨论 | Discord のディスカッションに参加する](https://discord.gg/kPrQkJttJy)**
+基于 [WebGAL](https://github.com/OpenWebGAL/WebGAL) / [Tauri v2](https://v2.tauri.app) / [hexz](https://github.com/maincoretech/hexz_k)，将游戏资源打包为独立 `.hxz` 加密归档文件，支持 Steamworks 差量更新。
 
-<a href="https://www.producthunt.com/posts/webgal?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-webgal" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=443280&theme=light" alt="WebGAL - Galgame&#0032;Editing&#0046;&#0032;Redefined | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+---
 
-# WebGAL
+## 架构
 
-**界面美观、功能强大、易于开发的全新网页端视觉小说引擎**
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'fontSize': '13px'}}}%%
+flowchart LR
+    subgraph Disk["💾 分发"]
+        HXZ["📦 game.hxz<br/>AES-256-GCM 加密<br/>随机访问索引"]
+        APP["🖥️ webgal-k.app"]
+        HXZ -. "独立于 .app<br/>差量更新友好" .- APP
+    end
 
-# WebGAL 提供可视化编辑器
+    subgraph Rust["🦀 src-tauri/src/lib.rs"]
+        Protocol["hexz:// protocol"]
+        IPC["read_hexz_file IPC"]
+        Store["Arc&lt;ResourcePack&gt;<br/>无锁并发读"]
+    end
 
-**创作视觉小说，何须会编程？欢迎体验 [WebGAL 图形化编辑器](https://github.com/OpenWebGAL/WebGAL_Terre/)**
+    subgraph JS["📦 hexzFetch.ts"]
+        Text["hexzText() / hexzJson()"]
+        Asset["assetSetter() → hexz://localhost/xxx"]
+    end
 
-## 在线体验
-
-#### WebGAL 示例游戏，一般会演示最新开发的功能
-
-https://demo.openwebgal.com
-
-#### 完整的游戏
-
-[WebGAL 官方游戏展示页](https://www.openwebgal.com/games/)
-
-[Elf of Era Idols Project](https://store.steampowered.com/app/2414730/Elf_of_Era_Idols_Project/) (通过 Steam 获取)
-
-## 使用 WebGAL 制作游戏
-
-[WebGAL 开发文档](https://docs.openwebgal.com/)
-
-[下载 WebGAL 图形化编辑器](https://github.com/OpenWebGAL/WebGAL_Terre/releases)
-
-你也可以使用源代码或 [WebGAL 调试工具](https://github.com/OpenWebGAL/WebGAL/releases) 制作游戏，并使用 [WebGAL Script VS Code 插件](https://marketplace.visualstudio.com/items?itemName=c6h5-no2.webgal-script-basics) 来启用语法高亮
-
-## WebGAL 优势与特色
-
-一次编写，处处运行，无需网页开发基础，3 分钟即可学会所有的语法，只要你有灵感，就可以立刻开始开始创作你自己的视觉小说！
-
-### 界面美观
-
-美观优雅的图形用户界面与交互效果，一切都是为了更好的用户体验。
-
-### 功能强大
-
-不仅支持主流视觉小说引擎所具有的几乎全部功能，你还可以使用 Pixi.js 为你的游戏添加自定义效果。
-
-### 易于开发
-
-无论是使用 WebGAL 脚本还是使用可视化编辑器进行开发，一切都是那么简单自然。
-
-### 参与 WebGAL 的开发工作
-
-**想要参与引擎开发的开发者请阅读 [此项目的参与指南](https://docs.openwebgal.com/developers/)**
-
-### 赞助
-
-WebGAL 是一款开源软件，因此你可以免费在 MPL-2.0 开源协议的范畴下使用本软件，并可用于商业使用。
-
-但即便如此，你的赞助也可以给予开发者前进的动力，让这个项目变得更好。
-
-[赞助本项目](https://docs.openwebgal.com/sponsor/)
-
-## WebGAL 相关项目
-
-- [webgal-craft](https://github.com/A-kirami/webgal-craft): 社区开发中的 WebGAL 可视化编辑器。
-- [Webgal_transformEditor](https://github.com/KonshinHaoshin/Webgal_transformEditor): 用于可视化编辑 `setTransform` 与 `changeFigure` 的运镜脚本工具。
-- [webgal-language-tools](https://github.com/xiaoxustudio/webgal-language-tools): 基于 Volar.js 的 WebGAL 语言工具链，提供 LSP、VS Code 扩展和 Monaco 支持。
-- [webgal-tool-l2dw](https://github.com/LostWaym/webgal-tool-l2dw): 面向 WebGAL 的 Live2D 工具，可调整模型与动作并导出相关指令。
-- [webgal-mygo](https://github.com/boomwwww/webgal-mygo): 面向 MyGO 项目的 WebGAL 专版引擎维护分支。
-
-# Sponsors
-
-<a href="https://openwebgal.com/">
-<img alt="Sponsor" src="https://raw.githubusercontent.com/OpenWebGAL/static/main/sponsors.png">
-</a>
-
-## Stargazers over time
-
-[![Stargazers over time](https://starchart.cc/OpenWebGAL/WebGAL.svg)](https://starchart.cc/OpenWebGAL/WebGAL)
-Custom modified WebGAL for our game use
-
-## Recommanded environment setup
-
-[VSCode](https://code.visualstudio.com/) (with [plugin](https://marketplace.visualstudio.com/items?itemName=c6h5-no2.webgal-script-basics)) + [Chrome](https://www.google.com/chrome/)/[Edge](https://www.microsoft.com/edge) + [Bun](https://bun.sh/)
-
-> NodeJS was removed since 2024-08-20
-
-## Commands
-
-```sh
-bun i        // setup project
-bun dev      // open dev server
-bun build    // build project, the webgal output is ./packages/webgal/dist
+    HXZ --> Protocol
+    HXZ --> IPC
+    Protocol -- "img/audio/video/font" --> Browser["🌐 WebView"]
+    IPC -- "json/txt/scss" --> Text
+    Text --> Browser
+    Asset --> Protocol
+    Asset --> Text
 ```
 
-## More infomation
+**双通道设计** — `hexz://` protocol 处理 no-cors 媒体，Tauri IPC 处理文本资源（WKWebView 阻止跨域 XHR）。
 
-see also [WebGAL's documents](https://docs.openwebgal.com/)
+| 资源类型 | 通道 | 原因 |
+|----------|------|------|
+| 图片 / 音频 / 视频 / 字体 | `hexz://` protocol | 浏览器原生，零开销 |
+| json / txt / scss | Tauri IPC | WKWebView CORS 限制 |
 
-instead of electron we use tauri2 to pack program, you can easily config environment with [tauri2's documents](https://v2.tauri.app/start/prerequisites/) for develop
+---
+
+## 与上游 WebGAL 差异
+
+### 资源加载
+
+| 上游 WebGAL | WebGAL_k |
+|-------------|----------|
+| 资源散落在 `public/game/` 目录 | 打包为单个 `game.hxz` 加密归档 |
+| 通过相对路径 `./game/xxx` 加载 | 通过 `hexz://localhost/xxx` 协议加载 |
+| 所有请求走浏览器 fetch/XHR | 双通道：no-cors 走 protocol，文本走 IPC |
+| 依赖 Service Worker 做缓存/转发 | 无 SW（WKWebView 不支持） |
+
+### 安全性
+
+| 上游 WebGAL | WebGAL_k |
+|-------------|----------|
+| 资源明文存储在文件系统 | AES-256-GCM 加密 |
+| 密码无原生支持 | `HEXZ_PASSWORD` 环境变量解密 |
+
+### 分发与更新
+
+| 上游 WebGAL | WebGAL_k |
+|-------------|----------|
+| Web 端部署，资源随页面加载 | 桌面端 Tauri 打包 |
+| 更新需重新部署全部文件 | `.hxz` 独立于可执行文件，支持 Steamworks 差量更新 |
+| 客户端每次请求完整资源 | O(1) 随机访问，按需读取单个文件 |
+
+### 并发性能
+
+| 上游 WebGAL | WebGAL_k |
+|-------------|----------|
+| 浏览器原生并发 | `Arc<ResourcePack>` 无锁并发，protocol + IPC 多通道并行 |
+
+### UI 微调
+
+- 文本框移除 `backdrop-filter: blur()`，背景加深
+- Title 画面移除全屏透明遮罩，修复双击音效
+
+---
+
+## 构建
+
+```bash
+# 1. 打包游戏资源为 .hxz 归档（无加密情况）
+# 同样的你可以使用gui工具来做这一步
+cargo run --manifest-path hexz_k/Cargo.toml -- pack game/ game.hxz
+
+# 2. 构建桌面应用
+bun tauri build
+
+# 3. 部署：game.hxz 放在可执行文件同目录
+cp game.hxz src-tauri/target/release/bundle/macos/webgal-k.app/Contents/MacOS/
+```
+
+`find_hexz()` 自动搜索 exe 同目录、上级目录、macOS `.app` 同级。
+
+---
+
+## hexz 特性利用
+
+| 特性 | 实现 |
+|------|------|
+| **加密** | AES-256-GCM，`HEXZ_PASSWORD` 环境变量 |
+| **随机访问** | O(1) 索引查找，按需读取单文件 |
+| **并发读** | `Arc<ResourcePack>`，protocol + IPC 并行 |
+| **差量更新** | `.hxz` 独立于可执行文件，Steamworks 友好 |
+
+---
+
+## 许可
+
+MIT · 基于 [WebGAL](https://github.com/OpenWebGAL/WebGAL) 构建
+

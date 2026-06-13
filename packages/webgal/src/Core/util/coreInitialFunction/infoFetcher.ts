@@ -7,7 +7,7 @@ import { getStorageAsync, setStorage } from '@/Core/controller/storage/storageCo
 import { initKey } from '@/Core/controller/storage/fastSaveLoad';
 import { getFastSaveFromStorage, getSavesFromStorage } from '@/Core/controller/storage/savesController';
 import { logger } from '@/Core/util/logger';
-import axios from 'axios';
+import { hexzText } from '@/Core/util/hexzFetch';
 import { IGameVar } from '@/Core/Modules/stage/stageInterface';
 
 /**
@@ -16,8 +16,7 @@ import { IGameVar } from '@/Core/Modules/stage/stageInterface';
  */
 export const infoFetcher = (url: string): Promise<IGameVar> => {
   const dispatch = webgalStore.dispatch;
-  return axios.get(url).then(async (r) => {
-    let gameConfigRaw: string = r.data;
+  return hexzText(url).then(async (gameConfigRaw) => {
     let gameConfig = WebgalParser.parseConfig(gameConfigRaw);
     logger.info('获取到游戏信息', gameConfig);
     // 先把 key 找到并设置了

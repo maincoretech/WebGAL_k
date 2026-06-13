@@ -6,6 +6,7 @@ import styles from '@/Stage/FullScreenPerform/fullScreenPerform.module.scss';
 import { WebGAL } from '@/Core/WebGAL';
 import useEscape from '@/hooks/useEscape';
 import { getBooleanArgByKey, getNumberArgByKey, getStringArgByKey } from '../util/getSentenceArg';
+import { assetSetter, fileType } from '@/Core/util/gameAssetsAccess/assetSetter';
 /**
  * 显示一小段黑屏演示
  * @param sentence
@@ -31,7 +32,8 @@ export const intro = (sentence: ISentence): IPerform => {
       break;
   }
   const backgroundImageFromArgs = getStringArgByKey(sentence, 'backgroundImage') ?? '';
-  const backgroundImage = `url("game/background/${backgroundImageFromArgs}") center/cover no-repeat`;
+  const bgUrl = backgroundImageFromArgs ? assetSetter(backgroundImageFromArgs, fileType.background) : '';
+  const backgroundImage = bgUrl ? `url("${bgUrl}") center/cover no-repeat` : 'none';
   const backgroundColor = getStringArgByKey(sentence, 'backgroundColor') ?? 'rgba(0, 0, 0, 1)';
   const color = getStringArgByKey(sentence, 'fontColor') ?? 'rgba(255, 255, 255, 1)';
   const animationFromArgs = getStringArgByKey(sentence, 'animation') ?? '';

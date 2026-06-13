@@ -24,7 +24,7 @@ class ChooseOption {
     const parts = script.split('->');
     const conditonPart = parts.length > 1 ? parts[0] : null;
     const mainPart = parts.length > 1 ? parts[1] : parts[0];
-    const mainPartNodes = mainPart.split(/(?<!\\):/g);
+    const mainPartNodes = mainPart.split(/(?<!\\):(?!\/\/)/g);
     const option = new ChooseOption(mainPartNodes[0], mainPartNodes[1]);
     if (conditonPart !== null) {
       const showConditionPart = conditonPart.match(/\((.*)\)/);

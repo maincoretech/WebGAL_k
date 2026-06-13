@@ -10,7 +10,7 @@ import { bindExtraFunc } from '@/Core/util/coreInitialFunction/bindExtraFunc';
 import { startPreviewSyncRuntime } from '@/Core/util/syncWithEditor/previewSyncRuntime';
 import PixiStage from '@/Core/controller/stage/pixi/PixiController';
 import { syncPixiStageState } from '@/Core/controller/stage/pixi/syncPixiStageState';
-import axios from 'axios';
+import { hexzJson } from './util/hexzFetch';
 import { __INFO } from '@/config/info';
 import { WebGAL } from '@/Core/WebGAL';
 import { loadTemplate } from '@/Core/util/coreInitialFunction/templateLoader';
@@ -28,7 +28,7 @@ export const initializeScript = (): void => {
   logger.info('Github: https://github.com/OpenWebGAL/WebGAL ');
   logger.info('Made with ❤ by OpenWebGAL');
   logger.info('The K mode (Modified)');
-  loadTemplate();
+  loadTemplate().catch(() => {});
   // 激活强制缩放
   // 在调整窗口大小时重新计算宽高，设计稿按照 1600*900。
   if (isIOS && window.innerWidth <= window.innerHeight) {
@@ -43,18 +43,18 @@ export const initializeScript = (): void => {
   }
 
   // 获得 userAnimation
-  loadStyle('./game/userStyleSheet.css');
+  loadStyle('hexz://localhost/userStyleSheet.css');
   // 获得 user Animation
   getUserAnimation();
   // 获取start场景
   const sceneUrl: string = assetSetter('start.txt', fileType.scene);
   // 场景写入到运行时
-  const initialSceneReady = sceneFetcher(sceneUrl).then((rawScene) => {
+  sceneFetcher(sceneUrl).then((rawScene) => {
     WebGAL.sceneManager.sceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl);
     WebGAL.sceneManager.settledScenes.add(sceneUrl); // 放入已加载场景列表，避免递归加载相同场景
   });
   // 获取游戏信息
-  infoFetcher('./game/config.txt');
+  infoFetcher('hexz://localhost/config.txt');
   /**
    * 启动Pixi
    */
@@ -94,14 +94,13 @@ function loadStyle(url: string) {
 }
 
 function getUserAnimation() {
-  axios.get('./game/animation/animationTable.json').then((res) => {
-    const animations: Array<string> = res.data;
+  hexzJson<string[]>('animation/animationTable.json').then((animations) => {
     for (const animationName of animations) {
-      axios.get(`./game/animation/${animationName}.json`).then((res) => {
-        if (res.data) {
+      hexzJson(`animation/${animationName}.json`).then((data) => {
+        if (data) {
           const userAnimation = {
             name: animationName,
-            effects: res.data,
+            effects: data,
           };
           WebGAL.animationManager.addAnimation(userAnimation);
         }
