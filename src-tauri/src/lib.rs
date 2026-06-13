@@ -35,7 +35,7 @@ pub fn run() {
       let _ = app.handle().plugin(tauri_plugin_window_state::Builder::default().build());
 
       if let Some(path) = find_hexz() {
-        let pw = std::env::var("HEXZ_PASSWORD").ok();
+        let pw = option_env!("HEXZ_PASSWORD").map(|s| s.to_string());
         if let Ok(pack) = ResourcePack::open(&path, pw.as_deref()) {
           app.handle().manage(Arc::new(pack));
         }
