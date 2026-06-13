@@ -64,6 +64,18 @@ export default function Title() {
   return (
     <>
       {GUIState.showTitle && <div className={applyStyle('Title_backup_background', styles.Title_backup_background)} />}
+      <div
+        className="title__enter-game-target"
+        onClick={() => {
+          playBgm(GUIState.titleBgm);
+          dispatch(setVisibility({ component: 'isEnterGame', visibility: true }));
+          if (fullScreen === fullScreenOption.on) {
+            document.documentElement.requestFullscreen();
+            if (keyboard) keyboard.lock(['Escape', 'F11']);
+          }
+        }}
+        onMouseEnter={playSeEnter}
+      />
       {GUIState.showTitle && (
         <div
           className={applyStyle('Title_main', styles.Title_main)}
@@ -77,12 +89,6 @@ export default function Title() {
             <div
               className={applyStyle('Title_button', styles.Title_button)}
               onClick={() => {
-                playBgm(GUIState.titleBgm);
-                if (fullScreen === fullScreenOption.on) {
-                  document.documentElement.requestFullscreen();
-                  if (keyboard) keyboard.lock(['Escape', 'F11']);
-                }
-                dispatch(setVisibility({ component: 'isEnterGame', visibility: true }));
                 startGame();
                 playSeClick();
               }}

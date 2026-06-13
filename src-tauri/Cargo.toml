@@ -24,7 +24,10 @@ tauri = { version = "2.11.2", features = ["macos-private-api"] }
 tauri-plugin-process = "2.3.1"
 tauri-plugin-persisted-scope = "2.3.7"
 tauri-plugin-fs = "2.5.1"
-hexz_k = { path = "../hexz_k" }
+hexz-core = "0.8"
+hexz-store = "0.8"
+bincode = "1"
+anyhow = "1"
 mime_guess = "2.0.5"
 http = "1.4.2"
 urlencoding = "2.1.3"

@@ -1,16 +1,11 @@
-name: "main"
+name: CI
+
 on:
   workflow_dispatch:
   push:
 
-# env:
-# CARGO_INCREMENTAL: 0
-# RUST_BACKTRACE: short
-# RUSTFLAGS: '-D warnings -W unreachable-pub -W rust-2021-compatibility'
-# RUSTFLAGS: "-W unreachable-pub -W rust-2021-compatibility"
-
 jobs:
-  publish-tauri:
+  build:
     permissions: write-all
     strategy:
       fail-fast: false
@@ -32,13 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Checkout hexz_k
-        uses: actions/checkout@v4
-        with:
-          repository: maincoretech/hexz_k
-          path: hexz_k
-
-      - name: Install Dependencies (Ubuntu Only)
+      - name: Install Dependencies (Ubuntu)
         if: matrix.platform == 'ubuntu-24.04'
         run: |
           sudo apt-get update
@@ -57,19 +46,6 @@ jobs:
         with:
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
-      # Just not need NodeJS and Yarn anymore!
-      # SEE U AGAIN~
-      # - name: Install yarn
-      #   uses: borales/actions-yarn@v4
-      #   with:
-      #     cmd: install
-
-      # - name: Setup node and cache for package data
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: "lts/*"
-      #     cache: "yarn"
-
       - name: Cache Rust
         uses: Swatinem/rust-cache@v2
 
@@ -78,8 +54,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version
-          includeDebug: true
+          tagName: app-v__VERSION__
           releaseName: "App v__VERSION__"
           releaseBody: "See the assets to download this version and install."
           releaseDraft: true

@@ -1,6 +1,9 @@
+mod hexz;
+
+use hexz::ResourcePack;
 use std::sync::Arc;
 
-type PackRef = Arc<hexz_k::ResourcePack>;
+type PackRef = Arc<ResourcePack>;
 
 fn find_hexz() -> Option<std::path::PathBuf> {
   let exe_dir = std::env::current_exe()
@@ -33,7 +36,7 @@ pub fn run() {
 
       if let Some(path) = find_hexz() {
         let pw = std::env::var("HEXZ_PASSWORD").ok();
-        if let Ok(pack) = hexz_k::ResourcePack::open(&path, pw.as_deref()) {
+        if let Ok(pack) = ResourcePack::open(&path, pw.as_deref()) {
           app.handle().manage(Arc::new(pack));
         }
       }

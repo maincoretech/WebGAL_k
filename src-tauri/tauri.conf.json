@@ -41,12 +41,6 @@
         "bundleMediaFramework": true
       }
     },
-    "android": {
-      "minSdkVersion": 24
-    },
-    "iOS": {
-      "developmentTeam": "maincore_tech."
-    },
     "macOS": {
       "dmg": {
         "appPosition": {

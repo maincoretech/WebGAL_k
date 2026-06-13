@@ -83,7 +83,6 @@ flowchart LR
 ### UI 微调
 
 - 文本框移除 `backdrop-filter: blur()`，背景加深
-- Title 画面移除全屏透明遮罩，修复双击音效
 
 ---
 

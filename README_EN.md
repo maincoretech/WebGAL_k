@@ -83,7 +83,6 @@ flowchart LR
 ### UI Tweaks
 
 - Textbox: removed `backdrop-filter: blur()`, darker background
-- Title screen: removed full-screen transparent overlay, fixed double-click SFX
 
 ---
 
