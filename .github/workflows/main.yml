@@ -2,6 +2,10 @@ name: CI
 
 on:
   workflow_dispatch:
+    inputs:
+      hexzPassword:
+        description: 'HEXZ archive password (leave empty if not encrypted)'
+        required: false
   push:
 
 jobs:
@@ -53,6 +57,7 @@ jobs:
         uses: tauri-apps/tauri-action@dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEXZ_PASSWORD: ${{ inputs.hexzPassword }}
         with:
           tagName: app-v__VERSION__
           releaseName: "App v__VERSION__"

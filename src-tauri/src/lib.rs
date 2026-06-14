@@ -41,7 +41,7 @@ pub fn run() {
       #[cfg(desktop)]
       let _ = app.handle().plugin(tauri_plugin_window_state::Builder::default().build());
 
-      let pw = option_env!("HEXZ_PASSWORD").map(|s| s.to_string());
+      let pw = option_env!("HEXZ_PASSWORD").filter(|s| !s.is_empty()).map(|s| s.to_string());
       let pack = find_hexz()
         .and_then(|p| ResourcePack::open(&p, pw.as_deref()).ok());
       let loaded = pack.is_some();
