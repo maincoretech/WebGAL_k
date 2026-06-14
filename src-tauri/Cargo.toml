@@ -1,6 +1,6 @@
 [package]
 name = "app"
-version = "0.1.2"
+version = "0.1.4"
 description = "webgal-k"
 authors = ["maincore_tech.", "k43Lab"]
 license = ""
