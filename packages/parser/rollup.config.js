@@ -12,6 +12,7 @@ export default [
       {
         file: "./build/es/index.js",
         format: "es",
+        exports: "named",
         sourcemap: !isProd
       },
     plugins: [
@@ -53,6 +54,7 @@ export default [
         file: "./build/umd/index.global.js",
         name: 'webgalParser',
         format: 'iife',
+        exports: "named",
         sourcemap: !isProd
       },
     ],

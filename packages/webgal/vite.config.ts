@@ -5,15 +5,27 @@ import loadVersion from 'vite-plugin-package-version';
 import { resolve } from 'path';
 import Info from 'unplugin-info/vite';
 import viteCompression from 'vite-plugin-compression';
+import fs from 'fs';
+import path from 'path';
 
 // https://vitejs.dev/config/
 
-// postcss
-import postcssPresetEnv from 'postcss-preset-env';
-import cssnano from 'cssnano';
-
 const env = process.env.NODE_ENV;
 console.log(env);
+
+/** Remove dist/game/ — assets are served from hexz archive */
+function stripGameAssets() {
+  return {
+    name: 'strip-game-assets',
+    closeBundle() {
+      const gameDir = path.resolve(__dirname, 'dist', 'game');
+      if (fs.existsSync(gameDir)) {
+        fs.rmSync(gameDir, { recursive: true, force: true });
+        console.log('[strip-game-assets] Removed dist/game/');
+      }
+    },
+  };
+}
 
 export default defineConfig({
   css: {
@@ -22,9 +34,6 @@ export default defineConfig({
         silenceDeprecations: ['legacy-js-api'],
       },
     },
-    postcss: {
-      plugins: [postcssPresetEnv(), cssnano()],
-    },
   },
   plugins: [
     react(),
@@ -32,7 +41,9 @@ export default defineConfig({
     Info(),
     viteCompression({
       filter: /^(.*assets).*\.(js|css|ttf)$/,
+      algorithm: 'brotliCompress',
     }),
+    stripGameAssets(),
     // @ts-ignore
     // visualizer(),
   ],

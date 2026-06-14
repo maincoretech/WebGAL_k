@@ -2,8 +2,9 @@ mod hexz;
 
 use hexz::ResourcePack;
 use std::sync::Arc;
+use tauri::Manager;
 
-type PackRef = Arc<ResourcePack>;
+type PackRef = Arc<Option<ResourcePack>>;
 
 fn find_hexz() -> Option<std::path::PathBuf> {
   let exe_dir = std::env::current_exe()
@@ -17,7 +18,13 @@ fn find_hexz() -> Option<std::path::PathBuf> {
   ];
   // macOS .app bundle: Contents/MacOS/ → 3 levels up
   #[cfg(target_os = "macos")]
-  dirs.extend(exe_dir.parent().and_then(|p| p.parent()).and_then(|p| p.parent()).map(|d| d.to_path_buf()));
+  {
+    let app_root = exe_dir
+      .parent().and_then(|p| p.parent())
+      .and_then(|p| p.parent())
+      .map(|d| d.to_path_buf());
+    dirs.extend(app_root);
+  }
   for d in &dirs {
     let p = d.join("game.hxz");
     if p.exists() { return Some(p); }
@@ -27,22 +34,27 @@ fn find_hexz() -> Option<std::path::PathBuf> {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-  use tauri::Manager;
   tauri::Builder::default()
     .plugin(tauri_plugin_fs::init())
     .setup(|app| {
       #[cfg(desktop)]
       let _ = app.handle().plugin(tauri_plugin_window_state::Builder::default().build());
 
-      if let Some(path) = find_hexz() {
-        let pw = option_env!("HEXZ_PASSWORD").map(|s| s.to_string());
-        if let Ok(pack) = ResourcePack::open(&path, pw.as_deref()) {
-          app.handle().manage(Arc::new(pack));
-        }
-      }
+      let pw = option_env!("HEXZ_PASSWORD").map(|s| s.to_string());
+      let pack = find_hexz()
+        .and_then(|p| ResourcePack::open(&p, pw.as_deref()).ok());
+      let loaded = pack.is_some();
+      app.handle().manage(Arc::new(pack));
+      app.handle().manage(PackStatus(loaded));
       Ok(())
     })
     .register_asynchronous_uri_scheme_protocol("hexz", hexz_protocol)
+    .on_page_load(|webview, _| {
+      let loaded = webview.state::<PackStatus>().0;
+      if !loaded {
+        let _ = webview.eval(ERROR_SCRIPT);
+      }
+    })
     .invoke_handler(tauri::generate_handler![read_hexz_file])
     .plugin(tauri_plugin_persisted_scope::init())
     .plugin(tauri_plugin_process::init())
@@ -50,19 +62,46 @@ pub fn run() {
     .expect("error while running webgal-k");
 }
 
+struct PackStatus(bool);
+
+const ERROR_SCRIPT: &str = r#"
+(function(){
+  var zh=/^zh\b/i.test(navigator.language);
+  var t=zh?'游戏资源不完整，请重新下载'
+         :'Game resources incomplete, please re-download';
+  var s=zh?'将 game.hxz 放在可执行文件同级目录'
+         :'Place game.hxz alongside the executable';
+  var d=document.createElement('div');
+  d.innerHTML=
+    '<div style="position:fixed;inset:0;display:flex;align-items:center;'
+   +'justify-content:center;z-index:9999;background:rgba(0,0,0,0.92)">'
+   +'<div style="position:relative;background:rgba(20,20,20,0.95);'
+   +'padding:40px 48px;text-align:center;'
+   +'font-family:-apple-system,sans-serif;max-width:420px">'
+   +'<div onclick="window.__TAURI_INTERNALS__.invoke(\'plugin:process|exit\',{code:0})"'
+   +' style="position:absolute;top:12px;right:14px;cursor:pointer;'
+   +'color:rgba(255,255,255,0.3);font-size:18px;line-height:1;user-select:none" title="Exit">✕</div>'
+   +'<div style="font-size:48px;margin-bottom:16px">📦</div>'
+   +'<div style="color:#fff;font-size:17px;font-weight:500;margin-bottom:8px">'+t+'</div>'
+   +'<div style="color:rgba(255,255,255,0.4);font-size:13px;line-height:1.6">'+s+'</div>'
+   +'</div></div>';
+  document.body.appendChild(d);
+})();
+"#;
+
 fn hexz_protocol(
   ctx: tauri::UriSchemeContext<'_, tauri::Wry>,
   request: http::Request<Vec<u8>>,
   responder: tauri::UriSchemeResponder,
 ) {
-  use tauri::Manager;
   let path = request.uri().path().trim_start_matches('/').to_string();
   let path = urlencoding::decode(&path).unwrap_or(std::borrow::Cow::Borrowed(&path)).into_owned();
   let handle = ctx.app_handle().clone();
   std::thread::spawn(move || {
     let pack: tauri::State<'_, PackRef> = handle.state();
-    match pack.read_file(&path) {
-      Ok(data) => {
+    let result = pack.as_ref().as_ref().and_then(|p| p.read_file(&path).ok());
+    match result {
+      Some(data) => {
         let mime = mime_guess::from_path(&path).first_or_octet_stream();
         responder.respond(
           http::Response::builder()
@@ -73,7 +112,7 @@ fn hexz_protocol(
             .unwrap(),
         );
       }
-      Err(_) => {
+      None => {
         responder.respond(
           http::Response::builder()
             .status(http::StatusCode::NOT_FOUND)
@@ -89,5 +128,7 @@ fn hexz_protocol(
 #[tauri::command]
 fn read_hexz_file(path: String, state: tauri::State<'_, PackRef>) -> Result<Vec<u8>, String> {
   let decoded = urlencoding::decode(&path).unwrap_or(std::borrow::Cow::Borrowed(&path)).into_owned();
-  state.read_file(&decoded).map_err(|e| e.to_string())
+  state.as_ref().as_ref()
+    .ok_or("pack not loaded".into())
+    .and_then(|p| p.read_file(&decoded).map_err(|e| e.to_string()))
 }

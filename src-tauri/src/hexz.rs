@@ -45,7 +45,7 @@ impl ResourcePack {
                 }
                 a
             } else {
-                deps::hexz_store::open_local(path, None::<Box<dyn deps::Encryptor>>)?
+                anyhow::bail!("Password provided but archive is not encrypted");
             }
         } else {
             deps::hexz_store::open_local(path, None::<Box<dyn deps::Encryptor>>)?
