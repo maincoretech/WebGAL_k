@@ -148,7 +148,6 @@
   border-bottom-color: rgba(255, 255, 255, 0.15);
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
-  font-weight: bold;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
@@ -163,6 +162,16 @@
   background: rgba(10, 10, 10, 0.45);
   box-shadow: 0 0.2em 0.8em rgba(0, 0, 0, 0.5);
   border-radius: 0 0 4px 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.Option_select_menu_open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .Option_select_item {
@@ -177,7 +186,6 @@
 .Option_select_item_active {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  font-weight: bold;
 }
 
 .Options_page_button {

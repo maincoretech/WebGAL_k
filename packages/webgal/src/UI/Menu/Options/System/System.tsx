@@ -148,8 +148,7 @@ export function System() {
               >
                 {languages[language[userDataState.optionData.language]]}
               </button>
-              {showLanguageSelect && (
-                <div className={styles.Option_select_menu}>
+              <div className={`${styles.Option_select_menu} ${showLanguageSelect ? styles.Option_select_menu_open : ''}`}>
                   {Object.entries(languages).map(([key, name]) => {
                     const value = language[key as keyof typeof language] as language;
                     return (
@@ -173,7 +172,6 @@ export function System() {
                     );
                   })}
                 </div>
-              )}
             </div>
           </NormalOption>
           <NormalOption key="option2" title={t('resetData.title')}>
