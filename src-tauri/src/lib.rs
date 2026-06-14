@@ -1,8 +1,9 @@
 mod hexz;
 
 use hexz::ResourcePack;
-use std::sync::Arc;
+use std::sync::{Arc, atomic::{AtomicBool, Ordering}};
 use tauri::Manager;
+use tauri::Emitter;
 
 type PackRef = Arc<Option<ResourcePack>>;
 
@@ -46,7 +47,19 @@ pub fn run() {
       let loaded = pack.is_some();
       app.handle().manage(Arc::new(pack));
       app.handle().manage(PackStatus(loaded));
+
+      let close_allowed = Arc::new(AtomicBool::new(false));
+      app.handle().manage(CloseGuard(close_allowed.clone()));
       Ok(())
+    })
+    .on_window_event(|window, event| {
+      if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+        let guard = window.state::<CloseGuard>();
+        if !guard.0.load(Ordering::Relaxed) {
+          api.prevent_close();
+          let _ = window.emit("hexz-before-close", ());
+        }
+      }
     })
     .register_asynchronous_uri_scheme_protocol("hexz", hexz_protocol)
     .on_page_load(|webview, _| {
@@ -55,7 +68,7 @@ pub fn run() {
         let _ = webview.eval(ERROR_SCRIPT);
       }
     })
-    .invoke_handler(tauri::generate_handler![read_hexz_file])
+    .invoke_handler(tauri::generate_handler![read_hexz_file, allow_close])
     .plugin(tauri_plugin_persisted_scope::init())
     .plugin(tauri_plugin_process::init())
     .run(tauri::generate_context!())
@@ -63,6 +76,7 @@ pub fn run() {
 }
 
 struct PackStatus(bool);
+struct CloseGuard(Arc<AtomicBool>);
 
 const ERROR_SCRIPT: &str = r#"
 (function(){
@@ -131,4 +145,10 @@ fn read_hexz_file(path: String, state: tauri::State<'_, PackRef>) -> Result<Vec<
   state.as_ref().as_ref()
     .ok_or("pack not loaded".into())
     .and_then(|p| p.read_file(&decoded).map_err(|e| e.to_string()))
+}
+
+#[tauri::command]
+fn allow_close(state: tauri::State<'_, CloseGuard>, window: tauri::Window) {
+  state.0.store(true, Ordering::Relaxed);
+  let _ = window.close();
 }

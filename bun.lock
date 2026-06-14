@@ -59,6 +59,7 @@
       "dependencies": {
         "@emotion/css": "^11.11.2",
         "@reduxjs/toolkit": "^1.8.1",
+        "@tauri-apps/api": "^2.11.0",
         "angular-expressions": "^1.4.3",
         "axios": "^1.13.5",
         "caniuse-lite": "^1.0.30001799",

@@ -8,7 +8,7 @@ import { nextSentence } from '@/Core/controller/gamePlay/nextSentence';
 import { setEbg } from '@/Core/gameScripts/changeBg/setEbg';
 import { restorePerform } from '@/Core/controller/storage/jumpFromBacklog';
 
-import { getFastSaveRecord, hasFastSaveRecord, loadFastSaveGame } from '@/Core/controller/storage/fastSaveLoad';
+import { getFastSaveRecord, hasFastSaveRecord, loadFastSaveGame, markGameEntered } from '@/Core/controller/storage/fastSaveLoad';
 import { WebGAL } from '@/Core/WebGAL';
 import { stageStateManager } from '@/Core/Modules/stage/stageStateManager';
 import { generateCurrentStageData } from '../storage/saveGame';
@@ -17,6 +17,7 @@ import { generateCurrentStageData } from '../storage/saveGame';
  * 从头开始游戏
  */
 export const startGame = () => {
+  markGameEntered();
   resetStage(true);
 
   // 重新获取初始场景
@@ -42,6 +43,7 @@ export async function getContinueGameSaveData() {
 }
 
 export async function continueGame() {
+  markGameEntered();
   /**
    * 重设模糊背景
    */

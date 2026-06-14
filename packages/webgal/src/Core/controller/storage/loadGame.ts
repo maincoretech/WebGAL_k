@@ -12,11 +12,14 @@ import { setEbg } from '@/Core/gameScripts/changeBg/setEbg';
 import { WebGAL } from '@/Core/WebGAL';
 import { stageStateManager } from '@/Core/Modules/stage/stageStateManager';
 
+import { markGameEntered } from '@/Core/controller/storage/fastSaveLoad';
+
 /**
  * 读取游戏存档
  * @param index 要读取的存档的档位
  */
 export const loadGame = (index: number) => {
+  markGameEntered();
   const userDataState = webgalStore.getState().saveData;
   // 获得存档文件
   const loadFile: ISaveData = userDataState.saveData[index];
