@@ -7,9 +7,12 @@ import { useGenSyncRef } from '@/hooks/useGenSyncRef';
 import { useMounted, useUnMounted, useUpdated } from '@/hooks/useLifeCycle';
 import { componentsVisibility, MenuPanelTag } from '@/store/guiInterface';
 import { setVisibility } from '@/store/GUIReducer';
-import { RootState } from '@/store/store';
+import { RootState, webgalStore } from '@/store/store';
 import { setOptionData } from '@/store/userDataReducer';
 import styles from '@/UI/Backlog/backlog.module.scss';
+import { showGlobalDialog } from '@/UI/GlobalDialog/GlobalDialog';
+import { exit } from '@tauri-apps/plugin-process';
+import i18n from 'i18next';
 import throttle from 'lodash/throttle';
 import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
@@ -43,7 +46,7 @@ export function useHotkey(opt?: HotKeyType) {
   useMouseRightClickHotKey();
   useMouseWheel();
   useSkip();
-  usePanic();
+  useEscMenu();
   useFastSaveBeforeUnloadPage();
   useSpaceAndEnter();
   useToggleFullScreen();
@@ -100,7 +103,6 @@ export function useMouseWheel() {
   const setComponentVisibility = useSetComponentVisibility();
   const isGameActive = useGameActive(GUIStore);
   const isInBackLog = useIsInBackLog(GUIStore);
-  const isPanicOverlayOpen = useIsPanicOverlayOpen(GUIStore);
   const next = useCallback(
     throttle(() => {
       nextSentence();
@@ -111,7 +113,6 @@ export function useMouseWheel() {
   // 问就是抄的999
   const prevDownWheelTimeRef = useRef(0);
   const handleMouseWheel = useCallback((ev) => {
-    if (isPanicOverlayOpen()) return;
     const direction =
       (ev.wheelDelta && (ev.wheelDelta > 0 ? 'up' : 'down')) ||
       (ev.detail && (ev.detail < 0 ? 'up' : 'down')) ||
@@ -149,32 +150,38 @@ export function useMouseWheel() {
 }
 
 /**
- * Panic Button, use Esc and Backquote
+ * Esc: 标准 VN 导航 — 返回上级 / 打开菜单 / 退出
+ *   标题页 → 退出确认
+ *   菜单/Backlog/对话框/鉴赏 → 关闭回到上级
+ *   游戏中 → 退出确认弹窗
  */
-export function usePanic() {
-  const panicButtonList = ['Escape', 'Backquote'];
-  const isPanicButton = (ev: KeyboardEvent) =>
-    !ev.isComposing && !ev.defaultPrevented && panicButtonList.includes(ev.code);
+export function useEscMenu() {
   const GUIStore = useGenSyncRef((state: RootState) => state.GUI);
-  const isTitleShown = useCallback(() => GUIStore.current.showTitle, [GUIStore]);
-  const isPanicOverlayOpen = useIsPanicOverlayOpen(GUIStore);
   const setComponentVisibility = useSetComponentVisibility();
-  const handlePressPanicButton = useCallback((ev: KeyboardEvent) => {
-    if (!isPanicButton(ev) || isTitleShown()) return;
-    if (isPanicOverlayOpen()) {
-      setComponentVisibility('showPanicOverlay', false);
-      // todo: resume
-    } else {
-      setComponentVisibility('showPanicOverlay', true);
-      stopAll(); // despite the name, it only disables fast mode and auto mode
-      // todo: pause music & animation for better performance
-    }
+  const handleEsc = useCallback((ev: KeyboardEvent) => {
+    if (ev.code !== 'Escape' || ev.isComposing) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    const st = GUIStore.current;
+
+    if (st.showGlobalDialog) { setComponentVisibility('showGlobalDialog', false); return; }
+    if (st.showExtra)        { setComponentVisibility('showExtra', false); return; }
+    if (st.showMenuPanel)    { setComponentVisibility('showMenuPanel', false); return; }
+
+    showGlobalDialog({
+      title: (st.showTitle ? i18n.t('gaming.buttons.exitTips') : i18n.t('gaming.buttons.titleTips')) as string,
+      leftText: i18n.t('common.yes') as string,
+      leftFunc: st.showTitle ? () => exit(0) : () => {
+        webgalStore.dispatch(setVisibility({ component: 'showTitle', visibility: true }));
+      },
+      rightText: i18n.t('common.no') as string,
+    });
   }, []);
   useMounted(() => {
-    document.addEventListener('keyup', handlePressPanicButton);
+    document.addEventListener('keyup', handleEsc);
   });
   useUnMounted(() => {
-    document.removeEventListener('keyup', handlePressPanicButton);
+    document.removeEventListener('keyup', handleEsc);
   });
 }
 
@@ -273,12 +280,6 @@ function useIsOpenedDialog<T = any>(GUIStore: T & any): () => boolean {
 function useIsOpenedExtra<T = any>(GUIStore: T & any): () => boolean {
   return useCallback(() => {
     return GUIStore.current.showExtra;
-  }, [GUIStore]);
-}
-
-function useIsPanicOverlayOpen<T = any>(GUIStore: T & any): () => boolean {
-  return useCallback(() => {
-    return GUIStore.current.showPanicOverlay;
   }, [GUIStore]);
 }
 

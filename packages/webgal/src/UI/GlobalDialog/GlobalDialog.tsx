@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { useSelector } from 'react-redux';
 import { RootState, webgalStore } from '@/store/store';
 import { setVisibility } from '@/store/GUIReducer';
-import { useSEByWebgalStore } from '@/hooks/useSoundEffect';
+import { exit } from '@tauri-apps/plugin-process';
 
 export default function GlobalDialog() {
   const isGlobalDialogShow = useSelector((state: RootState) => state.GUI.showGlobalDialog);
@@ -14,20 +14,23 @@ interface IShowGlobalDialogProps {
   title: string;
   leftText: string;
   rightText?: string;
-  leftFunc?: Function;
-  rightFunc?: Function;
+  leftFunc?: () => void;
+  rightFunc?: () => void;
+  onEnter?: () => void;
+  onClick?: () => void;
 }
 
-export function showGlogalDialog(props: IShowGlobalDialogProps) {
-  const { playSeClick, playSeEnter } = useSEByWebgalStore();
+export function showGlobalDialog(props: IShowGlobalDialogProps) {
   webgalStore.dispatch(setVisibility({ component: 'showGlobalDialog', visibility: true }));
+  const click = props.onClick;
+  const enter = props.onEnter;
   const handleLeft = () => {
-    playSeClick();
+    click?.();
     props.leftFunc?.();
     hideGlobalDialog();
   };
   const handleRight = () => {
-    playSeClick();
+    click?.();
     props.rightFunc?.();
     hideGlobalDialog();
   };
@@ -38,12 +41,12 @@ export function showGlogalDialog(props: IShowGlobalDialogProps) {
           <div className={styles.title}>{props.title}</div>
           <div className={styles.button_list}>
             {props.leftText && (
-              <div className={styles.button} onClick={handleLeft} onMouseEnter={playSeEnter}>
+              <div className={styles.button} onClick={handleLeft} onMouseEnter={enter}>
                 {props.leftText}
               </div>
             )}
             {props.rightText && (
-              <div className={styles.button} onClick={handleRight} onMouseEnter={playSeEnter}>
+              <div className={styles.button} onClick={handleRight} onMouseEnter={enter}>
                 {props.rightText}
               </div>
             )}
@@ -65,6 +68,9 @@ export function hideGlobalDialog() {
 export function showControls() {
   webgalStore.dispatch(setVisibility({ component: 'showControls', visibility: true }));
 }
+
+// 兼容旧引用
+export { showGlobalDialog as showGlogalDialog };
 
 export function hideControls() {
   webgalStore.dispatch(setVisibility({ component: 'showControls', visibility: false }));
