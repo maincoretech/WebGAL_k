@@ -1,4 +1,5 @@
 import { hexzText, hexzJson } from '@/Core/util/hexzFetch';
+import { resolveHexzUrl } from '@/Core/util/gameAssetsAccess/assetSetter';
 import { logger } from '@/Core/util/logger';
 import { WebGAL } from '@/Core/WebGAL';
 import { TemplateFontDescriptor, WebgalTemplate } from '@/types/template';
@@ -78,7 +79,7 @@ function resolveTemplateAssetPath(path: string): string {
     return path;
   }
   const normalized = path.replace(/^[./]+/, '');
-  return `hexz://localhost/template/${normalized}`;
+  return resolveHexzUrl(`template/${normalized}`);
 }
 
 async function loadStyleFiles() {

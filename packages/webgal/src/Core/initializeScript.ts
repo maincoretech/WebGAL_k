@@ -3,7 +3,7 @@
  */
 import { logger } from './util/logger';
 import { infoFetcher } from './util/coreInitialFunction/infoFetcher';
-import { assetSetter, fileType } from './util/gameAssetsAccess/assetSetter';
+import { assetSetter, fileType, resolveHexzUrl } from './util/gameAssetsAccess/assetSetter';
 import { sceneFetcher } from './controller/scene/sceneFetcher';
 import { sceneParser } from './parser/sceneParser';
 import { bindExtraFunc } from '@/Core/util/coreInitialFunction/bindExtraFunc';
@@ -43,18 +43,14 @@ export const initializeScript = (): void => {
   }
 
   // 获得 userAnimation
-  loadStyle('hexz://localhost/userStyleSheet.css');
-  // 获得 user Animation
+  loadStyle(resolveHexzUrl('userStyleSheet.css'));
   getUserAnimation();
-  // 获取start场景
   const sceneUrl: string = assetSetter('start.txt', fileType.scene);
-  // 场景写入到运行时
   sceneFetcher(sceneUrl).then((rawScene) => {
     WebGAL.sceneManager.sceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl);
-    WebGAL.sceneManager.settledScenes.add(sceneUrl); // 放入已加载场景列表，避免递归加载相同场景
+    WebGAL.sceneManager.settledScenes.add(sceneUrl);
   });
-  // 获取游戏信息
-  infoFetcher('hexz://localhost/config.txt');
+  infoFetcher(resolveHexzUrl('config.txt'));
   /**
    * 启动Pixi
    */

@@ -21,31 +21,36 @@ export enum fileType {
  * @param assetType 资源类型
  * @return {string} 处理后的资源路径（绝对或相对）
  */
+// macOS: hexz:// protocol; Windows: same-origin ./game/ via Service Worker
+const isWindows = /windows/i.test((navigator as any).userAgentData?.platform ?? navigator.platform ?? '');
+const PREFIX = isWindows ? './game/' : 'hexz://localhost/';
+
+/** Resolve a hexz-archive path to the platform-appropriate URL. */
+export const resolveHexzUrl = (relativePath: string) => `${PREFIX}${relativePath}`;
+
 export const assetSetter = (fileName: string, assetType: fileType): string => {
-  // 是绝对链接，直接返回
   if (fileName.startsWith('http://') || fileName.startsWith('https://')) {
     return fileName;
   } else {
-    // 根据类型拼接资源的相对路径
     let returnFilePath: string;
     switch (assetType) {
       case fileType.background:
-        returnFilePath = `hexz://localhost/background/${fileName}`;
+        returnFilePath = `${PREFIX}background/${fileName}`;
         break;
       case fileType.scene:
-        returnFilePath = `hexz://localhost/scene/${fileName}`;
+        returnFilePath = `${PREFIX}scene/${fileName}`;
         break;
       case fileType.vocal:
-        returnFilePath = `hexz://localhost/vocal/${fileName}`;
+        returnFilePath = `${PREFIX}vocal/${fileName}`;
         break;
       case fileType.figure:
-        returnFilePath = `hexz://localhost/figure/${fileName}`;
+        returnFilePath = `${PREFIX}figure/${fileName}`;
         break;
       case fileType.bgm:
-        returnFilePath = `hexz://localhost/bgm/${fileName}`;
+        returnFilePath = `${PREFIX}bgm/${fileName}`;
         break;
       case fileType.video:
-        returnFilePath = `hexz://localhost/video/${fileName}`;
+        returnFilePath = `${PREFIX}video/${fileName}`;
         break;
       default:
         returnFilePath = ``;

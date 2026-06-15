@@ -6,7 +6,7 @@ import { logger } from '@/Core/util/logger';
 import { IUserAnimation } from '../Modules/animations';
 import { applyAnimationEndState, getAnimateDuration } from '@/Core/Modules/animationFunctions';
 import { WebGAL } from '@/Core/WebGAL';
-import { v4 as uuid } from 'uuid';
+const uuid = () => crypto.randomUUID();
 import { generateTimelineObj } from '@/Core/controller/stage/pixi/animations/timeline';
 
 /**

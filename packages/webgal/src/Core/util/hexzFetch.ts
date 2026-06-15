@@ -7,10 +7,13 @@
 import { invoke } from '@tauri-apps/api/core';
 
 const HEXZ_PREFIX = 'hexz://localhost/';
+const GAME_PREFIX = './game/';
 
-/** Strip hexz:// prefix and read via IPC; returns decoded text. */
+/** Strip platform prefix and read via IPC; returns decoded text. */
 export async function hexzText(urlOrPath: string): Promise<string> {
-  const path = urlOrPath.startsWith(HEXZ_PREFIX) ? urlOrPath.slice(HEXZ_PREFIX.length) : urlOrPath;
+  let path = urlOrPath;
+  if (path.startsWith(HEXZ_PREFIX)) path = path.slice(HEXZ_PREFIX.length);
+  else if (path.startsWith(GAME_PREFIX)) path = path.slice(GAME_PREFIX.length);
   const bytes: number[] = await invoke('read_hexz_file', { path });
   return new TextDecoder().decode(new Uint8Array(bytes));
 }

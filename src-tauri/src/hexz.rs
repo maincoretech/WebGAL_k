@@ -7,11 +7,11 @@ use std::path::Path;
 use std::sync::Arc;
 
 mod deps {
+    pub use hexz_core::ArchiveStream;
     pub use hexz_core::algo::encryption::{AesGcmEncryptor, Encryptor};
     pub use hexz_core::format::header::Header;
     pub use hexz_core::format::magic::HEADER_SIZE;
     pub use hexz_core::store::StorageBackend;
-    pub use hexz_core::ArchiveStream;
     pub use hexz_store;
 }
 
@@ -21,10 +21,16 @@ pub struct ResourcePack {
 }
 
 #[derive(Debug, Deserialize)]
-struct MetaFile { path: String, offset: u64, size: u64 }
+struct MetaFile {
+    path: String,
+    offset: u64,
+    size: u64,
+}
 
 #[derive(Debug, Deserialize)]
-struct Metadata { files: Vec<MetaFile> }
+struct Metadata {
+    files: Vec<MetaFile>,
+}
 
 impl ResourcePack {
     pub fn open(path: impl AsRef<Path>, password: Option<&str>) -> anyhow::Result<Self> {
@@ -57,10 +63,19 @@ impl ResourcePack {
 
     pub fn read_file(&self, path: &str) -> anyhow::Result<Vec<u8>> {
         let normalized = path.replace('\\', "/");
-        let (offset, size) = self.index.get(&normalized)
-            .or_else(|| self.index.iter().find(|(k, _)| k.ends_with(&normalized)).map(|(_, v)| v))
+        let (offset, size) = self
+            .index
+            .get(&normalized)
+            .or_else(|| {
+                self.index
+                    .iter()
+                    .find(|(k, _)| k.ends_with(&normalized))
+                    .map(|(_, v)| v)
+            })
             .ok_or_else(|| anyhow::anyhow!("File not found: {path}"))?;
-        self.archive.read_at(deps::ArchiveStream::Main, *offset, *size).map_err(Into::into)
+        self.archive
+            .read_at(deps::ArchiveStream::Main, *offset, *size)
+            .map_err(Into::into)
     }
 
     fn read_header(path: &Path) -> anyhow::Result<deps::Header> {
@@ -71,7 +86,9 @@ impl ResourcePack {
     }
 
     fn build_index(archive: &hexz_core::Archive) -> anyhow::Result<HashMap<String, (u64, usize)>> {
-        let meta_bytes = archive.metadata.as_ref()
+        let meta_bytes = archive
+            .metadata
+            .as_ref()
             .ok_or_else(|| anyhow::anyhow!("No metadata in archive"))?;
         let meta: Metadata = serde_json::from_slice(meta_bytes)?;
         let mut idx = HashMap::new();

@@ -5,9 +5,8 @@
   "scripts": {
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "build": "rimraf -rf ./build && rollup --config",
-    "prepublishOnly": "npm run build",
-    "build-ci": "rollup --config",
+    "build": "bun run build.ts",
+    "build-ci": "bun run build.ts",
     "debug": "tsx test/debug.ts",
     "debug-scss-parser": "tsx test/debugCssParser.ts",
     "debug-linebreak-parser": "tsx test/debug-linebreak.ts"
@@ -24,18 +23,9 @@
     "tsx": "^3.12.7"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^23.0.2",
-    "@rollup/plugin-json": "^5.0.1",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-typescript": "^9.0.2",
     "@types/lodash": "^4.14.189",
     "@types/node": "^18.14.0",
     "@vitest/coverage-c8": "^0.28.5",
-    "rollup": "^3.29.5",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.34.1",
-    "ts-node": "^10.9.1",
     "tslib": "^2.4.1",
     "typescript": "^4.9.3",
     "vitest": "^0.28.5"

@@ -6,7 +6,7 @@ import { WebGALPixiContainer } from '@/Core/controller/stage/pixi/WebGALPixiCont
 import { addSpineBgImpl, addSpineFigureImpl } from '@/Core/controller/stage/pixi/spine';
 import { SCREEN_CONSTANTS } from '@/Core/util/constants';
 import { logger } from '@/Core/util/logger';
-import { v4 as uuid } from 'uuid';
+const uuid = () => crypto.randomUUID();
 import { cloneDeep, isEqual } from 'lodash';
 import omitBy from 'lodash/omitBy';
 import isUndefined from 'lodash/isUndefined';

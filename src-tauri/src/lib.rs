@@ -1,78 +1,131 @@
 mod hexz;
 
 use hexz::ResourcePack;
-use std::sync::{Arc, atomic::{AtomicBool, Ordering}};
-use tauri::Manager;
+#[cfg(target_os = "windows")]
+use std::io::Write;
+use std::sync::{
+    Arc,
+    atomic::{AtomicBool, Ordering},
+};
 use tauri::Emitter;
+use tauri::Manager;
+
+#[cfg(target_os = "windows")]
+fn win_log(msg: &str) {
+    let exe_dir = std::env::current_exe()
+        .ok()
+        .and_then(|p| p.parent().map(|d| d.to_path_buf()))
+        .unwrap_or_default();
+    let cur_dir = std::env::current_dir().unwrap_or_default();
+    for dir in [&exe_dir, &cur_dir] {
+        if let Ok(mut f) = std::fs::OpenOptions::new()
+            .create(true)
+            .append(true)
+            .open(dir.join("webgal-k.log"))
+        {
+            let ts = std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_millis();
+            let _ = writeln!(f, "[{ts}] {msg}");
+            return;
+        }
+    }
+}
 
 type PackRef = Arc<Option<ResourcePack>>;
 
 fn find_hexz() -> Option<std::path::PathBuf> {
-  let exe_dir = std::env::current_exe()
-    .ok()
-    .and_then(|p| p.parent().map(|d| d.to_path_buf()))
-    .unwrap_or_else(|| std::path::PathBuf::from("."));
+    let exe_dir = std::env::current_exe()
+        .ok()
+        .and_then(|p| p.parent().map(|d| d.to_path_buf()))
+        .unwrap_or_else(|| std::path::PathBuf::from("."));
 
-  let mut dirs: Vec<std::path::PathBuf> = vec![
-    exe_dir.clone(),
-    exe_dir.join(".."),
-  ];
-  // macOS .app bundle: Contents/MacOS/ → 3 levels up
-  #[cfg(target_os = "macos")]
-  {
-    let app_root = exe_dir
-      .parent().and_then(|p| p.parent())
-      .and_then(|p| p.parent())
-      .map(|d| d.to_path_buf());
-    dirs.extend(app_root);
-  }
-  for d in &dirs {
-    let p = d.join("game.hxz");
-    if p.exists() { return Some(p); }
-  }
-  None
+    #[cfg_attr(not(target_os = "macos"), allow(unused_mut))]
+    let mut dirs: Vec<std::path::PathBuf> = vec![exe_dir.clone(), exe_dir.join("..")];
+    // macOS .app bundle: Contents/MacOS/ → 3 levels up
+    #[cfg(target_os = "macos")]
+    {
+        let app_root = exe_dir
+            .parent()
+            .and_then(|p| p.parent())
+            .and_then(|p| p.parent())
+            .map(|d| d.to_path_buf());
+        dirs.extend(app_root);
+    }
+    for d in &dirs {
+        let p = d.join("game.hxz");
+        #[cfg(target_os = "windows")]
+        win_log(&format!("searching: {}", p.display()));
+        if p.exists() {
+            #[cfg(target_os = "windows")]
+            win_log(&format!("found: {}", p.display()));
+            return Some(p);
+        }
+    }
+    #[cfg(target_os = "windows")]
+    win_log("game.hxz not found");
+    None
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
+#[allow(unused_mut)]
 pub fn run() {
-  tauri::Builder::default()
-    .plugin(tauri_plugin_fs::init())
-    .setup(|app| {
-      #[cfg(desktop)]
-      let _ = app.handle().plugin(tauri_plugin_window_state::Builder::default().build());
+    let mut builder = tauri::Builder::default()
+        .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
+            if let Some(window) = app.get_webview_window("main") {
+                let _ = window.show();
+                let _ = window.set_focus();
+            }
+        }))
+        .plugin(tauri_plugin_fs::init())
+        .setup(|app| {
+            #[cfg(desktop)]
+            let _ = app
+                .handle()
+                .plugin(tauri_plugin_window_state::Builder::default().build());
 
-      let pw = option_env!("HEXZ_PASSWORD").filter(|s| !s.is_empty()).map(|s| s.to_string());
-      let pack = find_hexz()
-        .and_then(|p| ResourcePack::open(&p, pw.as_deref()).ok());
-      let loaded = pack.is_some();
-      app.handle().manage(Arc::new(pack));
-      app.handle().manage(PackStatus(loaded));
+            let pw = option_env!("HEXZ_PASSWORD")
+                .filter(|s| !s.is_empty())
+                .map(|s| s.to_string());
+            let pack = find_hexz().and_then(|p| ResourcePack::open(&p, pw.as_deref()).ok());
+            let loaded = pack.is_some();
+            #[cfg(target_os = "windows")]
+            win_log(&format!("pack loaded: {loaded}"));
+            app.handle().manage(Arc::new(pack));
+            app.handle().manage(PackStatus(loaded));
 
-      let close_allowed = Arc::new(AtomicBool::new(false));
-      app.handle().manage(CloseGuard(close_allowed.clone()));
-      Ok(())
-    })
-    .on_window_event(|window, event| {
-      if let tauri::WindowEvent::CloseRequested { api, .. } = event {
-        let guard = window.state::<CloseGuard>();
-        if !guard.0.load(Ordering::Relaxed) {
-          api.prevent_close();
-          let _ = window.emit("hexz-before-close", ());
-        }
-      }
-    })
-    .register_asynchronous_uri_scheme_protocol("hexz", hexz_protocol)
-    .on_page_load(|webview, _| {
-      let loaded = webview.state::<PackStatus>().0;
-      if !loaded {
-        let _ = webview.eval(ERROR_SCRIPT);
-      }
-    })
-    .invoke_handler(tauri::generate_handler![read_hexz_file, allow_close])
-    .plugin(tauri_plugin_persisted_scope::init())
-    .plugin(tauri_plugin_process::init())
-    .run(tauri::generate_context!())
-    .expect("error while running webgal-k");
+            let close_allowed = Arc::new(AtomicBool::new(false));
+            app.handle().manage(CloseGuard(close_allowed.clone()));
+            Ok(())
+        })
+        .on_window_event(|window, event| {
+            if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+                let guard = window.state::<CloseGuard>();
+                if !guard.0.load(Ordering::Relaxed) {
+                    api.prevent_close();
+                    let _ = window.emit("hexz-before-close", ());
+                }
+            }
+        });
+
+    #[cfg(not(target_os = "windows"))]
+    {
+        builder = builder.register_asynchronous_uri_scheme_protocol("hexz", hexz_protocol);
+    }
+
+    builder
+        .on_page_load(|webview, _| {
+            let loaded = webview.state::<PackStatus>().0;
+            if !loaded {
+                let _ = webview.eval(ERROR_SCRIPT);
+            }
+        })
+        .invoke_handler(tauri::generate_handler![read_hexz_file, allow_close])
+        .plugin(tauri_plugin_persisted_scope::init())
+        .plugin(tauri_plugin_process::init())
+        .run(tauri::generate_context!())
+        .expect("error while running webgal-k");
 }
 
 struct PackStatus(bool);
@@ -103,52 +156,66 @@ const ERROR_SCRIPT: &str = r#"
 })();
 "#;
 
+#[cfg(not(target_os = "windows"))]
 fn hexz_protocol(
-  ctx: tauri::UriSchemeContext<'_, tauri::Wry>,
-  request: http::Request<Vec<u8>>,
-  responder: tauri::UriSchemeResponder,
+    ctx: tauri::UriSchemeContext<'_, tauri::Wry>,
+    request: http::Request<Vec<u8>>,
+    responder: tauri::UriSchemeResponder,
 ) {
-  let path = request.uri().path().trim_start_matches('/').to_string();
-  let path = urlencoding::decode(&path).unwrap_or(std::borrow::Cow::Borrowed(&path)).into_owned();
-  let handle = ctx.app_handle().clone();
-  std::thread::spawn(move || {
+    let path = request.uri().path().trim_start_matches('/').to_string();
+    let path = urlencoding::decode(&path)
+        .unwrap_or(std::borrow::Cow::Borrowed(&path))
+        .into_owned();
+    let handle = ctx.app_handle().clone();
+    std::thread::spawn(move || serve_hexz(&path, &handle, responder));
+}
+
+#[cfg_attr(target_os = "windows", allow(dead_code))]
+fn serve_hexz(path: &str, handle: &tauri::AppHandle, responder: tauri::UriSchemeResponder) {
     let pack: tauri::State<'_, PackRef> = handle.state();
-    let result = pack.as_ref().as_ref().and_then(|p| p.read_file(&path).ok());
+    let result = pack.as_ref().as_ref().and_then(|p| p.read_file(path).ok());
     match result {
-      Some(data) => {
-        let mime = mime_guess::from_path(&path).first_or_octet_stream();
-        responder.respond(
-          http::Response::builder()
-            .header(http::header::CONTENT_TYPE, mime.essence_str())
-            .header("Access-Control-Allow-Origin", "*")
-            .status(http::StatusCode::OK)
-            .body(data)
-            .unwrap(),
-        );
-      }
-      None => {
-        responder.respond(
-          http::Response::builder()
-            .status(http::StatusCode::NOT_FOUND)
-            .header("Access-Control-Allow-Origin", "*")
-            .body(Vec::new())
-            .unwrap(),
-        );
-      }
+        Some(data) => {
+            let mime = mime_guess::from_path(path).first_or_octet_stream();
+            let len = data.len();
+            responder.respond(
+                http::Response::builder()
+                    .header(http::header::CONTENT_TYPE, mime.essence_str())
+                    .header(http::header::CONTENT_LENGTH, len)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .status(http::StatusCode::OK)
+                    .body(data)
+                    .unwrap(),
+            );
+        }
+        None => {
+            responder.respond(
+                http::Response::builder()
+                    .status(http::StatusCode::NOT_FOUND)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .body(Vec::new())
+                    .unwrap(),
+            );
+        }
     }
-  });
 }
 
 #[tauri::command]
 fn read_hexz_file(path: String, state: tauri::State<'_, PackRef>) -> Result<Vec<u8>, String> {
-  let decoded = urlencoding::decode(&path).unwrap_or(std::borrow::Cow::Borrowed(&path)).into_owned();
-  state.as_ref().as_ref()
-    .ok_or("pack not loaded".into())
-    .and_then(|p| p.read_file(&decoded).map_err(|e| e.to_string()))
+    #[cfg(target_os = "windows")]
+    win_log(&format!("read_hexz_file: {path}"));
+    let decoded = urlencoding::decode(&path)
+        .unwrap_or(std::borrow::Cow::Borrowed(&path))
+        .into_owned();
+    state
+        .as_ref()
+        .as_ref()
+        .ok_or("pack not loaded".into())
+        .and_then(|p| p.read_file(&decoded).map_err(|e| e.to_string()))
 }
 
 #[tauri::command]
 fn allow_close(state: tauri::State<'_, CloseGuard>, window: tauri::Window) {
-  state.0.store(true, Ordering::Relaxed);
-  let _ = window.close();
+    state.0.store(true, Ordering::Relaxed);
+    let _ = window.close();
 }

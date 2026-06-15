@@ -6,8 +6,7 @@
     "frontendDist": "../packages/webgal/dist",
     "devUrl": "http://localhost:3000",
     "beforeDevCommand": "bun run dev",
-    "beforeBuildCommand": "bun run build",
-    "removeUnusedCommands": true
+    "beforeBuildCommand": "bun run build"
   },
   "app": {
     "windows": [
@@ -20,7 +19,7 @@
       }
     ],
     "security": {
-      "csp": "default-src 'self' tauri://localhost hexz://localhost; style-src 'self' 'unsafe-inline' tauri://localhost hexz://localhost; img-src 'self' data: blob: tauri://localhost hexz://localhost; media-src 'self' tauri://localhost hexz://localhost; connect-src 'self' tauri://localhost hexz://localhost ipc: http://ipc.localhost; script-src 'self' 'unsafe-inline' 'unsafe-eval' tauri://localhost"
+      "csp": null
     },
     "enableGTKAppId": true,
     "macOSPrivateApi": true

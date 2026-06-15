@@ -1,6 +1,6 @@
 // spineHandlers.ts
 import { WebGALPixiContainer } from '@/Core/controller/stage/pixi/WebGALPixiContainer';
-import { v4 as uuid } from 'uuid';
+const uuid = () => crypto.randomUUID();
 import * as PIXI from 'pixi.js';
 import PixiStage from '@/Core/controller/stage/pixi/PixiController';
 import { logger } from '@/Core/util/logger';

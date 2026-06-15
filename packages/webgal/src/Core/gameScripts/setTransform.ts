@@ -7,7 +7,7 @@ import { AnimationFrame, IUserAnimation } from '../Modules/animations';
 import { generateTransformAnimationObj } from '@/Core/controller/stage/pixi/animations/generateTransformAnimationObj';
 import { WebGAL } from '@/Core/WebGAL';
 import { applyAnimationEndState, getAnimateDuration } from '../Modules/animationFunctions';
-import { v4 as uuid } from 'uuid';
+const uuid = () => crypto.randomUUID();
 import { generateTimelineObj } from '@/Core/controller/stage/pixi/animations/timeline';
 /**
  * 设置变换
