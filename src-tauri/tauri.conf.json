@@ -20,7 +20,7 @@
       }
     ],
     "security": {
-      "csp": "default-src 'self' tauri://localhost hexz://localhost; style-src 'self' 'unsafe-inline' tauri://localhost hexz://localhost; img-src 'self' data: blob: tauri://localhost hexz://localhost; media-src 'self' tauri://localhost hexz://localhost; connect-src 'self' tauri://localhost hexz://localhost ipc: http://ipc.localhost; script-src 'self' 'unsafe-inline' 'unsafe-eval' tauri://localhost"
+      "csp": "default-src 'self' tauri://localhost hexz: hexz://localhost; style-src 'self' 'unsafe-inline' tauri://localhost hexz: hexz://localhost; img-src 'self' data: blob: tauri://localhost hexz: hexz://localhost; media-src 'self' tauri://localhost hexz: hexz://localhost; connect-src 'self' tauri://localhost hexz: hexz://localhost ipc: http://ipc.localhost; script-src 'self' 'unsafe-inline' 'unsafe-eval' tauri://localhost"
     },
     "enableGTKAppId": true,
     "macOSPrivateApi": true

@@ -15,7 +15,7 @@ fn find_hexz() -> Option<std::path::PathBuf> {
 
   let mut dirs: Vec<std::path::PathBuf> = vec![
     exe_dir.clone(),
-    exe_dir.join(".."),
+    std::env::current_dir().unwrap_or_default(),
   ];
   // macOS .app bundle: Contents/MacOS/ → 3 levels up
   #[cfg(target_os = "macos")]
@@ -25,6 +25,7 @@ fn find_hexz() -> Option<std::path::PathBuf> {
       .and_then(|p| p.parent())
       .map(|d| d.to_path_buf());
     dirs.extend(app_root);
+    dirs.push(exe_dir.join(".."));
   }
   for d in &dirs {
     let p = d.join("game.hxz");
@@ -117,9 +118,11 @@ fn hexz_protocol(
     match result {
       Some(data) => {
         let mime = mime_guess::from_path(&path).first_or_octet_stream();
+        let len = data.len();
         responder.respond(
           http::Response::builder()
             .header(http::header::CONTENT_TYPE, mime.essence_str())
+            .header(http::header::CONTENT_LENGTH, len)
             .header("Access-Control-Allow-Origin", "*")
             .status(http::StatusCode::OK)
             .body(data)
