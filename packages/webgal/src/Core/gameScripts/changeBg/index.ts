@@ -13,7 +13,7 @@ import { cloneDeep } from '@/Core/util/lite';
 import { applyAnimationEndState, getAnimateDuration } from '@/Core/Modules/animationFunctions';
 import { WebGAL } from '@/Core/WebGAL';
 import { DEFAULT_BG_OUT_DURATION } from '@/Core/constants';
-import localforage from 'localforage';
+import { storeSet } from '@/Core/util/lite';
 import { stageStateManager } from '@/Core/Modules/stage/stageStateManager';
 
 /**
@@ -38,7 +38,7 @@ export const changeBg = (sentence: ISentence): IPerform => {
   if (unlockName !== '') {
     dispatch(unlockCgInUserData({ name: unlockName, url, series, order }));
     const userDataState = webgalStore.getState().userData;
-    localforage.setItem(WebGAL.gameKey, userDataState).then(() => {});
+    storeSet(WebGAL.gameKey, userDataState);
   }
 
   /**

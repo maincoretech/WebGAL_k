@@ -51,13 +51,12 @@ const jp = {
               },
             },
             about: {
-              title: 'WebGAL について',
-              subTitle: 'WebGAL エンジンの一つのフォーク',
+              title: 'WebGAL_k について',
+              subTitle: 'WebGAL のフォーク — より大胆に、より古典的に',
               version: 'バージョン',
-              sourceK: 'ソースコードリポジトリ',
-              source: '元のリポジトリ',
-              // contributors: '貢献者',
-              website: 'ウェブサイト',
+              credit: 'クレジット',
+              font: '欧文フォント：Maven Pro（SIL Open Font License 1.1）',
+              fontLicense: 'https://openfontlicense.org/',
             },
             skipAll: {
               title: 'スキップモード',

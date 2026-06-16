@@ -81,3 +81,27 @@ export function isEqual(a: unknown, b: unknown): boolean {
     Object.hasOwn(b as object, k) && isEqual((a as any)[k], (b as any)[k]),
   );
 }
+
+/** Tauri-native key-value store, replaces localforage. */
+import { LazyStore } from '@tauri-apps/plugin-store';
+
+const _stores = new Map<string, LazyStore>();
+
+function gameKeyFrom(key: string | number) { return String(key).split('-')[0]; }
+
+function getStore(gameKey: string) {
+  const file = `${gameKey}-data.json`;
+  const existing = _stores.get(file);
+  if (existing) return existing;
+  const store = new LazyStore(file);
+  _stores.set(file, store);
+  return store;
+}
+
+export async function storeGet(key: string | number): Promise<unknown> {
+  return await getStore(gameKeyFrom(key)).get(String(key));
+}
+
+export async function storeSet(key: string | number, value: unknown) {
+  await getStore(gameKeyFrom(key)).set(String(key), value);
+}

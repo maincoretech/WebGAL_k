@@ -51,13 +51,12 @@ const en = {
               },
             },
             about: {
-              title: 'About engine',
-              subTitle: 'A fork of WebGAL engine',
+              title: 'About WebGAL_k',
+              subTitle: 'A fork of WebGAL — bolder and more classic',
               version: 'Version',
-              sourceK: 'Source Code Repository',
-              source: 'Original Repository',
-              // contributors: 'Contributors',
-              website: 'Website',
+              credit: 'Credit',
+              font: 'Latin font: Maven Pro (SIL Open Font License 1.1)',
+              fontLicense: 'https://openfontlicense.org/',
             },
             skipAll: {
               title: 'Skip Mode',

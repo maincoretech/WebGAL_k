@@ -7,7 +7,7 @@ import { backupSaves, getStorage, setStorage, dumpToStorageFast } from '@/Core/c
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, webgalStore } from '@/store/store';
 import { showGlogalDialog } from '@/UI/GlobalDialog/GlobalDialog';
-import localforage from 'localforage';
+import { storeSet } from '@/Core/util/lite';
 import { logger } from '@/Core/util/logger';
 import useTrans from '@/hooks/useTrans';
 import useLanguage from '@/hooks/useLanguage';
@@ -59,13 +59,19 @@ export function System() {
         leftText: t('$common.yes'),
         rightText: t('$common.no'),
         leftFunc: async () => {
-          await localforage.setItem(WebGAL.gameKey, saveAsObj.userData);
+          await storeSet(WebGAL.gameKey, saveAsObj.userData);
           logger.info(t('gameSave.dialogs.import.tip'));
+          // Apply language from imported data
+          if (saveAsObj.userData?.optionData?.language != null) {
+            setLanguage(saveAsObj.userData.optionData.language, false);
+          }
+          // force refresh from store (bypass debounce)
           getStorage();
+          // immediately persist saves to disk
           webgalStore.dispatch(saveActions.replaceSaveGame(saveAsObj.saves.saveData));
-          webgalStore.dispatch(saveActions.setFastSave(saveAsObj.saves.quickSaveData));
-          dumpFastSaveToStorage();
-          dumpSavesToStorage(0, 200);
+          webgalStore.dispatch(saveActions.setFastSave(saveAsObj.saves.quickSaveData ?? null));
+          await dumpFastSaveToStorage();
+          await dumpSavesToStorage(0, 200);
         },
         rightFunc: () => {},
       });

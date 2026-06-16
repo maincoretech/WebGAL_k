@@ -19,6 +19,6 @@ export const logger = {
   },
 };
 
-if (process.env.NODE_ENV === 'production') {
+if (import.meta.env.PROD) {
   logger.setLevel('INFO');
 }

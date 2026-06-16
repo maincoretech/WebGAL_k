@@ -1,4 +1,4 @@
-import * as localforage from 'localforage';
+import { storeSet, storeGet } from '@/Core/util/lite';
 import { IUserData } from '@/store/userDataInterface';
 import { logger } from '../../util/logger';
 import { webgalStore } from '@/store/store';
@@ -68,7 +68,7 @@ export async function syncSaves() {
  */
 export const setStorage = debounce(() => {
   const userDataState = webgalStore.getState().userData;
-  localforage.setItem(WebGAL.gameKey, userDataState).then(() => {
+  storeSet(WebGAL.gameKey, userDataState).then(() => {
     logger.info('写入本地存储');
     syncSaves();
   });
@@ -78,7 +78,7 @@ export const setStorage = debounce(() => {
  * 从本地存储获取数据
  */
 export const getStorage = debounce(() => {
-  localforage.getItem(WebGAL.gameKey).then((newUserData) => {
+  storeGet(WebGAL.gameKey).then((newUserData) => {
     // 如果没有数据，重新初始化
     if (!newUserData) {
       logger.warn('现在重置数据');
@@ -117,8 +117,8 @@ function debounce<T, K>(func: (...args: T[]) => K, wait: number) {
 
 export const dumpToStorageFast = () => {
   const userDataState = webgalStore.getState().userData;
-  localforage.setItem(WebGAL.gameKey, userDataState).then(() => {
-    localforage.getItem(WebGAL.gameKey).then((newUserData) => {
+  storeSet(WebGAL.gameKey, userDataState).then(() => {
+    storeGet(WebGAL.gameKey).then((newUserData) => {
       // 如果没有数据，初始化
       if (!newUserData) {
         setStorage();
@@ -185,22 +185,22 @@ function isObject(value: unknown): value is Record<string, any> {
 
 export async function setStorageAsync() {
   const userDataState = webgalStore.getState().userData;
-  return await localforage.setItem(WebGAL.gameKey, userDataState);
+  return await storeSet(WebGAL.gameKey, userDataState);
 }
 
 export async function getStorageAsync() {
-  const newUserData = await localforage.getItem(WebGAL.gameKey);
+  const newUserData = await storeGet(WebGAL.gameKey);
   if (!newUserData) {
     const userDataState = webgalStore.getState().userData;
     logger.warn('现在重置数据');
-    return await localforage.setItem(WebGAL.gameKey, userDataState);
+    return await storeSet(WebGAL.gameKey, userDataState);
   }
   const shouldMigrate = !checkUserDataProperty(newUserData);
   const normalizedUserData = normalizeUserData(newUserData as Partial<IUserData>);
   webgalStore.dispatch(resetUserData(normalizedUserData));
   if (shouldMigrate) {
     logger.warn('检测到旧版本用户数据，已补齐默认字段');
-    return await localforage.setItem(WebGAL.gameKey, normalizedUserData);
+    return await storeSet(WebGAL.gameKey, normalizedUserData);
   }
   return;
 }

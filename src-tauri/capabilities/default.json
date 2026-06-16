@@ -8,6 +8,10 @@
     "core:path:default",
     "core:event:default",
     "core:webview:default",
-    "core:resources:default"
+    "core:resources:default",
+    "store:default",
+    "dialog:default",
+    "fs:default",
+    "opener:default"
   ]
 }

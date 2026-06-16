@@ -51,13 +51,12 @@ const zhTw = {
               },
             },
             about: {
-              title: '關於 WebGAL',
-              subTitle: 'WebGAL 引擎的分支',
+              title: '關於 WebGAL_k',
+              subTitle: 'WebGAL 引擎的分支 更加激進也更加傳統',
               version: '版本號',
-              sourceK: '程式碼倉庫',
-              source: '源倉庫',
-              // contributors: '貢獻者',
-              website: '網站',
+              credit: '鳴謝',
+              font: '西文字體：Maven Pro（遵循 SIL Open Font License 1.1）',
+              fontLicense: 'https://openfontlicense.org/',
             },
             skipAll: {
               title: '快進模式',
