@@ -44,17 +44,17 @@ export default function StandardTextbox(props: ITextboxProps) {
     if (index < prevLength) {
       return (
         <span key={currentDialogKey + index} className={styles.zhanwei}>
-          {e}
-          <span className={styles.outer}>{e}</span>
-          {isUseStroke && <span className={styles.inner}>{e}</span>}
+          {e.map(n => n.reactNode)}
+          <span className={styles.outer}>{e.map(n => n.reactNode)}</span>
+          {isUseStroke && <span className={styles.inner}>{e.map(n => n.reactNode)}</span>}
         </span>
       );
     }
     return (
       <span key={currentDialogKey + index} className={styles.zhanwei}>
-        {e}
-        <span className={styles.outer}>{e}</span>
-        {isUseStroke && <span className={styles.inner}>{e}</span>}
+        {e.map(n => n.reactNode)}
+        <span className={styles.outer}>{e.map(n => n.reactNode)}</span>
+        {isUseStroke && <span className={styles.inner}>{e.map(n => n.reactNode)}</span>}
       </span>
     );
   });
@@ -77,9 +77,9 @@ export default function StandardTextbox(props: ITextboxProps) {
           style={{ animationDelay: `${delay}ms`, animationDuration: `${textDuration}ms` }}
         >
           <span className={styles.zhanwei}>
-            {e}
-            <span className={styles.outer}>{e}</span>
-            {isUseStroke && <span className={styles.inner}>{e}</span>}
+            {e.map(n => n.reactNode)}
+            <span className={styles.outer}>{e.map(n => n.reactNode)}</span>
+            {isUseStroke && <span className={styles.inner}>{e.map(n => n.reactNode)}</span>}
           </span>
         </span>
       );
@@ -93,9 +93,9 @@ export default function StandardTextbox(props: ITextboxProps) {
         style={{ animationDelay: `${delay}ms`, position: 'relative' }}
       >
         <span className={styles.zhanwei}>
-          {e}
-          <span className={styles.outer}>{e}</span>
-          {isUseStroke && <span className={styles.inner}>{e}</span>}
+          {e.map(n => n.reactNode)}
+          <span className={styles.outer}>{e.map(n => n.reactNode)}</span>
+          {isUseStroke && <span className={styles.inner}>{e.map(n => n.reactNode)}</span>}
         </span>
       </span>
     );

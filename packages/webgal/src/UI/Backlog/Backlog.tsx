@@ -53,7 +53,7 @@ export const Backlog = () => {
     }
   }, [isBacklogOpen]);
 
-  let timeRef = useRef<ReturnType<typeof setTimeout>>();
+  let timeRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   // 缓存一下vdom
   const backlogList = useMemo<any>(() => {
     let backlogs = [];
@@ -194,7 +194,7 @@ export const Backlog = () => {
         setIndexHide(true);
         // setIsDisableScroll(false);
         // setIsDisableScroll(true);
-        timeRef.current = undefined;
+        timeRef.current = undefined as any;
         // 200是和动画一样的延时 保险起见多个80ms
         // 不加也没啥 问题不大
       }, 200 + 80);

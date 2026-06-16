@@ -112,7 +112,7 @@ export function useMouseWheel() {
   // 防止一直往下滚的时候顺着滚出历史记录
   // 问就是抄的999
   const prevDownWheelTimeRef = useRef(0);
-  const handleMouseWheel = useCallback((ev) => {
+  const handleMouseWheel = useCallback((ev: WheelEvent & { wheelDelta?: number; detail?: number }) => {
     const direction =
       (ev.wheelDelta && (ev.wheelDelta > 0 ? 'up' : 'down')) ||
       (ev.detail && (ev.detail < 0 ? 'up' : 'down')) ||
@@ -195,19 +195,19 @@ export function useSkip() {
   // 判断是否位于标题 & 存读档，选项 & 回想等页面
   const isGameActive = useGameActive(GUIStore);
   // 判断按键是否为ctrl
-  const isCtrlKey = useCallback((e) => e.keyCode === 17, []);
-  const handleCtrlKeydown = useCallback((e) => {
+  const isCtrlKey = useCallback((e: KeyboardEvent) => e.keyCode === 17, []);
+  const handleCtrlKeydown = useCallback((e: KeyboardEvent) => {
     if (isCtrlKey(e) && isGameActive()) {
       // 按下 ctrl 键快进时，强制全文快进
       startFast(true);
     }
   }, []);
-  const handleCtrlKeyup = useCallback((e) => {
+  const handleCtrlKeyup = useCallback((e: KeyboardEvent) => {
     if (isCtrlKey(e) && isGameActive()) {
       stopFast();
     }
   }, []);
-  const handleWindowBlur = useCallback((e) => {
+  const handleWindowBlur = useCallback((_e: FocusEvent) => {
     // 停止快进
     stopFast();
   }, []);
@@ -326,10 +326,10 @@ export function useSpaceAndEnter() {
   // 防止一直触发keydown导致快进
   const lockRef = useRef(false);
   // 判断按键是否为空格 & 回车
-  const isSpaceOrEnter = useCallback((e) => {
+  const isSpaceOrEnter = useCallback((e: KeyboardEvent) => {
     return e.keyCode === 32 || e.keyCode === 13;
   }, []);
-  const handleKeydown = useCallback((e) => {
+  const handleKeydown = useCallback((e: KeyboardEvent) => {
     if (isSpaceOrEnter(e) && isGameActive() && !lockRef.current) {
       if (!GUIStore.current.showTextBox) {
         setComponentVisibility('showTextBox', true);
@@ -340,12 +340,12 @@ export function useSpaceAndEnter() {
       lockRef.current = true;
     }
   }, []);
-  const handleKeyup = useCallback((e) => {
+  const handleKeyup = useCallback((e: KeyboardEvent) => {
     if (isSpaceOrEnter(e) && isGameActive()) {
       lockRef.current = false;
     }
   }, []);
-  const handleWindowBlur = useCallback((e) => {
+  const handleWindowBlur = useCallback((_e: FocusEvent) => {
     lockRef.current = false;
   }, []);
   // mounted时绑定事件

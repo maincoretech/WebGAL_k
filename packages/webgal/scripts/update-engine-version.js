@@ -5,10 +5,11 @@
  * 从 package.json 读取版本号并同步到 webgal-engine.json
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// 文件路径
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const packageJsonPath = path.resolve(__dirname, '../package.json');
 const engineJsonPath = path.resolve(__dirname, '../public/webgal-engine.json');
 

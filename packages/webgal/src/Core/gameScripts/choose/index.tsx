@@ -2,7 +2,7 @@ import { ISentence } from '@/Core/controller/scene/sceneInterface';
 import { createNonePerform, IPerform } from '@/Core/Modules/perform/performInterface';
 import { changeScene } from '@/Core/controller/scene/changeScene';
 import { jmp } from '@/Core/gameScripts/label/jmp';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import React from 'react';
 import styles from './choose.module.scss';
 import { webgalStore } from '@/store/store';
@@ -14,6 +14,8 @@ import useApplyStyle from '@/hooks/useApplyStyle';
 import { Provider } from 'react-redux';
 import { useFontFamily } from '@/hooks/useFontFamily';
 import { getNumberArgByKey } from '@/Core/util/getSentenceArg';
+
+let _chooseRoot: any;
 
 class ChooseOption {
   /**
@@ -76,18 +78,10 @@ export const choose = (sentence: ISentence): IPerform => {
     duration: 1000 * 60 * 60 * 24,
     isHoldOn: false,
     startFunction: () => {
-      // eslint-disable-next-line react/no-deprecated
-      ReactDOM.render(
-        <Provider store={webgalStore}>
-          <Choose chooseOptions={chooseOptions} />
-        </Provider>,
-        document.getElementById('chooseContainer'),
-      );
+      const el = document.getElementById('chooseContainer');
+      if (el) { if (!_chooseRoot) _chooseRoot = createRoot(el); _chooseRoot.render(<Provider store={webgalStore}><Choose chooseOptions={chooseOptions} /></Provider>); }
     },
-    stopFunction: () => {
-      // eslint-disable-next-line react/no-deprecated
-      ReactDOM.render(<div />, document.getElementById('chooseContainer'));
-    },
+    stopFunction: () => { _chooseRoot?.render(<div />); },
     blockingNext: () => true,
     blockingAuto: () => true,
     blockingStateCalculation: () => true,

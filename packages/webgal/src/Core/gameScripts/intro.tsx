@@ -1,16 +1,15 @@
 import { ISentence } from '@/Core/controller/scene/sceneInterface';
 import { IPerform } from '@/Core/Modules/perform/performInterface';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import styles from '@/Stage/FullScreenPerform/fullScreenPerform.module.scss';
 import { WebGAL } from '@/Core/WebGAL';
 import useEscape from '@/hooks/useEscape';
 import { getBooleanArgByKey, getNumberArgByKey, getStringArgByKey } from '../util/getSentenceArg';
 import { assetSetter, fileType } from '@/Core/util/gameAssetsAccess/assetSetter';
-/**
- * 显示一小段黑屏演示
- * @param sentence
- */
+
+let _introRoot: any;
+
 export const intro = (sentence: ISentence): IPerform => {
   /**
    * intro 内部控制
@@ -174,7 +173,8 @@ export const intro = (sentence: ISentence): IPerform => {
       }, baseDuration);
       WebGAL.events.userInteractNext.on(toNextIntroElement);
       // eslint-disable-next-line react/no-deprecated
-      ReactDOM.render(intro, document.getElementById('introContainer'));
+      const el = document.getElementById('introContainer');
+      if (el) { if (!_introRoot) _introRoot = createRoot(el); _introRoot.render(intro); }
       const introContainer = document.getElementById('introContainer');
 
       if (introContainer) {

@@ -1,37 +1,12 @@
 mod hexz;
 
 use hexz::ResourcePack;
-#[cfg(target_os = "windows")]
-use std::io::Write;
 use std::sync::{
     Arc,
     atomic::{AtomicBool, Ordering},
 };
 use tauri::Emitter;
 use tauri::Manager;
-
-#[cfg(target_os = "windows")]
-fn win_log(msg: &str) {
-    let exe_dir = std::env::current_exe()
-        .ok()
-        .and_then(|p| p.parent().map(|d| d.to_path_buf()))
-        .unwrap_or_default();
-    let cur_dir = std::env::current_dir().unwrap_or_default();
-    for dir in [&exe_dir, &cur_dir] {
-        if let Ok(mut f) = std::fs::OpenOptions::new()
-            .create(true)
-            .append(true)
-            .open(dir.join("webgal-k.log"))
-        {
-            let ts = std::time::SystemTime::now()
-                .duration_since(std::time::UNIX_EPOCH)
-                .unwrap()
-                .as_millis();
-            let _ = writeln!(f, "[{ts}] {msg}");
-            return;
-        }
-    }
-}
 
 type PackRef = Arc<Option<ResourcePack>>;
 
@@ -55,16 +30,8 @@ fn find_hexz() -> Option<std::path::PathBuf> {
     }
     for d in &dirs {
         let p = d.join("game.hxz");
-        #[cfg(target_os = "windows")]
-        win_log(&format!("searching: {}", p.display()));
-        if p.exists() {
-            #[cfg(target_os = "windows")]
-            win_log(&format!("found: {}", p.display()));
-            return Some(p);
-        }
+        if p.exists() { return Some(p); }
     }
-    #[cfg(target_os = "windows")]
-    win_log("game.hxz not found");
     None
 }
 
@@ -90,8 +57,6 @@ pub fn run() {
                 .map(|s| s.to_string());
             let pack = find_hexz().and_then(|p| ResourcePack::open(&p, pw.as_deref()).ok());
             let loaded = pack.is_some();
-            #[cfg(target_os = "windows")]
-            win_log(&format!("pack loaded: {loaded}"));
             app.handle().manage(Arc::new(pack));
             app.handle().manage(PackStatus(loaded));
 
@@ -141,7 +106,7 @@ const ERROR_SCRIPT: &str = r#"
   var d=document.createElement('div');
   d.innerHTML=
     '<div style="position:fixed;inset:0;display:flex;align-items:center;'
-   +'justify-content:center;z-index:9999;background:rgba(0,0,0,0.92)">'
+   +'justify-content:center;z-index:9999;background:rgba(0,0,0,1)">'
    +'<div style="position:relative;background:rgba(20,20,20,0.95);'
    +'padding:40px 48px;text-align:center;'
    +'font-family:-apple-system,sans-serif;max-width:420px">'
@@ -202,8 +167,6 @@ fn serve_hexz(path: &str, handle: &tauri::AppHandle, responder: tauri::UriScheme
 
 #[tauri::command]
 fn read_hexz_file(path: String, state: tauri::State<'_, PackRef>) -> Result<Vec<u8>, String> {
-    #[cfg(target_os = "windows")]
-    win_log(&format!("read_hexz_file: {path}"));
     let decoded = urlencoding::decode(&path)
         .unwrap_or(std::borrow::Cow::Borrowed(&path))
         .into_owned();

@@ -1,5 +1,5 @@
 import styles from './globalDialog.module.scss';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { useSelector } from 'react-redux';
 import { RootState, webgalStore } from '@/store/store';
 import { setVisibility } from '@/store/GUIReducer';
@@ -55,9 +55,12 @@ export function showGlobalDialog(props: IShowGlobalDialogProps) {
       </div>
     </div>
   );
+let dialogRoot: any = null;
   setTimeout(() => {
-    // eslint-disable-next-line react/no-deprecated
-    ReactDOM.render(renderElement, document.getElementById('globalDialogContainer'));
+    const el = document.getElementById('globalDialogContainer');
+    if (!el) return;
+    if (!dialogRoot) dialogRoot = createRoot(el);
+    dialogRoot.render(renderElement);
   }, 100);
 }
 

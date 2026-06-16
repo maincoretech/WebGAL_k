@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.scss';
 import './assets/style/animation.scss';
@@ -28,8 +28,8 @@ i18n
   })
   .then(() => console.log('WebGAL i18n Ready!'));
 
-// eslint-disable-next-line react/no-deprecated
-ReactDOM.render(
+const root = createRoot(document.querySelector('#root')!);
+root.render(
   <StrictMode>
     <Trans>
       <Provider store={webgalStore}>
@@ -37,7 +37,6 @@ ReactDOM.render(
       </Provider>
     </Trans>
   </StrictMode>,
-  document.querySelector('#root'),
 );
 
 // Service Worker: relays game/* requests to Tauri hexz IPC

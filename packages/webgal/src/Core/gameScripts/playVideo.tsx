@@ -1,12 +1,14 @@
 import { ISentence } from '@/Core/controller/scene/sceneInterface';
 import { IPerform } from '@/Core/Modules/perform/performInterface';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import styles from '@/Stage/FullScreenPerform/fullScreenPerform.module.scss';
 import { webgalStore } from '@/store/store';
 import { getRandomPerformName } from '@/Core/Modules/perform/performController';
 import { getBooleanArgByKey } from '@/Core/util/getSentenceArg';
 import { WebGAL } from '@/Core/WebGAL';
+
+let _videoRoot: any;
 /**
  * 播放一段视频 * @param sentence
  */
@@ -34,7 +36,8 @@ export const playVideo = (sentence: ISentence): IPerform => {
       vocalElement.volume = vocalVol.toString();
     }
     // eslint-disable-next-line react/no-deprecated
-    ReactDOM.render(<div />, document.getElementById('videoContainer'));
+    const el = document.getElementById('videoContainer');
+    if (el) { if (!_videoRoot) _videoRoot = createRoot(el); _videoRoot.render(<div />); }
   };
   const endPerform = () => {
     isOver = true;
@@ -49,12 +52,8 @@ export const playVideo = (sentence: ISentence): IPerform => {
     isHoldOn: false,
     startFunction: () => {
       // eslint-disable-next-line react/no-deprecated
-      ReactDOM.render(
-        <div className={styles.videoContainer}>
-          <video className={styles.fullScreen_video} id="playVideoElement" src={sentence.content} autoPlay={true} />
-        </div>,
-        document.getElementById('videoContainer'),
-      );
+      const el = document.getElementById('videoContainer');
+      if (el) { if (!_videoRoot) _videoRoot = createRoot(el); _videoRoot.render(<div className={styles.videoContainer}><video className={styles.fullScreen_video} id="playVideoElement" src={sentence.content} autoPlay={true} /></div>); }
       /**
        * 启动视频播放
        */

@@ -20,15 +20,15 @@
     "chevrotain": "^10.5.0",
     "cloudlogjs": "^1.0.11",
     "lodash": "^4.17.23",
-    "tsx": "^3.12.7"
+    "tsx": "^4"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.189",
-    "@types/node": "^18.14.0",
-    "@vitest/coverage-c8": "^0.28.5",
+    "@types/node": "^18.19.130",
+    "@vitest/coverage-v8": "^2",
     "tslib": "^2.4.1",
-    "typescript": "^4.9.3",
-    "vitest": "^0.28.5"
+    "typescript": "^5",
+    "vitest": "^2"
   },
   "type": "module"
 }

@@ -1,17 +1,10 @@
 const CACHE_PREFIX = 'webgal-';
 const CACHE_NAME = 'webgal-build-assets-v1';
-const LOG_PREFIX = '[WebGAL]';
 const HASHED_BUILD_ASSET_RE = /(^|\/)assets\/[^/?#]+-[A-Za-z0-9_-]{8,}\.(?:js|css|ttf|woff|woff2)$/;
 
 // Title-screen assets to pre-warm into LRU on SW activate
 const TITLE_WARM = ['background/WebGalEnter.png', 'config.txt', 'scene/start.txt'];
 
-const loggedKeys = new Set();
-function logOnce(key, ...args) {
-  if (loggedKeys.has(key)) return;
-  loggedKeys.add(key);
-  console.log(LOG_PREFIX, ...args);
-}
 
 // ── hexz LRU cache (bytes), 32 MB limit ──
 const hexzCache = (() => {
@@ -45,10 +38,14 @@ const hexzCache = (() => {
 function hexzRead(path) {
   return new Promise((resolve, reject) => {
     const ch = new MessageChannel();
-    ch.port1.onmessage = (e) => (e.data.ok ? resolve(e.data.bytes) : reject(new Error(e.data.error)), ch.port1.close());
-    self.clients.matchAll({ type: 'window' }).then(([c]) => c
-      ? c.postMessage({ type: 'HEXZ_READ_FILE', path }, [ch.port2])
-      : reject(new Error('No client')));
+    ch.port1.onmessage = (e) => {
+      e.data.ok ? resolve(e.data.bytes) : reject(new Error(e.data.error));
+      ch.port1.close();
+    };
+    self.clients.matchAll({ type: 'window' }).then(([c]) => {
+      if (c) { c.postMessage({ type: 'HEXZ_READ_FILE', path }, [ch.port2]); }
+      else { ch.port1.close(); reject(new Error('No client')); }
+    });
   });
 }
 
@@ -70,12 +67,10 @@ function hexzResponse(path, bytes) {
 
 // ── Lifecycle ──
 self.addEventListener('install', (e) => {
-  logOnce('install', CACHE_NAME);
   e.waitUntil(self.skipWaiting());
 });
 
 self.addEventListener('activate', (e) => {
-  logOnce('activate', CACHE_NAME);
   e.waitUntil((async () => {
     // Clean old Cache API caches
     const keys = await caches.keys();
@@ -100,7 +95,7 @@ function isHashedBuildAsset(r) {
 async function cacheFirst(r) {
   const cache = await caches.open(CACHE_NAME);
   const hit = await cache.match(r);
-  if (hit) { logOnce(`hit:${r.url}`, 'cache hit:', new URL(r.url).pathname); return hit; }
+  if (hit) { return hit; }
   const resp = await fetch(r);
   if (resp.ok && resp.status === 200) { cache.put(r, resp.clone()).catch(() => {}); }
   return resp;
@@ -123,6 +118,7 @@ self.addEventListener('fetch', (e) => {
     try {
       let p = decodeURIComponent(url.pathname.replace(/^\//, ''));
       if (p.startsWith('game/')) p = p.slice(5);
+      if (/\.\./.test(p)) return fetch(request); // no traversal
       let bytes = hexzCache.get(p);
       if (!bytes) { bytes = await hexzRead(p); hexzCache.set(p, bytes); }
       return hexzResponse(p, bytes);
