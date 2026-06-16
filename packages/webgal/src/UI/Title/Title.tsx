@@ -69,6 +69,7 @@ export default function Title() {
         onClick={() => {
           playBgm(GUIState.titleBgm);
           dispatch(setVisibility({ component: 'isEnterGame', visibility: true }));
+          dispatch(setVisibility({ component: 'showTitle', visibility: true }));
           if (fullScreen === fullScreenOption.on) {
             document.documentElement.requestFullscreen();
             if (keyboard) keyboard.lock(['Escape', 'F11']);

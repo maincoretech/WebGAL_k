@@ -8,7 +8,7 @@ import type { IStageObject } from '@/Core/controller/stage/pixi/PixiController';
 import { getEnterExitAnimation } from '@/Core/Modules/animationFunctions';
 import { logger } from '@/Core/util/logger';
 import { setEbg } from '@/Core/gameScripts/changeBg/setEbg';
-import { isUndefined, omitBy } from 'lodash';
+import { omitBy } from '@/Core/util/lite';
 
 export function syncPixiStageState(stageState: IStageState, options: IResolvedStageCommitOptions) {
   if (options.syncPixiStage) {
@@ -236,5 +236,5 @@ function convertTransform(transform: ITransform | undefined) {
     return {};
   }
   const { position, ...rest } = transform;
-  return omitBy({ ...rest, x: position?.x, y: position?.y }, isUndefined);
+  return omitBy({ ...rest, x: position?.x, y: position?.y }, (v: any) => v === undefined);
 }

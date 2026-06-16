@@ -1,6 +1,5 @@
 import { AnimationFrame } from '@/Core/Modules/animations';
-import { has, pickBy } from 'lodash';
-import isNull from 'lodash/isNull';
+import { pickBy } from '@/Core/util/lite';
 import { stageStateManager } from '@/Core/Modules/stage/stageStateManager';
 
 type AnimationObj = Array<AnimationFrame>;
@@ -19,7 +18,7 @@ export function generateTransformAnimationObj(
   const targetEffect = transformState.find((effect) => effect.target === target);
 
   applyFrame.duration = 500;
-  if (!isNull(duration) && typeof duration === 'number') {
+  if (duration !== null && typeof duration === 'number') {
     applyFrame.duration = duration;
   }
   applyFrame.ease = ease;
@@ -31,10 +30,10 @@ export function generateTransformAnimationObj(
       const effectWithDuration = { ...targetEffect!.transform!, duration: 0, ease };
       animationObj.unshift(effectWithDuration);
     } else {
-      const targetScale = pickBy(targetEffect.transform?.scale || {}, (source, key) => has(applyFrame.scale, key));
-      const targetPosition = pickBy(targetEffect.transform?.position || {}, (sr, key) => has(applyFrame.position, key));
+      const targetScale = pickBy(targetEffect.transform?.scale || {}, (source, key) => key in (applyFrame.scale || {}));
+      const targetPosition = pickBy(targetEffect.transform?.position || {}, (sr, key) => key in (applyFrame.position || {}));
       const effectWithDuration = {
-        ...pickBy(targetEffect.transform || {}, (source, key) => has(applyFrame, key)),
+        ...pickBy(targetEffect.transform || {}, (source, key) => key in applyFrame),
         duration: 0,
         ease,
       };

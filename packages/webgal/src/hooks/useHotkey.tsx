@@ -13,7 +13,7 @@ import styles from '@/UI/Backlog/backlog.module.scss';
 import { showGlobalDialog } from '@/UI/GlobalDialog/GlobalDialog';
 import { exit } from '@tauri-apps/plugin-process';
 import i18n from 'i18next';
-import throttle from 'lodash/throttle';
+import { throttle } from '@/Core/util/lite';
 import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import useFullScreen from './useFullScreen';

@@ -2,9 +2,9 @@ import { ISentence } from '@/Core/controller/scene/sceneInterface';
 import { createNonePerform, IPerform } from '@/Core/Modules/perform/performInterface';
 import { changeScene } from '@/Core/controller/scene/changeScene';
 import { jmp } from '@/Core/gameScripts/label/jmp';
-import { createRoot } from 'react-dom/client';
 import React from 'react';
 import styles from './choose.module.scss';
+import { renderTo, clearContainer } from '@/Core/util/portal';
 import { webgalStore } from '@/store/store';
 import { useSEByWebgalStore } from '@/hooks/useSoundEffect';
 import { WebGAL } from '@/Core/WebGAL';
@@ -14,8 +14,6 @@ import useApplyStyle from '@/hooks/useApplyStyle';
 import { Provider } from 'react-redux';
 import { useFontFamily } from '@/hooks/useFontFamily';
 import { getNumberArgByKey } from '@/Core/util/getSentenceArg';
-
-let _chooseRoot: any;
 
 class ChooseOption {
   /**
@@ -78,10 +76,9 @@ export const choose = (sentence: ISentence): IPerform => {
     duration: 1000 * 60 * 60 * 24,
     isHoldOn: false,
     startFunction: () => {
-      const el = document.getElementById('chooseContainer');
-      if (el) { if (!_chooseRoot) _chooseRoot = createRoot(el); _chooseRoot.render(<Provider store={webgalStore}><Choose chooseOptions={chooseOptions} /></Provider>); }
+      renderTo('chooseContainer', <Provider store={webgalStore}><Choose chooseOptions={chooseOptions} /></Provider>);
     },
-    stopFunction: () => { _chooseRoot?.render(<div />); },
+    stopFunction: () => { clearContainer('chooseContainer'); },
     blockingNext: () => true,
     blockingAuto: () => true,
     blockingStateCalculation: () => true,

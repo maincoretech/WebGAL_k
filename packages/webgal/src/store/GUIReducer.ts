@@ -17,7 +17,7 @@ const initState: IGuiState = {
   fontOptions: [...DEFAULT_FONT_OPTIONS],
   showBacklog: false,
   showStarter: true,
-  showTitle: true,
+  showTitle: false,
   showMenuPanel: false,
   showTextBox: true,
   showControls: true,

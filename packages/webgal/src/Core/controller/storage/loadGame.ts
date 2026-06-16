@@ -6,7 +6,7 @@ import { webgalStore } from '@/store/store';
 import { setVisibility } from '@/store/GUIReducer';
 import { restorePerform } from './jumpFromBacklog';
 import { stopAllPerform } from '@/Core/controller/gamePlay/stopAllPerform';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from '@/Core/util/lite';
 import { setEbg } from '@/Core/gameScripts/changeBg/setEbg';
 
 import { WebGAL } from '@/Core/WebGAL';

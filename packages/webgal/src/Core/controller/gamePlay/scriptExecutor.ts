@@ -5,7 +5,7 @@ import { restoreScene } from '../scene/restoreScene';
 import { webgalStore } from '@/store/store';
 import { getValueFromStateElseKey } from '@/Core/gameScripts/setVar';
 import { strIf } from '@/Core/controller/gamePlay/strIf';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from '@/Core/util/lite';
 import { ISceneEntry } from '@/Core/Modules/scene';
 import { WebGAL } from '@/Core/WebGAL';
 import { getBooleanArgByKey, getStringArgByKey } from '@/Core/util/getSentenceArg';

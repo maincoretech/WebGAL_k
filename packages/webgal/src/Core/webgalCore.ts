@@ -1,6 +1,5 @@
 import { BacklogManager } from '@/Core/Modules/backlog';
 import { ReadHistoryManager } from './Modules/readHistory';
-import mitt from 'mitt';
 import { SceneManager } from '@/Core/Modules/scene';
 import { AnimationManager } from '@/Core/Modules/animations';
 import { Gameplay } from './Modules/gamePlay';

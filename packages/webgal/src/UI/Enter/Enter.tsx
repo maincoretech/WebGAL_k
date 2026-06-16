@@ -44,6 +44,10 @@ export default function Enter() {
     if (isExiting || isIOS) return;
     setIsExiting(true);
 
+    // 立即进入游戏状态，避免动画期间闪现标题背景
+    dispatch(setVisibility({ component: 'isEnterGame', visibility: true }));
+    dispatch(setVisibility({ component: 'showTitle', visibility: true }));
+
     // 延迟 resolve enterPromise，防止主线程瞬间卡死导致 CSS 动画跳帧
     setTimeout(() => {
       window.__enterPromiseResolve?.();
@@ -64,9 +68,7 @@ export default function Enter() {
     >
       <div className={styles.content}>
         <div className={styles.startIndicator}>
-          <div className={styles.lightBarLeft} />
           <div className={styles.triangle} />
-          <div className={styles.lightBarRight} />
         </div>
         <div className={styles.tapText}>TAP TO START</div>
       </div>

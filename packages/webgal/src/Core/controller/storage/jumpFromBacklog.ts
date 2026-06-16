@@ -6,7 +6,7 @@ import { webgalStore } from '@/store/store';
 import { setVisibility } from '@/store/GUIReducer';
 import { runScript } from '@/Core/controller/gamePlay/runScript';
 import { stopAllPerform } from '@/Core/controller/gamePlay/stopAllPerform';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from '@/Core/util/lite';
 
 import { WebGAL } from '@/Core/WebGAL';
 import { stageStateManager } from '@/Core/Modules/stage/stageStateManager';

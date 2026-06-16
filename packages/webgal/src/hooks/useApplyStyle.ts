@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { WebGAL } from '@/Core/WebGAL';
-import axios from 'axios';
 import { scss2cssinjsParser } from '@/Core/controller/customUI/scss2cssinjsParser';
 import { useValue } from '@/hooks/useValue';
 import { css, injectGlobal } from '@emotion/css';

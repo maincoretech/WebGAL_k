@@ -3,7 +3,7 @@
  */
 import { IEffect, IStageState } from '@/Core/Modules/stage/stageInterface';
 import { ISaveScene } from '@/store/userDataInterface';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from '@/Core/util/lite';
 
 import { SYSTEM_CONFIG } from '@/config';
 import { SceneManager } from '@/Core/Modules/scene';

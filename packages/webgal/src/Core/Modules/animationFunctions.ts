@@ -1,13 +1,12 @@
 import { generateUniversalSoftInAnimationObj } from '@/Core/controller/stage/pixi/animations/universalSoftIn';
 import { logger } from '@/Core/util/logger';
 import { generateUniversalSoftOffAnimationObj } from '@/Core/controller/stage/pixi/animations/universalSoftOff';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep, pickBy } from '@/Core/util/lite';
 import { baseTransform } from '@/Core/Modules/stage/stageInterface';
 import { generateTimelineObj } from '@/Core/controller/stage/pixi/animations/timeline';
 import { WebGAL } from '@/Core/WebGAL';
 import PixiStage, { IAnimationObject } from '@/Core/controller/stage/pixi/PixiController';
 import { IUserAnimation } from './animations';
-import { pickBy } from 'lodash';
 import {
   DEFAULT_BG_IN_DURATION,
   DEFAULT_BG_OUT_DURATION,

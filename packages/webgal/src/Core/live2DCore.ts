@@ -60,7 +60,7 @@ export class Live2DCore {
           console.warn('live2d plugin load failed');
           return;
         }
-        const { Live2DModel, SoundManager, config } = await import('pixi-live2d-display-webgal');
+        const { Live2DModel, SoundManager, config } = await import('pixi-live2d-display');
         this.Live2DModel = Live2DModel;
         this.SoundManager = SoundManager;
         this.Config = config;

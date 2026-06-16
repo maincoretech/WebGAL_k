@@ -7,18 +7,44 @@ import { addSpineBgImpl, addSpineFigureImpl } from '@/Core/controller/stage/pixi
 import { SCREEN_CONSTANTS } from '@/Core/util/constants';
 import { logger } from '@/Core/util/logger';
 const uuid = () => crypto.randomUUID();
-import { cloneDeep, isEqual } from 'lodash';
-import omitBy from 'lodash/omitBy';
-import isUndefined from 'lodash/isUndefined';
+import { cloneDeep, isEqual, omitBy } from '@/Core/util/lite';
 import * as PIXI from 'pixi.js';
-import { INSTALLED } from 'pixi.js';
-import { GifResource } from './GifResource';
 import { stageStateManager } from '@/Core/Modules/stage/stageStateManager';
+
+/** PIXI v7 compatible replacement for PIXI.Loader */
+class AssetLoader {
+  resources: Record<string, { texture: PIXI.Texture }> = {};
+  private _loading = false;
+  private _queue: { name: string; url: string }[] = [];
+
+  get loading() { return this._loading; }
+
+  add(nameOrUrl: string, url?: string) {
+    this._queue.push({ name: nameOrUrl, url: url ?? nameOrUrl });
+    return this;
+  }
+
+  async load(callback?: () => void) {
+    this._loading = true;
+    try {
+      const toLoad = [...this._queue];
+      this._queue = [];
+      for (const asset of toLoad) {
+        this.resources[asset.name] = { texture: await PIXI.Assets.load(asset.url) };
+      }
+    } catch {
+      // load failed — caller handles via callback
+    } finally {
+      this._loading = false;
+      callback?.();
+    }
+  }
+}
 
 export interface IAnimationObject {
   setStartState: Function;
   setEndState: Function;
-  tickerFunc: PIXI.TickerCallback<number>;
+  tickerFunc: (dt: number) => void;
   getEndStateEffect?: Function;
   forceStopWithoutSetEndState?: Function;
 }
@@ -65,16 +91,14 @@ export interface ILive2DRecord {
 // @ts-ignore
 window.PIXI = PIXI;
 
-INSTALLED.push(GifResource);
-
 export default class PixiStage {
   public static assignTransform<T extends ITransform>(target: T, source?: ITransform, convertAlpha = true) {
     if (!source) return;
     const targetScale = target.scale;
     const targetPosition = target.position;
-    if (target.scale) Object.assign(targetScale!, omitBy(source.scale || {}, isUndefined));
-    if (target.position) Object.assign(targetPosition!, omitBy(source.position || {}, isUndefined));
-    Object.assign(target, omitBy(source, isUndefined));
+    if (target.scale) Object.assign(targetScale!, omitBy(source.scale || {}, (v: any) => v === undefined));
+    if (target.position) Object.assign(targetPosition!, omitBy(source.position || {}, (v: any) => v === undefined));
+    Object.assign(target, omitBy(source, (v: any) => v === undefined));
     target.scale = targetScale;
     target.position = targetPosition;
     if (convertAlpha) {
@@ -98,7 +122,7 @@ export default class PixiStage {
   public figureObjects = this.createReactiveList<IStageObject>([]);
   public stageWidth = SCREEN_CONSTANTS.width;
   public stageHeight = SCREEN_CONSTANTS.height;
-  public assetLoader = new PIXI.Loader();
+  public assetLoader = new AssetLoader();
   public readonly backgroundContainer: PIXI.Container;
   public backgroundObjects = this.createReactiveList<IStageObject>([]);
   public mainStageObject: IStageObject;
@@ -142,21 +166,19 @@ export default class PixiStage {
     const pixiContainer = document.getElementById('pixiContianer');
     if (pixiContainer) {
       pixiContainer.innerHTML = '';
-      pixiContainer.appendChild(app.view);
+      pixiContainer.appendChild(app.view as HTMLCanvasElement);
     }
 
-    // 设置样式
-    app.renderer.view.style.position = 'absolute';
-    app.renderer.view.style.display = 'block';
-    app.renderer.view.id = 'pixiCanvas';
-    // @ts-ignore
-    app.renderer.autoResize = true;
+    const view = app.view as HTMLCanvasElement;
+    view.style.position = 'absolute';
+    view.style.display = 'block';
+    view.id = 'pixiCanvas';
     const appRoot = document.getElementById('root');
     if (appRoot) {
       app.renderer.resize(appRoot.clientWidth, appRoot.clientHeight);
     }
     if (isIOS) {
-      app.renderer.view.style.zIndex = '-5';
+      view.style.zIndex = '-5';
     }
 
     // 添加主舞台容器
@@ -1147,7 +1169,7 @@ export default class PixiStage {
         else this.assetLoader.add(front.url).load(handle);
       }
     } catch (error) {
-      logger.fatal('PIXI Loader 故障', error);
+      logger.error('PIXI Loader 故障', error);
       front.callback();
       queueMicrotask(() => this.callLoader());
     }

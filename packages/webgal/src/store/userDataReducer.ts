@@ -17,7 +17,7 @@ import {
   voiceOption,
 } from '@/store/userDataInterface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from '@/Core/util/lite';
 import { ISetGameVar } from '@/Core/Modules/stage/stageInterface';
 
 const initialOptionSet: IOptionData = {
@@ -142,8 +142,11 @@ const userDataSlice = createSlice({
       Object.assign(state.optionData, initialOptionSet);
     },
     resetAllData(state) {
-      const { gameConfigInit } = state;
-      Object.assign(state, { ...cloneDeep(initState), globalGameVar: cloneDeep(gameConfigInit), gameConfigInit });
+      state.optionData = { ...initialOptionSet };
+      state.scriptManagedGlobalVar = [];
+      state.globalGameVar = { ...state.gameConfigInit };
+      state.appreciationData = { bgm: [], cg: [] };
+      state.readHistory = {};
     },
     setReadHistory: (state, action: PayloadAction<Record<'key' | 'value', string>>) => {
       state.readHistory[action.payload.key] = action.payload.value;

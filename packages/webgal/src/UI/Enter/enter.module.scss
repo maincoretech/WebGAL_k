@@ -22,12 +22,6 @@
     animation: none;
     transition: opacity 0.2s ease-out;
   }
-
-  .lightBarLeft, .lightBarRight {
-    opacity: 1;
-    width: 60%;
-    box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.8);
-  }
 }
 
 .content {
@@ -72,28 +66,6 @@
     transform: scale(1.05);
     filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.7));
   }
-}
-
-.lightBarLeft, .lightBarRight {
-  position: absolute;
-  bottom: 20px;
-  height: 3px;
-  width: 0;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.5);
-  transition: width 0.65s cubic-bezier(0.05, 0.7, 0.1, 1), opacity 0.3s ease-out;
-  opacity: 0;
-  z-index: 1;
-}
-
-.lightBarLeft {
-  right: 50%;
-  margin-right: 42px;
-}
-
-.lightBarRight {
-  left: 50%;
-  margin-left: 42px;
 }
 
 .tapText {

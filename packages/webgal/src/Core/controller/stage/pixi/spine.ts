@@ -11,7 +11,7 @@ let pixiSpineModule: typeof import('pixi-spine') | null = null;
 // @ts-ignore
 let pixiSpineLoading: Promise<typeof import('pixi-spine') | null> | null = null;
 
-let spineLoader: undefined | PIXI.Loader;
+let spineLoader: undefined | any;
 
 /**
  * 动态加载 'pixi-spine' 模块，并缓存结果

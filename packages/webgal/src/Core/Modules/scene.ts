@@ -1,5 +1,5 @@
 import { ISceneData } from '@/Core/controller/scene/sceneInterface';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from '@/Core/util/lite';
 
 export interface ISceneEntry {
   sceneName: string; // 场景名称

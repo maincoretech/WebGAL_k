@@ -3,7 +3,7 @@ import { IUserData } from '@/store/userDataInterface';
 import { logger } from '../../util/logger';
 import { webgalStore } from '@/store/store';
 import { initState, resetUserData } from '@/store/userDataReducer';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from '@/Core/util/lite';
 
 import { WebGAL } from '@/Core/WebGAL';
 import savesReducer, { ISavesData } from '@/store/savesReducer';

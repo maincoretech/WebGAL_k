@@ -19,6 +19,8 @@ import useSoundEffect from '@/hooks/useSoundEffect';
 import savesReducer, { ISavesData, saveActions } from '@/store/savesReducer';
 import { dumpFastSaveToStorage, dumpSavesToStorage } from '@/Core/controller/storage/savesController';
 import { OptionSlider } from '@/UI/Menu/Options/OptionSlider';
+import { save, open } from '@tauri-apps/plugin-dialog';
+import { writeTextFile, readTextFile } from '@tauri-apps/plugin-fs';
 
 interface IExportGameData {
   userData: IUserData;
@@ -33,63 +35,43 @@ export function System() {
   const t = useTrans('menu.options.pages.system.options.');
   const { playSeDialogOpen, playSeEnter, playSeSwitch } = useSoundEffect();
 
-  function exportSaves() {
-    const gameData: IExportGameData = {
-      userData: userDataState,
-      saves: userSavesState,
-    };
+  async function exportSaves() {
+    const filePath = await save({
+      filters: [{ name: 'JSON', extensions: ['json'] }],
+      defaultPath: 'saves.json',
+    });
+    if (!filePath) return;
+    await writeTextFile(filePath, JSON.stringify({ userData: userDataState, saves: userSavesState }));
+  }
 
-    const saves = JSON.stringify(gameData);
-    if (saves !== null) {
-      const blob = new Blob([saves], { type: 'application/json' });
-      const blobUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = blobUrl;
-      a.download = 'saves.json';
-      a.click();
-      a.remove();
+  async function importSaves() {
+    const filePath = await open({
+      filters: [{ name: 'JSON', extensions: ['json'] }],
+      multiple: false,
+    });
+    if (!filePath) return;
+    const content = await readTextFile(filePath as string);
+    try {
+      const saveAsObj: IExportGameData = JSON.parse(content);
+      playSeDialogOpen();
+      showGlogalDialog({
+        title: t('gameSave.dialogs.import.title'),
+        leftText: t('$common.yes'),
+        rightText: t('$common.no'),
+        leftFunc: async () => {
+          await localforage.setItem(WebGAL.gameKey, saveAsObj.userData);
+          logger.info(t('gameSave.dialogs.import.tip'));
+          getStorage();
+          webgalStore.dispatch(saveActions.replaceSaveGame(saveAsObj.saves.saveData));
+          webgalStore.dispatch(saveActions.setFastSave(saveAsObj.saves.quickSaveData));
+          dumpFastSaveToStorage();
+          dumpSavesToStorage(0, 200);
+        },
+        rightFunc: () => {},
+      });
+    } catch (e) {
+      logger.error(t('gameSave.dialogs.import.error'), e);
     }
-  }
-
-  function importSavesEventHandler(ev: any) {
-    // const t = useTrans('menu.options.pages.system.options.');
-
-    const file = ev.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (evR) => {
-      const saves = evR!.target!.result as string;
-      try {
-        const saveAsObj: IExportGameData = JSON.parse(saves);
-        playSeDialogOpen();
-        showGlogalDialog({
-          title: t('gameSave.dialogs.import.title'),
-          leftText: t('$common.yes'),
-          rightText: t('$common.no'),
-          leftFunc: async () => {
-            await localforage.setItem(WebGAL.gameKey, saveAsObj.userData).then(() => {
-              logger.info(t('gameSave.dialogs.import.tip'));
-            });
-            getStorage();
-            webgalStore.dispatch(saveActions.replaceSaveGame(saveAsObj.saves.saveData));
-            webgalStore.dispatch(saveActions.setFastSave(saveAsObj.saves.quickSaveData));
-            dumpFastSaveToStorage();
-            dumpSavesToStorage(0, 200);
-          },
-          rightFunc: () => {},
-        });
-      } catch (e) {
-        logger.error(t('gameSave.dialogs.import.error'), e);
-      }
-      // window.location.reload(); // dirty: 强制刷新 UI
-    };
-    reader.readAsText(file, 'UTF-8');
-  }
-
-  function importSaves() {
-    const inputElement = document.createElement('input');
-    inputElement.type = 'file';
-    inputElement.onchange = importSavesEventHandler;
-    inputElement.click();
   }
 
   const [showAbout, setShowAbout] = useState(false);

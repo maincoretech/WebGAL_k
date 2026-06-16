@@ -7,8 +7,6 @@ import { setScriptManagedGlobalVar } from '@/store/userDataReducer';
 import { ISetGameVar } from '@/Core/Modules/stage/stageInterface';
 import { dumpToStorageFast } from '@/Core/controller/storage/storageController';
 import expression from 'angular-expressions';
-import get from 'lodash/get';
-import random from 'lodash/random';
 import { getBooleanArgByKey } from '../util/getSentenceArg';
 import { stageStateManager } from '@/Core/Modules/stage/stageStateManager';
 
@@ -115,7 +113,14 @@ function EvaluateExpression(val: string) {
   const instance = expression.compile(val);
   return instance({
     random: (...args: any[]) => {
-      return args.length ? random(...args) : Math.random();
+      if (args.length >= 2) {
+        const [min, max] = [Math.ceil(args[0]), Math.floor(args[1])];
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      if (args.length === 1) {
+        return Math.floor(Math.random() * (Math.floor(args[0]) + 1));
+      }
+      return Math.random();
     },
   });
 }
@@ -134,7 +139,7 @@ export function getValueFromState(key: string) {
     ret = userData.globalGameVar[key];
   } else if (key.startsWith('$')) {
     const propertyKey = key.replace('$', '');
-    ret = get(_Merge, propertyKey, undefined) as BaseVal;
+    ret = propertyKey.split('.').reduce((obj: any, k: string) => obj?.[k], _Merge) as BaseVal;
   }
   return ret;
 }

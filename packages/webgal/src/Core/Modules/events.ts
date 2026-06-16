@@ -1,9 +1,28 @@
-import mitt from 'mitt';
-
 interface IWebgalEvent<T> {
   on: (callback: (message?: T) => void, id?: string) => void;
   off: (callback: (message?: T) => void, id?: string) => void;
   emit: (message?: T, id?: string) => void;
+}
+
+type EventHandler = (...args: any[]) => void;
+const bus = new Map<string, Set<EventHandler>>();
+
+function formEvent<T>(eventName: string): IWebgalEvent<T> {
+  return {
+    on: (callback, id?) => {
+      const name = `${eventName}-${id ?? ''}`;
+      if (!bus.has(name)) bus.set(name, new Set());
+      bus.get(name)!.add(callback as EventHandler);
+    },
+    emit: (message?, id?) => {
+      const name = `${eventName}-${id ?? ''}`;
+      bus.get(name)?.forEach((cb) => cb(message));
+    },
+    off: (callback, id?) => {
+      const name = `${eventName}-${id ?? ''}`;
+      bus.get(name)?.delete(callback as EventHandler);
+    },
+  };
 }
 
 export class Events {
@@ -12,22 +31,4 @@ export class Events {
   public fullscreenDbClick = formEvent('fullscreen-dbclick');
   public styleUpdate = formEvent('style-update');
   public afterStyleUpdate = formEvent('after-style-update');
-}
-
-const eventBus = mitt();
-
-function formEvent<T>(eventName: string): IWebgalEvent<T> {
-  return {
-    on: (callback, id?) => {
-      // @ts-ignore
-      eventBus.on(`${eventName}-${id ?? ''}`, callback);
-    },
-    emit: (message?, id?) => {
-      eventBus.emit(`${eventName}-${id ?? ''}`, message);
-    },
-    off: (callback, id?) => {
-      // @ts-ignore
-      eventBus.off(`${eventName}-${id ?? ''}`, callback);
-    },
-  };
 }

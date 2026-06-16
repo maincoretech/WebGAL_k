@@ -47,7 +47,7 @@ export function ExtraBgm() {
           currentPlayingBgmName.set(e.name);
           dispatch(setGuiAsset({ asset: 'titleBgm', value: e.url }));
         }}
-        key={e.name}
+        key={e.url}
         className={className}
         style={{
           animationDelay: `${i * 150}ms`,

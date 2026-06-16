@@ -1,6 +1,6 @@
 import { ISaveData } from '@/store/userDataInterface';
 import { webgalStore } from '@/store/store';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from '@/Core/util/lite';
 
 import { WebGAL } from '@/Core/WebGAL';
 import { saveActions } from '@/store/savesReducer';

@@ -9,7 +9,7 @@ import { logger } from '@/Core/util/logger';
 import { ITransform } from '@/Core/Modules/stage/stageInterface';
 import { generateTransformAnimationObj } from '@/Core/controller/stage/pixi/animations/generateTransformAnimationObj';
 import { AnimationFrame, IUserAnimation } from '@/Core/Modules/animations';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from '@/Core/util/lite';
 import { applyAnimationEndState, getAnimateDuration } from '@/Core/Modules/animationFunctions';
 import { WebGAL } from '@/Core/WebGAL';
 import { DEFAULT_BG_OUT_DURATION } from '@/Core/constants';

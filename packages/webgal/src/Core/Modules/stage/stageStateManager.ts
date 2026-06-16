@@ -1,5 +1,5 @@
-import cloneDeep from 'lodash/cloneDeep';
-import { isUndefined, omitBy } from 'lodash';
+import { cloneDeep } from '@/Core/util/lite';
+import { omitBy } from '@/Core/util/lite';
 import { commandType } from '@/Core/controller/scene/sceneInterface';
 import { STAGE_KEYS } from '@/Core/constants';
 import { baseBlinkParam, baseFocusParam } from '@/Core/live2DCore';
@@ -155,9 +155,9 @@ export class StageStateManager {
       } else if (transform) {
         const targetScale = state.effects[effectIndex].transform!.scale || {};
         const targetPosition = state.effects[effectIndex].transform!.position || {};
-        if (transform.scale) Object.assign(targetScale, omitBy(transform.scale, isUndefined));
-        if (transform.position) Object.assign(targetPosition, omitBy(transform.position, isUndefined));
-        Object.assign(state.effects[effectIndex].transform!, omitBy(transform, isUndefined));
+        if (transform.scale) Object.assign(targetScale, omitBy(transform.scale, (v: any) => v === undefined));
+        if (transform.position) Object.assign(targetPosition, omitBy(transform.position, (v: any) => v === undefined));
+        Object.assign(state.effects[effectIndex].transform!, omitBy(transform, (v: any) => v === undefined));
         state.effects[effectIndex].transform!.scale = targetScale;
         state.effects[effectIndex].transform!.position = targetPosition;
       }

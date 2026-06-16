@@ -1,14 +1,12 @@
 import { ISentence } from '@/Core/controller/scene/sceneInterface';
 import { IPerform } from '@/Core/Modules/perform/performInterface';
 import React from 'react';
-import { createRoot } from 'react-dom/client';
 import styles from '@/Stage/FullScreenPerform/fullScreenPerform.module.scss';
 import { WebGAL } from '@/Core/WebGAL';
 import useEscape from '@/hooks/useEscape';
 import { getBooleanArgByKey, getNumberArgByKey, getStringArgByKey } from '../util/getSentenceArg';
 import { assetSetter, fileType } from '@/Core/util/gameAssetsAccess/assetSetter';
-
-let _introRoot: any;
+import { renderTo } from '@/Core/util/portal';
 
 export const intro = (sentence: ISentence): IPerform => {
   /**
@@ -173,8 +171,7 @@ export const intro = (sentence: ISentence): IPerform => {
       }, baseDuration);
       WebGAL.events.userInteractNext.on(toNextIntroElement);
       // eslint-disable-next-line react/no-deprecated
-      const el = document.getElementById('introContainer');
-      if (el) { if (!_introRoot) _introRoot = createRoot(el); _introRoot.render(intro); }
+      renderTo('introContainer', intro);
       const introContainer = document.getElementById('introContainer');
 
       if (introContainer) {
