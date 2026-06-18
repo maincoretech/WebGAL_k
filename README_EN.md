@@ -8,6 +8,41 @@ Built on [WebGAL](https://github.com/OpenWebGAL/WebGAL) / [Tauri v2](https://v2.
 
 ---
 
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Engine | **React 18** · **PIXI.js 7.4** · **TypeScript 5.9** |
+| Native | **Tauri v2** (Rust) · WKWebView (macOS) / WebView2 (Windows) |
+| Crypto Archive | **hexz 0.8** — AES-256-GCM · O(1) random access · lock-free concurrent reads |
+| Build | **Bun** · Vite 5 · Sass |
+| Fonts | MavenPro (Latin) + Hanazono MinchoA subset (CJK + kana, 4.6MB) |
+
+### Dependency Cleanup
+
+Removed heavy dependencies, replaced with native APIs or lightweight implementations:
+
+| Removed | Replacement |
+|---------|-------------|
+| lodash | `src/Core/util/lite.ts` — `cloneDeep` → `structuredClone`, custom `omitBy`/`pickBy`/`throttle`/`isEqual` |
+| localforage | Tauri `LazyStore` (auto-save, 100ms debounce) |
+| mitt | Removed, direct calls |
+| axios | Removed, Tauri IPC / `hexz://` protocol |
+| cloudlogjs | Removed, `src/Core/util/logger.ts` |
+
+### Tauri Plugins
+
+| Plugin | Purpose |
+|--------|---------|
+| `plugin-store` | Save data / settings persistence |
+| `plugin-fs` | Native file import / export |
+| `plugin-dialog` | Native file picker dialogs |
+| `plugin-process` | Process management |
+| `plugin-single-instance` | Prevent multiple instances |
+| `plugin-opener` | Open external links in system browser (WKWebView blocks `target="_blank"`) |
+
+---
+
 ## Architecture
 
 ```mermaid
@@ -80,9 +115,24 @@ flowchart LR
 |-----------------|----------|
 | Browser-native concurrency | `Arc<ResourcePack>` lock-free, protocol + IPC parallel channels |
 
-### UI Tweaks
+### Rendering Optimizations
 
-- Textbox: removed `backdrop-filter: blur()`, darker background
+| Upstream WebGAL | WebGAL_k |
+|-----------------|----------|
+| PIXI default resolution (Retina 2x) | `resolution: 1`, lower GPU memory |
+| Default antialiasing | `antialias: false` |
+| Font smoothing `antialiased` (grayscale) | `subpixel-antialiased` (macOS subpixel) |
+| `setTimeout(0)` frame misalignment | `requestAnimationFrame` frame-aligned |
+| No GPU texture cleanup on scene switch | `AssetLoader.clear()` releases GPU textures |
+| Font 7.3MB (includes Latin/Hangul) | CJK + kana subset 4.6MB |
+
+### Redux Purity
+
+| Upstream WebGAL | WebGAL_k |
+|-----------------|----------|
+| Reducer calls `getStorage()` (I/O side effect) | Pure reducers, side effects at call sites |
+| debounce implementation bug (always returns undefined) | Fixed as standard fire-and-forget debounce |
+| `storeGet` returns `undefined` for missing keys | Normalized to `null` for consistent null checks |
 
 ---
 
