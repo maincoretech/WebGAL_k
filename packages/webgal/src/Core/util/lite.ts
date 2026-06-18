@@ -99,7 +99,8 @@ function getStore(gameKey: string) {
 }
 
 export async function storeGet(key: string | number): Promise<unknown> {
-  return await getStore(gameKeyFrom(key)).get(String(key));
+  const val = await getStore(gameKeyFrom(key)).get(String(key));
+  return val ?? null; // normalize undefined to null
 }
 
 export async function storeSet(key: string | number, value: unknown) {

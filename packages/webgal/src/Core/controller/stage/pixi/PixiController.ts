@@ -39,6 +39,18 @@ class AssetLoader {
       callback?.();
     }
   }
+
+  /** Release all cached textures to free GPU memory. Call periodically to prevent leaks. */
+  clear() {
+    for (const key of Object.keys(this.resources)) {
+      const entry = this.resources[key];
+      if (entry?.texture) {
+        entry.texture.destroy(true);
+      }
+    }
+    this.resources = {};
+    PIXI.Assets.cache.reset(); // clear PIXI internal texture cache
+  }
 }
 
 export interface IAnimationObject {
@@ -157,6 +169,8 @@ export default class PixiStage {
       backgroundAlpha: 0,
       preserveDrawingBuffer: true,
       autoStart: false,
+      resolution: 1, // 1x for lower memory; GAL art doesn't benefit from retina
+      antialias: false,
     });
     // @ts-ignore
 
@@ -461,7 +475,7 @@ export default class PixiStage {
     const setup = () => {
       // TODO：找一个更好的解法，现在的解法是无论是否复用原来的资源，都设置一个延时以让动画工作正常！
 
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         const texture = loader.resources?.[url]?.texture;
         if (texture && this.getStageObjByUuid(bgUuid)) {
           /**
@@ -485,7 +499,7 @@ export default class PixiStage {
           thisBgContainer.addChild(bgSprite);
           this.requestRender();
         }
-      }, 0);
+      });
     };
 
     /**
@@ -536,7 +550,7 @@ export default class PixiStage {
     const setup = () => {
       // TODO：找一个更好的解法，现在的解法是无论是否复用原来的资源，都设置一个延时以让动画工作正常！
 
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         console.debug('start loaded video: ' + url);
         const video = document.createElement('video');
         const videoResource = new PIXI.VideoResource(video);
@@ -569,7 +583,7 @@ export default class PixiStage {
             thisBgContainer.addChild(bgSprite);
           });
         }
-      }, 0);
+      });
     };
 
     /**
@@ -628,7 +642,7 @@ export default class PixiStage {
     // 完成图片加载后执行的函数
     const setup = () => {
       // TODO：找一个更好的解法，现在的解法是无论是否复用原来的资源，都设置一个延时以让动画工作正常！
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         const texture = loader.resources?.[url]?.texture;
         if (texture && this.getStageObjByUuid(figureUuid)) {
           /**
@@ -663,12 +677,13 @@ export default class PixiStage {
           thisFigureContainer.addChild(figureSprite);
           this.requestRender();
         }
-      }, 0);
+      });
     };
 
     /**
      * 加载器部分
      */
+    this.cacheGC();
     if (!loader.resources?.[url]?.texture) {
       this.loadAsset(url, setup);
     } else {

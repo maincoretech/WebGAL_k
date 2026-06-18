@@ -1,4 +1,3 @@
-import { getStorage } from '@/Core/controller/storage/storageController';
 import {
   FontOption,
   GuiAsset,
@@ -48,7 +47,6 @@ const GUISlice = createSlice({
      * @param action 改变显示状态的Action
      */
     setVisibility: (state, action: PayloadAction<setVisibilityPayload>) => {
-      getStorage();
       const { component, visibility } = action.payload;
       state[component] = visibility;
     },
@@ -58,7 +56,6 @@ const GUISlice = createSlice({
      * @param action 改变当前选中项的Action
      */
     setMenuPanelTag: (state, action: PayloadAction<MenuPanelTag>) => {
-      getStorage();
       state.currentMenuTag = action.payload;
     },
     /**

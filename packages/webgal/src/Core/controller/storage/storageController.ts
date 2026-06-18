@@ -97,22 +97,18 @@ export const getStorage = debounce(() => {
 
 /**
  * 防抖函数
- * @param func 要执行的函数
- * @param wait 防抖等待时间
+ * @param fn 要执行的函数
+ * @param wait 防抖等待时间（毫秒）
  */
-function debounce<T, K>(func: (...args: T[]) => K, wait: number) {
-  let timeout: ReturnType<typeof setTimeout>;
-
-  function context(...args: T[]): K {
-    clearTimeout(timeout);
-    let ret!: K;
+function debounce(fn: () => void, wait: number): () => void {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+  return () => {
+    if (timeout !== null) clearTimeout(timeout);
     timeout = setTimeout(() => {
-      ret = func.apply(context, args);
+      timeout = null;
+      fn();
     }, wait);
-    return ret;
-  }
-
-  return context;
+  };
 }
 
 export const dumpToStorageFast = () => {
