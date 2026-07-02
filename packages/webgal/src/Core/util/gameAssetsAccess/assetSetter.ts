@@ -21,8 +21,8 @@ export enum fileType {
  * @param assetType 资源类型
  * @return {string} 处理后的资源路径（绝对或相对）
  */
-// macOS: hexz:// protocol; Windows: same-origin ./game/ via Service Worker
-const isWindows = /windows/i.test((navigator as any).userAgentData?.platform ?? navigator.platform ?? '');
+// On Tauri desktop: WKWebView → MacIntel, WebView2 → Win32
+const isWindows = /win/i.test(navigator.platform ?? '');
 const PREFIX = isWindows ? './game/' : 'hexz://localhost/';
 
 /** Resolve a hexz-archive path to the platform-appropriate URL. */

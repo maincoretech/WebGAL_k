@@ -98,26 +98,25 @@ function isEmptyLine(line: string): boolean {
  */
 function sceneTextPreProcessPassTwo(lines: string[]): string[] {
   const processedLines: string[] = [];
-  let currentMultilineContent = "";
+  const parts: string[] = [];
   let placeHolderLines: string[] = [];
 
   function concat(line: string) {
     let trimmed = line.trim();
     if (trimmed.startsWith('-')) {
-      trimmed = " " + trimmed;
+      trimmed = ' ' + trimmed;
     }
-    currentMultilineContent = currentMultilineContent + trimmed;
+    parts.push(trimmed);
     placeHolderLines.push(placeholderLine(line));
   }
 
   for (const line of lines) {
-    console.log(line);
     if (line.endsWith('\\')) {
       const trueLine = line.slice(0, -1);
 
-      if (currentMultilineContent === "") {
+      if (parts.length === 0) {
         // first line
-        currentMultilineContent = trueLine;
+        parts.push(trueLine);
       } else {
         // middle line
         concat(trueLine);
@@ -125,14 +124,14 @@ function sceneTextPreProcessPassTwo(lines: string[]): string[] {
       continue;
     }
 
-    if (currentMultilineContent !== "") {
+    if (parts.length > 0) {
       // end line
       concat(line);
-      processedLines.push(currentMultilineContent);
+      processedLines.push(parts.join(''));
       processedLines.push(...placeHolderLines);
 
       placeHolderLines = [];
-      currentMultilineContent = "";
+      parts.length = 0;
       continue;
     }
 

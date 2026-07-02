@@ -52,7 +52,7 @@ const zhCn = {
             },
             about: {
               title: '关于 WebGAL_k',
-              subTitle: 'WebGAL 引擎的分支 更加激进也更加传统',
+              subTitle: 'WebGAL 引擎的分支',
               version: '版本号',
               credit: '鸣谢',
               font: '西文字体：Maven Pro（遵循 SIL Open Font License 1.1）',

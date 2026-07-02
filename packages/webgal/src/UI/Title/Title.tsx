@@ -13,6 +13,7 @@ import { getContinueGameSaveData, continueGame, startGame } from '@/Core/control
 import { showGlogalDialog } from '../GlobalDialog/GlobalDialog';
 import styles from './title.module.scss';
 import { exit } from '@tauri-apps/plugin-process';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useEffect, useState } from 'react';
 import { logger } from '@/Core/util/logger';
 
@@ -71,7 +72,7 @@ export default function Title() {
           dispatch(setVisibility({ component: 'isEnterGame', visibility: true }));
           dispatch(setVisibility({ component: 'showTitle', visibility: true }));
           if (fullScreen === fullScreenOption.on) {
-            document.documentElement.requestFullscreen();
+            getCurrentWindow().setFullscreen(true);
             if (keyboard) keyboard.lock(['Escape', 'F11']);
           }
         }}

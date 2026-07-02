@@ -12,15 +12,8 @@ export function argsParser(
   assetSetter: (fileName: string, assetType: fileType) => string,
 ): Array<arg> {
   const returnArrayList: Array<arg> = [];
-  // 处理参数
-  // 不要去空格
-  let newArgsRaw = argsRaw.replace(/ /g, ' ');
-  // 分割参数列表
-  let rawArgsList: Array<string> = newArgsRaw.split(' -');
-  // 去除空字符串
-  rawArgsList = rawArgsList.filter((e) => {
-    return e !== '';
-  });
+  // 分割参数列表（以 " -" 作为分隔）
+  const rawArgsList: Array<string> = argsRaw.split(' -').filter((e) => e !== '');
   rawArgsList.forEach((e) => {
     const equalSignIndex = e.indexOf('=');
     let argName = e.slice(0, equalSignIndex).trim();

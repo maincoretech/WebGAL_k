@@ -5,7 +5,6 @@ import {
   ISentence,
 } from './interface/sceneInterface';
 import { scriptParser } from './scriptParser/scriptParser';
-import uniqWith from 'lodash/uniqWith';
 import { fileType } from './interface/assets';
 import { ConfigMap } from './config/scriptConfig';
 
@@ -31,13 +30,9 @@ export const sceneParser = (
 ): IScene => {
   const rawSentenceList = rawScene.replaceAll('\r', '').split('\n'); // 原始句子列表
 
-  // 去分号留到后面去做了，现在注释要单独处理
-  const rawSentenceListWithoutEmpty = rawSentenceList;
-  // .map((sentence) => sentence.split(";")[0])
-  // .filter((sentence) => sentence.trim() !== "");
-  let assetsList: Array<IAsset> = []; // 场景资源列表
-  let subSceneList: Array<string> = []; // 子场景列表
-  const sentenceList: Array<ISentence> = rawSentenceListWithoutEmpty.map(
+  const assetsList: Array<IAsset> = []; // 场景资源列表
+  const subSceneList: Array<string> = []; // 子场景列表
+  const sentenceList: Array<ISentence> = rawSentenceList.map(
     (sentence, index) => {
       const returnSentence: ISentence = scriptParser(
         sentence,
@@ -47,21 +42,26 @@ export const sceneParser = (
         index,
       );
       // 在这里解析出语句可能携带的资源和场景，合并到 assetsList 和 subSceneList
-      assetsList = [...assetsList, ...returnSentence.sentenceAssets];
-      subSceneList = [...subSceneList, ...returnSentence.subScene];
+      for (const a of returnSentence.sentenceAssets) assetsList.push(a);
+      for (const s of returnSentence.subScene) subSceneList.push(s);
       return returnSentence;
     },
   );
 
-  // 开始资源的预加载
-  assetsList = uniqWith(assetsList); // 去重
-  assetsPrefetcher(assetsList);
+  // 开始资源的预加载（按 url 去重）
+  const seen = new Set<string>();
+  const uniqueAssets = assetsList.filter((a) => {
+    if (seen.has(a.url)) return false;
+    seen.add(a.url);
+    return true;
+  });
+  assetsPrefetcher(uniqueAssets);
 
   return {
     sceneName: sceneName, // 场景名称
     sceneUrl: sceneUrl,
     sentenceList: sentenceList, // 语句列表
-    assetsList: assetsList, // 资源列表
+    assetsList: uniqueAssets, // 资源列表
     subSceneList: subSceneList, // 子场景列表
   };
 };

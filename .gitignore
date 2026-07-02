@@ -33,3 +33,4 @@ packages/webgal/src/Core/util/pixiPerformManager/initRegister.ts
 # We use bun!
 yarn.lockhexz_k/
 game.hxz
+.svelte-kit

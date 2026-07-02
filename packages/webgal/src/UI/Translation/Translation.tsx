@@ -4,6 +4,7 @@ import s from './translation.module.scss';
 import languages, { language } from '@/config/language';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+import { storeGet } from '@/Core/util/lite';
 
 export default function Translation() {
   const setLanguage = useLanguage();
@@ -18,37 +19,32 @@ export default function Translation() {
   };
 
   useEffect(() => {
-    const lang = window?.localStorage.getItem('lang');
-    if (!lang) {
-      setIsShowSelectLanguage(true);
-      if (defaultLang) {
-        switch (defaultLang) {
-          case 'zh_CN':
-            setLang(language.zhCn);
-            break;
-          case 'zh_TW':
-            setLang(language.zhTw);
-            break;
-          case 'en':
-            setLang(language.en);
-            break;
-          case 'ja':
-            setLang(language.jp);
-            break;
-          // case 'fr':
-          //   setLang(language.fr);
-          //   break;
-          // case 'de':
-          //   setLang(language.de);
-          //   break;
-          default:
-            setLang(language.zhCn);
-            break;
+    storeGet('lang').then((lang) => {
+      if (!lang) {
+        setIsShowSelectLanguage(true);
+        if (defaultLang) {
+          switch (defaultLang) {
+            case 'zh_CN':
+              setLang(language.zhCn);
+              break;
+            case 'zh_TW':
+              setLang(language.zhTw);
+              break;
+            case 'en':
+              setLang(language.en);
+              break;
+            case 'ja':
+              setLang(language.jp);
+              break;
+            default:
+              setLang(language.zhCn);
+              break;
+          }
         }
+      } else {
+        setLanguage(Number(lang), false);
       }
-    } else {
-      setLanguage(Number(window?.localStorage.getItem('lang')), false);
-    }
+    });
   }, [defaultLang]);
 
   return (

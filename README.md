@@ -2,9 +2,7 @@
 
 **[English](./README_EN.md)**
 
-> WebGAL + hexz = 加密 · 随机访问 · 差量更新的桌面端视觉小说引擎
-
-基于 [WebGAL](https://github.com/OpenWebGAL/WebGAL) / [Tauri v2](https://v2.tauri.app) / [hexz](https://github.com/maincoretech/hexz_k)，将游戏资源打包为独立 `.hxz` 加密归档文件，支持 Steamworks 差量更新。
+基于 [WebGAL](https://github.com/OpenWebGAL/WebGAL) / [Tauri v2](https://v2.tauri.app) / [hexz](https://github.com/maincoretech/hexz_k)，将游戏资源打包为独立 `.hxz` 归档文件，支持 Steamworks 差量更新。
 
 ---
 
@@ -78,16 +76,6 @@ flowchart LR
 | 更新需重新部署全部文件 | `.hxz` 独立于可执行文件，支持 Steamworks 差量更新 |
 | 客户端每次请求完整资源 | O(1) 随机访问，按需读取单个文件 |
 
-### 并发性能
-
-| 上游 WebGAL | WebGAL_k |
-|-------------|----------|
-| 浏览器原生并发 | `Arc<ResourcePack>` 无锁并发，protocol + IPC 多通道并行 |
-
-### UI 微调
-
-- 文本框移除 `backdrop-filter: blur()`，背景加深
-
 ---
 
 ## 构建
@@ -105,19 +93,6 @@ cp game.hxz src-tauri/target/release/bundle/macos/webgal-k.app/Contents/MacOS/
 ```
 
 `find_hexz()` 自动搜索 exe 同目录、上级目录、macOS `.app` 同级。
-
----
-
-## hexz 特性利用
-
-| 特性 | 实现 |
-|------|------|
-| **加密** | AES-256-GCM，`HEXZ_PASSWORD` 环境变量 |
-| **随机访问** | O(1) 索引查找，按需读取单文件 |
-| **并发读** | `Arc<ResourcePack>`，protocol + IPC 并行 |
-| **差量更新** | `.hxz` 独立于可执行文件，Steamworks 友好 |
-
----
 
 ## 许可
 

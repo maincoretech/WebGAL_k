@@ -52,7 +52,7 @@ const en = {
             },
             about: {
               title: 'About WebGAL_k',
-              subTitle: 'A fork of WebGAL — bolder and more classic',
+              subTitle: 'A fork of WebGAL',
               version: 'Version',
               credit: 'Credit',
               font: 'Latin font: Maven Pro (SIL Open Font License 1.1)',

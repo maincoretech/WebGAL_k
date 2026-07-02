@@ -2,9 +2,7 @@
 
 **[中文版](./README.md)**
 
-> WebGAL + hexz = Encrypted · Random-access · Delta-updatable desktop visual novel engine
-
-Built on [WebGAL](https://github.com/OpenWebGAL/WebGAL) / [Tauri v2](https://v2.tauri.app) / [hexz](https://github.com/maincoretech/hexz_k). Packs game assets into a single encrypted `.hxz` archive, fully compatible with Steamworks delta patching.
+Built on [WebGAL](https://github.com/OpenWebGAL/WebGAL) / [Tauri v2](https://v2.tauri.app) / [hexz](https://github.com/maincoretech/hexz_k). Packs game assets into a single `.hxz` archive, fully compatible with Steamworks delta patching.
 
 ---
 
@@ -78,16 +76,6 @@ flowchart LR
 | Full redeploy on update | `.hxz` independent of executable, Steamworks delta patch ready |
 | Client fetches full resource per request | O(1) random access, single-file reads on demand |
 
-### Concurrency
-
-| Upstream WebGAL | WebGAL_k |
-|-----------------|----------|
-| Browser-native concurrency | `Arc<ResourcePack>` lock-free, protocol + IPC parallel channels |
-
-### UI Tweaks
-
-- Textbox: removed `backdrop-filter: blur()`, darker background
-
 ---
 
 ## Build
@@ -105,19 +93,6 @@ cp game.hxz src-tauri/target/release/bundle/macos/webgal-k.app/Contents/MacOS/
 ```
 
 `find_hexz()` searches exe directory, parent directory, and macOS `.app` bundle root.
-
----
-
-## hexz Features in Use
-
-| Feature | Implementation |
-|---------|---------------|
-| **Encryption** | AES-256-GCM, `HEXZ_PASSWORD` env var |
-| **Random access** | O(1) index lookup, per-file reads |
-| **Concurrent reads** | `Arc<ResourcePack>`, protocol + IPC in parallel |
-| **Delta updates** | `.hxz` independent of executable, Steamworks-ready |
-
----
 
 ## License
 

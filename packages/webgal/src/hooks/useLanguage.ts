@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useGenSyncRef } from './useGenSyncRef';
 import { logger } from '@/Core/util/logger';
 import { setStorage } from '@/Core/controller/storage/storageController';
+import { storeSet } from '@/Core/util/lite';
 import { language } from '@/config/language';
 
 export function getLanguageName(lang: language): string {
@@ -24,7 +25,7 @@ export default function useLanguage() {
 
     dispatch(setOptionData({ key: 'language', value: lang }));
     logger.info('设置语言: ' + languageName);
-    window?.localStorage.setItem('lang', lang.toString());
+    storeSet('lang', lang.toString());
     if (isSyncStorage) {
       setStorage();
     }

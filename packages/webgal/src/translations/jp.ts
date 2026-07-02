@@ -52,7 +52,7 @@ const jp = {
             },
             about: {
               title: 'WebGAL_k について',
-              subTitle: 'WebGAL のフォーク — より大胆に、より古典的に',
+              subTitle: 'WebGAL のフォーク',
               version: 'バージョン',
               credit: 'クレジット',
               font: '欧文フォント：Maven Pro（SIL Open Font License 1.1）',

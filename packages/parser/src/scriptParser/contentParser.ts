@@ -1,6 +1,20 @@
 import { commandType } from '../interface/sceneInterface';
 import { fileType } from '../interface/assets';
 
+/** Maps command types to their asset file type for content path resolution. */
+const CONTENT_FILE_TYPE: Partial<Record<commandType, fileType>> = {
+  [commandType.playEffect]: fileType.vocal,
+  [commandType.changeBg]: fileType.background,
+  [commandType.changeFigure]: fileType.figure,
+  [commandType.bgm]: fileType.bgm,
+  [commandType.callScene]: fileType.scene,
+  [commandType.changeScene]: fileType.scene,
+  [commandType.miniAvatar]: fileType.figure,
+  [commandType.video]: fileType.video,
+  [commandType.unlockBgm]: fileType.bgm,
+  [commandType.unlockCg]: fileType.background,
+};
+
 /**
  * 解析语句内容的函数，主要作用是把文件名改为绝对地址或相对地址（根据使用情况而定）
  * @param contentRaw 原始语句内容
@@ -11,60 +25,27 @@ import { fileType } from '../interface/assets';
 export const contentParser = (
   contentRaw: string,
   type: commandType,
-  assetSetter: any,
+  assetSetter: (name: string, ft: fileType) => string,
 ) => {
   if (contentRaw === 'none' || contentRaw === '') {
     return '';
   }
-  switch (type) {
-    case commandType.playEffect:
-      return assetSetter(contentRaw, fileType.vocal);
-    case commandType.changeBg:
-      return assetSetter(contentRaw, fileType.background);
-    case commandType.changeFigure:
-      return assetSetter(contentRaw, fileType.figure);
-    case commandType.bgm:
-      return assetSetter(contentRaw, fileType.bgm);
-    case commandType.callScene:
-      return assetSetter(contentRaw, fileType.scene);
-    case commandType.changeScene:
-      return assetSetter(contentRaw, fileType.scene);
-    case commandType.miniAvatar:
-      return assetSetter(contentRaw, fileType.figure);
-    case commandType.video:
-      return assetSetter(contentRaw, fileType.video);
-    case commandType.choose:
-      return getChooseContent(contentRaw, assetSetter);
-    case commandType.unlockBgm:
-      return assetSetter(contentRaw, fileType.bgm);
-    case commandType.unlockCg:
-      return assetSetter(contentRaw, fileType.background);
-    default:
-      return contentRaw;
+  if (type === commandType.choose) {
+    return getChooseContent(contentRaw, assetSetter);
   }
+  const ft = CONTENT_FILE_TYPE[type];
+  return ft ? assetSetter(contentRaw, ft) : contentRaw;
 };
 
-function getChooseContent(contentRaw: string, assetSetter: any): string {
+function getChooseContent(contentRaw: string, assetSetter: (name: string, ft: fileType) => string): string {
   const chooseList = contentRaw.split(/(?<!\\)\|/);
-  const chooseKeyList: Array<string> = [];
-  const chooseValueList: Array<string> = [];
+  const parts: string[] = [];
   for (const e of chooseList) {
-    chooseKeyList.push(e.split(/(?<!\\):/)[0] ?? '');
-    chooseValueList.push(e.split(/(?<!\\):/)[1] ?? '');
+    const colonIdx = e.search(/(?<!\\):/);
+    const key = colonIdx >= 0 ? e.slice(0, colonIdx) : e;
+    const val = colonIdx >= 0 ? e.slice(colonIdx + 1) : '';
+    const resolved = val.includes('.') ? assetSetter(val, fileType.scene) : val;
+    parts.push(`${key}:${resolved}`);
   }
-  const parsedChooseList = chooseValueList.map((e) => {
-    if (e.match(/\./)) {
-      return assetSetter(e, fileType.scene);
-    } else {
-      return e;
-    }
-  });
-  let ret = '';
-  for (let i = 0; i < chooseKeyList.length; i++) {
-    if (i !== 0) {
-      ret = ret + '|';
-    }
-    ret = ret + `${chooseKeyList[i]}:${parsedChooseList[i]}`;
-  }
-  return ret;
+  return parts.join('|');
 }
